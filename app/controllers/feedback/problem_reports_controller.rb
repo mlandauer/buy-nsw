@@ -1,10 +1,13 @@
 class Feedback::ProblemReportsController < ApplicationController
 
   def create
-    item = ProblemReport.create(report_params)
+    operation = CreateProblemReport.call(
+      params: params,
+      current_user: current_user,
+    )
 
     respond_to do |format|
-      if item.persisted?
+      if operation.success?
         format.html {
           flash.notice = success_message
           redirect_to(root_path)
@@ -22,17 +25,6 @@ class Feedback::ProblemReportsController < ApplicationController
   end
 
 private
-  def report_params
-    {
-      task: params[:task],
-      issue: params[:issue],
-      url: params[:url],
-      referer: params[:referer],
-      browser: params[:browser],
-      user: (current_user if current_user.present?),
-    }
-  end
-
   def success_message
     I18n.t('feedback.problem_report.messages.success')
   end
