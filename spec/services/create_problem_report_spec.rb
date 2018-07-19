@@ -32,6 +32,11 @@ RSpec.describe CreateProblemReport do
         expect(report.referer).to eq(params[:referer])
         expect(report.browser).to eq(params[:browser])
       end
+
+      it 'notifies slack of the problem report' do
+        expect(SlackPostJob).to receive(:perform_later)
+        operation
+      end
     end
 
     context 'with a user object' do

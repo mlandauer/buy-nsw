@@ -71,4 +71,69 @@ RSpec.describe SlackMessage do
     )
     s.seller_version_submitted(version)
   end
+
+  describe '#new_problem_report' do
+    let(:report) { create(:problem_report) }
+    let(:report_url) { ops_problem_report_url(report) }
+
+    let(:message_text) {
+      "A new problem was reported :mega: :speech_balloon:"
+    }
+    let(:message_fields) {
+      [
+        {
+          title: "Task",
+          value: report.task,
+        },
+        {
+          title: "Issue",
+          value: report.issue,
+        },
+      ]
+    }
+    let(:message_actions) {
+      [
+        type: 'button',
+        text: 'View problem report',
+        url: report_url
+      ]
+    }
+
+    it 'sends a message for an anonymous problem report' do
+      report.update_attribute(:user_id, nil)
+      
+      s = SlackMessage.new
+      expect(s).to receive(:message).with(
+        text: message_text,
+        attachments: [
+          {
+            fallback: "View problem report at #{report_url}",
+            fields: message_fields,
+            actions: message_actions,
+          }
+        ]
+      )
+      s.new_problem_report(report)
+    end
+
+    it 'sends a message with user details' do
+      s = SlackMessage.new
+      expect(s).to receive(:message).with(
+        text: message_text,
+        attachments: [
+          {
+            fallback: "View problem report at #{report_url}",
+            fields: message_fields + [
+              {
+                title: "User",
+                value: report.user.email,
+              }
+            ],
+            actions: message_actions,
+          }
+        ]
+      )
+      s.new_problem_report(report)
+    end
+  end
 end

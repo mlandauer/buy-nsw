@@ -9,6 +9,7 @@ class CreateProblemReport < ApplicationService
     begin
       assign_attributes
       persist_problem_report
+      send_slack_notification
 
       self.state = :success
     rescue Failure
@@ -40,6 +41,10 @@ private
 
   def persist_problem_report
     raise Failure unless problem_report.save
+  end
+
+  def send_slack_notification
+    SlackPostJob.perform_later(problem_report.id, :new_problem_report.to_s)
   end
 
 end
