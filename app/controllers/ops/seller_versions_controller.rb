@@ -77,7 +77,7 @@ private
   def forms
     @forms ||= {
       assign: ops[:assign]['contract.default'],
-      decide: ops[:decide]['contract.default'],
+      decide: decide_form,
     }
   end
   helper_method :forms
@@ -85,9 +85,13 @@ private
   def ops
     @ops ||= {
       assign: (run Ops::SellerVersion::Assign::Present),
-      decide: (run Ops::SellerVersion::Decide::Present),
     }
   end
+
+  def decide_form
+    @decide_form ||= Ops::BuildDecideSellerVersion.call(seller_version_id: params[:id]).form
+  end
+  helper_method :decide_form
 
   def _run_options(options)
     options.merge( "current_user" => current_user )
