@@ -17,12 +17,18 @@ class Ops::SellerVersionsController < Ops::BaseController
   end
 
   def assign
-    run Ops::SellerVersion::Assign do |result|
+    operation = Ops::AssignSellerVersion.call(
+      seller_version_id: params[:id],
+      current_user: current_user,
+      attributes: params[:seller_application],
+    )
+
+    if operation.success?
       flash.notice = I18n.t('ops.seller_versions.messages.update_assign_success')
       return redirect_to ops_seller_application_path(application)
+    else
+      render :show
     end
-
-    render :show
   end
 
   def decide
