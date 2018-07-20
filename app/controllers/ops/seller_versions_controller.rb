@@ -26,13 +26,19 @@ class Ops::SellerVersionsController < Ops::BaseController
   end
 
   def decide
-    run Ops::SellerVersion::Decide do |result|
-      decision = result['contract.default'].decision
+    operation = Ops::DecideSellerVersion.call(
+      seller_version_id: params[:id],
+      current_user: current_user,
+      attributes: params[:seller_application],
+    )
+
+    if operation.success?
+      decision = operation.form.decision
       flash.notice = I18n.t("ops.seller_versions.messages.decision_success.#{decision}")
       return redirect_to ops_seller_application_path(application)
+    else
+      render :show
     end
-
-    render :show
   end
 
   def notes
