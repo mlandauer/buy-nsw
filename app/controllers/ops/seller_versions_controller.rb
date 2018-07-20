@@ -80,19 +80,10 @@ private
   end
   helper_method :decorated_seller
 
-  def forms
-    @forms ||= {
-      assign: ops[:assign]['contract.default'],
-      decide: decide_form,
-    }
+  def assign_form
+    @assign_form ||= Ops::BuildAssignSellerVersion.call(seller_version_id: params[:id]).form
   end
-  helper_method :forms
-
-  def ops
-    @ops ||= {
-      assign: (run Ops::SellerVersion::Assign::Present),
-    }
-  end
+  helper_method :assign_form
 
   def decide_form
     @decide_form ||= Ops::BuildDecideSellerVersion.call(seller_version_id: params[:id]).form
