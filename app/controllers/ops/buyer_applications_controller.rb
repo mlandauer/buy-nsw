@@ -14,22 +14,34 @@ class Ops::BuyerApplicationsController < Ops::BaseController
   end
 
   def assign
-    run Ops::BuyerApplication::Assign do |result|
+    operation = Ops::AssignBuyerApplication.call(
+      buyer_application_id: params[:id],
+      current_user: current_user,
+      attributes: params[:buyer_application],
+    )
+
+    if operation.success?
       flash.notice = I18n.t('ops.buyer_applications.messages.update_assign_success')
       return redirect_to ops_buyer_application_path(application)
+    else
+      render :show
     end
-
-    render :show
   end
 
   def decide
-    run Ops::BuyerApplication::Decide do |result|
-      decision = result['contract.default'].decision
+    operation = Ops::DecideBuyerApplication.call(
+      buyer_application_id: params[:id],
+      current_user: current_user,
+      attributes: params[:buyer_application],
+    )
+
+    if operation.success?
+      decision = operation.form.decision
       flash.notice = I18n.t("ops.buyer_applications.messages.decision_success.#{decision}")
       return redirect_to ops_buyer_application_path(application)
+    else
+      render :show
     end
-
-    render :show
   end
 
   def notes
@@ -43,11 +55,6 @@ class Ops::BuyerApplicationsController < Ops::BaseController
   end
 
 private
-  def applications
-    @applications ||= BuyerApplication.includes(:seller)
-  end
-  helper_method :applications
-
   def search
     @search ||= Search::BuyerApplication.new(
       selected_filters: params,
@@ -66,24 +73,15 @@ private
   end
   helper_method :application
 
-  def forms
-    @forms ||= {
-      assign: ops[:assign]['contract.default'],
-      decide: ops[:decide]['contract.default'],
-    }
+  def assign_form
+    @assign_form ||= Ops::BuildAssignBuyerApplication.call(buyer_application_id: params[:id]).form
   end
-  helper_method :forms
+  helper_method :assign_form
 
-  def ops
-    @ops ||= {
-      assign: (run Ops::BuyerApplication::Assign::Present),
-      decide: (run Ops::BuyerApplication::Decide::Present),
-    }
+  def decide_form
+    @decide_form ||= Ops::BuildDecideBuyerApplication.call(buyer_application_id: params[:id]).form
   end
-
-  def _run_options(options)
-    options.merge( "current_user" => current_user )
-  end
+  helper_method :decide_form
 
   def csv_filename
     "buyer-applications-#{search.selected_filters_string}-#{Time.now.to_i}.csv"
