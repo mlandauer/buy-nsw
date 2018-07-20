@@ -247,3 +247,6 @@ en:
     seller_version_submitted:
       text: "%{seller} just submitted an application to become a seller. :rainbow: :tada:"
       button: Review application
+    new_problem_report:
+      text: "A new problem was reported :mega: :speech_balloon:"
+      button: "View problem report"

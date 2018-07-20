@@ -4,55 +4,88 @@ class SlackMessage
   def new_product_order(order)
     message_type_with_button(
       :new_product_order,
-      {
+      params: {
         buyer: link_to(order.buyer.name, ops_buyer_url(order.buyer)),
         organisation: order.buyer.organisation,
         product: link_to(order.product.name, pathway_product_url(order.product.section, order.product))
       },
-      ops_product_orders_url
+      button_url: ops_product_orders_url
     )
   end
 
   def buyer_application_submitted(application)
     message_type_with_button(
       :buyer_application_submitted,
-      {
+      params: {
         buyer: application.buyer.name,
         organisation: application.buyer.organisation
       },
-      ops_buyer_application_url(application)
+      button_url: ops_buyer_application_url(application)
     )
   end
 
   def seller_version_submitted(version)
     message_type_with_button(
       :seller_version_submitted,
-      {
+      params: {
         seller: version.name
       },
-      ops_seller_application_url(version)
+      button_url: ops_seller_application_url(version)
     )
   end
 
-  def message_type_with_button(type, params, button_url)
+  def new_problem_report(report)
+    fields = [
+      {
+        title: 'Task',
+        value: report.task,
+      },
+      {
+        title: 'Issue',
+        value: report.issue,
+      },
+    ]
+
+    if report.user.present?
+      fields << {
+        title: 'User',
+        value: report.user.email,
+      }
+    end
+
+    message_type_with_button(
+      :new_problem_report,
+      button_url: ops_problem_report_url(report),
+      fields: fields,
+    )
+  end
+
+  def message_type_with_button(type, params: {}, button_url:, fields: nil)
     message_with_button(
-      I18n.t("slack_messages.#{type}.text", params),
-      I18n.t("slack_messages.#{type}.button"),
-      button_url
+      text: I18n.t("slack_messages.#{type}.text", params),
+      button_text: I18n.t("slack_messages.#{type}.button"),
+      button_url: button_url,
+      fields: fields,
     )
   end
 
-  def message_with_button(text, button_text, button_url)
+  def message_with_button(text:, button_text:, button_url:, fields: nil)
+    attachment = {
+      fallback: "#{button_text} at #{button_url}",
+      actions: [
+        type: "button",
+        text: button_text,
+        url: button_url
+      ]
+    }
+
+    if fields.present?
+      attachment[:fields] = fields
+    end
+
     message(
       text: text,
-      attachments: [{
-        fallback: "#{button_text} at #{button_url}",
-        actions: [
-          type: "button",
-          text: button_text,
-          url: button_url
-        ]
-      }]
+      attachments: [ attachment ],
     )
   end
 

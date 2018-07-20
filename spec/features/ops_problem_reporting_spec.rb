@@ -6,6 +6,7 @@ RSpec.describe 'Submitting a problem report', type: :feature, js: true do
   let(:updated_message) { I18n.t('ops.problem_reports.messages.updated') }
 
   let!(:report) { create(:problem_report) }
+  let!(:reports) { create_list(:problem_report, 10, url: nil) }
   let(:tags) { ['example', 'tags'] }
 
   describe 'as an admin user', user: :admin_user do

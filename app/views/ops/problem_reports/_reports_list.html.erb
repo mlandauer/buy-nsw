@@ -18,7 +18,7 @@
         <tr>
           <td><%= report.id %></td>
           <td><%= report.state %></td>
-          <td><%= report.url.sub(/\Ahttps?\:\/\/[a-z0-9:\.]+\//, '/') %></td>
+          <td><%= report.url&.sub(/\Ahttps?\:\/\/[a-z0-9:\.]+\//, '/') %></td>
           <td><%= report.issue %></td>
           <td>
             <%= report.tags.join(', ') %>
