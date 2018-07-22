@@ -8,6 +8,8 @@ class SlackPostJob < ApplicationJob
       message.buyer_application_submitted(BuyerApplication.find(id))
     when :seller_version_submitted
       message.seller_version_submitted(SellerVersion.find(id))
+    when :new_problem_report
+      message.new_problem_report(ProblemReport.find(id))
     else
       raise "Unexpected type"
     end
