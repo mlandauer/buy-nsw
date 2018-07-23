@@ -39,9 +39,11 @@ class Ops::WaitingSellersController < Ops::BaseController
   end
 
   def invite
-    @operation = run Ops::WaitingSeller::Invite::Present
+    @operation = Ops::BuildInviteWaitingSellers.call(
+      waiting_seller_ids: params[:invite][:ids],
+    )
 
-    if operation['result.error'] == :no_ids
+    if operation.failure? && operation.no_sellers_selected?
       flash.alert = "You didn't select any sellers to invite"
       return redirect_to ops_waiting_sellers_path
     end
