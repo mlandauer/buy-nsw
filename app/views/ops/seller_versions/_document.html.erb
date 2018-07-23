@@ -4,10 +4,10 @@
   </header>
 
   <div class="document-details">
-    <% if key == :workers_compensation_certificate && application.seller.workers_compensation_exempt %>
+    <% if key == :workers_compensation_certificate && application.workers_compensation_exempt %>
       <p>Not required to have workers compensation insurance.</p>
     <% else %>
-      <% if (expiry = application.seller.send("#{key}_expiry")) && expiry.present? %>
+      <% if (expiry = application.send("#{key}_expiry")) && expiry.present? %>
         <p>
           <% if local_assigns[:no_expiry] %>
             Document date:

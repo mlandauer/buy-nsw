@@ -3,6 +3,7 @@ class SellerVersion < ApplicationRecord
   extend Enumerize
 
   include Concerns::StateScopes
+  include Concerns::SellerAliases
 
   before_save :normalise_abn
 
