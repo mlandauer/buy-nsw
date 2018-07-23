@@ -1,16 +1,21 @@
 class Ops::WaitingSellersController < Ops::BaseController
 
   def edit
-    @operation = run Ops::WaitingSeller::Update::Present
+    @operation = Ops::BuildUpdateWaitingSeller.call(waiting_seller_id: params[:id])
   end
 
   def update
-    @operation = run Ops::WaitingSeller::Update do |result|
-      flash.notice = 'Saved'
-      return redirect_to edit_ops_waiting_seller_path(result['model'])
-    end
+    @operation = Ops::UpdateWaitingSeller.call(
+      waiting_seller_id: params[:id],
+      attributes: params[:waiting_seller],
+    )
 
-    render :edit
+    if @operation.success?
+      flash.notice = 'Saved'
+      redirect_to edit_ops_waiting_seller_path(@operation.waiting_seller)
+    else
+      render :edit
+    end
   end
 
   def upload
