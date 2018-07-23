@@ -3,13 +3,17 @@ require 'rails_helper'
 RSpec.describe 'Searching products', type: :feature, js: true do
 
   let(:section) { 'applications-software' }
-  let(:seller_version) { create(:approved_seller_version, start_up: true) }
+
+  let(:seller_version_1) { create(:approved_seller_version, start_up: true) }
+  let(:seller_version_2) { create(:approved_seller_version, start_up: false) }
+
   let!(:product_1) {
     create(:active_product,
       name: 'Cloud-o-matic',
       summary: 'Summary',
       section: section,
       audiences: ['developers'],
+      seller: seller_version_2.seller,
     )
   }
   let!(:product_2) {
@@ -18,7 +22,7 @@ RSpec.describe 'Searching products', type: :feature, js: true do
       summary: 'Summary',
       section: section,
       audiences: ['legal'],
-      seller: seller_version.seller,
+      seller: seller_version_1.seller,
     )
   }
 

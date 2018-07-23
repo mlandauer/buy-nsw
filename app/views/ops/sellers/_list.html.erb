@@ -13,11 +13,11 @@
       <% results.each do |result| %>
       <tr>
         <td><%= result.id %></td>
-        <td><%= result.name %></td>
+        <td><%= result.first_version&.name %></td>
         <td>
-          <%= result.contact_name %>
-          <% if result.contact_email.present? %>
-            (<%= result.contact_email %>)
+          <%= result.first_version&.contact_name %>
+          <% if result.first_version&.contact_email.present? %>
+            (<%= result.first_version&.contact_email %>)
           <% end %>
         </td>
         <td>

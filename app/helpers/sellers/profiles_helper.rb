@@ -1,8 +1,8 @@
 module Sellers::ProfilesHelper
-  def seller_profile_tags(seller)
+  def seller_profile_tags(seller_version)
     content_tag(:ul, class: 'tags') {
       [:start_up, :sme, :indigenous, :not_for_profit, :govdc, :regional].select {|tag|
-        seller.public_send(tag) == true
+        seller_version.public_send(tag) == true
       }.map {|tag|
         content_tag(:li, I18n.t("sellers.tags.#{tag}"), class: "tag-#{tag.to_s.dasherize}")
       }.join(' ').html_safe

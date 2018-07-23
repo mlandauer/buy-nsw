@@ -85,7 +85,7 @@ module Sellers::Applications
     end
 
     def govdc_seller?
-      seller_version.seller.govdc == true
+      seller_version.govdc == true
     end
 
     def product_step
