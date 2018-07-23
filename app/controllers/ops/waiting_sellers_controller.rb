@@ -40,7 +40,7 @@ class Ops::WaitingSellersController < Ops::BaseController
 
   def invite
     @operation = Ops::BuildInviteWaitingSellers.call(
-      waiting_seller_ids: params[:invite][:ids],
+      waiting_seller_ids: params.dig(:invite, :ids),
     )
 
     if operation.failure? && operation.no_sellers_selected?
@@ -50,12 +50,16 @@ class Ops::WaitingSellersController < Ops::BaseController
   end
 
   def do_invite
-    @operation = run Ops::WaitingSeller::Invite do |result|
-      flash.notice = 'Invitations sent'
-      return redirect_to ops_waiting_sellers_path
-    end
+    @operation = Ops::InviteWaitingSellers.call(
+      waiting_seller_ids: params.dig(:invite, :ids),
+    )
 
-    render :invite
+    if operation.success?
+      flash.notice = 'Invitations sent'
+      redirect_to ops_waiting_sellers_path
+    else
+      render :invite
+    end
   end
 
 private
