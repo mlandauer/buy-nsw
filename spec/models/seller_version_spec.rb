@@ -28,4 +28,24 @@ RSpec.describe SellerVersion do
       expect(ABN.valid?(seller3.abn)).to be_truthy
     end
   end
+
+  describe '#approve' do
+    subject { create(:ready_for_review_seller_version, seller: version.seller) }
+
+    context 'when there are no "approved" versions for the same seller' do
+      let(:version) { create(:created_seller_version) }
+
+      it 'can be approved' do
+        expect(subject.may_approve?).to be_truthy
+      end
+    end
+
+    context 'when more than one version for the same seller is "approved"' do
+      let(:version) { create(:approved_seller_version) }
+
+      it 'cannot be approved' do
+        expect(subject.may_approve?).to be_falsey
+      end
+    end
+  end
 end

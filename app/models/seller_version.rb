@@ -34,7 +34,7 @@ class SellerVersion < ApplicationRecord
     end
 
     event :approve do
-      transitions from: :ready_for_review, to: :approved
+      transitions from: :ready_for_review, to: :approved, guard: :no_approved_versions?
 
       after_commit do
         seller.make_active!
@@ -61,6 +61,10 @@ class SellerVersion < ApplicationRecord
 
   def unassigned?
     ! assignee_present?
+  end
+
+  def no_approved_versions?
+    SellerVersion.approved.where(seller_id: seller_id).empty?
   end
 
   scope :for_review, -> { awaiting_assignment.or(ready_for_review) }
