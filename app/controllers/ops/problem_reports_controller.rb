@@ -46,13 +46,11 @@ private
     @problem_report ||= ProblemReport.find(params[:id])
   end
 
-  def operations
-    {
-      tag: run(Ops::ProblemReport::Tag::Present),
-    }
+  def tag_form
+    @tag_form ||= Ops::BuildTagProblemReport.call(problem_report_id: params[:id]).form
   end
 
-  helper_method :search, :problem_report, :operations
+  helper_method :search, :problem_report, :tag_form
 
   def _run_options(options)
     options.merge('config.current_user' => current_user)
