@@ -18,4 +18,21 @@ RSpec.describe SellerDecorator do
     end
   end
 
+  describe '#agreed_by_email' do
+    context 'when a version exists' do
+      let(:user) { create(:seller_user) }
+      let!(:version) { create(:seller_version, seller: seller, agreed_by: user) }
+
+      it 'returns the agreed by email from the first version' do
+        expect(subject.agreed_by_email).to eq(user.email)
+      end
+    end
+
+    context 'when no version exists' do
+      it 'returns nil' do
+        expect(subject.agreed_by_email).to be_blank
+      end
+    end
+  end
+
 end

@@ -1,7 +1,9 @@
 class SellerDecorator < BaseDecorator
 
   def agreed_by_email
-    agreed_by.email if agreed_by.present?
+    if first_version.present?
+      first_version.agreed_by.email if first_version.agreed_by.present?
+    end
   end
 
   def addresses
