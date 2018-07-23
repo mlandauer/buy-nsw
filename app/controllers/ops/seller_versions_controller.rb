@@ -17,22 +17,34 @@ class Ops::SellerVersionsController < Ops::BaseController
   end
 
   def assign
-    run Ops::SellerVersion::Assign do |result|
+    operation = Ops::AssignSellerVersion.call(
+      seller_version_id: params[:id],
+      current_user: current_user,
+      attributes: params[:seller_application],
+    )
+
+    if operation.success?
       flash.notice = I18n.t('ops.seller_versions.messages.update_assign_success')
       return redirect_to ops_seller_application_path(application)
+    else
+      render :show
     end
-
-    render :show
   end
 
   def decide
-    run Ops::SellerVersion::Decide do |result|
-      decision = result['contract.default'].decision
+    operation = Ops::DecideSellerVersion.call(
+      seller_version_id: params[:id],
+      current_user: current_user,
+      attributes: params[:seller_application],
+    )
+
+    if operation.success?
+      decision = operation.form.decision
       flash.notice = I18n.t("ops.seller_versions.messages.decision_success.#{decision}")
       return redirect_to ops_seller_application_path(application)
+    else
+      render :show
     end
-
-    render :show
   end
 
   def notes
@@ -74,20 +86,15 @@ private
   end
   helper_method :decorated_seller
 
-  def forms
-    @forms ||= {
-      assign: ops[:assign]['contract.default'],
-      decide: ops[:decide]['contract.default'],
-    }
+  def assign_form
+    @assign_form ||= Ops::BuildAssignSellerVersion.call(seller_version_id: params[:id]).form
   end
-  helper_method :forms
+  helper_method :assign_form
 
-  def ops
-    @ops ||= {
-      assign: (run Ops::SellerVersion::Assign::Present),
-      decide: (run Ops::SellerVersion::Decide::Present),
-    }
+  def decide_form
+    @decide_form ||= Ops::BuildDecideSellerVersion.call(seller_version_id: params[:id]).form
   end
+  helper_method :decide_form
 
   def _run_options(options)
     options.merge( "current_user" => current_user )
