@@ -19,7 +19,10 @@ class Ops::ProblemReportsController < Ops::BaseController
   end
 
   def tag
-    operation = run Ops::ProblemReport::Tag
+    operation = Ops::TagProblemReport.call(
+      problem_report_id: params[:id],
+      tags: params.dig(:problem_report, :tags),
+    )
 
     if operation.success?
       flash.notice = I18n.t('ops.problem_reports.messages.updated')
@@ -27,7 +30,7 @@ class Ops::ProblemReportsController < Ops::BaseController
       flash.alert = I18n.t('ops.problem_reports.messages.update_failed')
     end
 
-    redirect_to ops_problem_report_path(operation['model'])
+    redirect_to ops_problem_report_path(operation.problem_report)
   end
 
 private
@@ -51,9 +54,4 @@ private
   end
 
   helper_method :search, :problem_report, :tag_form
-
-  def _run_options(options)
-    options.merge('config.current_user' => current_user)
-  end
-
 end
