@@ -1,3 +1,5 @@
+require 'csv'
+
 class Ops::BuyersController < Ops::BaseController
 
   after_action :set_content_disposition, if: :csv_request?, only: :index
