@@ -1,23 +1,32 @@
 class Ops::WaitingSellersController < Ops::BaseController
 
   def edit
-    @operation = run Ops::WaitingSeller::Update::Present
+    @operation = Ops::BuildUpdateWaitingSeller.call(waiting_seller_id: params[:id])
   end
 
   def update
-    @operation = run Ops::WaitingSeller::Update do |result|
-      flash.notice = 'Saved'
-      return redirect_to edit_ops_waiting_seller_path(result['model'])
-    end
+    @operation = Ops::UpdateWaitingSeller.call(
+      waiting_seller_id: params[:id],
+      attributes: params[:waiting_seller],
+    )
 
-    render :edit
+    if @operation.success?
+      flash.notice = 'Saved'
+      redirect_to edit_ops_waiting_seller_path(@operation.waiting_seller)
+    else
+      render :edit
+    end
   end
 
   def upload
-    @operation = run Ops::WaitingSeller::Upload
+    @operation = Ops::UploadWaitingSellers.call(
+      file: params[:file],
+      file_contents: params[:file_contents],
+      persist: params[:persist],
+    )
 
     if operation.success?
-      if operation['result.persisted?'] == true
+      if operation.persisted? == true
         flash.notice = 'Saved'
         redirect_to ops_waiting_sellers_path
       else
@@ -30,21 +39,27 @@ class Ops::WaitingSellersController < Ops::BaseController
   end
 
   def invite
-    @operation = run Ops::WaitingSeller::Invite::Present
+    @operation = Ops::BuildInviteWaitingSellers.call(
+      waiting_seller_ids: params.dig(:invite, :ids),
+    )
 
-    if operation['result.error'] == :no_ids
+    if operation.failure? && operation.no_sellers_selected?
       flash.alert = "You didn't select any sellers to invite"
       return redirect_to ops_waiting_sellers_path
     end
   end
 
   def do_invite
-    @operation = run Ops::WaitingSeller::Invite do |result|
-      flash.notice = 'Invitations sent'
-      return redirect_to ops_waiting_sellers_path
-    end
+    @operation = Ops::InviteWaitingSellers.call(
+      waiting_seller_ids: params.dig(:invite, :ids),
+    )
 
-    render :invite
+    if operation.success?
+      flash.notice = 'Invitations sent'
+      redirect_to ops_waiting_sellers_path
+    else
+      render :invite
+    end
   end
 
 private

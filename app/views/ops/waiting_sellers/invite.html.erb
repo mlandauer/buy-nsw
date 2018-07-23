@@ -18,20 +18,20 @@
           </tr>
         </thead>
         <tbody>
-          <% operation['models'].each do |model| %>
+          <% operation.waiting_sellers.each do |model| %>
             <tr>
               <td><%= model.name %></td>
               <td><%= model.contact_name %></td>
               <td><%= model.contact_email %></td>
               <td>
-                <% if operation['result.invalid_model_ids'].include?(model.id) %>
+                <% if operation.invalid_waiting_sellers.include?(model) %>
                   <span class="invalid">Invalid</span>
                 <% else %>
                   OK
                 <% end %>
               </td>
               <td class="actions">
-                <% if operation['result.invalid_model_ids'].include?(model.id) %>
+                <% if operation.invalid_waiting_sellers.include?(model) %>
                   <%= link_to 'Fix errors', edit_ops_waiting_seller_path(model), target: '_blank' %>
                 <% end %>
                 <%= f.hidden_field :ids, value: model.id, name: 'invite[ids][]' %>
@@ -47,7 +47,7 @@
         <%= f.submit 'Send invitations' %>
       <% else %>
         <p>You need to fix errors before continuing.</p>
-        <%= link_to '', class: 'refresh-action' do %>
+        <%= link_to invite_ops_waiting_sellers_path(invite: { ids: params[:invite][:ids] }), class: 'refresh-action' do %>
           <span aria-hidden="true"></span>
           Refresh status
         <% end %>

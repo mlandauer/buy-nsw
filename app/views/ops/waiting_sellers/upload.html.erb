@@ -22,7 +22,7 @@
       </tr>
     </thead>
     <tbody>
-      <% operation['result.waiting_sellers'].each do |seller| %>
+      <% operation.waiting_sellers.each do |seller| %>
         <tr>
           <td><%= seller.name %></td>
           <td><%= formatted_abn seller.abn %></td>
@@ -41,8 +41,8 @@
   </table>
 
   <%= buy_nsw_form_for :upload, url: upload_ops_waiting_sellers_path, method: :post do |f| %>
-    <%= f.hidden_field :file_contents, value: Base64.encode64(operation['result.file_contents']), name: 'file_contents' %>
-    <%= f.hidden_field :complete, value: 'true', name: 'complete' %>
+    <%= f.hidden_field :file_contents, value: Base64.encode64(operation.file_contents), name: 'file_contents' %>
+    <%= f.hidden_field :persist, value: '1', name: 'persist' %>
     <%= f.submit 'Complete upload' %>
   <% end %>
 </section>
