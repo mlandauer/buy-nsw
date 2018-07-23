@@ -14,10 +14,14 @@ class Ops::WaitingSellersController < Ops::BaseController
   end
 
   def upload
-    @operation = run Ops::WaitingSeller::Upload
+    @operation = Ops::UploadWaitingSellers.call(
+      file: params[:file],
+      file_contents: params[:file_contents],
+      persist: params[:persist],
+    )
 
     if operation.success?
-      if operation['result.persisted?'] == true
+      if operation.persisted? == true
         flash.notice = 'Saved'
         redirect_to ops_waiting_sellers_path
       else
