@@ -15,7 +15,9 @@ class Seller < ApplicationRecord
   has_many :awards, class_name: 'SellerAward', dependent: :destroy
   has_many :engagements, class_name: 'SellerEngagement', dependent: :destroy
   has_many :products
+
   has_many :versions, class_name: 'SellerVersion'
+  has_one :approved_version, ->{ approved }, class_name: 'SellerVersion'
 
   has_documents :financial_statement, :professional_indemnity_certificate,
                 :workers_compensation_certificate,
@@ -36,5 +38,9 @@ class Seller < ApplicationRecord
 
   def first_version
     versions.first
+  end
+
+  def approved_version
+    versions.approved.first
   end
 end
