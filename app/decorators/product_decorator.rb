@@ -5,15 +5,15 @@ class ProductDecorator < BaseDecorator
   end
 
   def contact_name
-    custom_contact? ? super : seller.first_version&.contact_name
+    custom_contact? ? super : approved_seller_version&.contact_name
   end
 
   def contact_email
-    custom_contact? ? super : seller.first_version&.contact_email
+    custom_contact? ? super : approved_seller_version&.contact_email
   end
 
   def contact_phone
-    custom_contact? ? super : seller.first_version&.contact_phone
+    custom_contact? ? super : approved_seller_version&.contact_phone
   end
 
   def display_additional_terms?
