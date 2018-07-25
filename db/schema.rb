@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180718064601) do
+ActiveRecord::Schema.define(version: 20180725020310) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -343,6 +343,9 @@ ActiveRecord::Schema.define(version: 20180718064601) do
     t.boolean "agree"
     t.datetime "agreed_at"
     t.integer "agreed_by_id"
+    t.text "awards", default: [], array: true
+    t.text "accreditations", default: [], array: true
+    t.text "engagements", default: [], array: true
   end
 
   create_table "sellers", force: :cascade do |t|
