@@ -132,23 +132,19 @@ RSpec.describe 'Reviewing seller applications', type: :feature, js: true do
     it 'shows seller recognition details' do
       application = create(:awaiting_assignment_seller_version)
 
-      accreditation = create(:seller_accreditation, seller: application.seller)
-      engagement = create(:seller_engagement, seller: application.seller)
-      award = create(:seller_award, seller: application.seller)
-
       visit ops_seller_application_path(application)
       click_navigation_item 'Seller details'
 
       within_definition ops_field_label(:accreditations) do
-        expect(page).to have_content(accreditation.accreditation)
+        expect(page).to have_content(application.accreditations.first)
       end
 
       within_definition ops_field_label(:engagements) do
-        expect(page).to have_content(engagement.engagement)
+        expect(page).to have_content(application.engagements.first)
       end
 
       within_definition ops_field_label(:awards) do
-        expect(page).to have_content(award.award)
+        expect(page).to have_content(application.awards.first)
       end
     end
   end
