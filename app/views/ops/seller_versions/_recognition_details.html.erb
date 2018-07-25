@@ -5,7 +5,7 @@
       <% if seller.public_send(kind).any? %>
         <ul>
           <% seller.public_send(kind).each do |item| %>
-            <li><%= item.send(kind.to_s.singularize) %></li>
+            <li><%= item %></li>
           <% end %>
         </ul>
       <% else %>

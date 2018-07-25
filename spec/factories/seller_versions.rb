@@ -38,6 +38,16 @@ FactoryBot.define do
       representative_email 'signy@example.org'
       representative_phone '02 9765 4321'
 
+      sequence(:accreditations) {|n|
+        [ "ISO#{27000+n} compliance" ]
+      }
+      engagements [
+        "Board member, Australian Bakers' Association"
+      ]
+      sequence(:awards) {|n|
+        [ "Baker of the year #{2010+n}" ]
+      }
+
       agree true
     end
 

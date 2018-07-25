@@ -87,12 +87,12 @@ RSpec.describe 'Seller profiles', type: :feature, js: true, skip_login: true do
           seller.addresses.first.state_text,
           seller.addresses.first.postcode
         )
-        expect_list_entry('Accreditations', seller.accreditations.first.accreditation)
-        expect_list_entry('Industry engagement', seller.engagements.first.engagement)
+        expect_list_entry('Accreditations', version.accreditations.first)
+        expect_list_entry('Industry engagement', version.engagements.first)
       end
 
       within '#recognition' do
-        expect_list_entry('Awards', seller.awards.first.award)
+        expect_list_entry('Awards', version.awards.first)
       end
     end
   end

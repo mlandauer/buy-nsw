@@ -10,10 +10,7 @@ class Seller < ApplicationRecord
 
   has_one :waiting_seller
 
-  has_many :accreditations, class_name: 'SellerAccreditation', dependent: :destroy
   has_many :addresses, class_name: 'SellerAddress', dependent: :destroy
-  has_many :awards, class_name: 'SellerAward', dependent: :destroy
-  has_many :engagements, class_name: 'SellerEngagement', dependent: :destroy
   has_many :products
 
   has_many :versions, class_name: 'SellerVersion'

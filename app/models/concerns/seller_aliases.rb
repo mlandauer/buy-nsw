@@ -3,9 +3,6 @@ module Concerns::SellerAliases
 
   FIELDS = [
     :addresses,
-    :accreditations,
-    :engagements,
-    :awards,
   ]
 
   included do
