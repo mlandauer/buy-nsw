@@ -3,8 +3,8 @@
     <%= link_to product.name, pathway_product_path(section, product) %>
     <div class="seller-details">
       <span class="visually-hidden">by</span>
-      <%= product.seller.name %>
-      <%= seller_profile_tags(product.seller) %>
+      <%= product.approved_seller_version&.name %>
+      <%= seller_profile_tags(product.approved_seller_version) %>
     </div>
   </h3>
   <p class="summary"><%= product.summary.truncate_words(50) %></p>

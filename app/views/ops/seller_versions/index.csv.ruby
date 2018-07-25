@@ -4,7 +4,7 @@ csv_builder = lambda do |csv|
   search.results.each do |result|
     row = [
       result.id,
-      result.seller.name,
+      result.name,
       result.state,
     ]
     row += result.seller.owners.map(&:email)

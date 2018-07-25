@@ -15,8 +15,8 @@
       <tr>
         <td><%= application.id %></td>
         <td>
-          <% if application.seller.name.present? %>
-            <%= application.seller.name %>
+          <% if application.name.present? %>
+            <%= application.name %>
           <% else %>
             <em>Unnamed seller (<%= application.seller.owners.first.email %>)</em>
           <% end %>

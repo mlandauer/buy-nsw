@@ -2,6 +2,12 @@ FactoryBot.define do
   factory :product do
     association :seller
 
+    after(:create) do |product, evaluator|
+      unless evaluator.seller.versions.any?
+        create(:approved_seller_version, seller: evaluator.seller)
+      end
+    end
+
     trait :inactive do
       state :inactive
     end

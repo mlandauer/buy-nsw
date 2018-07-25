@@ -1,11 +1,11 @@
 <h2>Seller details</h2>
 
-<%= display_seller_list(type: :basic, resource: decorated_seller) %>
-<%= display_seller_list(type: :industry, resource: decorated_seller) %>
-<%= render partial: 'address_details', locals: { seller: decorated_seller } %>
-<%= display_seller_list(type: :contacts, resource: decorated_seller) %>
-<%= display_seller_list(type: :disclosures, resource: decorated_seller) %>
-<%= display_seller_list(type: :details, resource: decorated_seller) %>
-<%= render partial: 'business_info_details', locals: { seller: decorated_seller } %>
-<%= render partial: 'recognition_details', locals: { seller: decorated_seller } %>
-<%= display_seller_list(type: :terms, resource: decorated_seller) %>
+<%= display_seller_list(type: :basic, resource: decorated_seller_version) %>
+<%= display_seller_list(type: :industry, resource: decorated_seller_version) %>
+<%= render partial: 'address_details', locals: { seller: decorated_seller_version } %>
+<%= display_seller_list(type: :contacts, resource: decorated_seller_version) %>
+<%= display_seller_list(type: :disclosures, resource: decorated_seller_version) %>
+<%= display_seller_list(type: :details, resource: decorated_seller_version) %>
+<%= render partial: 'business_info_details', locals: { seller: decorated_seller_version } %>
+<%= render partial: 'recognition_details', locals: { seller: decorated_seller_version } %>
+<%= display_seller_list(type: :terms, resource: decorated_seller_version) %>

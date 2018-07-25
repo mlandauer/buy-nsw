@@ -3,20 +3,20 @@
   <% if authorized_buyer %>
   <dt>Authorised representative</dt>
   <dd>
-    <%= seller.representative_name %><br>
-    <%= tel_to seller.representative_phone, "data-module" => "track-outbound-link" %><br>
-    <%= mail_to seller.representative_email, seller.representative_email, "data-module" => "track-outbound-link" %>
+    <%= seller_version.representative_name %><br>
+    <%= tel_to seller_version.representative_phone, "data-module" => "track-outbound-link" %><br>
+    <%= mail_to seller_version.representative_email, seller_version.representative_email, "data-module" => "track-outbound-link" %>
   </dd>
   <% end %>
 
   <dt>ABN</dt>
-  <dd><%= link_to formatted_abn(seller.abn), abn_lookup_url(seller.abn) %></dd>
+  <dd><%= link_to formatted_abn(seller_version.abn), abn_lookup_url(seller_version.abn) %></dd>
 
   <% if authorized_buyer %>
   <dt>Location</td>
   <dd>
     <ul class="addresses">
-      <% seller.addresses.each do |address| %>
+      <% seller_version.addresses.each do |address| %>
         <li>
           <%= address.address %><br>
           <%= address.suburb %><br>
@@ -27,22 +27,22 @@
   </dd>
   <% end %>
 
-  <% if seller.accreditations.any? %>
+  <% if seller_version.accreditations.any? %>
   <dt>Accreditations</dt>
   <dd>
     <ul>
-      <% seller.accreditations.each do |item| %>
+      <% seller_version.accreditations.each do |item| %>
         <li><%= item.accreditation %></li>
       <% end %>
     </ul>
   </dd>
   <% end %>
 
-  <% if seller.engagements.any? %>
+  <% if seller_version.engagements.any? %>
   <dt>Industry engagement</dt>
   <dd>
     <ul>
-      <% seller.engagements.each do |item| %>
+      <% seller_version.engagements.each do |item| %>
         <li><%= item.engagement %></li>
       <% end %>
     </ul>

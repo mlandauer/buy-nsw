@@ -1,4 +1,4 @@
-<% content_for :title, seller.name %>
+<% content_for :title, seller_version.name %>
 
 <% if current_user.nil? %>
 <div class="alert alert-secondary" role="alert">
@@ -14,11 +14,11 @@
 
 <section class="view-sellers-profiles">
   <h1><%= content_for :title %></h1>
-  <div class="tags"><%= seller_profile_tags(seller) %></div>
+  <div class="tags"><%= seller_profile_tags(seller_version) %></div>
 
   <div class="intro">
     <div class="summary">
-      <%= simpler_format seller.summary %>
+      <%= simpler_format seller_version.summary %>
     </div>
   </div>
 
@@ -28,10 +28,10 @@
         <h3>On this page</h3>
         <ol>
           <li><%= link_to 'Company details', '#company-details' %></li>
-          <% if seller.awards.any? %>
+          <% if seller_version.awards.any? %>
             <li><%= link_to 'Recognition', '#recognition' %></li>
           <% end %>
-          <% if seller.products.active.any? %>
+          <% if seller_version.seller.products.active.any? %>
             <li><%= link_to 'Products', '#products' %></li>
           <% end %>
         </ol>

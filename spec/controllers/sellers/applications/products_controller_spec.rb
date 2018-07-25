@@ -15,7 +15,7 @@ RSpec.describe Sellers::Applications::ProductsController, type: :controller, sig
     context 'when the seller provides cloud services' do
       let!(:seller_version) { create(:created_seller_version, seller: @user.seller, services: ['cloud-services']) }
 
-      it 'redirects to the seller application' do
+      it 'renders the product dashboard' do
         get :index, params: { application_id: seller_version.id }
         expect(response).to have_http_status(:ok)
       end

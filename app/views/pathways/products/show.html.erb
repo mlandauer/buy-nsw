@@ -5,7 +5,7 @@
   <header class="with-seller-details">
     <h1><%= content_for :title %></h1>
     <div class="seller">
-      by <%= link_to product.seller.name, sellers_profile_path(product.seller) %>
+      by <%= link_to product.approved_seller_version&.name, sellers_profile_path(product.seller) %>
       <% if product.is_reselling? %>
         <ul class="tags">
           <li>Reseller</li>

@@ -83,10 +83,10 @@ private
   end
   helper_method :application
 
-  def decorated_seller
-    SellerDecorator.new(application.seller, view_context)
+  def decorated_seller_version
+    SellerVersionDecorator.new(application, view_context)
   end
-  helper_method :decorated_seller
+  helper_method :decorated_seller_version
 
   def assign_form
     @assign_form ||= Ops::BuildAssignSellerVersion.call(seller_version_id: params[:id]).form
