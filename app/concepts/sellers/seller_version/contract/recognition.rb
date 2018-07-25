@@ -1,62 +1,64 @@
 module Sellers::SellerVersion::Contract
   class Recognition < Base
-    include Concerns::Contracts::Populators
-
-    AccreditationPopulator = -> (options) {
-      return NestedChildPopulator.call(options.merge(
-        params: [:accreditation],
-        model_klass: SellerAccreditation,
-        context: self,
-        foreign_key: :seller_id,
-      ))
-    }
-
-    AwardPopulator = -> (options) {
-      return NestedChildPopulator.call(options.merge(
-        params: [:award],
-        model_klass: SellerAward,
-        context: self,
-        foreign_key: :seller_id,
-      ))
-    }
-
-    EngagementPopulator = -> (options) {
-      return NestedChildPopulator.call(options.merge(
-        params: [:engagement],
-        model_klass: SellerEngagement,
-        context: self,
-        foreign_key: :seller_id,
-      ))
-    }
 
     AccreditationPrepopulator = ->(_) {
-      2.times do
-        self.accreditations << SellerAccreditation.new(seller_id: seller_id)
+      self.accreditations ||= []
+
+      count = 0
+      while (self.accreditations.size < 10 && count < 2)
+        self.accreditations << ''
+        count += 1
       end
     }
 
     AwardPrepopulator = ->(_) {
-      2.times do
-        self.awards << SellerAward.new(seller_id: seller_id)
+      self.awards ||= []
+
+      count = 0
+      while (self.awards.size < 10 && count < 2)
+        self.awards << ''
+        count += 1
       end
     }
 
     EngagementPrepopulator = ->(_) {
-      2.times do
-        self.engagements << SellerEngagement.new(seller_id: seller_id)
+      self.engagements ||= []
+
+      count = 0
+      while (self.engagements.size < 10 && count < 2)
+        self.engagements << ''
+        count += 1
       end
     }
 
-    collection :accreditations, on: :seller, prepopulator: AccreditationPrepopulator, populator: AccreditationPopulator do
-      property :accreditation
+    def accreditations=(array)
+      super(filter_blank_values(array))
     end
 
-    collection :awards, on: :seller, prepopulator: AwardPrepopulator, populator: AwardPopulator do
-      property :award
+    def awards=(array)
+      super(filter_blank_values(array))
     end
 
-    collection :engagements, on: :seller, prepopulator: EngagementPrepopulator, populator: EngagementPopulator do
-      property :engagement
+    def engagements=(array)
+      super(filter_blank_values(array))
+    end
+
+    def filter_blank_values(array)
+      Array(array).reject{|row|
+        row.gsub(/\s/,'').blank?
+      }
+    end
+
+    collection :accreditations, on: :seller_version, prepopulator: AccreditationPrepopulator
+    collection :awards, on: :seller_version, prepopulator: AwardPrepopulator
+    collection :engagements, on: :seller_version, prepopulator: EngagementPrepopulator
+
+    validation :default, inherit: true do
+      required(:seller_version).schema do
+        required(:accreditations).value(max_items?: 10)
+        required(:awards).value(max_items?: 10)
+        required(:engagements).value(max_items?: 10)
+      end
     end
   end
 end

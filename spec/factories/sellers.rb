@@ -30,29 +30,8 @@ FactoryBot.define do
       end
     end
 
-    trait :with_award do
-      after(:create) do |seller|
-        create(:seller_award, seller: seller)
-      end
-    end
-
-    trait :with_engagement do
-      after(:create) do |seller|
-        create(:seller_engagement, seller: seller)
-      end
-    end
-
-    trait :with_accreditation do
-      after(:create) do |seller|
-        create(:seller_accreditation, seller: seller)
-      end
-    end
-
     trait :with_full_profile do
-      with_accreditation
       with_address
-      with_award
-      with_engagement
     end
 
     factory :active_seller, traits: [:active, :with_full_profile]
