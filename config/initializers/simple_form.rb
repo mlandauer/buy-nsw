@@ -190,4 +190,15 @@ SimpleForm.setup do |config|
     b.use :input, class: 'form-control', error_class: 'is-invalid'
     b.use :full_error, wrap_with: { tag: 'div', class: 'invalid-feedback' }
   end
+
+  config.wrappers :text_field_array, tag: 'fieldset', class: 'multiple-child-objects with-inline-labels expanding-list', error_class: 'form-group-invalid' do |b|
+    b.use :html5
+    b.use :placeholder
+    b.wrapper :legend_tag, tag: 'legend', class: 'with-label' do |ba|
+      ba.use :label_text
+    end
+    b.use :accessible_hint, tag: 'small', class: 'form-text text-muted'
+    b.use :input, class: 'form-control', error_class: 'is-invalid'
+    b.use :full_error, wrap_with: { tag: 'div', class: 'invalid-feedback' }
+  end
 end
