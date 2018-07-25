@@ -260,6 +260,15 @@ en:
             label: 'Yes, with government outside Australia'
         recognition:
           short: 'List awards and accreditations'
+          accreditations:
+            label: Accreditations (optional)
+            hint: Does your business have any formal accreditations you want to share?
+          engagements:
+            label: Industry engagement (optional)
+            hint: Are you involved in any boards, committees or groups for your industry?
+          awards:
+            label: Awards (optional)
+            hint: Has your work been recognised and awarded within your industry or by others?
         products:
           short: 'Your cloud products (optional)'
         submit:

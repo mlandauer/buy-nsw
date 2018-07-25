@@ -27,11 +27,7 @@
       this.insertAddLink()
     }
 
-    // Only add delete links to the rows which exist in the database, not new
-    // empty ones. We can check for this by finding the ones which have an
-    // existing value in the 'id' hidden field.
-    //
-    var $rows = this.$container.find('li:has(input[type=hidden][value])')
+    var $rows = this.$container.find('li')
     $($rows).each(
       $.proxy(this.buildDeleteLink, this)
     )
@@ -46,8 +42,7 @@
 
     var $newRow = this.$template.clone()
 
-    var $visibleInputs = $newRow.find('input[type=text], select')
-    var $hiddenInput = $newRow.find('input[type=hidden]')
+    var $visibleInputs = $newRow.find('input[type=text]')
 
     var newIndex = this.getNewIndex()
     var visibleIndex = newIndex + 1
@@ -56,27 +51,15 @@
       var $input = $(input)
       var $label = $input.siblings('label')
 
+      var newID = this.buildFieldID($input.attr('id'), newIndex)
+
       if (this.inlineLabels === true) {
         $label.text(visibleIndex + '.')
       }
-      $label.attr('for', this.buildFieldID(
-        $input.attr('id'), newIndex
-      ))
 
-      $input.attr('name', this.buildFieldName(
-        $input.attr('name'), newIndex
-      ))
-      $input.attr('id', this.buildFieldID(
-        $input.attr('id'), newIndex
-      ))
+      $label.attr('for', newID)
+      $input.attr('id', newID)
     }, this))
-
-    $hiddenInput.attr('name', this.buildFieldName(
-      $hiddenInput.attr('name'), newIndex
-    ))
-    $hiddenInput.attr('id', this.buildFieldID(
-      $hiddenInput.attr('id'), newIndex
-    ))
 
     $newRow.appendTo(this.$container)
     $visibleInputs.first().focus()
@@ -93,7 +76,7 @@
   ExpandingListModule.prototype.deleteRow = function deleteRow ($row, event) {
     event.preventDefault()
 
-    var $inputField = $row.find('input[type=text], select')
+    var $inputField = $row.find('input[type=text]')
     var $deleteLink = $row.find('a')
 
     $row.addClass('removed')
@@ -129,6 +112,9 @@
     var $deleteContainer = $('<div></div>').addClass('delete-action')
     var $deleteLink = $('<a></a>')
     var $element = $(element)
+    var $input = $element.find('input')
+
+    if ($input.val().length === 0) { return }
 
     $deleteLink.text('Delete this ' + this.objectName)
     $deleteLink.attr('href', '#')
@@ -140,66 +126,34 @@
 
   ExpandingListModule.prototype.buildTemplateForm = function buildTemplateForm () {
     var $templateForm = this.$el.find('li:first-of-type').clone()
-
     var $textInput = $templateForm.find('input[type=text]')
-    var $selectInput = $templateForm.find('select')
-    var $hiddenInput = $templateForm.find('input[type=hidden]')
 
     $textInput.val('')
-    $hiddenInput.val('')
-
-    // Reset the selected value in any dropdown boxes
-    $.each($selectInput, function (i, item) {
-      var $item = $(item)
-      var defaultVal = $item.attr('data-expanding-list-default')
-
-      $item.find('option').removeAttr('selected')
-      if (defaultVal !== undefined) {
-        $item.find('option[value="' + defaultVal + '"]').attr('selected', true)
-      } else {
-        $item.find('option:first').attr('selected', true)
-      }
-    })
-
     return $templateForm
-  }
-
-  ExpandingListModule.prototype.buildFieldName = function buildFieldName (name, newIndex) {
-    // The following expressions are designed to match everything in the following
-    // strings apart from the '[0]' index:
-    //
-    //    application[accreditations_attributes][0][accreditation]
-    //
-    var nameExpr = /([\w[\]]+)\[0\](\[\w+\])$/
-
-    var matches = name.match(nameExpr)
-    var newFieldName = matches[1] + '[' + newIndex + ']' + matches[2]
-
-    return newFieldName
   }
 
   ExpandingListModule.prototype.buildFieldID = function buildFieldID (id, newIndex) {
     // The following expressions are designed to match everything in the following
     // strings apart from the '[0]' index:
     //
-    //    application_accreditations_attributes_0_accreditation
+    //    application_accreditations_attributes_0
     //
-    var idExpr = /([\w[\]]+)_0_(\w+)$/
+    var idExpr = /([\w]+)_0$/
 
     var matches = id.match(idExpr)
-    var newFieldID = matches[1] + '_' + newIndex + '_' + matches[2]
+    var newFieldID = matches[1] + '_' + newIndex
 
     return newFieldID
   }
 
   ExpandingListModule.prototype.getNewIndex = function getNewIndex () {
     var $lastEl = this.$el.find('li:last-of-type')
-    var $hiddenInput = $lastEl.find('input[type=hidden]')
+    var $label = $lastEl.find('label')
 
-    var indexExpr = /[\w[\]]+_(\d+)_\w+$/
-    var matches = $hiddenInput.attr('id').match(indexExpr)
+    var indexExpr = /(\d+)\.$/
+    var matches = $label.text().match(indexExpr)
 
-    var lastIndex = parseInt(matches[1])
+    var lastIndex = parseInt(matches[1] - 1)
 
     return (lastIndex + 1)
   }
