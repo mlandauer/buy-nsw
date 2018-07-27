@@ -5,13 +5,10 @@ RSpec.describe Sellers::SellerVersion::Contract::Declaration do
   let(:seller_version) { create(:seller_version) }
   subject { described_class.new(seller_version: seller_version, seller: seller_version.seller) }
 
-  it 'can save with terms acceptance' do
-    subject.validate({
+  it 'validates with terms acceptance' do
+    expect(subject.validate({
       agree: true
-    })
-
-    expect(subject).to be_valid
-    expect(subject.save).to eq(true)
+    })).to eq(true)
   end
 
   it 'is invalid when terms are not accepted' do

@@ -13,11 +13,8 @@ RSpec.describe Sellers::SellerVersion::Invitation::Contract::Accept do
     }
   }
 
-  it 'can save with valid attributes' do
-    subject.validate(atts)
-
-    expect(subject).to be_valid
-    expect(subject.save).to eq(true)
+  it 'validates with valid attributes' do
+    expect(subject.validate(atts)).to eq(true)
   end
 
   it 'is invalid when the password is blank' do
