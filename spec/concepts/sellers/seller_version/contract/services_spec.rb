@@ -17,11 +17,8 @@ RSpec.describe Sellers::SellerVersion::Contract::Services do
     }
   }
 
-  it 'can save with valid attributes' do
-    subject.validate(atts)
-
-    expect(subject).to be_valid
-    expect(subject.save).to eq(true)
+  it 'validates with valid attributes' do
+    expect(subject.validate(atts)).to eq(true)
   end
 
   it 'is valid when no other non-cloud services are selected' do

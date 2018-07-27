@@ -26,9 +26,8 @@ RSpec.describe Sellers::SellerVersion::Contract::Characteristics do
     }
   }
 
-  it 'can save with valid attributes' do
+  it 'validates with valid attributes' do
     expect(subject.validate(atts)).to eq(true)
-    expect(subject.save).to eq(true)
   end
 
   it 'is invalid when the number of employees is blank' do

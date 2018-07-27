@@ -18,9 +18,8 @@ RSpec.describe Sellers::SellerVersion::Contract::Contacts do
     }
   }
 
-  it 'can save with valid attributes' do
+  it 'validates with valid attributes' do
     expect(subject.validate(atts)).to eq(true)
-    expect(subject.save).to eq(true)
   end
 
   it 'is invalid when the contact name is blank' do

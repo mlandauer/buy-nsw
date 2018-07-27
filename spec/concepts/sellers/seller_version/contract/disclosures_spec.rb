@@ -31,11 +31,8 @@ RSpec.describe Sellers::SellerVersion::Contract::Disclosures do
     end
   end
 
-  it 'can save with valid attributes' do
-    subject.validate(atts)
-
-    expect(subject).to be_valid
-    expect(subject.save).to eq(true)
+  it 'validates with valid attributes' do
+    expect(subject.validate(atts)).to eq(true)
   end
 
   describe 'investigations' do
