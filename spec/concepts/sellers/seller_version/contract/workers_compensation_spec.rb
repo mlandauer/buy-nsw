@@ -109,10 +109,7 @@ RSpec.describe Sellers::SellerVersion::Contract::WorkersCompensation do
     }
 
     it 'is valid when the certificate and expiry are blank' do
-      subject.validate(atts)
-
-      expect(subject).to be_valid
-      expect(subject.save).to eq(true)
+      expect(subject.validate(atts)).to eq(true)
     end
   end
 end

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Sellers::SellerVersion::Contract::ProductLiability do
 
-  let(:version) { create(:seller_version) }
+  let(:version) { build_stubbed(:seller_version) }
   subject { described_class.new(seller_version: version, seller: version.seller) }
 
   let(:example_pdf) {
