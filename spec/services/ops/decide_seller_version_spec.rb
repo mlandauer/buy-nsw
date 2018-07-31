@@ -32,6 +32,10 @@ RSpec.describe Ops::DecideSellerVersion do
         expect(operation.seller_version.state).to eq('approved')
       end
 
+      it 'transitions the seller to the "active" state' do
+        expect(operation.seller_version.seller.state).to eq('active')
+      end
+
       it 'logs an event' do
         expect(operation.seller_version.events.first.user).to eq(current_user)
         expect(operation.seller_version.events.first.message).to eq("Approved application. Response: Response")

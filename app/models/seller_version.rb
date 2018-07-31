@@ -37,7 +37,7 @@ class SellerVersion < ApplicationRecord
     event :approve do
       transitions from: :ready_for_review, to: :approved, guard: :no_approved_versions?
 
-      after_commit do
+      after do
         seller.make_active!
         seller.products.each(&:make_active!)
       end
