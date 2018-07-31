@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Sellers::SellerVersion::Contract::Contacts do
-  let(:seller) { create(:inactive_seller) }
-  let(:version) { create(:seller_version, seller: seller) }
+  let(:seller) { build_stubbed(:inactive_seller) }
+  let(:version) { build_stubbed(:seller_version, seller: seller) }
 
   subject { described_class.new(seller_version: version, seller: seller) }
 
@@ -18,9 +18,8 @@ RSpec.describe Sellers::SellerVersion::Contract::Contacts do
     }
   }
 
-  it 'can save with valid attributes' do
+  it 'validates with valid attributes' do
     expect(subject.validate(atts)).to eq(true)
-    expect(subject.save).to eq(true)
   end
 
   it 'is invalid when the contact name is blank' do

@@ -2,16 +2,13 @@ require 'rails_helper'
 
 RSpec.describe Sellers::SellerVersion::Contract::Declaration do
 
-  let(:seller_version) { create(:seller_version) }
+  let(:seller_version) { build_stubbed(:seller_version) }
   subject { described_class.new(seller_version: seller_version, seller: seller_version.seller) }
 
-  it 'can save with terms acceptance' do
-    subject.validate({
+  it 'validates with terms acceptance' do
+    expect(subject.validate({
       agree: true
-    })
-
-    expect(subject).to be_valid
-    expect(subject.save).to eq(true)
+    })).to eq(true)
   end
 
   it 'is invalid when terms are not accepted' do
@@ -25,14 +22,15 @@ RSpec.describe Sellers::SellerVersion::Contract::Declaration do
 
   describe '#representative_details_provided?' do
     context 'when all details are provided' do
-      before(:each) do
-        seller_version.update_attributes(
+      let(:seller_version) {
+        build_stubbed(
+          :seller_version,
           representative_name: 'Name',
           representative_email: 'Email',
           representative_phone: '01253 123456',
-          representative_position: 'Position',
+          representative_position: 'Position'
         )
-      end
+      }
 
       it 'returns true' do
         expect(subject.representative_details_provided?).to be_truthy
@@ -40,14 +38,15 @@ RSpec.describe Sellers::SellerVersion::Contract::Declaration do
     end
 
     context 'when details are missing' do
-      before(:each) do
-        seller_version.update_attributes(
+      let(:seller_version) {
+        build_stubbed(
+          :seller_version,
           representative_name: 'Name',
           representative_email: nil,
           representative_phone: nil,
-          representative_position: nil,
+          representative_position: nil
         )
-      end
+      }
 
       it 'returns true' do
         expect(subject.representative_details_provided?).to be_falsey
@@ -57,12 +56,8 @@ RSpec.describe Sellers::SellerVersion::Contract::Declaration do
 
   describe '#business_details_provided?' do
     context 'when all details are provided' do
-      before(:each) do
-        seller_version.update_attributes(
-          name: 'Name',
-          abn: 'ABN',
-        )
-      end
+      let(:seller_version) { build_stubbed(:seller_version, name: 'Name',
+      abn: 'ABN') }
 
       it 'returns true' do
         expect(subject.business_details_provided?).to be_truthy
@@ -70,12 +65,13 @@ RSpec.describe Sellers::SellerVersion::Contract::Declaration do
     end
 
     context 'when details are missing' do
-      before(:each) do
-        seller_version.update_attributes(
+      let(:seller_version) {
+        build_stubbed(
+          :seller_version,
           name: 'Name',
-          abn: nil,
+          abn: nil
         )
-      end
+      }
 
       it 'returns true' do
         expect(subject.business_details_provided?).to be_falsey

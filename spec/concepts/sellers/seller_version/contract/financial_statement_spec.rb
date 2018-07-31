@@ -21,11 +21,8 @@ RSpec.describe Sellers::SellerVersion::Contract::FinancialStatement do
     }
   }
 
-  it 'can save with valid attributes' do
-    subject.validate(atts)
-
-    expect(subject).to be_valid
-    expect(subject.save).to eq(true)
+  it 'validates with valid attributes' do
+    expect(subject.validate(atts)).to eq(true)
   end
 
   context 'financial_statement_file' do

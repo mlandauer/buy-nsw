@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Sellers::SellerVersion::Contract::Disclosures do
-  let(:seller) { create(:inactive_seller) }
-  let(:version) { create(:seller_version, seller: seller) }
+  let(:seller) { build_stubbed(:inactive_seller) }
+  let(:version) { build_stubbed(:seller_version, seller: seller) }
 
   subject { described_class.new(seller_version: version, seller: seller) }
 
@@ -31,11 +31,8 @@ RSpec.describe Sellers::SellerVersion::Contract::Disclosures do
     end
   end
 
-  it 'can save with valid attributes' do
-    subject.validate(atts)
-
-    expect(subject).to be_valid
-    expect(subject.save).to eq(true)
+  it 'validates with valid attributes' do
+    expect(subject.validate(atts)).to eq(true)
   end
 
   describe 'investigations' do
