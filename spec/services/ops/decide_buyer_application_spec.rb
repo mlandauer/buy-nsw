@@ -32,6 +32,10 @@ RSpec.describe Ops::DecideBuyerApplication do
         expect(operation.buyer_application.state).to eq('approved')
       end
 
+      it 'transitions the buyer to the "active" state' do
+        expect(operation.buyer_application.buyer.state).to eq('active')
+      end
+
       it 'logs an event' do
         expect(operation.buyer_application.events.first.user).to eq(current_user)
         expect(operation.buyer_application.events.first.message).to eq("Approved application. Response: Response")
