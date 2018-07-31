@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Sellers::SellerVersion::Products::Contract::Basics do
-  let(:product) { create(:inactive_product) }
-  let(:application) { create(:created_seller_version) }
+  let(:product) { build_stubbed(:inactive_product) }
+  let(:application) { build_stubbed(:created_seller_version) }
 
   subject { described_class.new(application: application, product: product) }
 

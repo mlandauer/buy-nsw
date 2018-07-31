@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Sellers::SellerVersion::Invitation::Contract::Accept do
-  let(:application) { create(:seller_version) }
-  let(:user) { create(:seller_user, seller: application.seller) }
+  let(:application) { build_stubbed(:seller_version) }
+  let(:user) { build_stubbed(:seller_user, seller: application.seller) }
 
   subject { described_class.new(user) }
 

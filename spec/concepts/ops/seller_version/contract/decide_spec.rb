@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Ops::SellerVersion::Contract::Decide do
 
-  let(:application) { create(:seller_version) }
+  let(:application) { build_stubbed(:seller_version) }
 
   it 'is valid with a decision and response' do
     form = described_class.new(application)
