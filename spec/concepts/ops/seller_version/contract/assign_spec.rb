@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Ops::SellerVersion::Contract::Assign do
 
   let(:user) { create(:admin_user) }
-  let(:application) { create(:seller_version) }
+  let(:application) { build_stubbed(:seller_version) }
 
   it 'is valid with an assignee' do
     form = described_class.new(application)

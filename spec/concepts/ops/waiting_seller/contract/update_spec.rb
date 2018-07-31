@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Ops::WaitingSeller::Contract::Update do
 
-  let(:waiting_seller) { create(:waiting_seller) }
+  let(:waiting_seller) { build_stubbed(:waiting_seller) }
   let(:atts) { attributes_for(:waiting_seller) }
 
   subject { described_class.new(waiting_seller) }

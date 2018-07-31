@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Ops::BuyerApplication::Contract::Decide do
 
-  let(:application) { create(:buyer_application) }
+  let(:application) { build_stubbed(:buyer_application) }
 
   it 'is valid with a decision and decision_body' do
     form = Ops::BuyerApplication::Contract::Decide.new(application)

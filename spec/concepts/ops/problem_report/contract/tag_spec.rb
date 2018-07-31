@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Ops::ProblemReport::Contract::Tag do
 
-  let(:problem_report) { create(:open_problem_report) }
+  let(:problem_report) { build_stubbed(:open_problem_report) }
 
   subject {
     described_class.new(problem_report)
@@ -20,7 +20,7 @@ RSpec.describe Ops::ProblemReport::Contract::Tag do
     subject.validate({
       tags: 'foo bar baz'
     })
-    
+
     expect(subject.to_nested_hash['tags']).to contain_exactly('foo', 'bar', 'baz')
   end
 
