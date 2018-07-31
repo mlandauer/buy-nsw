@@ -40,4 +40,8 @@ class Seller < ApplicationRecord
   def approved_version
     versions.approved.first
   end
+
+  def approved_name
+    approved_version&.name
+  end
 end
