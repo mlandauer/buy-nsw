@@ -111,24 +111,6 @@ RSpec.describe Sellers::WaitingSeller::Accept do
     end
   end
 
-  describe '#create_seller_address!' do
-    it 'creates a seller address from the WaitingSeller attributes' do
-      expect {
-        perform_operation(default_params)
-      }.to change{ SellerAddress.count }.from(0).to(1)
-
-      seller = Seller.last
-      address = SellerAddress.last
-
-      expect(address.seller).to eq(seller)
-
-      expect(address.address).to eq(waiting_seller.address)
-      expect(address.suburb).to eq(waiting_seller.suburb)
-      expect(address.state).to eq(waiting_seller.state)
-      expect(address.postcode).to eq(waiting_seller.postcode)
-    end
-  end
-
   describe '#create_version!' do
     it 'creates a seller version for the newly-created seller' do
       expect {
@@ -137,6 +119,7 @@ RSpec.describe Sellers::WaitingSeller::Accept do
 
       seller = Seller.last
       version = SellerVersion.last
+      address = version.addresses.first
 
       expect(version.seller).to eq(seller)
       expect(version.name).to eq(waiting_seller.name)
@@ -144,6 +127,11 @@ RSpec.describe Sellers::WaitingSeller::Accept do
       expect(version.contact_name).to eq(waiting_seller.contact_name)
       expect(version.contact_email).to eq(waiting_seller.contact_email)
       expect(version.website_url).to eq(waiting_seller.website_url)
+
+      expect(address.address).to eq(waiting_seller.address)
+      expect(address.suburb).to eq(waiting_seller.suburb)
+      expect(address.state).to eq(waiting_seller.state)
+      expect(address.postcode).to eq(waiting_seller.postcode)
     end
 
     it 'sets the "started_at" timestamp' do
