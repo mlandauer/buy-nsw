@@ -9,7 +9,7 @@ RSpec.describe SellerVersionDecorator do
 
   describe '#addresses' do
     it 'returns addresses wrapped in decorator objects' do
-      create_list(:seller_address, 3, seller: version.seller)
+      version.update_attribute(:addresses, [ attributes_for(:seller_address) ] * 3)
 
       expect(subject.addresses.size).to eq(3)
       subject.addresses.each do |address|

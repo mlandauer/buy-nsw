@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe SellerAddressDecorator do
 
-  let(:address) { create(:seller_address) }
+  let(:address) { build_stubbed(:seller_address) }
   let(:mock_context) { double('view context') }
 
   subject { SellerAddressDecorator.new(address, mock_context) }
