@@ -369,7 +369,7 @@ private
       a["Virtualisation used to keep users sharing the same infrastructure apart"] = product.virtualisation
 
       if product.virtualisation
-        a["Who implements the virtualisation technology"] = product.virtualisation_implementor
+        a["Who implements the virtualisation technology"] = product.virtualisation_implementor_text
 
         if product.virtualisation_implementor == 'third-party'
           a["Third party providing virtualisation"] = product.virtualisation_third_party
