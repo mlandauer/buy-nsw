@@ -46,40 +46,41 @@
 
     var $newRow = this.$template.clone()
 
-    var $visibleInputs = $newRow.find('input[type=text], select')
-    var $hiddenInput = $newRow.find('input[type=hidden]')
+    var $inputs = $newRow.find('input, select')
 
     var newIndex = this.getNewIndex()
     var visibleIndex = newIndex + 1
 
-    $visibleInputs.each($.proxy(function (i, input) {
+    $inputs.each($.proxy(function (i, input) {
       var $input = $(input)
       var $label = $input.siblings('label')
 
       if (this.inlineLabels === true) {
         $label.text(visibleIndex + '.')
       }
-      $label.attr('for', this.buildFieldID(
-        $input.attr('id'), newIndex
-      ))
 
-      $input.attr('name', this.buildFieldName(
-        $input.attr('name'), newIndex
-      ))
-      $input.attr('id', this.buildFieldID(
-        $input.attr('id'), newIndex
-      ))
+      if ($input.attr('id') !== undefined) {
+        $label.attr('for', this.buildFieldID(
+          $input.attr('id'), newIndex
+        ))
+
+        $input.attr('id', this.buildFieldID(
+          $input.attr('id'), newIndex
+        ))
+      }
+
+      if ($input.attr('name') !== undefined) {
+        $input.attr('name', this.buildFieldName(
+          $input.attr('name'), newIndex
+        ))
+      }
     }, this))
 
-    $hiddenInput.attr('name', this.buildFieldName(
-      $hiddenInput.attr('name'), newIndex
-    ))
-    $hiddenInput.attr('id', this.buildFieldID(
-      $hiddenInput.attr('id'), newIndex
-    ))
+    var $deleteCheckboxWrapper = $newRow.find('*[data-expanding-list-delete]')
+    $deleteCheckboxWrapper.hide()
 
     $newRow.appendTo(this.$container)
-    $visibleInputs.first().focus()
+    $inputs.first().focus()
 
     if (this.listFull()) {
       this.removeAddLink()
@@ -95,9 +96,11 @@
 
     var $inputField = $row.find('input[type=text], select')
     var $deleteLink = $row.find('a')
+    var $deleteCheckboxInput = $row.find('*[data-expanding-list-delete] input')
 
     $row.addClass('removed')
     $inputField.attr('disabled', true)
+    $deleteCheckboxInput.attr('checked', true)
     $deleteLink.remove()
 
     if (this.listFull() === false) {
@@ -130,6 +133,9 @@
     var $deleteLink = $('<a></a>')
     var $element = $(element)
 
+    var $deleteCheckboxWrapper = $element.find('*[data-expanding-list-delete]')
+    $deleteCheckboxWrapper.hide()
+
     $deleteLink.text('Delete this ' + this.objectName)
     $deleteLink.attr('href', '#')
     $deleteLink.on('click', $.proxy(this.deleteRow, this, $element))
@@ -143,10 +149,8 @@
 
     var $textInput = $templateForm.find('input[type=text]')
     var $selectInput = $templateForm.find('select')
-    var $hiddenInput = $templateForm.find('input[type=hidden]')
 
     $textInput.val('')
-    $hiddenInput.val('')
 
     // Reset the selected value in any dropdown boxes
     $.each($selectInput, function (i, item) {
@@ -194,10 +198,10 @@
 
   DetailedExpandingListModule.prototype.getNewIndex = function getNewIndex () {
     var $lastEl = this.$el.find('li:last-of-type')
-    var $hiddenInput = $lastEl.find('input[type=hidden]')
+    var $input = $lastEl.find('input[id]')
 
     var indexExpr = /[\w[\]]+_(\d+)_\w+$/
-    var matches = $hiddenInput.attr('id').match(indexExpr)
+    var matches = $input.attr('id').match(indexExpr)
 
     var lastIndex = parseInt(matches[1])
 
