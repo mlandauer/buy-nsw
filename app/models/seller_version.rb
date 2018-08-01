@@ -3,7 +3,6 @@ class SellerVersion < ApplicationRecord
   extend Enumerize
 
   include Concerns::StateScopes
-  include Concerns::SellerAliases
 
   before_save :normalise_abn
 
@@ -66,6 +65,16 @@ class SellerVersion < ApplicationRecord
 
   def no_approved_versions?
     SellerVersion.approved.where(seller_id: seller_id).empty?
+  end
+
+  def addresses=(new_value)
+    self[:addresses] = new_value.map(&:to_h)
+  end
+
+  def addresses
+    Array(self[:addresses]).map {|value|
+      OpenStruct.new(value)
+    }
   end
 
   scope :for_review, -> { awaiting_assignment.or(ready_for_review) }
