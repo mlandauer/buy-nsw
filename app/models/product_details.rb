@@ -243,7 +243,7 @@ private
       a["Whether there are restrictions on users accessing or extracting data"] = product.data_access_restrictions
 
       if product.data_access_restrictions
-        a["The restrictions on users accessing or extracting data"] = product.data_access_restrictions
+        a["The restrictions on users accessing or extracting data"] = product.data_access_restrictions_details
       end
 
       a["Whether users can access audit information about activities and transactions"] = product.audit_information
