@@ -48,6 +48,10 @@ FactoryBot.define do
         [ "Baker of the year #{2010+n}" ]
       }
 
+      addresses {
+        [ attributes_for(:seller_address) ]
+      }
+
       agree true
     end
 
