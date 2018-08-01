@@ -40,7 +40,6 @@ class Sellers::WaitingSeller::Accept < Trailblazer::Operation
   step :create_user!
   failure :include_devise_errors!, fail_fast: true
   step :create_seller!
-  step :create_seller_address!
   step :create_version!
   step :log_event!
   step :update_seller_assignment!
@@ -63,17 +62,6 @@ class Sellers::WaitingSeller::Accept < Trailblazer::Operation
     options['seller'] = Seller.create!
   end
 
-  def create_seller_address!(options, model:, **)
-    options['seller_address'] = options['seller'].addresses.new(
-      address: model.address,
-      suburb: model.suburb,
-      state: model.state,
-      postcode: model.postcode,
-      country: model.country,
-    )
-    options['seller_address'].save!
-  end
-
   def create_version!(options, model:, **)
     options['application'] = options['seller'].versions.new(
       started_at: Time.now,
@@ -82,6 +70,13 @@ class Sellers::WaitingSeller::Accept < Trailblazer::Operation
       contact_name: model.contact_name,
       contact_email: model.contact_email,
       website_url: model.website_url,
+      addresses: [{
+        address: model.address,
+        suburb: model.suburb,
+        state: model.state,
+        postcode: model.postcode,
+        country: model.country,
+      }],
     )
     options['application'].save!
   end
