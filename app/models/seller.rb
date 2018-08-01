@@ -9,8 +9,6 @@ class Seller < ApplicationRecord
   belongs_to :agreed_by, class_name: 'User', optional: true
 
   has_one :waiting_seller
-
-  has_many :addresses, class_name: 'SellerAddress', dependent: :destroy
   has_many :products
 
   has_many :versions, class_name: 'SellerVersion'
