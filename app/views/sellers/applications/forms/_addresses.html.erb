@@ -7,7 +7,7 @@
       <%= a.input :state, collection: SellerAddress.state.options, include_blank: true %>
       <%= a.input :postcode %>
       <%= a.input :country, collection: ISO3166::Country.translations, label_method: :second, value_method: :first, input_html: { data: { expanding_list_default: 'AU' } } %>
-      <%= a.hidden_field :id %>
+      <%= a.input :_delete, as: :boolean, value: '1', wrapper_html: { data: { expanding_list_delete: true } } %>
     </li>
   <% end %>
   </ol>

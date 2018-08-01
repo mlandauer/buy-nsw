@@ -124,6 +124,8 @@ en:
               label: Postcode
             country:
               label: Country
+            _delete:
+              label: Delete this address
         declaration:
           short: 'Accept the Core Terms'
           agree_html: |

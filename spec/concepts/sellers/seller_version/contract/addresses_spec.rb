@@ -13,9 +13,18 @@ RSpec.describe Sellers::SellerVersion::Contract::Addresses do
       ]
     }
   }
-  let(:address_atts) { attributes_for(:seller_address) }
+  let(:address_atts) {
+    {
+      address: '123 Test Street',
+      suburb: 'Testville',
+      state: 'nsw',
+      country: 'AU',
+      postcode: '2000',
+    }
+  }
 
   it 'validates with valid attributes' do
+    subject.validate(atts)
     expect(subject.validate(atts)).to eq(true)
   end
 
@@ -66,28 +75,62 @@ RSpec.describe Sellers::SellerVersion::Contract::Addresses do
       expect(subject).to_not be_valid
       expect(subject.addresses[0].errors[:postcode]).to be_present
     end
-
-    # TODO: This behaviour currently works in the application but appears not to
-    # in these unit tests. Return to these in future and fix.
-    #
-    # context 'with the `addresses_attributes` keys' do
-    #   it 'is valid with a full address' do
-    #     attributes = atts.merge(addresses: nil, addresses_attributes: [ address_atts ])
-    #     subject.validate(attributes)
-    #
-    #     expect(subject).to be_valid
-    #   end
-    #
-    #   it 'is invalid with a missing attribute' do
-    #     invalid_address = address_atts.merge(address: nil)
-    #     attributes = atts.merge(addresses: nil, addresses_attributes: [ invalid_address ])
-    #     subject.validate(attributes)
-    #
-    #     expect(subject).to_not be_valid
-    #     puts subject.errors.inspect
-    #     expect(subject.errors[:addresses_attributes][0][:address]).to be_present
-    #   end
-    # end
   end
 
+  describe '#addresses' do
+    let(:addresses) { [ address_atts ] * 3 }
+    let(:version) { build_stubbed(:seller_version, seller: seller, addresses: addresses) }
+
+    it 'adds a new address' do
+      subject.validate({
+        addresses: addresses + [address_atts],
+      })
+
+      expect(subject.addresses.size).to eq(4)
+    end
+
+    it 'removes an address when omitted' do
+      subject.validate({
+        addresses: addresses[0..1],
+      })
+
+      expect(subject.addresses.size).to eq(2)
+    end
+  end
+
+  describe '#valid?' do
+    context 'with a valid address' do
+      before(:each) {
+        subject.validate({
+          addresses: [ address_atts ]
+        })
+      }
+
+      it 'is true' do
+        expect(subject).to be_valid
+      end
+    end
+
+    context 'with an invalid address' do
+      let(:invalid_atts) {
+        {
+          address: nil,
+          suburb: nil,
+          state: 'nsw',
+          country: 'AU',
+          postcode: nil,
+        }
+      }
+
+      before(:each) {
+        subject.validate({
+          addresses: [ address_atts, invalid_atts ],
+        })
+      }
+
+      it 'is false' do
+        expect(subject).to_not be_valid
+      end
+    end
+  end
 end
