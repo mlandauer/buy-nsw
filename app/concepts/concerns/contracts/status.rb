@@ -7,7 +7,12 @@ module Concerns::Contracts::Status
 
       if value.is_a?(Array)
         value.any? {|item|
-          item.respond_to?(:id) ? item.id.present? : item.present?
+          case
+          when item.respond_to?(:address) then item.address.present?
+          when item.respond_to?(:id) then item.id.present?
+          else
+            item.present?
+          end
         }
       elsif value.is_a?(DocumentUploader)
         value.file.present?
