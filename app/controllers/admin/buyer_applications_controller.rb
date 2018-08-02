@@ -5,7 +5,7 @@ class Admin::BuyerApplicationsController < Admin::BaseController
   after_action :set_content_disposition, if: :csv_request?, only: :index
 
   layout ->{
-    action_name == 'index' ? 'ops' : '../ops/buyer_applications/_layout'
+    action_name == 'index' ? 'admin' : '../admin/buyer_applications/_layout'
   }
 
   def index

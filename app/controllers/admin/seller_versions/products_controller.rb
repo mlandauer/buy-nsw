@@ -1,5 +1,5 @@
 class Admin::SellerVersions::ProductsController < Admin::BaseController
-  layout '../ops/seller_versions/_layout'
+  layout '../admin/seller_versions/_layout'
 
   def show
   end
