@@ -1,0 +1,36 @@
+<section class="view-admin-waiting-sellers-edit">
+  <header class="view-header">
+    <h1>Edit waitlisted seller</h1>
+  </header>
+
+  <p>You can manually amend the details of this waitlisted seller. Once you have invited a seller, the details here can't be changed anymore.</p>
+
+  <%= buy_nsw_form_for operation.form, url: admin_waiting_seller_path(operation.form), as: :waiting_seller, i18n_scope: 'admin.waiting_sellers.update' do |f| %>
+
+    <div class="row">
+      <div class="col-md-6">
+        <%= f.input :name %>
+        <%= f.input :abn %>
+
+        <%= f.input :contact_name %>
+        <%= f.input :contact_email %>
+        <%= f.input :contact_position %>
+        <%= f.input :website_url %>
+      </div>
+      <div class="col-md-6">
+        <%= f.input :address %>
+        <%= f.input :suburb %>
+        <%= f.input :postcode %>
+        <%= f.input :state, as: :select, collection: SellerAddress.state.options, label_method: :first, value_method: :last, include_blank: true %>
+        <%= f.input :country, as: :select, collection: ISO3166::Country.translations, label_method: :last, value_method: :first, include_blank: true %>
+      </div>
+    </div>
+
+    <div class="actions">
+      <p><%= f.submit 'Save waitlisted seller' %></p>
+      <p>
+        <%= link_to 'Go back to the list', admin_waiting_sellers_path %>
+      </p>
+    </div>
+  <% end %>
+</section>

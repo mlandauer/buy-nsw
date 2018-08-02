@@ -1,0 +1,15 @@
+<dl>
+  <dt><%= t('admin.seller_versions.fields.addresses.name') %></dt>
+  <dd>
+    <ul>
+      <% seller.addresses.each do |address| %>
+        <li>
+          <%= address.address %><br>
+          <%= address.suburb %><br>
+          <%= address.state %>, <%= address.postcode %><br>
+          <%= address.country %>
+        </li>
+      <% end %>
+    </ul>
+  </dd>
+</dl>

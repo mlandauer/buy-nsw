@@ -1,0 +1,11 @@
+.view-admin-buyer-applications-list {
+  @include admin-resource-list-column-set;
+}
+
+.view-admin-buyer-applications-show {
+  @include admin-resource-show-column-set;
+
+  .make-decision, .make-assignment, .add-note {
+    @include operation-box;
+  }
+}

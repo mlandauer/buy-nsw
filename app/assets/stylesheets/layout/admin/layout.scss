@@ -1,0 +1,48 @@
+body.admin {
+  .column-set {
+    @include app-column-container;
+
+    .left-col {
+      @include app-column-fixed;
+
+      background: $grey-4;
+      display: flex;
+      flex-direction: column;
+      border-right: 3px solid darken($grey-1, 5%);
+    }
+
+    .right-col {
+      @include app-column;
+
+      flex: 1;
+    }
+  }
+
+  h2 {
+    font-size: 1.4rem;
+  }
+
+  .view-padded {
+    padding: 1rem;
+
+    .view-header {
+      margin: -1rem -1rem 2rem -1rem;
+    }
+  }
+
+  .view-header {
+    background: #fff;
+    border-bottom: 2px solid $grey-2;
+
+    background: $grey-1;
+
+    padding: 1.5rem 1rem;
+    margin-bottom: 2em;
+
+    h1 {
+      margin: 0;
+      font-size: 1.7rem;
+    }
+  }
+
+}

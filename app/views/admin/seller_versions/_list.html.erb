@@ -1,0 +1,46 @@
+<% if applications.any? %>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Seller name</th>
+        <th scope="col">Status</th>
+        <th scope="col">Submitted</th>
+        <th scope="col">Assigned to</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% applications.each do |application| %>
+      <tr>
+        <td><%= application.id %></td>
+        <td>
+          <% if application.name.present? %>
+            <%= application.name %>
+          <% else %>
+            <em>Unnamed seller (<%= application.seller.owners.first.email %>)</em>
+          <% end %>
+        </td>
+        <td><%= application.state %></td>
+        <td>
+          <% if application.submitted_at.present? %>
+            <abbr title="<%= application.submitted_at.to_s %>">
+              <%= time_ago_in_words application.submitted_at %> ago
+            </abbr>
+          <% end %>
+        </td>
+        <td>
+          <% if application.assigned_to.present? %>
+            <%= application.assigned_to.email %>
+          <% end %>
+        </td>
+        <td class="actions">
+          <%= link_to 'View', admin_seller_application_path(application) %>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <%= render partial: 'admin/shared/no_records_message', locals: local_assigns.slice(:search) %>
+<% end %>

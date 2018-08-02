@@ -1,0 +1,71 @@
+<% content_for(:seller_application_content) do %>
+  <section class="status-overview">
+    <div class="status-indicator">
+      <span>Status</span>
+      <%= application.state %>
+    </div>
+    <div class="assigned-to">
+      <span>Assigned to</span>
+      <% if application.assigned_to.present? %>
+        <%= application.assigned_to.email %>
+      <% else %>
+        nobody
+      <% end %>
+    </div>
+  </section>
+
+  <section class="application-details">
+    <% if application.seller.waiting_seller.present? %>
+      <p class="invited-message">This seller was invited to apply.</p>
+    <% end %>
+    <dl>
+      <% if application.started_at.present? %>
+        <dt>Started at</dt>
+        <dd><%= application.started_at.localtime.to_formatted_s(:long) %></dd>
+      <% end %>
+      <% if application.submitted_at.present? %>
+        <dt>Submitted by</dt>
+        <dd><%= application.owners.map(&:email).join(', ') %></dd>
+        <dt>Submitted at</dt>
+        <dd><%= application.submitted_at.localtime.to_formatted_s(:long) %></dd>
+      <% end %>
+      <% if application.decided_at.present? %>
+        <dt>Decided at</dt>
+        <dd><%= application.decided_at.localtime.to_formatted_s(:long) %></dd>
+      <% end %>
+    </dl>
+  </section>
+
+  <section class="make-assignment" data-module="collapsible-section">
+    <h2>Assign this application to a user</h2>
+
+    <div class="inner">
+      <%= render partial: 'assign_form', locals: { form: assign_form } %>
+    </div>
+  </section>
+
+  <% if application.may_approve? && application.assigned_to == current_user %>
+    <section class="make-decision" data-module="collapsible-section">
+      <h2>Make a decision on this application</h2>
+
+      <div class="inner">
+        <%= render partial: 'decision_form', locals: { form: decide_form } %>
+      </div>
+    </section>
+  <% end %>
+
+  <section class="add-note" data-module="collapsible-section">
+    <h2>Add a private note to this application</h2>
+
+    <div class="inner">
+      <%= render partial: 'note_form', locals: { event: Event::Note.new, application: application } %>
+    </div>
+  </section>
+
+  <section class="events-list">
+    <% if application.events.any? %>
+      <h2>History</h2>
+      <%= render partial: 'admin/shared/events', locals: { events: application.events } %>
+    <% end %>
+  </section>
+<% end %>

@@ -1,0 +1,48 @@
+<% if applications.any? %>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Buyer name</th>
+        <th scope="col">Organisation</th>
+        <th scope="col">Status</th>
+        <th scope="col">Submitted</th>
+        <th scope="col">Assigned to</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% applications.each do |application| %>
+      <tr>
+        <td><%= application.id %></td>
+        <td>
+          <% if application.buyer.name.present? %>
+            <%= application.buyer.name %>
+          <% else %>
+            <em>Unnamed buyer (<%= application.user.email %>)</em>
+          <% end %>
+        </td>
+        <td><%= application.buyer.organisation %></td>
+        <td><%= application.state %></td>
+        <td>
+          <% if application.submitted_at.present? %>
+            <abbr title="<%= application.submitted_at.to_s %>">
+              <%= time_ago_in_words application.submitted_at %> ago
+            </abbr>
+          <% end %>
+        </td>
+        <td>
+          <% if application.assigned_to.present? %>
+            <%= application.assigned_to.email %>
+          <% end %>
+        </td>
+        <td class="actions">
+          <%= link_to 'View', admin_buyer_application_path(application) %>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <%= render partial: 'admin/shared/no_records_message', locals: local_assigns.slice(:search) %>
+<% end %>

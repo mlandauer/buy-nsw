@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Search::Ops::SellerVersion do
+RSpec.describe Search::Admin::SellerVersion do
 
   describe '#available_filters' do
     it 'returns all admin users in the assigned_to filter' do

@@ -1,0 +1,43 @@
+body.admin {
+  header.admin {
+    background: darken($grey-4, 10%);
+    color: #fff;
+    border-bottom: 3px solid darken($grey-4, 5%);
+
+    padding: 0.7rem 1rem;
+    margin-bottom: 0;
+
+    h1 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0;
+
+      span {
+        display: inline-block;
+        vertical-align: middle;
+      }
+
+      .logo {
+        background: asset-url('inverted-logo.png') no-repeat;
+        background-size: 34px 40px;
+        text-indent: -9999px;
+        margin-right: 9px;
+        width: 34px;
+        height: 40px;
+      }
+
+      .title {
+        padding-top: .1rem;
+      }
+    }
+
+    .user {
+      text-align: left;
+      padding-left: 48px;
+
+      p {
+        font-size: 0.75rem;
+      }
+    }
+  }
+}

@@ -1,4 +1,4 @@
-@mixin ops-details {
+@mixin admin-details {
   dl {
     @include make-row();
 
@@ -46,6 +46,6 @@
   }
 }
 
-.ops-details {
-  @include ops-details;
+.admin-details {
+  @include admin-details;
 }
