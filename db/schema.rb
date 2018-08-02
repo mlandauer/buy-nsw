@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180731034736) do
+ActiveRecord::Schema.define(version: 20180802010027) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -253,38 +253,6 @@ ActiveRecord::Schema.define(version: 20180731034736) do
     t.text "data_disposal_approach"
   end
 
-  create_table "seller_accreditations", force: :cascade do |t|
-    t.integer "seller_id", null: false
-    t.string "accreditation"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "seller_addresses", force: :cascade do |t|
-    t.integer "seller_id", null: false
-    t.string "address"
-    t.string "suburb"
-    t.string "state"
-    t.string "postcode"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "country"
-  end
-
-  create_table "seller_awards", force: :cascade do |t|
-    t.integer "seller_id", null: false
-    t.string "award"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "seller_engagements", force: :cascade do |t|
-    t.integer "seller_id", null: false
-    t.string "engagement"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "seller_versions", force: :cascade do |t|
     t.string "state", null: false
     t.text "response"
@@ -400,8 +368,5 @@ ActiveRecord::Schema.define(version: 20180731034736) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "seller_accreditations", "sellers"
-  add_foreign_key "seller_awards", "sellers"
-  add_foreign_key "seller_engagements", "sellers"
   add_foreign_key "seller_versions", "sellers"
 end
