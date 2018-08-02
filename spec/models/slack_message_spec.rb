@@ -15,9 +15,9 @@ RSpec.describe SlackMessage do
 
   it "#new_product_order" do
     order = build_stubbed(:product_order)
-    buyer_url = ops_buyer_url(order.buyer)
+    buyer_url = admin_buyer_url(order.buyer)
     product_url = pathway_product_url(order.product.section, order.product)
-    order_url = ops_product_orders_url
+    order_url = admin_product_orders_url
 
     s = SlackMessage.new
     expect(s).to receive(:message).with(
@@ -36,7 +36,7 @@ RSpec.describe SlackMessage do
 
   it '#buyer_application_submitted' do
     application = build_stubbed(:awaiting_assignment_buyer_application)
-    application_url = ops_buyer_application_url(application)
+    application_url = admin_buyer_application_url(application)
 
     s = SlackMessage.new
     expect(s).to receive(:message).with(
@@ -55,7 +55,7 @@ RSpec.describe SlackMessage do
 
   it '#seller_version_submitted' do
     version = build_stubbed(:awaiting_assignment_seller_version)
-    version_url = ops_seller_application_url(version)
+    version_url = admin_seller_application_url(version)
 
     s = SlackMessage.new
     expect(s).to receive(:message).with(
@@ -74,7 +74,7 @@ RSpec.describe SlackMessage do
 
   describe '#new_problem_report' do
     let(:report) { build_stubbed(:problem_report) }
-    let(:report_url) { ops_problem_report_url(report) }
+    let(:report_url) { admin_problem_report_url(report) }
 
     let(:message_text) {
       "A new problem was reported :mega: :speech_balloon:"

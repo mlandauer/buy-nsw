@@ -5,11 +5,11 @@ class SlackMessage
     message_type_with_button(
       :new_product_order,
       params: {
-        buyer: link_to(order.buyer.name, ops_buyer_url(order.buyer)),
+        buyer: link_to(order.buyer.name, admin_buyer_url(order.buyer)),
         organisation: order.buyer.organisation,
         product: link_to(order.product.name, pathway_product_url(order.product.section, order.product))
       },
-      button_url: ops_product_orders_url
+      button_url: admin_product_orders_url
     )
   end
 
@@ -20,7 +20,7 @@ class SlackMessage
         buyer: application.buyer.name,
         organisation: application.buyer.organisation
       },
-      button_url: ops_buyer_application_url(application)
+      button_url: admin_buyer_application_url(application)
     )
   end
 
@@ -30,7 +30,7 @@ class SlackMessage
       params: {
         seller: version.name
       },
-      button_url: ops_seller_application_url(version)
+      button_url: admin_seller_application_url(version)
     )
   end
 
@@ -55,7 +55,7 @@ class SlackMessage
 
     message_type_with_button(
       :new_problem_report,
-      button_url: ops_problem_report_url(report),
+      button_url: admin_problem_report_url(report),
       fields: fields,
     )
   end

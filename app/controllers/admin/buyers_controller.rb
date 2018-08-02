@@ -20,7 +20,7 @@ class Admin::BuyersController < Admin::BaseController
 
     if operation.success?
       flash.notice = I18n.t('admin.buyers.messages.deactivate_success')
-      return redirect_to ops_buyer_path(buyer)
+      return redirect_to admin_buyer_path(buyer)
     else
       render :show
     end

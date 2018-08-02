@@ -94,7 +94,7 @@
 
       <div class="inner">
         <p>If this problem has been fixed, you can mark this report as resolved.</p>
-        <%= button_to 'Mark as resolved', resolve_ops_problem_report_path(problem_report), class: 'btn btn-primary' %>
+        <%= button_to 'Mark as resolved', resolve_admin_problem_report_path(problem_report), class: 'btn btn-primary' %>
       </div>
     </section>
   <% end %>
@@ -103,7 +103,7 @@
     <h2>Edit the tags on this report</h2>
 
     <div class="inner">
-      <%= buy_nsw_form_for tag_form, url: tag_ops_problem_report_path(problem_report), method: :put, as: :problem_report do |f| %>
+      <%= buy_nsw_form_for tag_form, url: tag_admin_problem_report_path(problem_report), method: :put, as: :problem_report do |f| %>
         <%= f.input :tags, label: 'Tags' %>
         <%= f.submit "Save" %>
       <% end %>

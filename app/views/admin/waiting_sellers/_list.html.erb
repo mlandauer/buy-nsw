@@ -1,4 +1,4 @@
-<%= buy_nsw_form_for :waiting_sellers, url: invite_ops_waiting_sellers_path, method: :get do |f| %>
+<%= buy_nsw_form_for :waiting_sellers, url: invite_admin_waiting_sellers_path, method: :get do |f| %>
 
 <table class="table">
   <thead>
@@ -21,7 +21,7 @@
         <td><%= seller.invitation_state %></td>
         <td class="actions">
           <% if seller.editable? %>
-            <%= link_to 'Edit', edit_ops_waiting_seller_path(seller) %>
+            <%= link_to 'Edit', edit_admin_waiting_seller_path(seller) %>
           <% end %>
         </td>
       </tr>

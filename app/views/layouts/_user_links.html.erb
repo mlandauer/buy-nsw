@@ -3,7 +3,7 @@
   <p class="signed-in-user"><%= current_user.email %></p>
   <ul>
     <% if current_user.is_admin? %>
-      <li><%= link_to 'Procurement Ops', ops_root_path %></li>
+      <li><%= link_to 'Procurement Ops', admin_root_path %></li>
     <% end %>
     <% if current_user.is_seller? %>
       <% if current_user.seller&.version_in_progress? %>

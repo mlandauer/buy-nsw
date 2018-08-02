@@ -27,7 +27,7 @@ class Admin::SellerVersionsController < Admin::BaseController
 
     if operation.success?
       flash.notice = I18n.t('admin.seller_versions.messages.update_assign_success')
-      return redirect_to ops_seller_application_path(application)
+      return redirect_to admin_seller_application_path(application)
     else
       render :show
     end
@@ -43,7 +43,7 @@ class Admin::SellerVersionsController < Admin::BaseController
     if operation.success?
       decision = operation.form.decision
       flash.notice = I18n.t("admin.seller_versions.messages.decision_success.#{decision}")
-      return redirect_to ops_seller_application_path(application)
+      return redirect_to admin_seller_application_path(application)
     else
       render :show
     end
@@ -56,7 +56,7 @@ class Admin::SellerVersionsController < Admin::BaseController
       eventable: application,
       note: params[:event_note]['note']
     )
-    redirect_to ops_seller_application_path(application)
+    redirect_to admin_seller_application_path(application)
   end
 
 private

@@ -8,9 +8,9 @@
         </h1>
         <nav class="vertical">
           <ul>
-            <%= nav_link_to 'Application', ops_seller_application_path(application), icon: 'ellipses' %>
-            <%= nav_link_to 'Seller details', seller_details_ops_seller_application_path(application), icon: 'spreadsheet' %>
-            <%= nav_link_to 'Documents', documents_ops_seller_application_path(application), icon: 'file' %>
+            <%= nav_link_to 'Application', admin_seller_application_path(application), icon: 'ellipses' %>
+            <%= nav_link_to 'Seller details', seller_details_admin_seller_application_path(application), icon: 'spreadsheet' %>
+            <%= nav_link_to 'Documents', documents_admin_seller_application_path(application), icon: 'file' %>
           </ul>
 
           <h3>
@@ -19,7 +19,7 @@
           </h3>
           <ul>
             <% application.seller.products.each do |product| %>
-              <%= nav_link_to formatted_product_name(product), ops_seller_application_product_path(application, product), icon: 'cart' %>
+              <%= nav_link_to formatted_product_name(product), admin_seller_application_product_path(application, product), icon: 'cart' %>
             <% end %>
           </ul>
         </nav>

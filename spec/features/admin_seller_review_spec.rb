@@ -57,7 +57,7 @@ RSpec.describe 'Reviewing seller applications', type: :feature, js: true do
 
     it 'tells the user when a seller is exempt from workers compensation insurance' do
       application = create(:awaiting_assignment_seller_version, workers_compensation_exempt: true)
-      visit ops_seller_application_path(application)
+      visit admin_seller_application_path(application)
 
       click_navigation_item 'Documents'
 
@@ -69,7 +69,7 @@ RSpec.describe 'Reviewing seller applications', type: :feature, js: true do
     it 'tags sellers who were invited from the waitlist' do
       application = create(:awaiting_assignment_seller_version)
       create(:joined_waiting_seller, seller: application.seller)
-      visit ops_seller_application_path(application)
+      visit admin_seller_application_path(application)
 
       within '.current-view' do
         expect(page).to have_content('This seller was invited')
@@ -84,7 +84,7 @@ RSpec.describe 'Reviewing seller applications', type: :feature, js: true do
         let!(:document) { create(:unscanned_document, documentable: product, kind: 'terms') }
 
         before(:example) {
-          visit ops_seller_application_path(application)
+          visit admin_seller_application_path(application)
           click_navigation_item(product.name)
         }
 
@@ -100,7 +100,7 @@ RSpec.describe 'Reviewing seller applications', type: :feature, js: true do
         let!(:document) { create(:clean_document, documentable: product, kind: 'terms') }
 
         before(:example) {
-          visit ops_seller_application_path(application)
+          visit admin_seller_application_path(application)
           click_navigation_item(product.name)
         }
 
@@ -116,7 +116,7 @@ RSpec.describe 'Reviewing seller applications', type: :feature, js: true do
         let!(:document) { create(:infected_document, documentable: product, kind: 'terms') }
 
         before(:example) {
-          visit ops_seller_application_path(application)
+          visit admin_seller_application_path(application)
           click_navigation_item(product.name)
         }
 
@@ -132,7 +132,7 @@ RSpec.describe 'Reviewing seller applications', type: :feature, js: true do
     it 'shows seller recognition details' do
       application = create(:awaiting_assignment_seller_version)
 
-      visit ops_seller_application_path(application)
+      visit admin_seller_application_path(application)
       click_navigation_item 'Seller details'
 
       within_definition admin_field_label(:accreditations) do

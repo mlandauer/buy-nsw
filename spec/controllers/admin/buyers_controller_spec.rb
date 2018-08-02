@@ -49,7 +49,7 @@ RSpec.describe Admin::BuyersController, type: :controller, sign_in: :admin_user 
       it 'redirects to the buyer page' do
         post :deactivate, params: { id: buyer.id }
 
-        expect(response).to redirect_to(ops_buyer_path(buyer))
+        expect(response).to redirect_to(admin_buyer_path(buyer))
       end
 
       it 'sets a success flash notice' do

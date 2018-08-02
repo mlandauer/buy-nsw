@@ -16,30 +16,30 @@
 
       <nav class="vertical">
         <ul>
-          <%= nav_link_to 'Dashboard', ops_root_path, icon: 'grid-three-up' %>
+          <%= nav_link_to 'Dashboard', admin_root_path, icon: 'grid-three-up' %>
         </ul>
 
         <h3>Applications</h3>
         <ul>
-          <%= nav_link_to 'Buyer applications', ops_buyer_applications_path, icon: 'inbox', match_prefix: true %>
-          <%= nav_link_to 'Seller applications', ops_seller_applications_path, icon: 'inbox', match_prefix: true %>
+          <%= nav_link_to 'Buyer applications', admin_buyer_applications_path, icon: 'inbox', match_prefix: true %>
+          <%= nav_link_to 'Seller applications', admin_seller_applications_path, icon: 'inbox', match_prefix: true %>
         </ul>
 
         <h3>Migration</h3>
         <ul>
-          <%= nav_link_to 'Seller waitlist', ops_waiting_sellers_path, icon: 'bolt', match_prefix: true %>
+          <%= nav_link_to 'Seller waitlist', admin_waiting_sellers_path, icon: 'bolt', match_prefix: true %>
         </ul>
 
         <h3>Entities</h3>
         <ul>
-          <%= nav_link_to 'Buyers', ops_buyers_path, icon: 'people', match_prefix: true %>
-          <%= nav_link_to 'Sellers', ops_sellers_path, icon: 'briefcase', match_prefix: true %>
-          <%= nav_link_to 'Product Orders', ops_product_orders_path, icon: 'dollar' %>
+          <%= nav_link_to 'Buyers', admin_buyers_path, icon: 'people', match_prefix: true %>
+          <%= nav_link_to 'Sellers', admin_sellers_path, icon: 'briefcase', match_prefix: true %>
+          <%= nav_link_to 'Product Orders', admin_product_orders_path, icon: 'dollar' %>
         </ul>
 
         <h3>Performance</h3>
         <ul>
-          <%= nav_link_to 'Problem reports', ops_problem_reports_path, icon: 'bug', match_prefix: true %>
+          <%= nav_link_to 'Problem reports', admin_problem_reports_path, icon: 'bug', match_prefix: true %>
         </ul>
       </nav>
 

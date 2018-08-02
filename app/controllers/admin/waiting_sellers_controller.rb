@@ -12,7 +12,7 @@ class Admin::WaitingSellersController < Admin::BaseController
 
     if @operation.success?
       flash.notice = 'Saved'
-      redirect_to edit_ops_waiting_seller_path(@operation.waiting_seller)
+      redirect_to edit_admin_waiting_seller_path(@operation.waiting_seller)
     else
       render :edit
     end
@@ -28,13 +28,13 @@ class Admin::WaitingSellersController < Admin::BaseController
     if operation.success?
       if operation.persisted? == true
         flash.notice = 'Saved'
-        redirect_to ops_waiting_sellers_path
+        redirect_to admin_waiting_sellers_path
       else
         render :upload
       end
     else
       flash.alert = "We couldn't parse any rows from your CSV"
-      redirect_to ops_waiting_sellers_path
+      redirect_to admin_waiting_sellers_path
     end
   end
 
@@ -45,7 +45,7 @@ class Admin::WaitingSellersController < Admin::BaseController
 
     if operation.failure? && operation.no_sellers_selected?
       flash.alert = "You didn't select any sellers to invite"
-      return redirect_to ops_waiting_sellers_path
+      return redirect_to admin_waiting_sellers_path
     end
   end
 
@@ -56,7 +56,7 @@ class Admin::WaitingSellersController < Admin::BaseController
 
     if operation.success?
       flash.notice = 'Invitations sent'
-      redirect_to ops_waiting_sellers_path
+      redirect_to admin_waiting_sellers_path
     else
       render :invite
     end

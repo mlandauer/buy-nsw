@@ -24,7 +24,7 @@ class Admin::BuyerApplicationsController < Admin::BaseController
 
     if operation.success?
       flash.notice = I18n.t('admin.buyer_applications.messages.update_assign_success')
-      return redirect_to ops_buyer_application_path(application)
+      return redirect_to admin_buyer_application_path(application)
     else
       render :show
     end
@@ -40,7 +40,7 @@ class Admin::BuyerApplicationsController < Admin::BaseController
     if operation.success?
       decision = operation.form.decision
       flash.notice = I18n.t("admin.buyer_applications.messages.decision_success.#{decision}")
-      return redirect_to ops_buyer_application_path(application)
+      return redirect_to admin_buyer_application_path(application)
     else
       render :show
     end
@@ -53,7 +53,7 @@ class Admin::BuyerApplicationsController < Admin::BaseController
       eventable: application,
       note: params[:event_note]['note']
     )
-    redirect_to ops_buyer_application_path(application)
+    redirect_to admin_buyer_application_path(application)
   end
 
 private

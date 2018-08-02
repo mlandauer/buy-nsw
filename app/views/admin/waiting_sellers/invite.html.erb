@@ -3,7 +3,7 @@
     <h1>Send invitations to waitlisted sellers</h1>
   </header>
 
-  <%= simple_form_for :invite, url: invite_ops_waiting_sellers_path, method: :post, as: :invite do |f| %>
+  <%= simple_form_for :invite, url: invite_admin_waiting_sellers_path, method: :post, as: :invite do |f| %>
     <p>Send invites to the following sellers?</p>
 
     <div class="record-list">
@@ -32,7 +32,7 @@
               </td>
               <td class="actions">
                 <% if operation.invalid_waiting_sellers.include?(model) %>
-                  <%= link_to 'Fix errors', edit_ops_waiting_seller_path(model), target: '_blank' %>
+                  <%= link_to 'Fix errors', edit_admin_waiting_seller_path(model), target: '_blank' %>
                 <% end %>
                 <%= f.hidden_field :ids, value: model.id, name: 'invite[ids][]' %>
               </td>
@@ -47,14 +47,14 @@
         <%= f.submit 'Send invitations' %>
       <% else %>
         <p>You need to fix errors before continuing.</p>
-        <%= link_to invite_ops_waiting_sellers_path(invite: { ids: params[:invite][:ids] }), class: 'refresh-action' do %>
+        <%= link_to invite_admin_waiting_sellers_path(invite: { ids: params[:invite][:ids] }), class: 'refresh-action' do %>
           <span aria-hidden="true"></span>
           Refresh status
         <% end %>
       <% end %>
 
       <span style="padding-left: 1rem">
-        or <%= link_to 'cancel and go back', ops_waiting_sellers_path %>
+        or <%= link_to 'cancel and go back', admin_waiting_sellers_path %>
       </span>
     </fieldset>
   <% end %>

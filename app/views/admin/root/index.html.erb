@@ -5,25 +5,25 @@
 
   <ul class="dashboard-sections">
     <li>
-      <%= link_to ops_seller_applications_path do %>
+      <%= link_to admin_seller_applications_path do %>
         <span class="big-number"><%= seller_applications_for_review_count %></span>
         <%= 'seller application'.pluralize(seller_applications_for_review_count) %> for review
       <% end %>
     </li>
     <li>
-      <%= link_to ops_seller_applications_path(assigned_to: current_user.id) do %>
+      <%= link_to admin_seller_applications_path(assigned_to: current_user.id) do %>
         <span class="big-number"><%= assigned_seller_applications_for_review_count %></span>
         <%= 'seller application'.pluralize(seller_applications_for_review_count) %> assigned to you
       <% end %>
     </li>
     <li>
-      <%= link_to ops_buyer_applications_path do %>
+      <%= link_to admin_buyer_applications_path do %>
         <span class="big-number"><%= buyer_applications_for_review_count %></span>
         <%= 'buyer application'.pluralize(buyer_applications_for_review_count) %> for review
       <% end %>
     </li>
     <li>
-      <%= link_to ops_buyer_applications_path(assigned_to: current_user.id) do %>
+      <%= link_to admin_buyer_applications_path(assigned_to: current_user.id) do %>
         <span class="big-number"><%= assigned_buyer_applications_for_review_count %></span>
         <%= 'buyer application'.pluralize(buyer_applications_for_review_count) %> assigned to you
       <% end %>

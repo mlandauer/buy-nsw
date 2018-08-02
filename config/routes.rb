@@ -72,7 +72,7 @@ Rails.application.routes.draw do
   get '/cloud/:section', to: 'pathways/search#search', as: :pathway_search
   get '/cloud/:section/products/:id', to: 'pathways/products#show', as: :pathway_product
 
-  namespace :admin, path: 'ops', as: :ops do
+  namespace :admin, path: 'ops' do
     resources :buyers do
       member do
         get :details
