@@ -70,7 +70,7 @@ module Admin::SellerVersions::DetailHelper
       :federal_government_experience,
       :international_government_experience,
     ]
-    i18n_base = 'ops.seller_versions.fields.government_experience.values'
+    i18n_base = 'admin.seller_versions.fields.government_experience.values'
 
     keys.each do |key|
       labels << t("#{i18n_base}.#{key}") if seller.public_send("#{key}")

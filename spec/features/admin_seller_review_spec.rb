@@ -44,13 +44,13 @@ RSpec.describe 'Reviewing seller applications', type: :feature, js: true do
 
       click_navigation_item 'Documents'
 
-      within_document ops_field_label(:financial_statement) do
+      within_document admin_field_label(:financial_statement) do
         expect(page).to have_link('View document')
       end
-      within_document ops_field_label(:professional_indemnity_certificate) do
+      within_document admin_field_label(:professional_indemnity_certificate) do
         expect(page).to have_content('Awaiting virus scan')
       end
-      within_document ops_field_label(:workers_compensation_certificate) do
+      within_document admin_field_label(:workers_compensation_certificate) do
         expect(page).to have_content('Infected')
       end
     end
@@ -61,7 +61,7 @@ RSpec.describe 'Reviewing seller applications', type: :feature, js: true do
 
       click_navigation_item 'Documents'
 
-      within_document ops_field_label(:workers_compensation_certificate) do
+      within_document admin_field_label(:workers_compensation_certificate) do
         expect(page).to have_content('Not required')
       end
     end
@@ -135,15 +135,15 @@ RSpec.describe 'Reviewing seller applications', type: :feature, js: true do
       visit ops_seller_application_path(application)
       click_navigation_item 'Seller details'
 
-      within_definition ops_field_label(:accreditations) do
+      within_definition admin_field_label(:accreditations) do
         expect(page).to have_content(application.accreditations.first)
       end
 
-      within_definition ops_field_label(:engagements) do
+      within_definition admin_field_label(:engagements) do
         expect(page).to have_content(application.engagements.first)
       end
 
-      within_definition ops_field_label(:awards) do
+      within_definition admin_field_label(:awards) do
         expect(page).to have_content(application.awards.first)
       end
     end
@@ -209,8 +209,8 @@ RSpec.describe 'Reviewing seller applications', type: :feature, js: true do
     end
   end
 
-  def ops_field_label(key)
-    I18n.t("#{key}.name", scope: [ :ops, :seller_versions, :fields ])
+  def admin_field_label(key)
+    I18n.t("#{key}.name", scope: [ :admin, :seller_versions, :fields ])
   end
 
   def click_navigation_item(label)

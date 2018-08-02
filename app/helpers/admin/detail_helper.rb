@@ -11,7 +11,7 @@ module Admin::DetailHelper
   end
 
   def display_label_for(resource_name, type, field)
-    t("ops.#{resource_name}.fields.#{field}.name", default: field)
+    t("admin.#{resource_name}.fields.#{field}.name", default: field)
   end
 
   def display_value_for(resource, field)

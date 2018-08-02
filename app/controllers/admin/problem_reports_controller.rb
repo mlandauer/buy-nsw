@@ -10,9 +10,9 @@ class Admin::ProblemReportsController < Admin::BaseController
     )
 
     if operation.success?
-      flash.notice = I18n.t('ops.problem_reports.messages.resolved')
+      flash.notice = I18n.t('admin.problem_reports.messages.resolved')
     else
-      flash.alert = I18n.t('ops.problem_reports.messages.resolve_failed')
+      flash.alert = I18n.t('admin.problem_reports.messages.resolve_failed')
     end
 
     redirect_to ops_problem_report_path(operation.problem_report)
@@ -25,9 +25,9 @@ class Admin::ProblemReportsController < Admin::BaseController
     )
 
     if operation.success?
-      flash.notice = I18n.t('ops.problem_reports.messages.updated')
+      flash.notice = I18n.t('admin.problem_reports.messages.updated')
     else
-      flash.alert = I18n.t('ops.problem_reports.messages.update_failed')
+      flash.alert = I18n.t('admin.problem_reports.messages.update_failed')
     end
 
     redirect_to ops_problem_report_path(operation.problem_report)

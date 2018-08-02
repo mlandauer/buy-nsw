@@ -6,7 +6,7 @@
       <% search.available_filters.each do |key, options| %>
         <li class="filter">
           <%= label_tag key do %>
-            <%= t("ops.#{controller_name}.search.filters.#{key}.name") %>
+            <%= t("admin.#{controller_name}.search.filters.#{key}.name") %>
             <% if options == :term_filter %>
               <%= text_field_tag key, search.filter_value(key), class: 'form-control' %>
             <% else %>

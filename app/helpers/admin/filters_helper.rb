@@ -6,7 +6,7 @@ module Admin::FiltersHelper
       if option.is_a?(Array)
         option
       else
-        [ t("ops.#{resource_name}.search.filters.#{key}.options.#{option}"), option ]
+        [ t("admin.#{resource_name}.search.filters.#{key}.options.#{option}"), option ]
       end
     }
 

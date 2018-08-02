@@ -1,5 +1,5 @@
 en:
-  ops:
+  admin:
     buyers:
       messages:
         deactivate_success: Buyer deactivated

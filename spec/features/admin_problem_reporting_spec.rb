@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe 'Submitting a problem report', type: :feature, js: true do
 
-  let(:resolved_message) { I18n.t('ops.problem_reports.messages.resolved') }
-  let(:updated_message) { I18n.t('ops.problem_reports.messages.updated') }
+  let(:resolved_message) { I18n.t('admin.problem_reports.messages.resolved') }
+  let(:updated_message) { I18n.t('admin.problem_reports.messages.updated') }
 
   let!(:report) { create(:problem_report) }
   let!(:reports) { create_list(:problem_report, 10, url: nil) }
