@@ -1,4 +1,4 @@
-module Search::Ops
+module Search::Admin
   class Seller < Search::Base
 
     def available_filters

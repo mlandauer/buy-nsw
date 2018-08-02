@@ -13,7 +13,7 @@ class Admin::SellersController < Admin::BaseController
 
 private
   def search
-    @search ||= Search::Ops::Seller.new(
+    @search ||= Search::Admin::Seller.new(
       selected_filters: params,
       default_values: {
         state: 'active',

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Search::Ops::Seller do
+RSpec.describe Search::Admin::Seller do
 
   it 'returns all sellers' do
     create_list(:active_seller, 5)

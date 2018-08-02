@@ -66,7 +66,7 @@ private
   helper_method :applications
 
   def search
-    @search ||= Search::Ops::SellerVersion.new(
+    @search ||= Search::Admin::SellerVersion.new(
       selected_filters: params,
       default_values: {
         state: 'ready_for_review',
