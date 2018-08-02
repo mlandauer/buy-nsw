@@ -5,7 +5,7 @@ class SellerAddressDecorator < BaseDecorator
   end
 
   def state
-    SellerAddress.state.find_value(super)&.text
+    state_text
   end
 
 end

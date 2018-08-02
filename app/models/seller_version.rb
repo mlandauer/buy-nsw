@@ -73,7 +73,7 @@ class SellerVersion < ApplicationRecord
 
   def addresses
     Array(self[:addresses]).map {|value|
-      OpenStruct.new(value)
+      SellerAddress.new(value)
     }
   end
 
