@@ -1,5 +1,5 @@
-@mixin ops-resource-show-column-set {
-  @include ops-details;
+@mixin admin-resource-show-column-set {
+  @include admin-details;
 
   aside {
     @include app-column-fixed;

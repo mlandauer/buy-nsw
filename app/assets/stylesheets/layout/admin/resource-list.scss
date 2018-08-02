@@ -1,5 +1,5 @@
-@mixin ops-resource-list-column-set {
-  @include ops-list;
+@mixin admin-resource-list-column-set {
+  @include admin-list;
 
   aside {
     @include app-column-fixed;
@@ -25,7 +25,7 @@
     ul.filters {
       padding-left: 0;
       padding-right: 0;
-      
+
       margin-bottom: 0.5rem;
     }
 

@@ -1,0 +1,6 @@
+.view-admin-problem-reports-list {
+  @include admin-resource-list-column-set;
+}
+.view-admin-problem-reports-show {
+  @extend .view-padded;
+}

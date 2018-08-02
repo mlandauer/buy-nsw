@@ -1,5 +1,5 @@
-.view-ops-waiting-sellers {
-  @include ops-resource-list-column-set;
+.view-admin-waiting-sellers {
+  @include admin-resource-list-column-set;
 
   .upload-form {
     @include operation-box;
@@ -70,11 +70,11 @@
   }
 }
 
-.view-ops-waiting-sellers-edit {
+.view-admin-waiting-sellers-edit {
   @extend .view-padded;
 }
-.view-ops-waiting-sellers-invite {
-  @include ops-list;
+.view-admin-waiting-sellers-invite {
+  @include admin-list;
   @extend .view-padded;
 
   .invalid {

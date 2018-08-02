@@ -1,9 +1,9 @@
-.view-ops-seller-applications-list {
-  @include ops-resource-list-column-set;
+.view-admin-seller-applications-list {
+  @include admin-resource-list-column-set;
 }
 
-.view-ops-seller-applications-show {
-  @include ops-resource-show-column-set;
+.view-admin-seller-applications-show {
+  @include admin-resource-show-column-set;
 
   .make-decision, .make-assignment, .add-note {
     @include operation-box;
