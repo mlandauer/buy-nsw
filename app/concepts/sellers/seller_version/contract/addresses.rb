@@ -5,7 +5,7 @@ module Sellers::SellerVersion::Contract
 
     AddressPrepopulator = ->(_) {
       if self.addresses.size < 1
-        self.addresses << OpenStruct.new(country: 'AU')
+        self.addresses << SellerAddress.new(country: 'AU')
       end
     }
 
@@ -23,7 +23,7 @@ module Sellers::SellerVersion::Contract
 
       return skip! if fragment['_delete'] == '1'
 
-      address = OpenStruct.new(
+      address = SellerAddress.new(
         fragment.slice('address', 'suburb', 'state', 'postcode', 'country')
       )
 
