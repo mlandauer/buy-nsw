@@ -34,7 +34,7 @@ RSpec.describe Ops::BuildDecideSellerVersion do
 
   describe '#form' do
     it 'returns a form for the seller version' do
-      expect(subject.form).to be_a(Ops::SellerVersion::Contract::Decide)
+      expect(subject.form).to be_a(Admin::SellerVersion::Contract::Decide)
       expect(subject.form.model).to eq(version)
     end
   end

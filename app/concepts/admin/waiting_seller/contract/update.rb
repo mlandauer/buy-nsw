@@ -1,4 +1,4 @@
-module Ops::WaitingSeller::Contract
+module Admin::WaitingSeller::Contract
   class Update < Reform::Form
     include Forms::ValidationHelper
 

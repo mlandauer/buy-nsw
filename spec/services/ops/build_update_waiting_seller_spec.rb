@@ -19,7 +19,7 @@ RSpec.describe Ops::BuildUpdateWaitingSeller do
       end
 
       it 'assigns the form' do
-        expect(subject.form).to be_a(Ops::WaitingSeller::Contract::Update)
+        expect(subject.form).to be_a(Admin::WaitingSeller::Contract::Update)
         expect(subject.form.model).to eq(waiting_seller)
       end
     end

@@ -19,7 +19,7 @@ class Ops::BuildUpdateWaitingSeller < ApplicationService
   end
 
   def form
-    @form ||= Ops::WaitingSeller::Contract::Update.new(waiting_seller)
+    @form ||= Admin::WaitingSeller::Contract::Update.new(waiting_seller)
   end
 
 private

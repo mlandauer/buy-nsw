@@ -32,7 +32,7 @@ private
   attr_reader :waiting_seller_ids
 
   def form_class
-    Ops::WaitingSeller::Contract::Update
+    Admin::WaitingSeller::Contract::Update
   end
 
   def valid_waiting_sellers?

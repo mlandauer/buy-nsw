@@ -13,7 +13,7 @@ class Ops::BuildTagProblemReport < ApplicationService
   end
 
   def form
-    @form ||= Ops::ProblemReport::Contract::Tag.new(problem_report)
+    @form ||= Admin::ProblemReport::Contract::Tag.new(problem_report)
   end
 
   def problem_report

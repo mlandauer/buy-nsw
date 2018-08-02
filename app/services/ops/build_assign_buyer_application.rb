@@ -12,7 +12,7 @@ class Ops::BuildAssignBuyerApplication < ApplicationService
   end
 
   def form
-    @form ||= Ops::BuyerApplication::Contract::Assign.new(buyer_application)
+    @form ||= Admin::BuyerApplication::Contract::Assign.new(buyer_application)
   end
 
   def buyer_application

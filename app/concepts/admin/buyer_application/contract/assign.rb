@@ -1,4 +1,4 @@
-module Ops::BuyerApplication::Contract
+module Admin::BuyerApplication::Contract
   class Assign < Reform::Form
     include Forms::ValidationHelper
 

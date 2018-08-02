@@ -12,7 +12,7 @@ class Ops::BuildAssignSellerVersion < ApplicationService
   end
 
   def form
-    @form ||= Ops::SellerVersion::Contract::Assign.new(seller_version)
+    @form ||= Admin::SellerVersion::Contract::Assign.new(seller_version)
   end
 
   def seller_version

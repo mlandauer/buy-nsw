@@ -26,7 +26,7 @@ RSpec.describe Ops::BuildTagProblemReport do
 
   describe '#form' do
     it 'returns a form for the problem report' do
-      expect(subject.form).to be_a(Ops::ProblemReport::Contract::Tag)
+      expect(subject.form).to be_a(Admin::ProblemReport::Contract::Tag)
       expect(subject.form.model).to eq(problem_report)
     end
   end

@@ -1,4 +1,4 @@
-module Ops::ProblemReport::Contract
+module Admin::ProblemReport::Contract
   class Tag < Reform::Form
     property :tags
 

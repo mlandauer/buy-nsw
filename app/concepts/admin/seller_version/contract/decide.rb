@@ -1,4 +1,4 @@
-module Ops::SellerVersion::Contract
+module Admin::SellerVersion::Contract
   class Decide < Reform::Form
     include Forms::ValidationHelper
 

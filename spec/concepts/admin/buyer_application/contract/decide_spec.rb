@@ -1,11 +1,11 @@
 require 'rails_helper'
 
-RSpec.describe Ops::BuyerApplication::Contract::Decide do
+RSpec.describe Admin::BuyerApplication::Contract::Decide do
 
   let(:application) { build_stubbed(:buyer_application) }
 
   it 'is valid with a decision and decision_body' do
-    form = Ops::BuyerApplication::Contract::Decide.new(application)
+    form = described_class.new(application)
 
     form.validate(
        decision: 'approve',
@@ -16,7 +16,7 @@ RSpec.describe Ops::BuyerApplication::Contract::Decide do
   end
 
   it 'is invalid without a decision' do
-    form = Ops::BuyerApplication::Contract::Decide.new(application)
+    form = described_class.new(application)
 
     form.validate(
        decision: nil,
@@ -27,7 +27,7 @@ RSpec.describe Ops::BuyerApplication::Contract::Decide do
   end
 
   it 'is invalid without a decision in the list' do
-    form = Ops::BuyerApplication::Contract::Decide.new(application)
+    form = described_class.new(application)
 
     form.validate(
        decision: 'blah',

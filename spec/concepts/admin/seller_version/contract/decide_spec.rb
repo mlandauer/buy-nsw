@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Ops::SellerVersion::Contract::Decide do
+RSpec.describe Admin::SellerVersion::Contract::Decide do
 
   let(:application) { build_stubbed(:seller_version) }
 

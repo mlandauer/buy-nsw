@@ -1,12 +1,12 @@
 require 'rails_helper'
 
-RSpec.describe Ops::BuyerApplication::Contract::Assign do
+RSpec.describe Admin::BuyerApplication::Contract::Assign do
 
   let(:user) { create(:admin_user) }
   let(:application) { build_stubbed(:buyer_application) }
 
   it 'is valid with an assignee' do
-    form = Ops::BuyerApplication::Contract::Assign.new(application)
+    form = described_class.new(application)
 
     form.validate(
       assigned_to_id: user.id,
@@ -16,7 +16,7 @@ RSpec.describe Ops::BuyerApplication::Contract::Assign do
   end
 
   it 'is invalid without an assignee' do
-    form = Ops::BuyerApplication::Contract::Assign.new(application)
+    form = described_class.new(application)
 
     form.validate(
        assigned_to_id: nil,
@@ -27,7 +27,7 @@ RSpec.describe Ops::BuyerApplication::Contract::Assign do
   end
 
   it 'is invalid with a non-admin assignee' do
-    form = Ops::BuyerApplication::Contract::Assign.new(application)
+    form = described_class.new(application)
     other_user = create(:buyer_user)
 
     form.validate(

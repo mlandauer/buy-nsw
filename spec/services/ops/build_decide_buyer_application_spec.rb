@@ -34,7 +34,7 @@ RSpec.describe Ops::BuildDecideBuyerApplication do
 
   describe '#form' do
     it 'returns a form for the buyer application' do
-      expect(subject.form).to be_a(Ops::BuyerApplication::Contract::Decide)
+      expect(subject.form).to be_a(Admin::BuyerApplication::Contract::Decide)
       expect(subject.form.model).to eq(application)
     end
   end
