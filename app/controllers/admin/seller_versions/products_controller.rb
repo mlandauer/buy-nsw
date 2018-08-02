@@ -1,4 +1,4 @@
-class Ops::SellerVersions::ProductsController < Ops::BaseController
+class Admin::SellerVersions::ProductsController < Admin::BaseController
   layout '../ops/seller_versions/_layout'
 
   def show

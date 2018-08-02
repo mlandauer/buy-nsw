@@ -1,4 +1,4 @@
-class Ops::WaitingSellersController < Ops::BaseController
+class Admin::WaitingSellersController < Admin::BaseController
 
   def edit
     @operation = Ops::BuildUpdateWaitingSeller.call(waiting_seller_id: params[:id])

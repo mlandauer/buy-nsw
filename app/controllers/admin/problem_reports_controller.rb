@@ -1,4 +1,4 @@
-class Ops::ProblemReportsController < Ops::BaseController
+class Admin::ProblemReportsController < Admin::BaseController
 
   def index; end
   def show; end
