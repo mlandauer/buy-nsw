@@ -11,7 +11,10 @@ private
   helper_method :sellers
 
   def seller_version
-    @seller_version ||= sellers.find(params[:id]).approved_version
+    @seller_version ||= SellerVersionDecorator.new(
+      sellers.find(params[:id]).approved_version,
+      view_context,
+    )
   end
   helper_method :seller_version
 

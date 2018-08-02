@@ -82,10 +82,10 @@ RSpec.describe 'Seller profiles', type: :feature, js: true, skip_login: true do
         )
         expect_list_entry('ABN', abn)
         expect_list_entry('Location',
-          seller.addresses.first.address,
-          seller.addresses.first.suburb,
-          seller.addresses.first.state_text,
-          seller.addresses.first.postcode
+          version.addresses.first.address,
+          version.addresses.first.suburb,
+          SellerAddress.state.find_value(version.addresses.first.state).text,
+          version.addresses.first.postcode
         )
         expect_list_entry('Accreditations', version.accreditations.first)
         expect_list_entry('Industry engagement', version.engagements.first)

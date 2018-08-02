@@ -24,21 +24,7 @@ FactoryBot.define do
       state :active
     end
 
-    trait :with_address do
-      after(:create) do |seller|
-        create(:seller_address, seller: seller)
-      end
-    end
-
-    trait :with_full_profile do
-      with_address
-    end
-
-    factory :active_seller, traits: [:active, :with_full_profile]
+    factory :active_seller, traits: [:active]
     factory :inactive_seller, traits: [:inactive]
-    factory :inactive_seller_with_full_profile, traits: [:inactive, :with_full_profile]
-
-    # TODO: Remove this in future
-    factory :inactive_seller_with_tailor_fields, traits: [:inactive]
   end
 end
