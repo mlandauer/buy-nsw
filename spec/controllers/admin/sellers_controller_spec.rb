@@ -1,12 +1,12 @@
 require 'rails_helper'
 
-RSpec.describe Ops::BuyersController, type: :controller, sign_in: :admin_user do
+RSpec.describe Admin::SellersController, type: :controller, sign_in: :admin_user do
 
   describe 'GET index' do
     describe 'format CSV' do
       render_views
 
-      let!(:buyers) { create_list(:buyer, 5) }
+      let!(:sellers) { create_list(:seller, 5) }
       let(:params) {
         {
           # Reset the default filters
@@ -26,7 +26,7 @@ RSpec.describe Ops::BuyersController, type: :controller, sign_in: :admin_user do
         Timecop.freeze(time) do
           get :index, params: params
         end
-        expected = "attachment; filename=buyers-skip-filters-true-#{time.to_i}.csv"
+        expected = "attachment; filename=sellers-skip-filters-true-#{time.to_i}.csv"
 
         expect(response.headers['Content-Disposition']).to eq(expected)
       end
@@ -38,29 +38,6 @@ RSpec.describe Ops::BuyersController, type: :controller, sign_in: :admin_user do
         expect(csv.size).to eq(6)
       end
     end
-  end
-
-  describe 'POST deactivate' do
-
-    let(:buyer) { create(:active_buyer) }
-
-    describe 'on success' do
-
-      it 'redirects to the buyer page' do
-        post :deactivate, params: { id: buyer.id }
-
-        expect(response).to redirect_to(ops_buyer_path(buyer))
-      end
-
-      it 'sets a success flash notice' do
-        expect(I18n).to receive(:t).with(/deactivate_success$/).and_return('String')
-
-        post :deactivate, params: { id: buyer.id }
-
-        expect(controller.flash.notice).to eq('String')
-      end
-    end
-
   end
 
 end

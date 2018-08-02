@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Ops::BuyerApplicationsController, type: :controller, sign_in: :admin_user do
+RSpec.describe Admin::BuyerApplicationsController, type: :controller, sign_in: :admin_user do
 
   describe 'GET index' do
     describe 'format CSV' do

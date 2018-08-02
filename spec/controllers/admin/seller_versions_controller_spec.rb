@@ -1,12 +1,12 @@
 require 'rails_helper'
 
-RSpec.describe Ops::SellersController, type: :controller, sign_in: :admin_user do
+RSpec.describe Admin::SellerVersionsController, type: :controller, sign_in: :admin_user do
 
   describe 'GET index' do
     describe 'format CSV' do
       render_views
 
-      let!(:sellers) { create_list(:seller, 5) }
+      let!(:seller_applications) { create_list(:seller_version, 5) }
       let(:params) {
         {
           # Reset the default filters
@@ -26,7 +26,7 @@ RSpec.describe Ops::SellersController, type: :controller, sign_in: :admin_user d
         Timecop.freeze(time) do
           get :index, params: params
         end
-        expected = "attachment; filename=sellers-skip-filters-true-#{time.to_i}.csv"
+        expected = "attachment; filename=seller-applications-skip-filters-true-#{time.to_i}.csv"
 
         expect(response.headers['Content-Disposition']).to eq(expected)
       end
@@ -35,6 +35,8 @@ RSpec.describe Ops::SellersController, type: :controller, sign_in: :admin_user d
         get :index, params: params
         csv = CSV.parse(response.body)
 
+        # NOTE: There are 6 rows (including the header row)
+        #
         expect(csv.size).to eq(6)
       end
     end
