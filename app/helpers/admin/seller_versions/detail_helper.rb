@@ -1,4 +1,4 @@
-module Ops::SellerVersions::DetailHelper
+module Admin::SellerVersions::DetailHelper
   def display_seller_list(type:, resource:)
     display_list(
       fields: seller_fields,

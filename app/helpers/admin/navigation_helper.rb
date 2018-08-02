@@ -1,4 +1,4 @@
-module Ops::NavigationHelper
+module Admin::NavigationHelper
   def nav_link_to(label, url, icon: nil, match_prefix: false)
     if match_prefix
       selected = current_page_or_prefix?(url)

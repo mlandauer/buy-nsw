@@ -1,4 +1,4 @@
-module Ops::FiltersHelper
+module Admin::FiltersHelper
   def prepare_filter_options(resource_name, key, options)
     empty_value = [""]
 

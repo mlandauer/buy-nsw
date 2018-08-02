@@ -1,10 +1,10 @@
-module Ops::SellerVersionsHelper
+module Admin::SellerVersionsHelper
   include Sellers::ProfilesHelper
 
-  include Ops::AssigneesHelper
-  include Ops::DetailHelper
+  include Admin::AssigneesHelper
+  include Admin::DetailHelper
 
-  include Ops::SellerVersions::DetailHelper
+  include Admin::SellerVersions::DetailHelper
 
   def formatted_product_name(product)
     name = h(product.name || 'Unamed product')

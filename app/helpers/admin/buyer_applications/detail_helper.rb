@@ -1,4 +1,4 @@
-module Ops::BuyerApplications::DetailHelper
+module Admin::BuyerApplications::DetailHelper
   def display_buyer_list(type:, resource:)
     display_list(
       fields: buyer_fields,

@@ -1,4 +1,4 @@
-module Ops::DetailHelper
+module Admin::DetailHelper
   def display_list(fields:, type:, resource:, resource_name:)
     content_tag(:dl, id: type) {
       fields[type].map {|field|
