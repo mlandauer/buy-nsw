@@ -19,7 +19,7 @@ class Admin::SellerVersionsController < Admin::BaseController
   end
 
   def assign
-    operation = Ops::AssignSellerVersion.call(
+    operation = Admin::AssignSellerVersion.call(
       seller_version_id: params[:id],
       current_user: current_user,
       attributes: params[:seller_application],
@@ -34,7 +34,7 @@ class Admin::SellerVersionsController < Admin::BaseController
   end
 
   def decide
-    operation = Ops::DecideSellerVersion.call(
+    operation = Admin::DecideSellerVersion.call(
       seller_version_id: params[:id],
       current_user: current_user,
       attributes: params[:seller_application],
@@ -89,12 +89,12 @@ private
   helper_method :decorated_seller_version
 
   def assign_form
-    @assign_form ||= Ops::BuildAssignSellerVersion.call(seller_version_id: params[:id]).form
+    @assign_form ||= Admin::BuildAssignSellerVersion.call(seller_version_id: params[:id]).form
   end
   helper_method :assign_form
 
   def decide_form
-    @decide_form ||= Ops::BuildDecideSellerVersion.call(seller_version_id: params[:id]).form
+    @decide_form ||= Admin::BuildDecideSellerVersion.call(seller_version_id: params[:id]).form
   end
   helper_method :decide_form
 

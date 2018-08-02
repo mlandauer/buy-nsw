@@ -4,7 +4,7 @@ class Admin::ProblemReportsController < Admin::BaseController
   def show; end
 
   def resolve
-    operation = Ops::ResolveProblemReport.call(
+    operation = Admin::ResolveProblemReport.call(
       problem_report_id: params[:id],
       current_user: current_user,
     )
@@ -19,7 +19,7 @@ class Admin::ProblemReportsController < Admin::BaseController
   end
 
   def tag
-    operation = Ops::TagProblemReport.call(
+    operation = Admin::TagProblemReport.call(
       problem_report_id: params[:id],
       tags: params.dig(:problem_report, :tags),
     )
@@ -50,7 +50,7 @@ private
   end
 
   def tag_form
-    @tag_form ||= Ops::BuildTagProblemReport.call(problem_report_id: params[:id]).form
+    @tag_form ||= Admin::BuildTagProblemReport.call(problem_report_id: params[:id]).form
   end
 
   helper_method :search, :problem_report, :tag_form

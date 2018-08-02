@@ -1,11 +1,11 @@
 class Admin::WaitingSellersController < Admin::BaseController
 
   def edit
-    @operation = Ops::BuildUpdateWaitingSeller.call(waiting_seller_id: params[:id])
+    @operation = Admin::BuildUpdateWaitingSeller.call(waiting_seller_id: params[:id])
   end
 
   def update
-    @operation = Ops::UpdateWaitingSeller.call(
+    @operation = Admin::UpdateWaitingSeller.call(
       waiting_seller_id: params[:id],
       attributes: params[:waiting_seller],
     )
@@ -19,7 +19,7 @@ class Admin::WaitingSellersController < Admin::BaseController
   end
 
   def upload
-    @operation = Ops::UploadWaitingSellers.call(
+    @operation = Admin::UploadWaitingSellers.call(
       file: params[:file],
       file_contents: params[:file_contents],
       persist: params[:persist],
@@ -39,7 +39,7 @@ class Admin::WaitingSellersController < Admin::BaseController
   end
 
   def invite
-    @operation = Ops::BuildInviteWaitingSellers.call(
+    @operation = Admin::BuildInviteWaitingSellers.call(
       waiting_seller_ids: params.dig(:invite, :ids),
     )
 
@@ -50,7 +50,7 @@ class Admin::WaitingSellersController < Admin::BaseController
   end
 
   def do_invite
-    @operation = Ops::InviteWaitingSellers.call(
+    @operation = Admin::InviteWaitingSellers.call(
       waiting_seller_ids: params.dig(:invite, :ids),
     )
 

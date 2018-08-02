@@ -16,7 +16,7 @@ class Admin::BuyerApplicationsController < Admin::BaseController
   end
 
   def assign
-    operation = Ops::AssignBuyerApplication.call(
+    operation = Admin::AssignBuyerApplication.call(
       buyer_application_id: params[:id],
       current_user: current_user,
       attributes: params[:buyer_application],
@@ -31,7 +31,7 @@ class Admin::BuyerApplicationsController < Admin::BaseController
   end
 
   def decide
-    operation = Ops::DecideBuyerApplication.call(
+    operation = Admin::DecideBuyerApplication.call(
       buyer_application_id: params[:id],
       current_user: current_user,
       attributes: params[:buyer_application],
@@ -76,12 +76,12 @@ private
   helper_method :application
 
   def assign_form
-    @assign_form ||= Ops::BuildAssignBuyerApplication.call(buyer_application_id: params[:id]).form
+    @assign_form ||= Admin::BuildAssignBuyerApplication.call(buyer_application_id: params[:id]).form
   end
   helper_method :assign_form
 
   def decide_form
-    @decide_form ||= Ops::BuildDecideBuyerApplication.call(buyer_application_id: params[:id]).form
+    @decide_form ||= Admin::BuildDecideBuyerApplication.call(buyer_application_id: params[:id]).form
   end
   helper_method :decide_form
 

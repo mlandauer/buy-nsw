@@ -16,7 +16,7 @@ class Admin::BuyersController < Admin::BaseController
   end
 
   def deactivate
-    operation = Ops::DeactivateBuyer.call(buyer_id: params[:id])
+    operation = Admin::DeactivateBuyer.call(buyer_id: params[:id])
 
     if operation.success?
       flash.notice = I18n.t('admin.buyers.messages.deactivate_success')
