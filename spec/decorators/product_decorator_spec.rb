@@ -16,7 +16,7 @@ RSpec.describe ProductDecorator do
 
     context 'when a document with no attached file is present' do
       before(:each) {
-        create(:clean_document, documentable: product, kind: 'terms', document: nil)
+        product.terms = create(:clean_document, documentable: product, kind: 'terms', document: nil)
       }
 
       it 'returns false' do
@@ -26,7 +26,7 @@ RSpec.describe ProductDecorator do
 
     context 'when a clean document is present' do
       before(:each) {
-        create(:clean_document, documentable: product, kind: 'terms')
+        product.terms = create(:clean_document, documentable: product, kind: 'terms')
       }
 
       it 'returns true' do
@@ -36,7 +36,7 @@ RSpec.describe ProductDecorator do
 
     context 'when an unscanned document is present' do
       before(:each) {
-        create(:unscanned_document, documentable: product, kind: 'terms')
+        product.terms = create(:unscanned_document, documentable: product, kind: 'terms')
       }
 
       it 'returns false' do
@@ -46,7 +46,7 @@ RSpec.describe ProductDecorator do
 
     context 'when an infected document is present' do
       before(:each) {
-        create(:infected_document, documentable: product, kind: 'terms')
+        product.terms = create(:infected_document, documentable: product, kind: 'terms')
       }
 
       it 'returns false' do

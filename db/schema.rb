@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180802063348) do
+ActiveRecord::Schema.define(version: 20180803043326) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -251,6 +251,7 @@ ActiveRecord::Schema.define(version: 20180802063348) do
     t.string "access_control_testing_frequency"
     t.text "deployment_model", default: [], array: true
     t.text "data_disposal_approach"
+    t.integer "terms_id"
   end
 
   create_table "seller_versions", force: :cascade do |t|
@@ -372,6 +373,7 @@ ActiveRecord::Schema.define(version: 20180802063348) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "products", "documents", column: "terms_id"
   add_foreign_key "seller_versions", "documents", column: "financial_statement_id"
   add_foreign_key "seller_versions", "documents", column: "product_liability_certificate_id"
   add_foreign_key "seller_versions", "documents", column: "professional_indemnity_certificate_id"
