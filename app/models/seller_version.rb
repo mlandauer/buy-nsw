@@ -3,6 +3,7 @@ class SellerVersion < ApplicationRecord
   extend Enumerize
 
   include Concerns::StateScopes
+  include Concerns::Documentable
 
   before_save :normalise_abn
 
@@ -12,6 +13,10 @@ class SellerVersion < ApplicationRecord
 
   has_many :events, -> { order(created_at: :desc) }, as: :eventable, class_name: 'Event::Event'
   has_many :owners, through: :seller, class_name: 'User'
+
+  has_documents :financial_statement, :professional_indemnity_certificate,
+                :workers_compensation_certificate,
+                :product_liability_certificate
 
   aasm column: :state do
     state :created, initial: true

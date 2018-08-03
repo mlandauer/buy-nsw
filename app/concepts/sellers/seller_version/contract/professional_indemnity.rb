@@ -3,16 +3,13 @@ module Sellers::SellerVersion::Contract
     feature Reform::Form::ActiveModel::FormBuilderMethods
     feature Reform::Form::MultiParameterAttributes
 
-    property :professional_indemnity_certificate_file,   on: :seller
+    property :professional_indemnity_certificate_file,   on: :seller_version
     property :professional_indemnity_certificate_expiry, on: :seller_version, multi_params: true
-    property :remove_professional_indemnity_certificate, on: :seller
+    property :remove_professional_indemnity_certificate, on: :seller_version
 
     validation :default, inherit: true do
-      required(:seller).schema do
-        required(:professional_indemnity_certificate_file).filled(:file?)
-      end
-
       required(:seller_version).schema do
+        required(:professional_indemnity_certificate_file).filled(:file?)
         required(:professional_indemnity_certificate_expiry).filled(:date?, :in_future?)
       end
     end

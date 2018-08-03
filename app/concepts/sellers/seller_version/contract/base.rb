@@ -7,7 +7,7 @@ module Sellers::SellerVersion::Contract
     include Forms::ValidationHelper
 
     def upload_for(key)
-      self.model[:seller].public_send(key)
+      self.model[:seller_version].public_send(key)
     end
 
     def i18n_base

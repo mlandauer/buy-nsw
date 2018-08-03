@@ -14,10 +14,6 @@ class Seller < ApplicationRecord
   has_many :versions, class_name: 'SellerVersion'
   has_one :approved_version, ->{ approved }, class_name: 'SellerVersion'
 
-  has_documents :financial_statement, :professional_indemnity_certificate,
-                :workers_compensation_certificate,
-                :product_liability_certificate
-
   aasm column: :state do
     state :inactive, initial: true
     state :active

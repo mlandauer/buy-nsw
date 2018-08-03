@@ -3,10 +3,10 @@ module Sellers::SellerVersion::Contract
     feature Reform::Form::ActiveModel::FormBuilderMethods
     feature Reform::Form::MultiParameterAttributes
 
-    property :workers_compensation_certificate_file,   on: :seller
+    property :workers_compensation_certificate_file,   on: :seller_version
     property :workers_compensation_certificate_expiry, on: :seller_version, multi_params: true
     property :workers_compensation_exempt,             on: :seller_version
-    property :remove_workers_compensation_certificate, on: :seller
+    property :remove_workers_compensation_certificate, on: :seller_version
 
     # NOTE: Trying to implement conditional validation on this model has been
     # painstaking, but the following does work.
@@ -89,17 +89,15 @@ module Sellers::SellerVersion::Contract
         required(:workers_compensation_exempt, Types::Bool).filled
         required(:workers_compensation_certificate_expiry, Types::Date).maybe(:date?, :in_future?)
 
+        required(:workers_compensation_certificate_file, Types::File).maybe(:file_uploaded?)
+
         rule(workers_compensation_certificate_expiry: [:workers_compensation_exempt, :workers_compensation_certificate_expiry]) do |exempt, expiry|
           (exempt.false? | exempt.eql?('0')).then(expiry.filled?)
         end
-      end
 
-      required(:seller).schema do
-        required(:workers_compensation_certificate_file, Types::File).maybe(:file_uploaded?)
-      end
-
-      rule(workers_compensation_certificate_file: [[:seller_version, :workers_compensation_exempt], [:seller, :workers_compensation_certificate_file]]) do |exempt, document|
-        (exempt.false? | exempt.eql?('0')).then(document.filled?)
+        rule(workers_compensation_certificate_file: [:workers_compensation_exempt, :workers_compensation_certificate_file]) do |exempt, document|
+          (exempt.false? | exempt.eql?('0')).then(document.filled?)
+        end
       end
     end
   end
