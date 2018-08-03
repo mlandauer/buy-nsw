@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180802010027) do
+ActiveRecord::Schema.define(version: 20180802063348) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -315,6 +315,10 @@ ActiveRecord::Schema.define(version: 20180802010027) do
     t.text "accreditations", default: [], array: true
     t.text "engagements", default: [], array: true
     t.jsonb "addresses", default: []
+    t.integer "financial_statement_id"
+    t.integer "professional_indemnity_certificate_id"
+    t.integer "workers_compensation_certificate_id"
+    t.integer "product_liability_certificate_id"
   end
 
   create_table "sellers", force: :cascade do |t|
@@ -368,5 +372,9 @@ ActiveRecord::Schema.define(version: 20180802010027) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "seller_versions", "documents", column: "financial_statement_id"
+  add_foreign_key "seller_versions", "documents", column: "product_liability_certificate_id"
+  add_foreign_key "seller_versions", "documents", column: "professional_indemnity_certificate_id"
+  add_foreign_key "seller_versions", "documents", column: "workers_compensation_certificate_id"
   add_foreign_key "seller_versions", "sellers"
 end
