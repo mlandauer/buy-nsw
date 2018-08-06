@@ -2,8 +2,6 @@ class Document < ApplicationRecord
   include AASM
   extend Enumerize
 
-  belongs_to :documentable, polymorphic: true
-
   enumerize :scan_status, in: [:unscanned, :clean, :infected]
 
   mount_uploader :document, DocumentUploader
@@ -11,7 +9,7 @@ class Document < ApplicationRecord
   after_commit :scan_file, on: :create
   before_create :update_document_attributes
 
-  validates :kind, :document, :scan_status, presence: true
+  validates :document, :scan_status, presence: true
   validate :force_immutable
 
   aasm column: :scan_status do
