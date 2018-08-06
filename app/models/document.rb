@@ -1,14 +1,36 @@
 class Document < ApplicationRecord
+  include AASM
   extend Enumerize
 
   belongs_to :documentable, polymorphic: true
-  validates :kind, :scan_status, presence: true
+
+  enumerize :scan_status, in: [:unscanned, :clean, :infected]
+
   mount_uploader :document, DocumentUploader
 
-  before_save :update_document_attributes
-  after_save :scan_file
+  after_create :scan_file
+  before_create :update_document_attributes
 
-  enumerize :scan_status, in: ['unscanned', 'clean', 'infected']
+  validates :kind, :document, :scan_status, presence: true
+  validate :force_immutable
+
+  aasm column: :scan_status do
+    state :unscanned, initial: true
+    state :clean
+    state :infected
+
+    event :mark_as_clean do
+      transitions from: :unscanned, to: :clean
+    end
+
+    event :mark_as_infected do
+      transitions from: :unscanned, to: :infected
+    end
+
+    event :reset_scan_status do
+      transitions from: [:clean, :infected], to: :unscanned
+    end
+  end
 
   def url
     document.url
@@ -26,16 +48,21 @@ class Document < ApplicationRecord
     document.size
   end
 
-  def update_document_attributes
-    if document.present? && document_changed?
-      self.scan_status = 'unscanned'
-      self.original_filename = document.file.original_filename
-      self.content_type = document.file.content_type
+  def scan_file
+    DocumentScanJob.perform_later(self)
+  end
+
+private
+  def force_immutable
+    if self.changed? && self.persisted? && self.changes.keys != ['scan_status']
+      errors.add(:base, :immutable)
+      self.reload
     end
   end
 
-  def scan_file
-    DocumentScanJob.perform_later(self) if saved_change_to_attribute?(:document)
+  def update_document_attributes
+    self.original_filename = document.file.original_filename
+    self.content_type = document.file.content_type
   end
 
 end

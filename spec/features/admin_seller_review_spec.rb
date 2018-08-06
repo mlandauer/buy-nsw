@@ -30,11 +30,18 @@ RSpec.describe 'Reviewing seller applications', type: :feature, js: true do
     end
 
     it 'can see uploaded documents' do
-      application = create(:awaiting_assignment_seller_version)
+      seller = create(:inactive_seller)
 
-      create(:clean_document, documentable: application.seller, kind: 'financial_statement')
-      create(:unscanned_document, documentable: application.seller, kind: 'professional_indemnity_certificate')
-      create(:infected_document, documentable: application.seller, kind: 'workers_compensation_certificate')
+      fs = create(:clean_document, documentable: seller, kind: 'financial_statement')
+      pic = create(:unscanned_document, documentable: seller, kind: 'professional_indemnity_certificate')
+      wcc = create(:infected_document, documentable: seller, kind: 'workers_compensation_certificate')
+
+      application = create(:awaiting_assignment_seller_version,
+        seller: seller,
+        financial_statement_id: fs.id,
+        professional_indemnity_certificate_id: pic.id,
+        workers_compensation_certificate_id: wcc.id,
+      )
 
       visit '/ops'
       click_on 'Seller applications'
@@ -84,6 +91,8 @@ RSpec.describe 'Reviewing seller applications', type: :feature, js: true do
         let!(:document) { create(:unscanned_document, documentable: product, kind: 'terms') }
 
         before(:example) {
+          product.update_attribute(:terms_id, document.id)
+
           visit admin_seller_application_path(application)
           click_navigation_item(product.name)
         }
@@ -100,6 +109,8 @@ RSpec.describe 'Reviewing seller applications', type: :feature, js: true do
         let!(:document) { create(:clean_document, documentable: product, kind: 'terms') }
 
         before(:example) {
+          product.update_attribute(:terms_id, document.id)
+
           visit admin_seller_application_path(application)
           click_navigation_item(product.name)
         }
@@ -116,6 +127,8 @@ RSpec.describe 'Reviewing seller applications', type: :feature, js: true do
         let!(:document) { create(:infected_document, documentable: product, kind: 'terms') }
 
         before(:example) {
+          product.update_attribute(:terms_id, document.id)
+          
           visit admin_seller_application_path(application)
           click_navigation_item(product.name)
         }

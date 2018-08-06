@@ -3,22 +3,27 @@ module Concerns::Documentable
 
   class_methods do
     def has_documents(*fields)
-      fields.map(&:to_s).each do |field|
+      fields.each do |field|
         after_initialize do
           @documents = {}
-        end
-
-        after_save do
-          @documents.each {|key, doc|
-            doc.save! if doc.document_changed? && !doc.destroyed?
-          }
+          @updated_documents = {}
         end
 
         define_method(field) do
-          @documents[field] ||= documents.find_or_initialize_by(kind: field)
+          document_id = self.send("#{field.to_s}_id")
+
+          @documents[field] ||= if document_id.present?
+                                  Document.find_by(id: document_id)
+                                else
+                                  Document.new
+                                end
         end
 
-        define_method("#{field}_file") do
+        define_method("#{field.to_s}=") do |document|
+          self.send("#{field.to_s}_id=", document.id)
+        end
+
+        define_method("#{field.to_s}_file") do
           self.public_send(field).document
         end
 
@@ -28,8 +33,20 @@ module Concerns::Documentable
           # of the Carrierwave uploader object being re-assigned.
           #
           if file.respond_to?(:tempfile)
-            self.public_send("#{field}").document = file
+            @updated_documents[field] = Document.new(
+              documentable_type: self.class.name,
+              documentable_id: self.id,
+              kind: field,
+              document: file,
+            )
           end
+        end
+
+        before_save do
+          @updated_documents.each {|key, doc|
+            doc.save!
+            self.send("#{key.to_s}_id=", doc.id)
+          }
         end
 
         define_method("remove_#{field}") do
@@ -37,7 +54,7 @@ module Concerns::Documentable
         end
 
         define_method("remove_#{field}=") do |value|
-          self.public_send("#{field}").destroy unless (value.blank? || value == '0')
+          self.send("#{field.to_s}_id=", nil) unless (value.blank? || value == '0')
         end
       end
     end
@@ -45,8 +62,6 @@ module Concerns::Documentable
 
   included do
     private_class_method :has_documents
-
-    has_many :documents, as: :documentable, autosave: true, dependent: :destroy
   end
 
 end
