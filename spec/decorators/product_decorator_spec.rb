@@ -16,7 +16,7 @@ RSpec.describe ProductDecorator do
 
     context 'when a clean document is present' do
       before(:each) {
-        product.terms = create(:clean_document, documentable: product, kind: 'terms')
+        product.terms = create(:clean_document)
       }
 
       it 'returns true' do
@@ -26,7 +26,7 @@ RSpec.describe ProductDecorator do
 
     context 'when an unscanned document is present' do
       before(:each) {
-        product.terms = create(:unscanned_document, documentable: product, kind: 'terms')
+        product.terms = create(:unscanned_document)
       }
 
       it 'returns false' do
@@ -36,7 +36,7 @@ RSpec.describe ProductDecorator do
 
     context 'when an infected document is present' do
       before(:each) {
-        product.terms = create(:infected_document, documentable: product, kind: 'terms')
+        product.terms = create(:infected_document)
       }
 
       it 'returns false' do

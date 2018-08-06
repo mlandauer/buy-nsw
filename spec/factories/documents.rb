@@ -1,8 +1,6 @@
 FactoryBot.define do
 
   factory :document do
-    association :documentable, factory: :seller
-    kind 'financial_statement'
     document {
       Rack::Test::UploadedFile.new(
         Rails.root.join('spec', 'fixtures', 'files', 'example.pdf'),

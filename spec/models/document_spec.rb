@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Document do
 
   let(:documentable) { create(:inactive_seller) }
-  let(:attributes) { attributes_for(:document, documentable_id: documentable.id, documentable_type: 'Seller') }
+  let(:attributes) { attributes_for(:document) }
 
   describe '#valid?' do
     context 'with all attributes' do
