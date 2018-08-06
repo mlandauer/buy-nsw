@@ -19,9 +19,11 @@
   }
 
   RemoveFileModule.prototype.buildButton = function () {
-    var $button = $('<button></button>')
+    var $button = $('<a></a>')
     var labelText = this.$label.text()
 
+    $button.attr('href', 'javascript:void')
+    $button.attr('class', 'button')
     $button.text(labelText)
     $button.on('click', $.proxy(this.removeFile, this))
 
@@ -30,8 +32,6 @@
 
   RemoveFileModule.prototype.removeFile = function (event) {
     event.preventDefault()
-
-    window.console.dir(this.$form)
 
     this.$input.prop('checked', true)
     this.$form.submit()

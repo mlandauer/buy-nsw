@@ -52,7 +52,7 @@
           padding-bottom: 0;
         }
 
-        button {
+        .button {
           @include button-danger;
 
           font-size: .9rem;
