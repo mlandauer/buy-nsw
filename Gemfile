@@ -17,6 +17,7 @@ gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 3.7'
 
 gem 'aasm'
+gem 'bootsnap', require: false
 gem 'carrierwave', '~> 1.0'
 gem 'clamby'
 gem 'colorize'
