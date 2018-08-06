@@ -14,16 +14,6 @@ RSpec.describe ProductDecorator do
       end
     end
 
-    context 'when a document with no attached file is present' do
-      before(:each) {
-        product.terms = create(:clean_document, documentable: product, kind: 'terms', document: nil)
-      }
-
-      it 'returns false' do
-        expect(subject.display_additional_terms?).to be_falsey
-      end
-    end
-
     context 'when a clean document is present' do
       before(:each) {
         product.terms = create(:clean_document, documentable: product, kind: 'terms')

@@ -4,13 +4,11 @@ class DocumentScanJob < ApplicationJob
   def perform(document)
     file = download_file(document)
     status = case Clamby.safe?(file)
-              when true then 'clean'
-              when false then 'infected'
+              when true then document.mark_as_clean!
+              when false then document.mark_as_infected!
               else
                 raise ScanFailure
               end
-
-    document.update_attribute(:scan_status, status)
   end
 
 private
