@@ -3,10 +3,12 @@ class MigrateProductTermDocuments < ActiveRecord::Migration[5.1]
     add_column :products, :terms_id, :integer
 
     all_documents.each do |document|
-      product = Product.find(document['documentable_id'])
-      product.update_attribute(:terms_id, document['id'])
+      product = Product.find_by_id(document['documentable_id'])
 
-      puts "Doc ##{document['id']} => product update: #{product.id}"
+      if product.present?
+        product.update_attribute(:terms_id, document['id'])
+        puts "Doc ##{document['id']} => product update: #{product.id}"
+      end
     end
 
     add_foreign_key :products, :documents, column: :terms_id

@@ -7,13 +7,14 @@ class MigrateSellerDocumentsToVersions < ActiveRecord::Migration[5.1]
 
     all_documents.each do |document|
       kind = document['kind']
-      seller = Seller.find(document['documentable_id'])
+      seller = Seller.find_by_id(document['documentable_id'])
 
-      seller.versions.update_all({
-        "#{kind}_id" => document['id']
-      })
-
-      puts "Doc ##{document['id']} => seller versions update: #{seller.versions.map(&:id).join(', ')}"
+      if seller.present?
+        seller.versions.update_all({
+          "#{kind}_id" => document['id']
+        })
+        puts "Doc ##{document['id']} => seller versions update: #{seller.versions.map(&:id).join(', ')}"
+      end
     end
 
     add_foreign_key :seller_versions, :documents, column: :financial_statement_id
