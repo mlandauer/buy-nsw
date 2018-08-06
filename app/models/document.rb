@@ -8,7 +8,7 @@ class Document < ApplicationRecord
 
   mount_uploader :document, DocumentUploader
 
-  after_create :scan_file
+  after_commit :scan_file, on: :create
   before_create :update_document_attributes
 
   validates :kind, :document, :scan_status, presence: true
