@@ -14,8 +14,7 @@ class Sellers::SellerVersion::Update < Trailblazer::Operation
 
     def contract!(options, **)
       options['contract.default'] = options['config.contract_class'].new(
-        seller_version: options['model.seller_version'],
-        seller: options['model.seller'],
+        options['model.seller_version']
       )
     end
 

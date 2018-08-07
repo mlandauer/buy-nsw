@@ -9,10 +9,7 @@ RSpec.describe Sellers::Applications::StepPresenter do
 
   describe '#started?' do
     before(:each) do
-      allow(contract).to receive(:new).with(
-        seller_version: seller_version,
-        seller: seller_version.seller
-      ).and_return(mock_contract)
+      allow(contract).to receive(:new).with(seller_version).and_return(mock_contract)
     end
 
     context 'when the contract is started' do
@@ -34,10 +31,7 @@ RSpec.describe Sellers::Applications::StepPresenter do
 
   describe '#complete?' do
     before(:each) do
-      allow(contract).to receive(:new).with(
-        seller_version: seller_version,
-        seller: seller_version.seller
-      ).and_return(mock_contract)
+      allow(contract).to receive(:new).with(seller_version).and_return(mock_contract)
     end
 
     context 'when validate_optional_steps is false' do
