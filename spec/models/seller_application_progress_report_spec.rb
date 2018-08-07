@@ -3,25 +3,21 @@ require 'rails_helper'
 RSpec.describe SellerApplicationProgressReport do
 
   class BaseStepOne < Sellers::SellerVersion::Contract::Base
-    property :name, on: :seller_version
+    property :name
 
     validation :default do
-      required(:seller_version).schema do
-        required(:name).filled
-      end
+      required(:name).filled
     end
   end
   class BaseStepTwo < Sellers::SellerVersion::Contract::Base
-    property :contact_name, on: :seller_version
+    property :contact_name
 
     validation :default do
-      required(:seller_version).schema do
-        required(:contact_name).filled
-      end
+      required(:contact_name).filled
     end
   end
 
-  class ProductStepOne < Sellers::SellerVersion::Contract::Base
+  class ProductStepOne < Sellers::SellerVersion::Products::Contract::Base
     property :name, on: :product
 
     validation :default do
@@ -30,7 +26,7 @@ RSpec.describe SellerApplicationProgressReport do
       end
     end
   end
-  class ProductStepTwo < Sellers::SellerVersion::Contract::Base
+  class ProductStepTwo < Sellers::SellerVersion::Products::Contract::Base
     property :summary, on: :product
 
     validation :default do
