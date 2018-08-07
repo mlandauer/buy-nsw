@@ -30,7 +30,7 @@ module Sellers::SellerVersion::Contract
       collection.append(address)
     end
 
-    collection :addresses, on: :seller_version, prepopulator: AddressPrepopulator, populator: :populate_addresses! do
+    collection :addresses, prepopulator: AddressPrepopulator, populator: :populate_addresses! do
       include Forms::ValidationHelper
 
       def i18n_base

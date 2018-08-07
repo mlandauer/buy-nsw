@@ -1,18 +1,18 @@
 module Sellers::SellerVersion::Contract
   class Disclosures < Base
-    property :receivership,          on: :seller_version
-    property :investigations,        on: :seller_version
-    property :legal_proceedings,     on: :seller_version
-    property :insurance_claims,      on: :seller_version
-    property :conflicts_of_interest, on: :seller_version
-    property :other_circumstances,   on: :seller_version
+    property :receivership
+    property :investigations
+    property :legal_proceedings
+    property :insurance_claims
+    property :conflicts_of_interest
+    property :other_circumstances
 
-    property :receivership_details,          on: :seller_version
-    property :investigations_details,        on: :seller_version
-    property :legal_proceedings_details,     on: :seller_version
-    property :insurance_claims_details,      on: :seller_version
-    property :conflicts_of_interest_details, on: :seller_version
-    property :other_circumstances_details,   on: :seller_version
+    property :receivership_details
+    property :investigations_details
+    property :legal_proceedings_details
+    property :insurance_claims_details
+    property :conflicts_of_interest_details
+    property :other_circumstances_details
 
     validation :default do
       required(:seller_version).schema do

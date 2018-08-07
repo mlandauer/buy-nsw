@@ -1,13 +1,13 @@
 module Sellers::SellerVersion::Contract
   class Contacts < Base
-    property :contact_name,          on: :seller_version
-    property :contact_email,         on: :seller_version
-    property :contact_phone,         on: :seller_version
+    property :contact_name
+    property :contact_email
+    property :contact_phone
 
-    property :representative_name,     on: :seller_version
-    property :representative_email,    on: :seller_version
-    property :representative_phone,    on: :seller_version
-    property :representative_position, on: :seller_version
+    property :representative_name
+    property :representative_email
+    property :representative_phone
+    property :representative_position
 
     validation :default, inherit: true do
       required(:seller_version).schema do
