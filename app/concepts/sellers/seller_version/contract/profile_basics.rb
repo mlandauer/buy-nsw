@@ -5,11 +5,9 @@ module Sellers::SellerVersion::Contract
     property :linkedin_url
 
     validation :default, inherit: true  do
-      required(:seller_version).schema do
-        required(:summary).filled(max_word_count?: 50)
-        required(:website_url).filled(:url?)
-        optional(:linkedin_url).maybe(:str?, :url?)
-      end
+      required(:summary).filled(max_word_count?: 50)
+      required(:website_url).filled(:url?)
+      optional(:linkedin_url).maybe(:str?, :url?)
     end
   end
 end

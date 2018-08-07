@@ -8,10 +8,8 @@ module Sellers::SellerVersion::Contract
     property :remove_professional_indemnity_certificate
 
     validation :default, inherit: true do
-      required(:seller_version).schema do
-        required(:professional_indemnity_certificate_file).filled(:file?)
-        required(:professional_indemnity_certificate_expiry).filled(:date?, :in_future?)
-      end
+      required(:professional_indemnity_certificate_file).filled(:file?)
+      required(:professional_indemnity_certificate_expiry).filled(:date?, :in_future?)
     end
 
     def started?

@@ -4,7 +4,7 @@ RSpec.describe Sellers::SellerVersion::Contract::BusinessDetails do
   let(:seller) { create(:inactive_seller) }
   let(:version) { build_stubbed(:seller_version, seller: seller) }
 
-  subject { described_class.new(seller_version: version, seller: seller) }
+  subject { described_class.new(version) }
 
   let(:atts) {
     {
@@ -35,7 +35,7 @@ RSpec.describe Sellers::SellerVersion::Contract::BusinessDetails do
     subject.validate(atts.merge(abn: '10 123 456 789'))
 
     expect(subject).to_not be_valid
-    expect(subject.errors[:abn].count).to eq(1)
+    expect(subject.errors[:abn]).to be_present
   end
 
   it 'is also valid when the ABN has no spaces' do
