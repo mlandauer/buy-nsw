@@ -54,10 +54,7 @@ module Sellers::Applications
 
   private
     def build_contract(version)
-      contract_class.new(
-        seller_version: version,
-        seller: version.seller,
-      )
+      contract_class.new(version)
     end
   end
 end
