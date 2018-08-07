@@ -8,10 +8,8 @@ module Sellers::SellerVersion::Contract
     property :remove_financial_statement
 
     validation :default, inherit: true do
-      required(:seller_version).schema do
-        required(:financial_statement_file).filled(:file?)
-        required(:financial_statement_expiry).filled(:date?)
-      end
+      required(:financial_statement_file).filled(:file?)
+      required(:financial_statement_expiry).filled(:date?)
     end
 
     def started?

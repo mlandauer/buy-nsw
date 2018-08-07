@@ -1,10 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Sellers::SellerVersion::Contract::WorkersCompensation do
-  let(:seller) { create(:inactive_seller) }
-  let(:version) { create(:seller_version, seller: seller) }
-
-  subject { described_class.new(seller_version: version, seller: seller) }
+  let(:version) { create(:seller_version) }
+  subject { described_class.new(version) }
 
   let(:example_pdf) {
     Rack::Test::UploadedFile.new(

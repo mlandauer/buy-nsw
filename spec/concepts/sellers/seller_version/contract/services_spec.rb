@@ -1,10 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Sellers::SellerVersion::Contract::Services do
-  let(:seller) { create(:inactive_seller) }
-  let(:version) { create(:seller_version, seller: seller) }
-
-  subject { described_class.new(seller_version: version, seller: seller) }
+  let(:version) { create(:seller_version) }
+  subject { described_class.new(version) }
 
   let(:atts) {
     {
@@ -94,7 +92,7 @@ RSpec.describe Sellers::SellerVersion::Contract::Services do
   end
 
   it 'is invalid when "offers_cloud" is false and there are products' do
-    create(:product, seller: seller)
+    create(:product, seller: version.seller)
     subject.validate(atts.merge(offers_cloud: 'false', govdc: 'true'))
 
     expect(subject).to_not be_valid

@@ -1,9 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Sellers::SellerVersion::Contract::Declaration do
-
   let(:seller_version) { build_stubbed(:seller_version) }
-  subject { described_class.new(seller_version: seller_version, seller: seller_version.seller) }
+  subject { described_class.new(seller_version) }
 
   it 'validates with terms acceptance' do
     expect(subject.validate({

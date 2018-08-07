@@ -1,10 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Sellers::SellerVersion::Contract::Characteristics do
-  let(:seller) { build_stubbed(:inactive_seller) }
-  let(:version) { build_stubbed(:seller_version, seller: seller) }
+  let(:version) { build_stubbed(:seller_version) }
 
-  subject { described_class.new(seller_version: version, seller: seller) }
+  subject { described_class.new(version) }
 
   let(:atts) {
     {

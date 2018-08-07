@@ -21,15 +21,13 @@ module Sellers::SellerVersion::Contract
     property :international_government_experience
 
     validation :default do
-      required(:seller_version).schema do
-        # TODO: These don't currently return a nice human-friendly
-        # error message currently
-        required(:number_of_employees).
-          value(included_in?: SellerVersion.number_of_employees.values)
-        required(:corporate_structure).
-          value(included_in?: SellerVersion.corporate_structure.values)
-        required(:regional).filled(:bool?)
-      end
+      # TODO: These don't currently return a nice human-friendly
+      # error message currently
+      required(:number_of_employees).
+        value(included_in?: SellerVersion.number_of_employees.values)
+      required(:corporate_structure).
+        value(included_in?: SellerVersion.corporate_structure.values)
+      required(:regional).filled(:bool?)
     end
   end
 end
