@@ -9,11 +9,7 @@ class Sellers::SellerVersion::Products::Update < Trailblazer::Operation
     end
 
     def contract!(options, **)
-      options['contract.default'] = options['config.contract_class'].new(
-        application: options['model.application'],
-        seller: options['model.seller'],
-        product: options['model.product'],
-      )
+      options['contract.default'] = options['config.contract_class'].new(options['model.product'])
     end
   end
 

@@ -2,8 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Sellers::SellerVersion::Products::Contract::Commercials do
   let(:product) { build_stubbed(:inactive_product) }
-
-  subject { described_class.new(product: product) }
+  subject { described_class.new(product) }
 
   let(:atts) {
     {
