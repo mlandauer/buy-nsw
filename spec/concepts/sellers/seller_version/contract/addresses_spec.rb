@@ -1,10 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Sellers::SellerVersion::Contract::Addresses do
-  let(:seller) { build_stubbed(:inactive_seller) }
-  let(:version) { build_stubbed(:seller_version, seller: seller) }
-
-  subject { described_class.new(seller_version: version, seller: seller) }
+  let(:version) { build_stubbed(:seller_version) }
+  subject { described_class.new(version) }
 
   let(:atts) {
     {
@@ -79,8 +77,7 @@ RSpec.describe Sellers::SellerVersion::Contract::Addresses do
 
   describe '#addresses' do
     let(:addresses) { [ address_atts ] * 3 }
-    let(:version) { build_stubbed(:seller_version, seller: seller, addresses: addresses) }
-
+    
     it 'adds a new address' do
       subject.validate({
         addresses: addresses + [address_atts],

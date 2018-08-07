@@ -1,7 +1,7 @@
 module Sellers::SellerVersion::Products::Contract
   class Terms < Base
-    property :terms_file, on: :product
-    property :remove_terms, on: :product
+    property :terms_file
+    property :remove_terms
 
     def started?
       super do |key, value|

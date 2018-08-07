@@ -30,7 +30,7 @@ module Sellers::SellerVersion::Contract
       collection.append(address)
     end
 
-    collection :addresses, on: :seller_version, prepopulator: AddressPrepopulator, populator: :populate_addresses! do
+    collection :addresses, prepopulator: AddressPrepopulator, populator: :populate_addresses! do
       include Forms::ValidationHelper
 
       def i18n_base
@@ -58,26 +58,22 @@ module Sellers::SellerVersion::Contract
     end
 
     validation :default, inherit: true, with: { form: true } do
-      required(:seller_version).schema do
-
-        # NOTE: We have to duplicate the validations here otherwise calling
-        # `valid?` on this form won't actually check if the addresses are valid.
-        #
-        # Likewise, if we remove the validations above, errors won't appear to
-        # users on the form.
-        #
-        required(:addresses).filled(:array?, min_size?: 1) do
-          each do
-            schema do
-              required(:address).filled
-              required(:suburb).filled
-              required(:state).filled
-              required(:postcode).filled
-              required(:country).filled(included_in?: ISO3166::Country.translations.keys)
-            end
+      # NOTE: We have to duplicate the validations here otherwise calling
+      # `valid?` on this form won't actually check if the addresses are valid.
+      #
+      # Likewise, if we remove the validations above, errors won't appear to
+      # users on the form.
+      #
+      required(:addresses).filled(:array?, min_size?: 1) do
+        each do
+          schema do
+            required(:address).filled
+            required(:suburb).filled
+            required(:state).filled
+            required(:postcode).filled
+            required(:country).filled(included_in?: ISO3166::Country.translations.keys)
           end
         end
-
       end
     end
 

@@ -49,16 +49,14 @@ module Sellers::SellerVersion::Contract
       }
     end
 
-    collection :accreditations, on: :seller_version, prepopulator: AccreditationPrepopulator
-    collection :awards, on: :seller_version, prepopulator: AwardPrepopulator
-    collection :engagements, on: :seller_version, prepopulator: EngagementPrepopulator
+    collection :accreditations, prepopulator: AccreditationPrepopulator
+    collection :awards, prepopulator: AwardPrepopulator
+    collection :engagements, prepopulator: EngagementPrepopulator
 
     validation :default, inherit: true do
-      required(:seller_version).schema do
-        required(:accreditations).value(max_items?: 10)
-        required(:awards).value(max_items?: 10)
-        required(:engagements).value(max_items?: 10)
-      end
+      required(:accreditations).value(max_items?: 10)
+      required(:awards).value(max_items?: 10)
+      required(:engagements).value(max_items?: 10)
     end
   end
 end

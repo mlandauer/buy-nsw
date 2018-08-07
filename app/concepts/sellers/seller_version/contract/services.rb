@@ -1,8 +1,8 @@
 module Sellers::SellerVersion::Contract
   class Services < Base
     property :offers_cloud, virtual: true
-    property :services, on: :seller_version
-    property :govdc, on: :seller_version
+    property :services
+    property :govdc
 
     def offers_cloud
       self.services.any? ? self.services.include?('cloud-services') : nil
@@ -35,26 +35,24 @@ module Sellers::SellerVersion::Contract
         end
 
         def has_no_products?
-          form.seller.products.empty?
+          form.model.seller.products.empty?
         end
       end
 
-      required(:seller_version).schema do
-        required(:services).maybe(one_of?: SellerVersion.services.values)
-        required(:govdc).filled(:bool?)
-        optional(:offers_cloud).filled(:bool?)
+      required(:services).maybe(one_of?: SellerVersion.services.values)
+      required(:govdc).filled(:bool?)
+      optional(:offers_cloud).maybe(:bool?)
 
-        rule(services: [:offers_cloud, :services]) do |offers_cloud, services|
-          offers_cloud.true?.then(services.filled?)
-        end
+      rule(services: [:offers_cloud, :services]) do |offers_cloud, services|
+        offers_cloud.true?.then(services.filled?)
+      end
 
-        validate(no_cloud_products?: [:services, :offers_cloud]) do |services, offers_cloud|
-          services.include?('cloud-services') || has_no_products?
-        end
+      validate(no_cloud_products?: [:services, :offers_cloud]) do |services, offers_cloud|
+        services.include?('cloud-services') || has_no_products?
+      end
 
-        rule(eligible_seller: [:services, :govdc]) do |services, govdc|
-          services.offers_cloud? | govdc.true?
-        end
+      rule(eligible_seller: [:services, :govdc]) do |services, govdc|
+        services.offers_cloud? | govdc.true?
       end
     end
   end

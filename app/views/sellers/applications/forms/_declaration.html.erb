@@ -3,10 +3,10 @@
     <h2>You can't accept the ProcureIT Contracting Framework</h2>
 
     <% if errors['not_authorised_representative'] %>
-      <p>Only <strong><%= f.object.seller_version.representative_email %></strong> can accept the ProcureIT Contracting Framework on behalf of your organisation.</p>
+      <p>Only <strong><%= f.object.model.representative_email %></strong> can accept the ProcureIT Contracting Framework on behalf of your organisation.</p>
 
-      <% unless f.object.seller_version.owners.map(&:email).include?(f.object.seller_version.representative_email) %>
-        <p>You need to <%= link_to 'invite them to your seller account', new_sellers_application_invitation_path(application, email: f.object.seller_version.representative_email) %> and ask them to sign in to accept the terms.</p>
+      <% unless f.object.model.owners.map(&:email).include?(f.object.model.representative_email) %>
+        <p>You need to <%= link_to 'invite them to your seller account', new_sellers_application_invitation_path(application, email: f.object.model.representative_email) %> and ask them to sign in to accept the terms.</p>
       <% else %>
         <p>They have already been invited to sign in and accept the terms.</p>
       <% end %>
@@ -30,9 +30,9 @@
 
 <p>You acknowledge that this is an application to join the ICT Services Scheme, and agree to abide by its <%= link_to 'rules', 'https://www.procurepoint.nsw.gov.au/scm0020' %>.</p>
 
-<% if f.object.seller_version.agree == true %>
+<% if f.object.model.agree == true %>
 
-  <p>The ProcureIT Contracting Framework was agreed to at <strong><%= f.object.seller_version.agreed_at.localtime.to_formatted_s(:long) %></strong><% if f.object.seller_version.agreed_by.present? %> by <strong><%= f.object.seller_version.agreed_by.email %></strong><% end %>.</p>
+  <p>The ProcureIT Contracting Framework was agreed to at <strong><%= f.object.model.agreed_at.localtime.to_formatted_s(:long) %></strong><% if f.object.model.agreed_by.present? %> by <strong><%= f.object.model.agreed_by.email %></strong><% end %>.</p>
   <p class="return-link">
     <%= link_to 'Return to application', sellers_application_path(application), class: 'btn btn-primary' %>
   </p>
@@ -44,9 +44,9 @@
         error: false,
         error_html: false,
         label: t('agree_html', scope: [:sellers, :applications, :steps, :declaration],
-          name: f.object.seller_version.representative_name,
-          organisation: f.object.seller_version.name,
-          abn: f.object.seller_version.abn) %>
+          name: f.object.model.representative_name,
+          organisation: f.object.model.name,
+          abn: f.object.model.abn) %>
 
   <fieldset class="actions">
     <%= f.submit step.button_label(default: 'Save and continue'), class: 'btn btn-primary' %>
