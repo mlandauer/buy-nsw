@@ -22,11 +22,7 @@ module Sellers::Applications
 
   private
     def build_contract(application, product)
-      contract_class.new(
-        application: application,
-        seller: application.seller,
-        product: product,
-      )
+      contract_class.new(product)
     end
   end
 end
