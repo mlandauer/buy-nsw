@@ -101,7 +101,7 @@ en:
         govdc:
           name: 'GovDC infrastructure provider?'
         agree:
-          name: 'Agreement to the Core Terms'
+          name: 'Agreement to the ProcureIT Contracting Framework'
         number_of_employees_text:
           name: 'Number of employees'
         sme:
