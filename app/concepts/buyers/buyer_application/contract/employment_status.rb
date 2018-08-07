@@ -1,10 +1,10 @@
 module Buyers::BuyerApplication::Contract
   class EmploymentStatus < Base
-    property :employment_status, on: :buyer
+    property :employment_status, on: :application
 
     validation :default, inherit: true do
-      required(:buyer).schema do
-        required(:employment_status, in_list?: Buyer.employment_status.options).filled
+      required(:application).schema do
+        required(:employment_status, in_list?: BuyerApplication.employment_status.options).filled
       end
     end
   end

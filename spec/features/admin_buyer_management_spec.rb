@@ -5,6 +5,7 @@ RSpec.describe 'Managing buyers', type: :feature, js: true do
   describe 'as an admin user', user: :admin_user do
     it 'can deactivate a buyer' do
       buyer = create(:active_buyer)
+      create(:approved_buyer_application, buyer: buyer)
 
       visit '/ops'
       click_on 'Buyers'

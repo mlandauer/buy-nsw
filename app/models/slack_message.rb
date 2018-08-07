@@ -17,8 +17,8 @@ class SlackMessage
     message_type_with_button(
       :buyer_application_submitted,
       params: {
-        buyer: application.buyer.name,
-        organisation: application.buyer.organisation
+        buyer: application.name,
+        organisation: application.organisation
       },
       button_url: admin_buyer_application_url(application)
     )

@@ -4,16 +4,16 @@
       <%= t('buyers.applications.steps.terms.intro_html') %>
       <dl>
         <dt><%= t('activemodel.attributes.buyers.buyer_application.contract.basic_details.name') %></dt>
-        <dd><%= operation[:buyer_model].name %></dd>
+        <dd><%= operation[:application_model].name %></dd>
 
         <dt><%= t('activemodel.attributes.buyers.buyer_application.contract.basic_details.organisation') %></dt>
-        <dd><%= operation[:buyer_model].organisation %></dd>
+        <dd><%= operation[:application_model].organisation %></dd>
 
         <dt><%= t('buyers.applications.steps.email_approval.long') %></dt>
         <dd><%= operation[:application_model].application_body %></dd>
 
         <dt><%= t('buyers.applications.steps.employment_status.long') %></dt>
-        <dd><%= operation[:buyer_model].employment_status.text %></dd>
+        <dd><%= operation[:application_model].employment_status.text %></dd>
 
         <% if operation[:application_model].requires_manager_approval? %>
           <dt><%= t('buyers.applications.steps.manager_approval.long') %></dt>

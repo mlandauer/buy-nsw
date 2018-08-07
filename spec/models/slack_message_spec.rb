@@ -14,14 +14,16 @@ RSpec.describe SlackMessage do
   end
 
   it "#new_product_order" do
-    order = build_stubbed(:product_order)
+    application = create(:created_buyer_application)
+    order = create(:product_order, buyer: application.buyer)
+
     buyer_url = admin_buyer_url(order.buyer)
     product_url = pathway_product_url(order.product.section, order.product)
     order_url = admin_product_orders_url
 
     s = SlackMessage.new
     expect(s).to receive(:message).with(
-      text: "<#{buyer_url}|Buyer Buyer> from Organisation Name wants to buy <#{product_url}|Product name>. :moneyBag: :tada:",
+      text: "<#{buyer_url}|#{application.name}> from #{application.organisation} wants to buy <#{product_url}|Product name>. :moneyBag: :tada:",
       attachments: [{
         fallback: "View product order at #{order_url}",
         actions: [
@@ -40,7 +42,7 @@ RSpec.describe SlackMessage do
 
     s = SlackMessage.new
     expect(s).to receive(:message).with(
-      text: "Buyer Buyer from Organisation Name just submitted an application to become a buyer. :saxophone: :tada:",
+      text: "#{application.name} from #{application.organisation} just submitted an application to become a buyer. :saxophone: :tada:",
       attachments: [{
         fallback: "Review application at #{application_url}",
         actions: [

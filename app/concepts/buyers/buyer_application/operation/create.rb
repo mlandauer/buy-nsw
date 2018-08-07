@@ -9,7 +9,7 @@ class Buyers::BuyerApplication::Create < Trailblazer::Operation
                               Buyer.new(user: options['current_user'])
 
     options[:application_model] = options[:buyer_model].applications.first ||
-                                    BuyerApplication.new(started_at: Time.now)
+                                    BuyerApplication.new(started_at: Time.now, user: options['current_user'])
   end
 
 

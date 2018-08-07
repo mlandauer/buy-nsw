@@ -2,13 +2,17 @@ require 'securerandom'
 
 class BuyerApplication < ApplicationRecord
   include AASM
+  extend Enumerize
 
   include Concerns::StateScopes
 
   belongs_to :assigned_to, class_name: 'User', optional: true
   belongs_to :buyer
-  has_one :user, through: :buyer
+  belongs_to :user
+
   has_many :events, -> { order(created_at: :desc) }, as: :eventable, class_name: 'Event::Event'
+
+  enumerize :employment_status, in: ['employee', 'contractor', 'other-eligible']
 
   aasm column: :state do
     state :created, initial: true
@@ -62,7 +66,7 @@ class BuyerApplication < ApplicationRecord
   end
 
   def requires_manager_approval?
-    buyer.employment_status == 'contractor'
+    employment_status == 'contractor'
   end
 
   def assignee_present?
@@ -74,10 +78,7 @@ class BuyerApplication < ApplicationRecord
   end
 
   def self.find_by_user_and_application(user_id, application_id)
-    joins(:buyer).where(
-      'buyers.user_id' => user_id,
-      'buyer_applications.id' => application_id,
-    ).first!
+    where(user_id: user_id, id: application_id).first!
   end
 
   def set_manager_approval_token!

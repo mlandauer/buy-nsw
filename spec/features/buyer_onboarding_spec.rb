@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe 'Buyer onboarding', type: :feature, js: true, skip_login: true do
 
-  describe 'as a buyer with a government email' do
-    let(:user) { build(:buyer_user_with_approved_email) }
+  describe 'as a buyer' do
+    let(:user) { build(:buyer_user) }
 
     it 'submits a valid employee application' do
       visit '/register/buyer'
@@ -33,37 +33,6 @@ RSpec.describe 'Buyer onboarding', type: :feature, js: true, skip_login: true do
       # NOTE: All employees now must complete the application form
       fill_in_application_body
 
-      fill_in_employment_status(:contractor)
-      fill_in_manager_details
-      review_and_submit
-
-      expect_submission_message
-    end
-  end
-
-  describe 'as a buyer with a non-government email' do
-    let(:user) { build(:buyer_user_without_approved_email) }
-
-    it 'submits a valid employee application' do
-      visit '/register/buyer'
-
-      complete_buyer_sign_up(user)
-      confirm_email_address(user)
-
-      fill_in_buyer_details
-      fill_in_application_body
-      fill_in_employment_status(:employee)
-      review_and_submit
-    end
-
-    it 'submits a valid contractor application' do
-      visit '/register/buyer'
-
-      complete_buyer_sign_up(user)
-      confirm_email_address(user)
-
-      fill_in_buyer_details
-      fill_in_application_body
       fill_in_employment_status(:contractor)
       fill_in_manager_details
       review_and_submit

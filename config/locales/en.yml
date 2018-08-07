@@ -78,7 +78,7 @@ en:
     failure:
       unauthenticated: "Please sign in or create an account to continue."
   enumerize:
-    buyer:
+    buyer_application:
       employment_status:
         employee: "I'm a NSW Government employee and need access to buy.nsw to perform my role."
         contractor: "I'm a contractor working in state or local government."

@@ -16,6 +16,7 @@ RSpec.describe Buyers::BuyerApplication::Create do
     expect(result[:buyer_model]).to be_persisted
 
     expect(result[:buyer_model].user).to eq(user)
+    expect(result[:application_model].user).to eq(user)
   end
 
   it 'does not create an additional buyer when one exists' do

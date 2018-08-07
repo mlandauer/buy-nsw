@@ -7,7 +7,7 @@ RSpec.describe BuyerApplication do
       let(:application) { create(:buyer_application) }
 
       it 'transitions to `awaiting_manager_approval` when the buyer is a contractor' do
-        application.buyer.employment_status = 'contractor'
+        application.employment_status = 'contractor'
         application.submit
 
         expect(application.state).to eq('awaiting_manager_approval')
