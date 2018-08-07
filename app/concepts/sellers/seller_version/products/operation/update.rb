@@ -19,7 +19,7 @@ class Sellers::SellerVersion::Products::Update < Trailblazer::Operation
   # if they are invalid as we want the user to be able to return later to edit
   # the form.
   #
-  success Contract::Validate( key: :seller_application )
+  success :validate_form!
   step Contract::Persist()
 
   success :expire_progress_cache!
@@ -28,7 +28,11 @@ class Sellers::SellerVersion::Products::Update < Trailblazer::Operation
   # validation errors and show the form again when the fields are invalid.
   #
   step :prepopulate!
-  step Contract::Validate()
+  step :return_valid_state!
+
+  def validate_form!(options, params:, **)
+    options['result.valid'] = options['contract.default'].validate(params[:seller_application])
+  end
 
   def expire_progress_cache!(options, **)
     cache_key = "sellers.products.#{options['model.product'].id}.*"
@@ -38,5 +42,9 @@ class Sellers::SellerVersion::Products::Update < Trailblazer::Operation
   def prepopulate!(options, **)
     contract = options['contract.default']
     contract.prepopulate!
+  end
+
+  def return_valid_state!(options, **)
+    options['result.valid']
   end
 end
