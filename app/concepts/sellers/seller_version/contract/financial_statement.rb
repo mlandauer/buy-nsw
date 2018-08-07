@@ -3,9 +3,9 @@ module Sellers::SellerVersion::Contract
     feature Reform::Form::ActiveModel::FormBuilderMethods
     feature Reform::Form::MultiParameterAttributes
 
-    property :financial_statement_file,   on: :seller_version
-    property :financial_statement_expiry, on: :seller_version, multi_params: true
-    property :remove_financial_statement, on: :seller_version
+    property :financial_statement_file
+    property :financial_statement_expiry, multi_params: true
+    property :remove_financial_statement
 
     validation :default, inherit: true do
       required(:seller_version).schema do

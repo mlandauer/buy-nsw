@@ -1,7 +1,7 @@
 module Sellers::SellerVersion::Contract
   class BusinessDetails < Base
-    property :name,         on: :seller_version
-    property :abn,          on: :seller_version
+    property :name
+    property :abn
 
     validation :default, with: {form: true} do
       required(:seller_version).schema do

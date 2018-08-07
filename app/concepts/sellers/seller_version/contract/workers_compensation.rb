@@ -3,10 +3,10 @@ module Sellers::SellerVersion::Contract
     feature Reform::Form::ActiveModel::FormBuilderMethods
     feature Reform::Form::MultiParameterAttributes
 
-    property :workers_compensation_certificate_file,   on: :seller_version
-    property :workers_compensation_certificate_expiry, on: :seller_version, multi_params: true
-    property :workers_compensation_exempt,             on: :seller_version
-    property :remove_workers_compensation_certificate, on: :seller_version
+    property :workers_compensation_certificate_file
+    property :workers_compensation_certificate_expiry, multi_params: true
+    property :workers_compensation_exempt
+    property :remove_workers_compensation_certificate
 
     # NOTE: Trying to implement conditional validation on this model has been
     # painstaking, but the following does work.

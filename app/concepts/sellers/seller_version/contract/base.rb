@@ -1,6 +1,5 @@
 module Sellers::SellerVersion::Contract
   class Base < Reform::Form
-    include Concerns::Contracts::Composition
     include Concerns::Contracts::MultiStepForm
     include Concerns::Contracts::Status
     include Concerns::Contracts::SellerApplication

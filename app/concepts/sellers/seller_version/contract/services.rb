@@ -1,8 +1,8 @@
 module Sellers::SellerVersion::Contract
   class Services < Base
     property :offers_cloud, virtual: true
-    property :services, on: :seller_version
-    property :govdc, on: :seller_version
+    property :services
+    property :govdc
 
     def offers_cloud
       self.services.any? ? self.services.include?('cloud-services') : nil

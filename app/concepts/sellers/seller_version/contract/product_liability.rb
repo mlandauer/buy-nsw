@@ -3,9 +3,9 @@ module Sellers::SellerVersion::Contract
     feature Reform::Form::ActiveModel::FormBuilderMethods
     feature Reform::Form::MultiParameterAttributes
 
-    property :product_liability_certificate_file,   on: :seller_version
-    property :product_liability_certificate_expiry, on: :seller_version, multi_params: true
-    property :remove_product_liability_certificate, on: :seller_version
+    property :product_liability_certificate_file
+    property :product_liability_certificate_expiry, multi_params: true
+    property :remove_product_liability_certificate
 
     module Types
       include Dry::Types.module
