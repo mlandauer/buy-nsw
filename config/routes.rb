@@ -136,7 +136,7 @@ Rails.application.routes.draw do
   get '/privacy', to: 'static#privacy'
   get '/terms-of-use', to: 'static#terms_of_use'
   get '/accessibility', to: 'static#accessibility'
-  get '/core-terms', to: 'static#core_terms'
+  get '/core-terms', to: redirect('https://www.procurepoint.nsw.gov.au/before-you-buy/standard-procurement-contract-templates/it-contract-templates/procure-it-framework-0')
   get '/guides/seller', to: 'static#seller_guide'
   get '/guides/buyer', to: 'static#buyer_guide'
   get '/license', to: 'static#license'

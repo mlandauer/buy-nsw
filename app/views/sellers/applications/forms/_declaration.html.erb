@@ -1,9 +1,9 @@
 <% if operation.failure? && (errors = operation['result.errors']) && errors.any? %>
   <div class="block-error" role="alert">
-    <h2>You can't accept the Core Terms</h2>
+    <h2>You can't accept the ProcureIT Contracting Framework</h2>
 
     <% if errors['not_authorised_representative'] %>
-      <p>Only <strong><%= f.object.seller_version.representative_email %></strong> can accept the Core Terms on behalf of your organisation.</p>
+      <p>Only <strong><%= f.object.seller_version.representative_email %></strong> can accept the ProcureIT Contracting Framework on behalf of your organisation.</p>
 
       <% unless f.object.seller_version.owners.map(&:email).include?(f.object.seller_version.representative_email) %>
         <p>You need to <%= link_to 'invite them to your seller account', new_sellers_application_invitation_path(application, email: f.object.seller_version.representative_email) %> and ask them to sign in to accept the terms.</p>
@@ -13,7 +13,7 @@
     <% elsif errors['missing_representative_details'] %>
       <p>Only your authorised representative can accept the terms on behalf of your organisation.</p>
 
-      <p>You need to <%= link_to 'nominate who they are', sellers_application_step_path(application, 'contacts') %>. If it's not you, they will need to sign in and accept the terms.</p>
+      <p>You need to <%= link_to 'nominate who they are', sellers_application_step_path(application, 'contacts') %>. If it's not you, they will need to sign in and accept the ProcureIT Contracting Framework.</p>
     <% end %>
 
     <% if errors['missing_business_details'] %>
@@ -22,15 +22,17 @@
   </div>
 <% end %>
 
-<p>You need to accept the Core Terms to become a seller.</p>
-
-<p>Please note these initial terms will be updated soon. We will let you know when they change, what the changes are, and ask you to agree once more when finalised.</p>
+<p>To become a seller, you need to agree to use the ProcureIT Contracting Framework.</p>
 
 <%= render partial: 'sellers/applications/forms/shared/core_terms', locals: { scrollable: true } %>
 
+<p>These terms will be updated over time and we will let you know when they change and what the changes are.</p>
+
+<p>You acknowledge that this is an application to join the ICT Services Scheme, and agree to abide by its <%= link_to 'rules', 'https://www.procurepoint.nsw.gov.au/scm0020' %>.</p>
+
 <% if f.object.seller_version.agree == true %>
 
-  <p>The Core Terms were agreed to at <strong><%= f.object.seller_version.agreed_at.localtime.to_formatted_s(:long) %></strong><% if f.object.seller_version.agreed_by.present? %> by <strong><%= f.object.seller_version.agreed_by.email %></strong><% end %>.</p>
+  <p>The ProcureIT Contracting Framework was agreed to at <strong><%= f.object.seller_version.agreed_at.localtime.to_formatted_s(:long) %></strong><% if f.object.seller_version.agreed_by.present? %> by <strong><%= f.object.seller_version.agreed_by.email %></strong><% end %>.</p>
   <p class="return-link">
     <%= link_to 'Return to application', sellers_application_path(application), class: 'btn btn-primary' %>
   </p>

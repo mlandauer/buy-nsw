@@ -127,9 +127,9 @@ en:
             _delete:
               label: Delete this address
         declaration:
-          short: 'Accept the Core Terms'
+          short: 'Accept the ProcureIT Contracting Framework'
           agree_html: |
-            I am <strong>%{name}</strong>, an authorised representative of <strong>%{organisation}</strong> (ABN: %{abn}) and I agree to the ICT Agreement Core Terms
+            I am <strong>%{name}</strong>, an authorised representative of <strong>%{organisation}</strong> (ABN: %{abn}) and I agree to the ProcureIT Contracting Framework
         disclosures:
           short: 'Complete disclosures'
           long: 'Disclosures'
@@ -311,7 +311,7 @@ en:
           <ul>
             <li>share details about products and services you offer</li>
             <li>provide details about your offering to support your application</li>
-            <li>accept the <a href="/core-terms">Core Terms</a></li>
+            <li>agree to use the <a href="https://www.procurepoint.nsw.gov.au/before-you-buy/standard-procurement-contract-templates/it-contract-templates/procure-it-framework-0">ProcureIT Contracting Framework</a></li>
           </ul>
     dashboard:
       actions:
