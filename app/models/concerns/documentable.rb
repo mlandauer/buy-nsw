@@ -33,12 +33,7 @@ module Concerns::Documentable
           # of the Carrierwave uploader object being re-assigned.
           #
           if file.respond_to?(:tempfile)
-            @updated_documents[field] = Document.new(
-              documentable_type: self.class.name,
-              documentable_id: self.id,
-              kind: field,
-              document: file,
-            )
+            @updated_documents[field] = Document.new(document: file)
           end
         end
 

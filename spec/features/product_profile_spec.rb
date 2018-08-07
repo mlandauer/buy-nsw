@@ -31,7 +31,7 @@ RSpec.describe 'Showing products', type: :feature, js: true do
   end
 
   it 'links to the additional terms' do
-    document = create(:clean_document, documentable: product, kind: 'terms')
+    document = create(:clean_document)
     product.update_attribute(:terms_id, document.id)
 
     visit pathway_product_path(product.section, product)

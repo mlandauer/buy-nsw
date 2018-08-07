@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180803043326) do
+ActiveRecord::Schema.define(version: 20180806062417) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,10 +44,7 @@ ActiveRecord::Schema.define(version: 20180803043326) do
   end
 
   create_table "documents", force: :cascade do |t|
-    t.integer "documentable_id", null: false
-    t.string "documentable_type", null: false
     t.string "document"
-    t.string "kind", null: false
     t.string "scan_status", default: "unscanned", null: false
     t.string "original_filename"
     t.string "content_type"

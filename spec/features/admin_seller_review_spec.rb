@@ -32,9 +32,9 @@ RSpec.describe 'Reviewing seller applications', type: :feature, js: true do
     it 'can see uploaded documents' do
       seller = create(:inactive_seller)
 
-      fs = create(:clean_document, documentable: seller, kind: 'financial_statement')
-      pic = create(:unscanned_document, documentable: seller, kind: 'professional_indemnity_certificate')
-      wcc = create(:infected_document, documentable: seller, kind: 'workers_compensation_certificate')
+      fs = create(:clean_document)
+      pic = create(:unscanned_document)
+      wcc = create(:infected_document)
 
       application = create(:awaiting_assignment_seller_version,
         seller: seller,
@@ -88,7 +88,7 @@ RSpec.describe 'Reviewing seller applications', type: :feature, js: true do
       let!(:product) { create(:inactive_product, :with_basic_details, seller: application.seller) }
 
       context 'for an unscanned document' do
-        let!(:document) { create(:unscanned_document, documentable: product, kind: 'terms') }
+        let!(:document) { create(:unscanned_document) }
 
         before(:example) {
           product.update_attribute(:terms_id, document.id)
@@ -106,7 +106,7 @@ RSpec.describe 'Reviewing seller applications', type: :feature, js: true do
       end
 
       context 'for a clean document' do
-        let!(:document) { create(:clean_document, documentable: product, kind: 'terms') }
+        let!(:document) { create(:clean_document) }
 
         before(:example) {
           product.update_attribute(:terms_id, document.id)
@@ -124,11 +124,11 @@ RSpec.describe 'Reviewing seller applications', type: :feature, js: true do
       end
 
       context 'for an infected document' do
-        let!(:document) { create(:infected_document, documentable: product, kind: 'terms') }
+        let!(:document) { create(:infected_document) }
 
         before(:example) {
           product.update_attribute(:terms_id, document.id)
-          
+
           visit admin_seller_application_path(application)
           click_navigation_item(product.name)
         }
