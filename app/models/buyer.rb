@@ -1,14 +1,18 @@
 class Buyer < ApplicationRecord
   include AASM
-  extend Enumerize
-
   include Concerns::StateScopes
+
+  ALIAS_FIELDS = [:name, :organisation, :employment_status, :user_id]
+
+  ALIAS_FIELDS.each do |field|
+    define_method(field) do |*args, &block|
+      applications.first&.send(field, *args, &block)
+    end
+  end
 
   belongs_to :user
   has_many :applications, class_name: 'BuyerApplication'
   has_many :product_orders
-
-  enumerize :employment_status, in: ['employee', 'contractor', 'other-eligible']
 
   aasm column: :state do
     state :inactive, initial: true
