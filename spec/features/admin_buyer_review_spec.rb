@@ -10,7 +10,7 @@ RSpec.describe 'Reviewing buyer applications', type: :feature, js: true do
       click_on 'Buyer applications'
       click_on 'Reset filters'
 
-      select_application_from_list(application.buyer.name)
+      select_application_from_list(application.name)
 
       expect_application_state('awaiting_assignment')
 
@@ -20,8 +20,8 @@ RSpec.describe 'Reviewing buyer applications', type: :feature, js: true do
       expect_application_state('ready_for_review')
 
       expect_buyer_details(
-        'Buyer name' => application.buyer.name,
-        'Organisation name' => application.buyer.organisation
+        'Buyer name' => application.name,
+        'Organisation name' => application.organisation
       )
 
       decide_on_application(decision: 'Approve', decision_body: 'Response text')
