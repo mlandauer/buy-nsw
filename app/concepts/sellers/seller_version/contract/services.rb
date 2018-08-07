@@ -41,7 +41,7 @@ module Sellers::SellerVersion::Contract
 
       required(:services).maybe(one_of?: SellerVersion.services.values)
       required(:govdc).filled(:bool?)
-      optional(:offers_cloud).filled(:bool?)
+      optional(:offers_cloud).maybe(:bool?)
 
       rule(services: [:offers_cloud, :services]) do |offers_cloud, services|
         offers_cloud.true?.then(services.filled?)
