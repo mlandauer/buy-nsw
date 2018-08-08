@@ -12,7 +12,7 @@ FactoryBot.define do
       roles ['buyer']
 
       after :create do |user|
-        create(:active_buyer, user: user)
+        create(:approved_buyer_application, user: user)
       end
     end
 

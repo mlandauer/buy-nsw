@@ -7,10 +7,10 @@ class BuyerApplication < ApplicationRecord
   include Concerns::StateScopes
 
   belongs_to :assigned_to, class_name: 'User', optional: true
-  belongs_to :buyer
   belongs_to :user
 
   has_many :events, -> { order(created_at: :desc) }, as: :eventable, class_name: 'Event::Event'
+  has_many :product_orders, foreign_key: :buyer_id
 
   enumerize :employment_status, in: ['employee', 'contractor', 'other-eligible']
 

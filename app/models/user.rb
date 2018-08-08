@@ -8,7 +8,7 @@ class User < ApplicationRecord
 
   enumerize :roles, in: ['seller', 'buyer', 'admin'], multiple: true
 
-  has_one :buyer
+  has_one :buyer, class_name: 'BuyerApplication'
   belongs_to :seller, optional: true
 
   has_many :seller_versions, through: :seller, source: :versions

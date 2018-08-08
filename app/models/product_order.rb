@@ -1,5 +1,5 @@
 class ProductOrder < ApplicationRecord
-  belongs_to :buyer
+  belongs_to :buyer, class_name: 'BuyerApplication'
   belongs_to :product
 
   THRESHOLD = 150000
