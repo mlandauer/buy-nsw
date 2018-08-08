@@ -1,13 +1,11 @@
 module Buyers::BuyerApplication::Contract
   class BasicDetails < Base
-    property :name, on: :application
-    property :organisation, on: :application
+    property :name
+    property :organisation
 
     validation :default do
-      required(:application).schema do
-        required(:name).filled
-        required(:organisation).filled
-      end
+      required(:name).filled
+      required(:organisation).filled
     end
   end
 end
