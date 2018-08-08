@@ -5,7 +5,7 @@ class SlackMessage
     message_type_with_button(
       :new_product_order,
       params: {
-        buyer: link_to(order.buyer.name, admin_buyer_url(order.buyer)),
+        buyer: link_to(order.buyer.name, admin_buyer_application_url(order.buyer)),
         organisation: order.buyer.organisation,
         product: link_to(order.product.name, pathway_product_url(order.product.section, order.product))
       },
