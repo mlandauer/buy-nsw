@@ -27,7 +27,7 @@ class User < ApplicationRecord
   end
 
   def is_active_buyer?
-    is_buyer? && buyer.present? && buyer.active?
+    is_buyer? && buyer.present? && buyer.approved?
   end
 
   def is_seller?

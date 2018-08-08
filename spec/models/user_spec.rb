@@ -41,22 +41,22 @@ RSpec.describe User do
   end
 
   describe '#is_active_buyer?' do
-    it 'is true when the user has the "buyer" role and an active buyer record' do
-      user = User.new(roles: ['buyer'])
-      create(:active_buyer, user: user)
+    it 'is true when the user has the "buyer" role and an approved buyer application' do
+      user = create(:user, roles: ['buyer'])
+      create(:approved_buyer_application, user: user)
 
       expect(user.is_active_buyer?).to be_truthy
     end
 
-    it 'is false when the user has no associated buyer' do
+    it 'is false when the user has no associated buyer application' do
       user = User.new(roles: ['buyer'])
 
       expect(user.is_active_buyer?).to be_falsey
     end
 
-    it 'is false when the user has an inactive buyer record' do
-      user = User.new(roles: ['buyer'])
-      create(:inactive_buyer, user: user)
+    it 'is false when the user has a non-approved buyer application' do
+      user = create(:user, roles: ['buyer'])
+      create(:created_buyer_application, user: user)
 
       expect(user.is_active_buyer?).to be_falsey
     end

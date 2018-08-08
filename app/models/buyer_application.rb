@@ -85,6 +85,10 @@ class BuyerApplication < ApplicationRecord
     update_attribute(:manager_approval_token, SecureRandom.hex(16))
   end
 
+  def in_progress?
+    created?
+  end
+
   scope :assigned_to, ->(user) { where('assigned_to_id = ?', user) }
   scope :for_review, -> { awaiting_assignment.or(ready_for_review) }
 end
