@@ -9,7 +9,7 @@ private
   helper_method :buyer
 
   def validate_buyer!
-    if buyer.blank? || buyer.application_in_progress?
+    if buyer.blank? || buyer.in_progress?
       redirect_to new_buyers_application_path
     end
   end

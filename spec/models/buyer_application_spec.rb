@@ -27,16 +27,6 @@ RSpec.describe BuyerApplication do
 
         expect(application.state).to eq('ready_for_review')
       end
-
-      # NOTE: This behaviour has been removed for launch.
-      #
-      # it 'transitions to `approved` when email approval is not required and the buyer is an employee' do
-      #   application.user.email = 'foo@example.nsw.gov.au'
-      #   application.buyer.employment_status = 'employee'
-      #   application.submit
-      #
-      #   expect(application.state).to eq('approved')
-      # end
     end
 
     describe '#manager_approve' do
@@ -56,15 +46,6 @@ RSpec.describe BuyerApplication do
 
         expect(application.state).to eq('ready_for_review')
       end
-
-      # NOTE: This behaviour has been removed for launch.
-      #
-      # it 'transitions to `approved` when email approval is not required' do
-      #   application.user.email = 'foo@example.nsw.gov.au'
-      #   application.manager_approve
-      #
-      #   expect(application.state).to eq('approved')
-      # end
     end
 
     describe '#assign' do
@@ -84,12 +65,6 @@ RSpec.describe BuyerApplication do
         application.approve
 
         expect(application.state).to eq('approved')
-      end
-
-      it 'transitions the buyer to `active`' do
-        expect { application.approve! }.to change {
-          application.buyer.reload.state
-        }.from('inactive').to('active')
       end
     end
 

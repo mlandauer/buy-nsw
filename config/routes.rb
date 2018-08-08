@@ -73,13 +73,6 @@ Rails.application.routes.draw do
   get '/cloud/:section/products/:id', to: 'pathways/products#show', as: :pathway_product
 
   namespace :admin, path: 'ops' do
-    resources :buyers do
-      member do
-        get :details
-        post :deactivate
-      end
-    end
-
     resources :buyer_applications, path: 'buyer-applications' do
       member do
         get :buyer_details
@@ -87,6 +80,7 @@ Rails.application.routes.draw do
         patch :assign
         patch :decide
         post :notes
+        post :deactivate
       end
     end
 

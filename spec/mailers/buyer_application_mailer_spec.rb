@@ -12,7 +12,7 @@ RSpec.describe BuyerApplicationMailer, type: :mailer do
     end
 
     it 'renders the body' do
-      expect(mail.body.encoded).to match(application.buyer.name)
+      expect(mail.body.encoded).to match(application.name)
       expect(mail.body.encoded).to match(application.user.email)
 
       expect(mail.body.encoded).to match(application.manager_approval_token)

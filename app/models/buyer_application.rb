@@ -7,10 +7,10 @@ class BuyerApplication < ApplicationRecord
   include Concerns::StateScopes
 
   belongs_to :assigned_to, class_name: 'User', optional: true
-  belongs_to :buyer
   belongs_to :user
 
   has_many :events, -> { order(created_at: :desc) }, as: :eventable, class_name: 'Event::Event'
+  has_many :product_orders, foreign_key: :buyer_id
 
   enumerize :employment_status, in: ['employee', 'contractor', 'other-eligible']
 
@@ -21,6 +21,7 @@ class BuyerApplication < ApplicationRecord
     state :ready_for_review
     state :approved
     state :rejected
+    state :deactivated
 
     event :submit do
       transitions from: :created, to: :approved, guard: :no_approval_required?
@@ -46,14 +47,14 @@ class BuyerApplication < ApplicationRecord
 
     event :approve do
       transitions from: :ready_for_review, to: :approved
-
-      after do
-        buyer.make_active!
-      end
     end
 
     event :reject do
       transitions from: :ready_for_review, to: :rejected
+    end
+
+    event :deactivate do
+      transitions from: :approved, to: :deactivated
     end
   end
 
@@ -83,6 +84,10 @@ class BuyerApplication < ApplicationRecord
 
   def set_manager_approval_token!
     update_attribute(:manager_approval_token, SecureRandom.hex(16))
+  end
+
+  def in_progress?
+    created?
   end
 
   scope :assigned_to, ->(user) { where('assigned_to_id = ?', user) }

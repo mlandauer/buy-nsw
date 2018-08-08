@@ -1,14 +1,14 @@
 class Admin::DeactivateBuyer < ApplicationService
-  def initialize(buyer_id:)
-    @buyer_id = buyer_id
+  def initialize(buyer_application_id:)
+    @buyer_application_id = buyer_application_id
   end
 
-  def buyer
-    @buyer ||= Buyer.find(buyer_id)
+  def buyer_application
+    @buyer_application ||= BuyerApplication.find(buyer_application_id)
   end
 
   def call
-    if buyer.may_make_inactive? && buyer.make_inactive!
+    if buyer_application.may_deactivate? && buyer_application.deactivate!
       self.state = :success
     else
       self.state = :failure
@@ -16,5 +16,5 @@ class Admin::DeactivateBuyer < ApplicationService
   end
 
 private
-  attr_reader :buyer_id
+  attr_reader :buyer_application_id
 end

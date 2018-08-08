@@ -1,6 +1,5 @@
 FactoryBot.define do
   factory :buyer_application do
-    association :buyer
     association :user
 
     state 'created'
@@ -44,7 +43,7 @@ FactoryBot.define do
 
       state 'awaiting_assignment'
     end
-    
+
     trait :ready_for_review do
       completed
 

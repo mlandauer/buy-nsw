@@ -13,7 +13,7 @@
       <% end %>
     <% end %>
     <% if current_user.is_buyer? %>
-      <% if current_user.buyer&.application_in_progress? %>
+      <% if current_user.buyer&.in_progress? %>
         <li><%= link_to 'Continue application', new_buyers_application_path %></li>
       <% elsif current_user.buyer.present? %>
         <li><%= link_to 'Your buyer account', buyers_dashboard_path %></li>

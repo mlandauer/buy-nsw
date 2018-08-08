@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :product_order do
     association :product, factory: :active_product
-    association :buyer, factory: :active_buyer
+    association :buyer, factory: :approved_buyer_application
     product_updated_at 1.day.ago
     estimated_contract_value 75000
     contacted_seller false

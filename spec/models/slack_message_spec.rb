@@ -15,9 +15,9 @@ RSpec.describe SlackMessage do
 
   it "#new_product_order" do
     application = create(:created_buyer_application)
-    order = create(:product_order, buyer: application.buyer)
+    order = create(:product_order, buyer: application)
 
-    buyer_url = admin_buyer_url(order.buyer)
+    buyer_url = admin_buyer_application_url(order.buyer)
     product_url = pathway_product_url(order.product.section, order.product)
     order_url = admin_product_orders_url
 
