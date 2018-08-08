@@ -2,7 +2,6 @@ module Sellers::SellerVersion::Contract
   class Base < Reform::Form
     include Concerns::Contracts::MultiStepForm
     include Concerns::Contracts::Status
-    include Concerns::Contracts::SellerApplication
     include Forms::ValidationHelper
 
     def upload_for(key)
