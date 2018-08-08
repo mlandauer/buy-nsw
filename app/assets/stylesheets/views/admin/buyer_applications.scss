@@ -5,7 +5,7 @@
 .view-admin-buyer-applications-show {
   @include admin-resource-show-column-set;
 
-  .make-decision, .make-assignment, .add-note {
+  .make-decision, .make-assignment, .add-note, .deactivate {
     @include operation-box;
   }
 }

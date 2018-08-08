@@ -21,6 +21,7 @@ class BuyerApplication < ApplicationRecord
     state :ready_for_review
     state :approved
     state :rejected
+    state :deactivated
 
     event :submit do
       transitions from: :created, to: :approved, guard: :no_approval_required?
@@ -50,6 +51,10 @@ class BuyerApplication < ApplicationRecord
 
     event :reject do
       transitions from: :ready_for_review, to: :rejected
+    end
+
+    event :deactivate do
+      transitions from: :approved, to: :deactivated
     end
   end
 

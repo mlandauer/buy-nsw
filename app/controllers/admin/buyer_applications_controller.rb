@@ -46,6 +46,17 @@ class Admin::BuyerApplicationsController < Admin::BaseController
     end
   end
 
+  def deactivate
+    operation = Admin::DeactivateBuyer.call(buyer_application_id: params[:id])
+
+    if operation.success?
+      flash.notice = I18n.t('admin.buyer_applications.messages.deactivate_success')
+      return redirect_to admin_buyer_application_path(application)
+    else
+      render :show
+    end
+  end
+
   def notes
     application = BuyerApplication.find(params[:id])
     event = Event::Note.create(
