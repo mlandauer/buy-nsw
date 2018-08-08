@@ -1,16 +1,5 @@
 en:
   admin:
-    buyers:
-      messages:
-        deactivate_success: Buyer deactivated
-      search:
-        filters:
-          term:
-            name: Search by
-          state:
-            name: Status
-        labels:
-          export_csv: Download results as CSV
     buyer_applications:
       fields:
         name:
