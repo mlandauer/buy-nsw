@@ -23,7 +23,7 @@ private
   end
 
   def authorized_buyer
-    current_user && current_user.buyer.present? && current_user.buyer.active?
+    current_user && current_user.is_active_buyer?
   end
   helper_method :authorized_buyer
 end
