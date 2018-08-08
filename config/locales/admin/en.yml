@@ -16,6 +16,7 @@ en:
           name: "Manager's email"
       messages:
         update_assign_success: Application assigned
+        deactivate_success: Buyer deactivated
         decision_success:
           approve: Application approved
           reject: Application rejected

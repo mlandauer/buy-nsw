@@ -4,18 +4,18 @@ RSpec.describe 'Managing buyers', type: :feature, js: true do
 
   describe 'as an admin user', user: :admin_user do
     it 'can deactivate a buyer' do
-      buyer = create(:active_buyer)
-      create(:approved_buyer_application, buyer: buyer)
+      buyer = create(:approved_buyer_application)
 
       visit '/ops'
-      click_on 'Buyers'
+      click_on 'Buyer applications'
+      click_on 'Reset filters'
 
       select_buyer_from_list(buyer.name)
-      expect_buyer_state('active')
+      expect_buyer_state('approved')
       deactivate_buyer
 
       expect_flash_message('Buyer deactivated')
-      expect_buyer_state('inactive')
+      expect_buyer_state('deactivated')
     end
   end
 

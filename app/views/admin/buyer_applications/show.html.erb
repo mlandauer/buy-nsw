@@ -51,6 +51,16 @@
     </section>
   <% end %>
 
+  <% if application.may_deactivate? %>
+    <section class="deactivate" data-module="collapsible-section">
+      <h2>Deactivate this buyer</h2>
+
+      <div class="inner">
+        <%= render partial: 'deactivate_form' %>
+      </div>
+    </section>
+  <% end %>
+
   <section class="add-note" data-module="collapsible-section">
     <h2>Add a private note to this application</h2>
 

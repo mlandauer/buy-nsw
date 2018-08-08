@@ -42,4 +42,26 @@ RSpec.describe Admin::BuyerApplicationsController, type: :controller, sign_in: :
     end
   end
 
+  describe 'POST deactivate' do
+    let(:application) { create(:approved_buyer_application) }
+
+    describe 'on success' do
+
+      it 'redirects to the buyer page' do
+        post :deactivate, params: { id: application.id }
+
+        expect(response).to redirect_to(admin_buyer_application_path(application))
+      end
+
+      it 'sets a success flash notice' do
+        expect(I18n).to receive(:t).with(/deactivate_success$/).and_return('String')
+
+        post :deactivate, params: { id: application.id }
+
+        expect(controller.flash.notice).to eq('String')
+      end
+    end
+
+  end
+
 end
