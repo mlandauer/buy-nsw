@@ -4,9 +4,9 @@ csv_builder = lambda do |csv|
   search.results.each do |result|
     csv << [
       result.id,
-      result.buyer.name,
+      result.name,
       result.user.email,
-      result.buyer.organisation,
+      result.organisation,
       result.state,
     ]
   end
