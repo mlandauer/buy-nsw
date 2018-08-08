@@ -44,7 +44,7 @@ RSpec.describe BuildProductOrder do
 
       it 'fails when the current user is an inactive buyer' do
         user = create(:buyer_user)
-        create(:inactive_buyer, user: user)
+        create(:rejected_buyer_application, user: user)
         operation = perform_operation(user: user)
 
         expect(operation).to be_failure
