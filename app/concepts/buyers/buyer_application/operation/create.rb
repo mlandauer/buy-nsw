@@ -1,25 +1,19 @@
 class Buyers::BuyerApplication::Create < Trailblazer::Operation
   step :model!
   step :check_application_state!
-  step :persist_with_relations!
+  step :persist!
   step :log_event!
 
   def model!(options, **)
-    options[:buyer_model] = options['current_user'].buyer ||
-                              Buyer.new(user: options['current_user'])
-
-    options[:application_model] = options[:buyer_model].applications.first ||
+    options[:application_model] = options['current_user'].buyer ||
                                     BuyerApplication.new(started_at: Time.now, user: options['current_user'])
   end
-
 
   def check_application_state!(options, **)
     options[:application_model].created?
   end
 
-  def persist_with_relations!(options, **)
-    options[:buyer_model].save!
-    options[:application_model].buyer = options[:buyer_model]
+  def persist!(options, **)
     options[:application_model].save!
   end
 

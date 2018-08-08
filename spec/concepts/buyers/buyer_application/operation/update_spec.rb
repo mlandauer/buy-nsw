@@ -4,8 +4,7 @@ RSpec.describe Buyers::BuyerApplication::Update do
   include ActiveJob::TestHelper
 
   let(:user) { create(:buyer_user) }
-  let(:buyer) { create(:inactive_buyer, user: user) }
-  let(:application) { create(:created_buyer_application, buyer: buyer, user: user) }
+  let(:application) { create(:created_buyer_application, user: user) }
 
   def build_params(application, step, params = {})
     {
@@ -27,10 +26,10 @@ RSpec.describe Buyers::BuyerApplication::Update do
                }),
                'current_user' => user,
              )
-    result[:buyer_model].reload
+    result[:application_model].reload
 
     expect(result).to be_success
-    expect(result[:buyer_model].name).to eq('John Doe')
+    expect(result[:application_model].name).to eq('John Doe')
   end
 
   context '#submit_if_valid_and_last_step!' do
@@ -52,7 +51,7 @@ RSpec.describe Buyers::BuyerApplication::Update do
     end
 
     it 'submits an application on the last step when all fields are valid' do
-      application = create(:completed_buyer_application, buyer: buyer, user: user)
+      application = create(:completed_buyer_application, user: user)
 
       result = Buyers::BuyerApplication::Update.(
                  build_params(application, 'terms'),
@@ -68,7 +67,7 @@ RSpec.describe Buyers::BuyerApplication::Update do
     end
 
     it 'sets the token when manager approval is required' do
-      application = create(:completed_manager_approval_buyer_application, buyer: buyer, user: user)
+      application = create(:completed_manager_approval_buyer_application, user: user)
 
       result = Buyers::BuyerApplication::Update.(
                  build_params(application, 'terms'),
@@ -81,7 +80,7 @@ RSpec.describe Buyers::BuyerApplication::Update do
     end
 
     it 'sends an email when manager approval is required' do
-      application = create(:completed_manager_approval_buyer_application, buyer: buyer, user: user)
+      application = create(:completed_manager_approval_buyer_application, user: user)
 
       expect {
         perform_enqueued_jobs do
@@ -116,7 +115,7 @@ RSpec.describe Buyers::BuyerApplication::Update do
 
   context '#set_submission_status!' do
     it 'sets the `ready_for_submission` flag to `true` when all steps aside from the last are valid' do
-      application = create(:completed_buyer_application, buyer: buyer, user: user)
+      application = create(:completed_buyer_application, user: user)
 
       result = Buyers::BuyerApplication::Update::Present.(
                  build_params(application, 'terms'),
@@ -127,7 +126,7 @@ RSpec.describe Buyers::BuyerApplication::Update do
     end
 
     it 'sets the `ready_for_submission` flag to `false` when a step that is not the last is invalid' do
-      application = create(:created_buyer_application, buyer: buyer, user: user)
+      application = create(:created_buyer_application, user: user)
 
       result = Buyers::BuyerApplication::Update::Present.(
                  build_params(application, 'terms'),

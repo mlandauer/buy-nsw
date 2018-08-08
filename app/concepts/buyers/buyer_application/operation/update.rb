@@ -9,12 +9,11 @@ class Buyers::BuyerApplication::Update < Trailblazer::Operation
         params_key :buyer_application
 
         model :application, options[:application_model]
-        model :buyer, options[:buyer_model]
 
         path_route :buyers_application_step_path, :application
       end
 
-      step_flow do |application, buyer|
+      step_flow do |application|
         step Buyers::BuyerApplication::Contract::BasicDetails
 
         if application.requires_email_approval?
@@ -44,7 +43,6 @@ class Buyers::BuyerApplication::Update < Trailblazer::Operation
 
     def model!(options, params:, **)
       options[:application_model] = BuyerApplication.created.find_by_user_and_application(options['current_user'], params[:id])
-      options[:buyer_model] = options[:application_model].buyer
 
       options[:application_model].present?
     end
