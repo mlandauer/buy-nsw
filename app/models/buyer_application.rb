@@ -46,10 +46,6 @@ class BuyerApplication < ApplicationRecord
 
     event :approve do
       transitions from: :ready_for_review, to: :approved
-
-      after do
-        buyer.make_active!
-      end
     end
 
     event :reject do
