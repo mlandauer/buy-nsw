@@ -51,7 +51,7 @@ private
   helper_method :operation
 
   def application
-    form.model[:application]
+    form.model
   end
   helper_method :application
 
