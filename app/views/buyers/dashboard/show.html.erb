@@ -1,15 +1,15 @@
 <section class="view-buyers-dashboard">
   <h1><%= t :title, scope: [:buyers, :dashboard] %></h1>
 
-  <% if buyer.active? %>
+  <% if buyer.approved? %>
     <div class="seller-status">
       <span class="active-icon" aria-hidden="true"></span>
       <%= t :good_standing, scope: [:buyers, :dashboard, :status] %>
     </div>
 
     <%= render partial: 'interim_message' %>
-  <% elsif buyer.inactive? %>
-    <% if buyer.recent_application.rejected? %>
+  <% else %>
+    <% if buyer.rejected? %>
       <div class="current-application">
         <span class="rejected-icon" aria-hidden="true"></span>
         <h2><%= t :rejected_title, scope: [:buyers, :dashboard, :status] %></h2>

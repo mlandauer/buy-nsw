@@ -3,8 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Buyer dashboard', type: :feature, user: :buyer_user do
 
   it 'shows a message to buyers awaiting review' do
-    buyer = create(:inactive_buyer, user: @user)
-    create(:ready_for_review_buyer_application, buyer: buyer)
+    create(:ready_for_review_buyer_application, user: @user)
 
     visit '/'
     click_on 'Your buyer account'
@@ -14,7 +13,7 @@ RSpec.describe 'Buyer dashboard', type: :feature, user: :buyer_user do
   end
 
   it 'shows a message to buyers with an active profile' do
-    buyer = create(:active_buyer, user: @user)
+    create(:approved_buyer_application, user: @user)
 
     visit '/'
     click_on 'Your buyer account'
