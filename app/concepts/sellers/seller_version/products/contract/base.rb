@@ -1,10 +1,7 @@
 module Sellers::SellerVersion::Products::Contract
   class Base < Reform::Form
-    include Concerns::Contracts::MultiStepForm
     include Concerns::Contracts::Status
     include Forms::ValidationHelper
-
-    model :product
 
     def product_id
       model.id
