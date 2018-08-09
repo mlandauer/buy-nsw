@@ -1,9 +1,9 @@
 module Sellers::InvitationHelper
-  def owner_name(application)
-    if application.seller.name.present?
-      application.seller.name
+  def owner_name(version)
+    if version.name.present?
+      version.name
     else
-      application.owners.first.email
+      version.owners.first.email
     end
   end
 end

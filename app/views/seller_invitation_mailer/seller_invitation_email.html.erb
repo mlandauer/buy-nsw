@@ -1,5 +1,5 @@
-<p>You've been invited to help with <%= owner_name(@application) %>'s application to join <strong>buy.nsw</strong>.</p>
+<p>You've been invited to help with <%= owner_name(@version) %>'s application to join <strong>buy.nsw</strong>.</p>
 
 <p>Click the button below to accept the invitation.</p>
 
-<p><%= link_to "Accept invitation", accept_sellers_application_invitations_url(@application, confirmation_token: @user.confirmation_token), class: 'button' %></p>
+<p><%= link_to "Accept invitation", accept_sellers_application_invitations_url(@version, confirmation_token: @user.confirmation_token), class: 'button' %></p>
