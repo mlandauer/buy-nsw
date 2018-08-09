@@ -16,6 +16,8 @@ body.mailer {
 
   a.button {
     @include button;
+    display: inline-block;
+    width: auto;
   }
 
   .quote {
