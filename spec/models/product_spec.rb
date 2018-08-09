@@ -13,4 +13,15 @@ RSpec.describe Product do
     end
   end
 
+  describe '.accessible' do
+    it 'returns only products where "accessibility_type" is "all"' do
+      create_list(:product, 3, accessibility_type: 'none')
+      accessible_product = create(:product, accessibility_type: 'all')
+
+      results = Product.accessible
+
+      expect(results).to contain_exactly(accessible_product)
+    end
+  end
+
 end
