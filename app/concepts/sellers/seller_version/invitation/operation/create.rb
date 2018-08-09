@@ -43,7 +43,7 @@ class Sellers::SellerVersion::Invitation::Create < Trailblazer::Operation
   end
 
   def send_invitation_email!(options, model:, **)
-    mailer = SellerInvitationMailer.with(application: options[:application_model], user: model)
+    mailer = SellerInvitationMailer.with(version: options[:application_model], user: model)
     mailer.seller_invitation_email.deliver_later
   end
 end
