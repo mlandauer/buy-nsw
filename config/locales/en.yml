@@ -65,8 +65,8 @@ en:
         to tailor our help to you we need to ask you a few more questions.</p>
         <p>A member of our team will then contact you to help finalise the order.</p>
       estimated_contract_value:
-        label: How much is your organisation expecting to spend?
-        hint: Only an approximate value is needed. Please provide the amount in Australian Dollars and excluding GST.
+        label: What is the approximate value of the contract, excluding GST?
+        hint: Please enter numbers only, for example 100000 not $100,000.
       contacted_seller:
         label: Have you contacted the seller about your intention to buy?
       purchased_cloud_before:
@@ -101,7 +101,7 @@ en:
     same_password?: Please enter the same password
     max_word_count?: exceeds the word count
     max_items?: You have entered too many items
-    number?: Please enter a number
+    number?: Please enter a number only - no symbols, spaces or commas.
     no_cloud_products?: Please remove all your cloud products from your application first
     abn?: Please enter a valid ABN
     unique_abn?: This ABN has already been used on another application. Please contact us so that we can help you resolve this.
