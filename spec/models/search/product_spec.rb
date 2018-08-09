@@ -5,9 +5,10 @@ RSpec.describe Search::Product do
 
   it_behaves_like 'Concerns::Search::SellerTagFilters', term: 'test', section: 'section'
 
+  let(:section) { 'applications-software' }
+
   context 'pagination' do
     it 'returns results only for the specific page' do
-      section = 'applications-software'
       create_list(:active_product, 8, section: section)
 
       args = {
@@ -27,6 +28,20 @@ RSpec.describe Search::Product do
       expect(second_page.results.size).to eq(8)
       expect(second_page.paginated_results.size).to eq(3)
     end
+  end
+
+  it 'filters by accessibility_type' do
+    create_list(:active_product, 3, accessibility_type: 'none', section: section)
+    accessible_product = create(:active_product, accessibility_type: 'all', section: section)
+
+    search = described_class.new(
+      section: section,
+      selected_filters: {
+        characteristics: [ :all_accessible ]
+      }
+    )
+
+    expect(search.results).to contain_exactly(accessible_product)
   end
 
 end

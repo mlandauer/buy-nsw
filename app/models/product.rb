@@ -12,7 +12,7 @@ class Product < ApplicationRecord
   has_many :benefits, class_name: 'ProductBenefit'
   has_many :features, class_name: 'ProductFeature'
   has_many :seller_versions, through: :seller, source: :versions
-  
+
   has_one :approved_seller_version, through: :seller, source: :approved_version
 
   aasm column: :state do
@@ -114,6 +114,7 @@ class Product < ApplicationRecord
   scope :with_data_in_australia, -> { where(data_location: ['australia-default', 'australia-request']) }
   scope :with_api, ->{ where(api: ['rest', 'non-rest']) }
   scope :mobile_devices, ->{ where(mobile_devices: true) }
+  scope :accessible, -> { where(accessibility_type: 'all') }
 
   scope :with_government_network_type, ->(type) { where(":type = ANY(government_network_type)", type: type) }
 

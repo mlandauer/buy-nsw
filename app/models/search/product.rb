@@ -18,7 +18,7 @@ module Search
       {
         term: :term_filter,
         audiences: audiences_keys,
-        characteristics: [:data_in_australia, :api, :mobile_devices],
+        characteristics: [:data_in_australia, :api, :mobile_devices, :all_accessible],
         pricing: [:free_version, :free_trial, :education, :not_for_profit],
         business_identifiers: [:disability, :indigenous, :not_for_profit, :regional, :start_up, :sme],
         reseller_type: [:reseller, :not_reseller],
@@ -58,7 +58,8 @@ module Search
             yield_self(&method(:mobile_devices_filter)).
             yield_self(&method(:security_standards_filter)).
             yield_self(&method(:irap_assessed_filter)).
-            yield_self(&method(:asd_certified_filter))
+            yield_self(&method(:asd_certified_filter)).
+            yield_self(&method(:all_accessible_filter))
     end
 
     def term_filter(relation)
@@ -176,6 +177,14 @@ module Search
     def asd_certified_filter(relation)
       if filter_selected?(:security_standards, :asd_certified)
         relation = relation.asd_certified
+      else
+        relation
+      end
+    end
+
+    def all_accessible_filter(relation)
+      if filter_selected?(:characteristics, :all_accessible)
+        relation = relation.accessible
       else
         relation
       end

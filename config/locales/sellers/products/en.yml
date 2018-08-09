@@ -637,6 +637,7 @@ en:
             data_in_australia: Data hosted only in Australia
             api: API available
             mobile_devices: Works on mobile devices
+            all_accessible: WCAG 2.0 AA compliant
         security_standards:
           name: Security standards
           options:
