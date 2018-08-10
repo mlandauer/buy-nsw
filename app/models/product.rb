@@ -12,7 +12,7 @@ class Product < ApplicationRecord
   has_many :benefits, class_name: 'ProductBenefit'
   has_many :features, class_name: 'ProductFeature'
   has_many :seller_versions, through: :seller, source: :versions
-  
+
   has_one :approved_seller_version, through: :seller, source: :approved_version
 
   aasm column: :state do
@@ -21,6 +21,10 @@ class Product < ApplicationRecord
 
     event :make_active do
       transitions from: :inactive, to: :active
+    end
+
+    event :make_inactive do
+      transitions from: :active, to: :inactive
     end
   end
 
