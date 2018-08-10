@@ -221,6 +221,7 @@ en:
       approved_application: "Approved application. Response: %{note}"
       rejected_application: "Rejected application. Response: %{note}"
       returned_application: "Returned application to seller. Response: %{note}"
+      reverted_application: "Deactivated seller and reverted application for changes"
       note: "Note added: %{note}"
   slack_messages:
     new_product_order:

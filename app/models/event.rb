@@ -37,6 +37,8 @@ module Event
     end
   end
 
+  class RevertedApplication < Event; end
+
   class ManagerApproved < Event
     def message
       I18n.t(locale_name, name: name, email: email)
