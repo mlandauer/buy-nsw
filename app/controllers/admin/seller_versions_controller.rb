@@ -49,6 +49,20 @@ class Admin::SellerVersionsController < Admin::BaseController
     end
   end
 
+  def revert
+    operation = Admin::RevertSellerVersion.call(
+      seller_version_id: params[:id],
+      current_user: current_user,
+    )
+
+    if operation.success?
+      flash.notice = I18n.t("admin.seller_versions.messages.revert_success")
+      return redirect_to admin_seller_application_path(application)
+    else
+      render :show
+    end
+  end
+
   def notes
     application = SellerVersion.find(params[:id])
     event = Event::Note.create(

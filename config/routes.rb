@@ -94,6 +94,7 @@ Rails.application.routes.draw do
         patch :assign
         patch :decide
         post :notes
+        post :revert
       end
 
       resources :products, only: :show, controller: 'seller_versions/products'

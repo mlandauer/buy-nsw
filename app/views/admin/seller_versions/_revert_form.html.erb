@@ -1,0 +1,10 @@
+<p>
+  This will deactivate the seller and their products from buy.nsw, so that the seller can make changes.
+  When re-submitted, the application and products will need to be reviewed again.
+</p>
+<p>Talk with the seller first before making this change.</p>
+
+<%= button_to 'Deactivate seller and revert for changes',
+              revert_admin_seller_application_path(application),
+              class: 'btn btn-danger',
+              data: { method: :post } %>

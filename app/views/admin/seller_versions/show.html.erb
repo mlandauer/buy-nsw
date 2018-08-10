@@ -54,6 +54,16 @@
     </section>
   <% end %>
 
+  <% if application.may_return_to_applicant? && application.approved? && application.assigned_to == current_user %>
+    <section class="make-decision" data-module="collapsible-section">
+      <h2>Revert this application for changes</h2>
+
+      <div class="inner">
+        <%= render partial: 'revert_form' %>
+      </div>
+    </section>
+  <% end %>
+
   <section class="add-note" data-module="collapsible-section">
     <h2>Add a private note to this application</h2>
 

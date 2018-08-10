@@ -3,6 +3,6 @@
 <p>If you need to re-activate the account, please contact the <strong>buy.nsw</strong> team for help.</p>
 
 <%= button_to 'Deactivate buyer',
-              deactivate_admin_buyer_application_path,
+              deactivate_admin_buyer_application_path(application),
               class: 'btn btn-danger',
               data: { method: :post } %>

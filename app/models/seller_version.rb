@@ -52,7 +52,7 @@ class SellerVersion < ApplicationRecord
     end
 
     event :return_to_applicant do
-      transitions from: :ready_for_review, to: :created
+      transitions from: [:ready_for_review, :approved], to: :created
     end
   end
 

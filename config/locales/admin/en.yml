@@ -187,6 +187,7 @@ en:
           approve: Application approved
           reject: Application rejected
           return_to_applicant: Application returned to the seller
+        revert_success: Seller and products reverted
     waiting_sellers:
       search:
         filters:
