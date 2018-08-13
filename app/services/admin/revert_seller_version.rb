@@ -14,6 +14,7 @@ class Admin::RevertSellerVersion < ApplicationService
         validate_current_user
         validate_state
         update_version_state
+        update_seller_state
         update_product_states
         persist_version
         log_event
@@ -28,8 +29,12 @@ class Admin::RevertSellerVersion < ApplicationService
 private
   attr_reader :seller_version_id, :current_user
 
+  def seller
+    seller_version.seller
+  end
+
   def products
-    seller_version.seller.products
+    seller.products
   end
 
   def validate_current_user
@@ -46,6 +51,10 @@ private
 
   def update_version_state
     seller_version.return_to_applicant
+  end
+
+  def update_seller_state
+    seller.make_inactive!
   end
 
   def update_product_states
