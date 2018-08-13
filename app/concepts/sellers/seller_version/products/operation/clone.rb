@@ -4,7 +4,6 @@ class Sellers::SellerVersion::Products::Clone < Trailblazer::Operation
   step :copy_attributes!
   step :set_new_product_name!
   step :persist_new_product!
-  step :copy_features_and_benefits!
 
   def model!(options, params:, **)
     return false unless options['config.current_user'].present?
@@ -29,20 +28,6 @@ class Sellers::SellerVersion::Products::Clone < Trailblazer::Operation
 
   def persist_new_product!(options, **)
     options[:new_product_model].save
-  end
-
-  def copy_features_and_benefits!(options, **)
-    options[:product_model].features.each do |record|
-      options[:new_product_model].features.create!(
-        feature: record.feature,
-      )
-    end
-
-    options[:product_model].benefits.each do |record|
-      options[:new_product_model].benefits.create!(
-        benefit: record.benefit,
-      )
-    end
   end
 
   def excluded_attributes
