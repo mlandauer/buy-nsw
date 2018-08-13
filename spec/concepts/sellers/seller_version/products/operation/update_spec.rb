@@ -9,7 +9,7 @@ RSpec.describe Sellers::SellerVersion::Products::Update do
   let(:default_params) {
     { section: Product.section.values.first }
   }
-  let(:default_contract) { Sellers::SellerVersion::Products::Contract::Type }
+  let(:default_contract) { Products::TypeForm }
 
   def perform_operation(user: current_user, params: default_params, contract: default_contract)
     described_class.(

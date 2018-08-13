@@ -17,14 +17,14 @@ RSpec.describe SellerApplicationProgressReport do
     end
   end
 
-  class ProductStepOne < Sellers::SellerVersion::Products::Contract::Base
+  class ProductStepOne < Products::BaseForm
     property :name
 
     validation :default do
       required(:name).filled
     end
   end
-  class ProductStepTwo < Sellers::SellerVersion::Products::Contract::Base
+  class ProductStepTwo < Products::BaseForm
     property :summary
 
     validation :default do
