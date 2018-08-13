@@ -13,10 +13,9 @@ RSpec.describe Sellers::SellerVersion::Products::Clone do
       contact_name: 'Example Name',
       free_version: true,
       free_version_details: 'Free tier available',
+      features: ['one', 'two', 'three'],
     )
   }
-  let!(:features) { create_list(:product_feature, 5, product: product) }
-  let!(:benefits) { create_list(:product_benefit, 5, product: product) }
 
   def perform_operation
     described_class.({
@@ -37,6 +36,7 @@ RSpec.describe Sellers::SellerVersion::Products::Clone do
     expect(new_product.contact_name).to eq(product.contact_name)
     expect(new_product.free_version).to eq(product.free_version)
     expect(new_product.free_version_details).to eq(product.free_version_details)
+    expect(new_product.features).to eq(product.features)
   end
 
   it 'sets a new name for the product' do
@@ -66,14 +66,6 @@ RSpec.describe Sellers::SellerVersion::Products::Clone do
     new_product = result[:new_product_model]
 
     expect(new_product.state).to eq('inactive')
-  end
-
-  it 'copies the features and benefits' do
-    result = perform_operation
-    new_product = result[:new_product_model]
-
-    expect(new_product.features.count).to eq(features.count)
-    expect(new_product.benefits.count).to eq(benefits.count)
   end
 
   it 'copies the terms document' do

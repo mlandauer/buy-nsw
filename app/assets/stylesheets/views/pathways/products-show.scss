@@ -71,20 +71,17 @@
     }
 
     .features-benefits {
-      @include make-row();
+      @include make-row;
 
       border-top: 1px solid #eee;
-      padding-top: 1.5rem;
-      margin-top: 1.5rem;
+      padding-top: 1rem;
       margin-bottom: 1rem;
 
       ul {
-        @include make-col-ready();
-        @include media-breakpoint-up(md) {
-          @include make-col(6);
-        }
+        @include make-col-ready;
+        @include make-col(12);
 
-        margin-bottom: 1rem;
+        &:not(:last-of-type) { margin-bottom: 1.5rem; }
       }
       li {
         margin-left: 20px;

@@ -60,8 +60,8 @@ private
       a["Category"] = product.section_text
       a["Summary"] = product.summary
       a["Audiences"] = product.audiences.texts
-      a["Features"] = product.features.map(&:feature)
-      a["Benefits"] = product.benefits.map(&:benefit)
+      a["Features"] = product.features
+      a["Benefits"] = product.benefits
 
       a["Reseller status"] = product.reseller_type_text
 

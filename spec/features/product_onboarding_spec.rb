@@ -19,20 +19,20 @@ RSpec.describe 'Product onboarding', type: :feature, js: true, user: :seller_use
       check enumerize_value(:audiences, 'data-analytics')
     end
 
-    within_fieldset field_label(:basics, :features, key: :title) do
+    within_fieldset field_label(:basics, :features) do
       fill_in '1', with: 'Feature 1'
       fill_in '2', with: 'Feature 2'
       8.times do |i|
-        click_on 'Add another feature'
+        click_on 'Add another row'
         fill_in i+3, with: "Feature #{i+3}"
       end
     end
 
-    within_fieldset field_label(:basics, :benefits, key: :title) do
+    within_fieldset field_label(:basics, :benefits) do
       fill_in '1', with: 'Benefit 1'
       fill_in '2', with: 'Benefit 2'
       8.times do |i|
-        click_on 'Add another benefit'
+        click_on 'Add another row'
         fill_in i+3, with: "Benefit #{i+3}"
       end
     end
