@@ -21,6 +21,10 @@ class Seller < ApplicationRecord
     event :make_active do
       transitions from: :inactive, to: :active
     end
+
+    event :make_inactive do
+      transitions from: :active, to: :inactive
+    end
   end
 
   def version_in_progress?

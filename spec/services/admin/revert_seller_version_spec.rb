@@ -34,6 +34,10 @@ RSpec.describe Admin::RevertSellerVersion do
       it 'makes the products inactive' do
         expect(product.reload.state).to eq('inactive')
       end
+
+      it 'makes the seller inactive' do
+        expect(version.seller.reload.state).to eq('inactive')
+      end
     end
 
     context 'a version in another state' do
