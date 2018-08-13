@@ -1,5 +1,5 @@
-module Sellers::SellerVersion::Contract
-  class BusinessDetails < Base
+module SellerVersions
+  class BusinessDetailsForm < BaseForm
     property :name
     property :abn
 

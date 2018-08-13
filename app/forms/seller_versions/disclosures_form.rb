@@ -1,5 +1,5 @@
-module Sellers::SellerVersion::Contract
-  class Disclosures < Base
+module SellerVersions
+  class DisclosuresForm < BaseForm
     property :receivership
     property :investigations
     property :legal_proceedings

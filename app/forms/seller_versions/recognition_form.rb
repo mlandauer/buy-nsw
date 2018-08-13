@@ -1,5 +1,5 @@
-module Sellers::SellerVersion::Contract
-  class Recognition < Base
+module SellerVersions
+  class RecognitionForm < BaseForm
     include Concerns::Contracts::Populators
 
     def accreditations=(array)

@@ -1,5 +1,5 @@
-module Sellers::SellerVersion::Contract
-  class WorkersCompensation < Base
+module SellerVersions
+  class WorkersCompensationForm < BaseForm
     feature Reform::Form::ActiveModel::FormBuilderMethods
     feature Reform::Form::MultiParameterAttributes
 

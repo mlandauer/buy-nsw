@@ -1,5 +1,5 @@
-module Sellers::SellerVersion::Contract
-  class ProfileBasics < Base
+module SellerVersions
+  class ProfileBasicsForm < BaseForm
     property :summary
     property :website_url
     property :linkedin_url

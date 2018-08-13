@@ -1,5 +1,5 @@
-module Sellers::SellerVersion::Contract
-  class Addresses < Base
+module SellerVersions
+  class AddressesForm < BaseForm
     include Concerns::Contracts::Populators
     include Forms::ValidationHelper
 

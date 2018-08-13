@@ -1,5 +1,5 @@
-module Sellers::SellerVersion::Contract
-  class ProfessionalIndemnity < Base
+module SellerVersions
+  class ProfessionalIndemnityForm < BaseForm
     feature Reform::Form::ActiveModel::FormBuilderMethods
     feature Reform::Form::MultiParameterAttributes
 

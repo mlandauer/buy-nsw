@@ -1,5 +1,5 @@
-module Sellers::SellerVersion::Contract
-  class Characteristics < Base
+module SellerVersions
+  class CharacteristicsForm < BaseForm
     property :number_of_employees
     property :corporate_structure
 

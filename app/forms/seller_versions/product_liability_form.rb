@@ -1,5 +1,5 @@
-module Sellers::SellerVersion::Contract
-  class ProductLiability < Base
+module SellerVersions
+  class ProductLiabilityForm < BaseForm
     feature Reform::Form::ActiveModel::FormBuilderMethods
     feature Reform::Form::MultiParameterAttributes
 

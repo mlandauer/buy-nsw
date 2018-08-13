@@ -1,5 +1,5 @@
-module Sellers::SellerVersion::Contract
-  class Contacts < Base
+module SellerVersions
+  class ContactsForm < BaseForm
     property :contact_name
     property :contact_email
     property :contact_phone

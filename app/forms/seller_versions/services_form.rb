@@ -1,5 +1,5 @@
-module Sellers::SellerVersion::Contract
-  class Services < Base
+module SellerVersions
+  class ServicesForm < BaseForm
     property :offers_cloud, virtual: true
     property :services
     property :govdc
