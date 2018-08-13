@@ -10,6 +10,10 @@ module Sellers::Applications
       )
     end
 
+    def key
+      contract_class.name.demodulize.sub(/Form$/,'').underscore
+    end
+
     def complete?(application, product, validate_optional_steps: false)
       contract = build_contract(application, product)
 
