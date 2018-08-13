@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Sellers::SellerVersion::Contract::ProfessionalIndemnity do
+RSpec.describe SellerVersions::ProfessionalIndemnityForm do
   let(:version) { create(:seller_version) }
   subject { described_class.new(version) }
 

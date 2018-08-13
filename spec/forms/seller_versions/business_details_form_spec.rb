@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Sellers::SellerVersion::Contract::BusinessDetails do
+RSpec.describe SellerVersions::BusinessDetailsForm do
   let(:seller) { create(:inactive_seller) }
   let(:version) { build_stubbed(:seller_version, seller: seller) }
 

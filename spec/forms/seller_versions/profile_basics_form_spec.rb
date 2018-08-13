@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Sellers::SellerVersion::Contract::ProfileBasics do
+RSpec.describe SellerVersions::ProfileBasicsForm do
   let(:version) { build_stubbed(:seller_version) }
   subject { described_class.new(version) }
 
