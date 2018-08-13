@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Sellers::Applications::StepPresenter do
 
   let(:seller_version) { create(:created_seller_version) }
-  let(:contract) { Sellers::SellerVersion::Contract::BusinessDetails }
+  let(:contract) { SellerVersions::BusinessDetailsForm }
 
   subject { described_class.new(contract) }
 

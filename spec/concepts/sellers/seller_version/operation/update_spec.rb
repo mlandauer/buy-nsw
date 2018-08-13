@@ -9,7 +9,7 @@ RSpec.describe Sellers::SellerVersion::Update do
   let(:default_params) {
     { name: 'Company', abn: abn }
   }
-  let(:default_contract) { Sellers::SellerVersion::Contract::BusinessDetails }
+  let(:default_contract) { SellerVersions::BusinessDetailsForm }
 
   def perform_operation(user: current_user, params: default_params, contract: default_contract)
     described_class.(
@@ -32,7 +32,7 @@ RSpec.describe Sellers::SellerVersion::Update do
 
   context 'for legals' do
     let(:contract) {
-      Sellers::SellerVersion::Contract::Declaration
+      SellerVersions::DeclarationForm
     }
 
     def fill_required_details(email: current_user.email)

@@ -11,9 +11,7 @@ module Sellers::Applications
     end
 
     def name(type = :short)
-      base = "#{i18n_key}.steps.#{key}"
-
-      I18n.t("#{base}.#{type}", default: I18n.t("#{base}.short"))
+      I18n.t("#{i18n_base}.#{type}", default: I18n.t("#{i18n_base}.short"))
     end
 
     def button_label(default:)
@@ -24,8 +22,12 @@ module Sellers::Applications
       'sellers.applications'
     end
 
+    def i18n_base
+      "#{i18n_key}.steps.#{key}"
+    end
+
     def key
-      contract_class.name.demodulize.underscore
+      contract_class.name.demodulize.sub(/Form$/,'').underscore
     end
 
     def slug

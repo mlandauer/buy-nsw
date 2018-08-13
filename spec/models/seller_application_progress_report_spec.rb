@@ -2,14 +2,14 @@ require 'rails_helper'
 
 RSpec.describe SellerApplicationProgressReport do
 
-  class BaseStepOne < Sellers::SellerVersion::Contract::Base
+  class BaseStepOne < SellerVersions::BaseForm
     property :name
 
     validation :default do
       required(:name).filled
     end
   end
-  class BaseStepTwo < Sellers::SellerVersion::Contract::Base
+  class BaseStepTwo < SellerVersions::BaseForm
     property :contact_name
 
     validation :default do
@@ -17,14 +17,14 @@ RSpec.describe SellerApplicationProgressReport do
     end
   end
 
-  class ProductStepOne < Sellers::SellerVersion::Products::Contract::Base
+  class ProductStepOne < Products::BaseForm
     property :name
 
     validation :default do
       required(:name).filled
     end
   end
-  class ProductStepTwo < Sellers::SellerVersion::Products::Contract::Base
+  class ProductStepTwo < Products::BaseForm
     property :summary
 
     validation :default do

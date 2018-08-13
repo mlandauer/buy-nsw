@@ -8,7 +8,7 @@ RSpec.describe Sellers::Applications::StepsController, type: :controller, sign_i
 
       it 'excludes the declaration' do
         contracts = described_class.contracts(seller_version)
-        expect(contracts).to_not include(Sellers::SellerVersion::Contract::Declaration)
+        expect(contracts).to_not include(SellerVersions::DeclarationForm)
       end
     end
 
@@ -17,7 +17,7 @@ RSpec.describe Sellers::Applications::StepsController, type: :controller, sign_i
 
       it 'includes the declaration' do
         contracts = described_class.contracts(seller_version)
-        expect(contracts).to include(Sellers::SellerVersion::Contract::Declaration)
+        expect(contracts).to include(SellerVersions::DeclarationForm)
       end
     end
   end

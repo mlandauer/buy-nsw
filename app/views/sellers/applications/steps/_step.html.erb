@@ -2,7 +2,8 @@
 
 <%= buy_nsw_form_for(form,
                         url: form_path,
-                        as: :seller_application) do |f| %>
+                        as: :seller_application,
+                        i18n_scope: step.i18n_base) do |f| %>
 
   <% unless (step.key == 'declaration') %>
     <%= render partial: 'sellers/applications/steps/errors', locals: local_assigns.slice(:skip_link).merge(f: f) %>
