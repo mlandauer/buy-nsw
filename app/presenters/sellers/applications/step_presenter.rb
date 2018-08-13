@@ -27,7 +27,7 @@ module Sellers::Applications
     end
 
     def key
-      contract_class.name.demodulize.underscore
+      contract_class.name.demodulize.sub(/Form$/,'').underscore
     end
 
     def slug
