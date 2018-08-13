@@ -1,5 +1,5 @@
-module Sellers::SellerVersion::Products::Contract
-  class Commercials < Base
+module Products
+  class CommercialsForm < BaseForm
     property :free_version
     property :free_version_details
 

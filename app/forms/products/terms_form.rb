@@ -1,5 +1,5 @@
-module Sellers::SellerVersion::Products::Contract
-  class Terms < Base
+module Products
+  class TermsForm < BaseForm
     property :terms_file
     property :remove_terms
 

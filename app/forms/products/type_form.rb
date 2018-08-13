@@ -1,5 +1,5 @@
-module Sellers::SellerVersion::Products::Contract
-  class Type < Base
+module Products
+  class TypeForm < BaseForm
     property :section
 
     validation :default, inherit: true do

@@ -1,5 +1,5 @@
-module Sellers::SellerVersion::Products::Contract
-  class OnboardingOffboarding < Base
+module Products
+  class OnboardingOffboardingForm < BaseForm
     property :onboarding_assistance
     property :offboarding_assistance
 

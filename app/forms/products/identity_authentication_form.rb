@@ -1,5 +1,5 @@
-module Sellers::SellerVersion::Products::Contract
-  class IdentityAuthentication < Base
+module Products
+  class IdentityAuthenticationForm < BaseForm
     property :authentication_required
     property :authentication_types
     property :authentication_other

@@ -1,5 +1,5 @@
-module Sellers::SellerVersion::Products::Contract
-  class OperationalSecurity < Base
+module Products
+  class OperationalSecurityForm < BaseForm
     property :change_management_processes
     property :change_management_approach
     property :vulnerability_processes

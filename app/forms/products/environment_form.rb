@@ -1,5 +1,5 @@
-module Sellers::SellerVersion::Products::Contract
-  class Environment < Base
+module Products
+  class EnvironmentForm < BaseForm
     property :deployment_model
     property :deployment_model_other
 

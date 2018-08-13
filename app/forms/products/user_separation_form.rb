@@ -1,5 +1,5 @@
-module Sellers::SellerVersion::Products::Contract
-  class UserSeparation < Base
+module Products
+  class UserSeparationForm < BaseForm
     property :virtualisation
 
     property :virtualisation_implementor

@@ -1,5 +1,5 @@
-module Sellers::SellerVersion::Products::Contract
-  class BackupRecovery < Base
+module Products
+  class BackupRecoveryForm < BaseForm
     property :backup_capability
     property :backup_scheduling_type
     property :backup_recovery_type

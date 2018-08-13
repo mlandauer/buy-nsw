@@ -1,5 +1,5 @@
-module Sellers::SellerVersion::Products::Contract
-  class AvailabilitySupport < Base
+module Products
+  class AvailabilitySupportForm < BaseForm
     property :guaranteed_availability
     property :support_options
     property :support_options_additional_cost

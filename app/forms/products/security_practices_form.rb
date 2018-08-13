@@ -1,5 +1,5 @@
-module Sellers::SellerVersion::Products::Contract
-  class SecurityPractices < Base
+module Products
+  class SecurityPracticesForm < BaseForm
     property :secure_development_approach
     property :penetration_testing_frequency
     property :penetration_testing_approach

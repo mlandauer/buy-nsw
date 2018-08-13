@@ -1,5 +1,5 @@
-module Sellers::SellerVersion::Products::Contract
-  class Basics < Base
+module Products
+  class BasicsForm < BaseForm
     include Concerns::Contracts::Populators
 
     def features=(array)

@@ -1,5 +1,5 @@
-module Sellers::SellerVersion::Products::Contract
-  class UserData < Base
+module Products
+  class UserDataForm < BaseForm
     property :data_import_formats
     property :data_import_formats_other
     property :data_export_formats

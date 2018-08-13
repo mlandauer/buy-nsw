@@ -1,5 +1,5 @@
-module Sellers::SellerVersion::Products::Contract
-  class DataProtection < Base
+module Products
+  class DataProtectionForm < BaseForm
     property :encryption_transit_user_types
     property :encryption_transit_user_other
     property :encryption_transit_network_types

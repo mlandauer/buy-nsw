@@ -1,5 +1,5 @@
-module Sellers::SellerVersion::Products::Contract
-  class Locations < Base
+module Products
+  class LocationsForm < BaseForm
     property :data_location_control
 
     property :data_location

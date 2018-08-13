@@ -1,5 +1,5 @@
-module Sellers::SellerVersion::Products::Contract
-  class SecurityStandards < Base
+module Products
+  class SecurityStandardsForm < BaseForm
     feature Reform::Form::ActiveModel::FormBuilderMethods
     feature Reform::Form::MultiParameterAttributes
 

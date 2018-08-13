@@ -1,5 +1,5 @@
-module Sellers::SellerVersion::Products::Contract
-  class ReportingAnalytics < Base
+module Products
+  class ReportingAnalyticsForm < BaseForm
     property :metrics_contents
     property :metrics_channel_types
     property :metrics_channel_other
