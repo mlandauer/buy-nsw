@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Sellers::SellerVersion::Products::Contract::Commercials do
+RSpec.describe Products::CommercialsForm do
   let(:product) { build_stubbed(:inactive_product) }
   subject { described_class.new(product) }
 
