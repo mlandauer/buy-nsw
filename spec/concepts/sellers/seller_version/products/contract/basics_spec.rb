@@ -16,10 +16,10 @@ RSpec.describe Sellers::SellerVersion::Products::Contract::Basics do
       contact_email: 'other@example.org',
       contact_phone: '01234 567890',
       features: [
-        { feature: 'It does things' },
+        'It does things',
       ],
       benefits: [
-        { benefit: 'It benefits you' },
+        'It benefits you',
       ],
     }
   }
@@ -46,7 +46,7 @@ RSpec.describe Sellers::SellerVersion::Products::Contract::Basics do
     it 'is invalid when there are more than 10 features' do
       features = []
       11.times do
-        features << { feature: 'It does things' }
+        features << 'It does things'
       end
 
       subject.validate(atts.merge(features: features))
@@ -58,10 +58,10 @@ RSpec.describe Sellers::SellerVersion::Products::Contract::Basics do
     it 'is valid when the features in excess of 10 are blank' do
       features = []
       10.times do
-        features << { feature: 'It does things' }
+        features << 'It does things'
       end
       2.times do
-        features << { feature: '' }
+        features << ''
       end
       subject.validate(atts.merge(features: features))
 
@@ -75,19 +75,19 @@ RSpec.describe Sellers::SellerVersion::Products::Contract::Basics do
       end
 
       it 'only adds one feature when 9 already exist' do
-        create_list(:product_feature, 9, product: product)
+        subject.features = ['feature'] * 9
         subject.prepopulate!
         expect(subject.features.size).to eq(10)
       end
 
       it 'does not add any extra features when 10 already exist' do
-        create_list(:product_feature, 10, product: product)
+        subject.features = ['feature'] * 10
         subject.prepopulate!
         expect(subject.features.size).to eq(10)
       end
 
       it 'does not add any extra features when more than 10 already exist' do
-        create_list(:product_feature, 15, product: product)
+        subject.features = ['feature'] * 15
         subject.prepopulate!
         expect(subject.features.size).to eq(15)
       end
