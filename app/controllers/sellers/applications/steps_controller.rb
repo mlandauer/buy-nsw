@@ -18,22 +18,22 @@ class Sellers::Applications::StepsController < Sellers::Applications::BaseContro
 
   def self.contracts(seller_version)
     base_contracts = [
-      Sellers::SellerVersion::Contract::BusinessDetails,
-      Sellers::SellerVersion::Contract::Addresses,
-      Sellers::SellerVersion::Contract::Characteristics,
-      Sellers::SellerVersion::Contract::Contacts,
-      Sellers::SellerVersion::Contract::Disclosures,
-      Sellers::SellerVersion::Contract::FinancialStatement,
-      Sellers::SellerVersion::Contract::ProductLiability,
-      Sellers::SellerVersion::Contract::ProfessionalIndemnity,
-      Sellers::SellerVersion::Contract::ProfileBasics,
-      Sellers::SellerVersion::Contract::Recognition,
-      Sellers::SellerVersion::Contract::Services,
-      Sellers::SellerVersion::Contract::WorkersCompensation,
+      SellerVersions::BusinessDetailsForm,
+      SellerVersions::AddressesForm,
+      SellerVersions::CharacteristicsForm,
+      SellerVersions::ContactsForm,
+      SellerVersions::DisclosuresForm,
+      SellerVersions::FinancialStatementForm,
+      SellerVersions::ProductLiabilityForm,
+      SellerVersions::ProfessionalIndemnityForm,
+      SellerVersions::ProfileBasicsForm,
+      SellerVersions::RecognitionForm,
+      SellerVersions::ServicesForm,
+      SellerVersions::WorkersCompensationForm,
     ]
     base_contracts.tap {|contracts|
       if seller_version.services.include?('cloud-services')
-        contracts << Sellers::SellerVersion::Contract::Declaration
+        contracts << SellerVersions::DeclarationForm
       end
     }
   end
