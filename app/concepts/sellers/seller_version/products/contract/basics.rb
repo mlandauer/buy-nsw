@@ -2,41 +2,16 @@ module Sellers::SellerVersion::Products::Contract
   class Basics < Base
     include Concerns::Contracts::Populators
 
-    FeaturePopulator = -> (options) {
-      return NestedChildPopulator.call(options.merge(
-        params: [:feature],
-        model_klass: ProductFeature,
-        context: self,
-        foreign_key: :product_id,
-      ))
-    }
-    FeaturePrepopulator = ->(_) {
-      count = 0
+    def features=(array)
+      super(filter_blank_array_values(array))
+    end
 
-      while (self.features.size < 10 && count < 2)
-        self.features << ProductFeature.new(product_id: product_id)
-        count += 1
-      end
-    }
-    BenefitPopulator = -> (options) {
-      return NestedChildPopulator.call(options.merge(
-        params: [:benefit],
-        model_klass: ProductBenefit,
-        context: self,
-        foreign_key: :product_id,
-      ))
-    }
-    BenefitPrepopulator = ->(_) {
-      count = 0
+    def benefits=(array)
+      super(filter_blank_array_values(array))
+    end
 
-      while (self.features.size < 10 && count < 2)
-        self.benefits << ProductBenefit.new(product_id: product_id)
-        count += 1
-      end
-    }
-
-    def audiences=(values)
-      super(values.reject(&:blank?))
+    def audiences=(array)
+      super(filter_blank_array_values(array))
     end
 
     property :name
@@ -51,12 +26,8 @@ module Sellers::SellerVersion::Products::Contract
     property :contact_email
     property :contact_phone
 
-    collection :features, on: :product, prepopulator: FeaturePrepopulator, populator: FeaturePopulator do
-      property :feature
-    end
-    collection :benefits, on: :product, prepopulator: BenefitPrepopulator, populator: BenefitPopulator do
-      property :benefit
-    end
+    collection :features, prepopulator: ->(_){ TextFieldArrayPrepopulator.(self, name: :features, limit: 10) }
+    collection :benefits, prepopulator: ->(_){ TextFieldArrayPrepopulator.(self, name: :benefits, limit: 10) }
 
     validation :default, inherit: true do
       required(:name).filled
