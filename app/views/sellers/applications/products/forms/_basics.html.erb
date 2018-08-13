@@ -10,19 +10,26 @@
   <%= f.input :audiences, as: :check_boxes, collection: Product.audiences.options, wrapper: false %>
 </fieldset>
 
-<%= render partial: 'sellers/applications/products/forms/shared/expanding_list', locals: {
-  form: f,
-  association: :features,
-  field: :feature,
-  i18n_base: 'sellers.applications.products.steps.basics.features',
-} %>
-
-<%= render partial: 'sellers/applications/products/forms/shared/expanding_list', locals: {
-  form: f,
-  association: :benefits,
-  field: :benefit,
-  i18n_base: 'sellers.applications.products.steps.basics.benefits',
-} %>
+<%=
+  f.input :features, as: :text_field_array,
+                           wrapper: :text_field_array,
+                           wrapper_html: {
+                             data: {
+                               module: 'expanding-list',
+                               expanding_list_max: 10,
+                             }
+                           }
+%>
+<%=
+  f.input :benefits, as: :text_field_array,
+                           wrapper: :text_field_array,
+                           wrapper_html: {
+                             data: {
+                               module: 'expanding-list',
+                               expanding_list_max: 10,
+                             }
+                           }
+%>
 
 <fieldset class="multiple-choice-group checkbox-group"
           data-module="further-details-fields"

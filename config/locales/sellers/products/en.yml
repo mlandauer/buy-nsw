@@ -34,11 +34,11 @@ en:
             contact_phone:
               label: Contact phone number (optional)
             features:
-              title: Features
-              hint_text: List up to 10 features of your product
+              label: Features
+              hint: List up to 10 features of your product
             benefits:
-              title: Benefits
-              hint_text: List up to 10 benefits of your product
+              label: Benefits
+              hint: List up to 10 benefits of your product
           commercials:
             short: Commercials
             long: Your product commercials

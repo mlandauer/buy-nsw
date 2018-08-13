@@ -8,9 +8,6 @@ class Product < ApplicationRecord
   belongs_to :seller
 
   has_documents :terms
-
-  has_many :benefits, class_name: 'ProductBenefit'
-  has_many :features, class_name: 'ProductFeature'
   has_many :seller_versions, through: :seller, source: :versions
 
   has_one :approved_seller_version, through: :seller, source: :approved_version
