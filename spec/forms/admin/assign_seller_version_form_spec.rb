@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Admin::SellerVersion::Contract::Assign do
+RSpec.describe Admin::AssignSellerVersionForm do
 
   let(:user) { create(:admin_user) }
   let(:application) { build_stubbed(:seller_version) }

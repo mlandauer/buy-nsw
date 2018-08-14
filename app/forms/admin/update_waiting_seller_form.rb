@@ -1,5 +1,5 @@
-module Admin::WaitingSeller::Contract
-  class Update < Reform::Form
+module Admin
+  class UpdateWaitingSellerForm < Reform::Form
     include Forms::ValidationHelper
 
     property :name

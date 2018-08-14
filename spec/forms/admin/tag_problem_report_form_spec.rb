@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Admin::ProblemReport::Contract::Tag do
+RSpec.describe Admin::TagProblemReportForm do
 
   let(:problem_report) { build_stubbed(:open_problem_report) }
 

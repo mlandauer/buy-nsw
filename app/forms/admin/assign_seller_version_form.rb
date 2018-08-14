@@ -1,8 +1,8 @@
-module Admin::BuyerApplication::Contract
-  class Assign < Reform::Form
+module Admin
+  class AssignSellerVersionForm < Reform::Form
     include Forms::ValidationHelper
 
-    model :buyer_application
+    model :seller_application
 
     property :assigned_to_id
 
