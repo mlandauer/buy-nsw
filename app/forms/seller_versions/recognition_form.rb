@@ -1,6 +1,6 @@
 module SellerVersions
   class RecognitionForm < BaseForm
-    include Concerns::Contracts::Populators
+    include Concerns::NestedTextFieldArray
 
     def accreditations=(array)
       super(filter_blank_array_values(array))

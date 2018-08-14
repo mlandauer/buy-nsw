@@ -1,4 +1,4 @@
-module Concerns::Contracts::Populators
+module Concerns::NestedTextFieldArray
   TextFieldArrayPrepopulator = ->(context, name:, limit:) {
     context.send("#{name}=", []) unless context.send(name).is_a?(Array)
 

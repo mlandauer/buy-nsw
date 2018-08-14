@@ -1,6 +1,6 @@
 module SellerVersions
   class BaseForm < Reform::Form
-    include Concerns::Contracts::Status
+    include Concerns::FormStatus
     include Forms::ValidationHelper
 
     def upload_for(key)
