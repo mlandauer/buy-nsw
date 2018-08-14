@@ -1,6 +1,6 @@
 module Products
   class BaseForm < Reform::Form
-    include Concerns::Contracts::Status
+    include Concerns::FormStatus
     include Forms::ValidationHelper
 
     def product_id

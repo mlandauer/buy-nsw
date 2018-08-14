@@ -1,4 +1,4 @@
-module Concerns::Contracts::Status
+module Concerns::FormStatus
   extend ActiveSupport::Concern
 
   def started?(&block)

@@ -1,6 +1,6 @@
 module Products
   class BasicsForm < BaseForm
-    include Concerns::Contracts::Populators
+    include Concerns::NestedTextFieldArray
 
     def features=(array)
       super(filter_blank_array_values(array))

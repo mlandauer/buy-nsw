@@ -1,6 +1,6 @@
 module SellerVersions
   class AddressesForm < BaseForm
-    include Concerns::Contracts::Populators
+    include Concerns::NestedTextFieldArray
     include Forms::ValidationHelper
 
     AddressPrepopulator = ->(_) {
