@@ -20,8 +20,12 @@ module Concerns::Operations::MultiStepForm
       I18n.t("#{i18n_key}.steps.#{key}.button_label", default: default)
     end
 
+    def i18n_base
+      "#{i18n_key}.steps.#{key}"
+    end
+
     def key
-      contract_class.name.demodulize.underscore
+      contract_class.name.demodulize.sub(/Form$/,'').underscore
     end
 
     def slug
