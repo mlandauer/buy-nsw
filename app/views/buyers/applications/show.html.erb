@@ -1,6 +1,10 @@
-<h1>Apply to become a buyer</h1>
+<% unless first_step? %>
+  <p class="back-link">
+    <%= link_to 'Back', buyers_application_step_path(application, previous_step_slug) %>
+  </p>
+<% end %>
 
-<h2><%= presenter.name(:long) %></h2>
+<h1>Apply to become a buyer</h1>
 
 <%= buy_nsw_form_for form, url: buyers_application_path(application), as: :buyer_application, i18n_scope: presenter.i18n_base do |f| %>
   <%= display_block_errors(f) %>

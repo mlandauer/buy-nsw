@@ -104,9 +104,26 @@ private
   def next_step_slug
     BuyerStepPresenter.new(next_step).slug
   end
+  helper_method :next_step_slug
+
+  def previous_step
+    @previous_step ||= steps[ steps.index(form_class) - 1 ]
+  end
+  helper_method :previous_step
+
+  def previous_step_slug
+    BuyerStepPresenter.new(previous_step).slug
+  end
+  helper_method :previous_step_slug
 
   def last_step?
     form_class == steps.last
   end
+  helper_method :last_step?
+
+  def first_step?
+    form_class == steps.first
+  end
+  helper_method :first_step?
 
 end

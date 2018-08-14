@@ -1,6 +1,19 @@
 .view-buyers-applications {
   @include two-thirds;
 
+  .back-link a {
+    &::before {
+      content: '< ';
+    }
+
+    font-size: .9rem;
+    margin-bottom: 1rem;
+  }
+
+  h1 {
+    margin-bottom: 3rem;
+  }
+
   .detail-review dl {
     @include make-row();
 
