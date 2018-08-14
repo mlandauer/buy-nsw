@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Sellers::SellerVersion::Invitation::Contract::Accept do
+RSpec.describe Sellers::AcceptInvitationForm do
   let(:application) { build_stubbed(:seller_version) }
   let(:user) { build_stubbed(:seller_user, seller: application.seller) }
 

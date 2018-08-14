@@ -2,7 +2,7 @@ class Sellers::SellerVersion::Invitation::Create < Trailblazer::Operation
   class Present < Trailblazer::Operation
     step :application_model!
     step :build_user!
-    step Contract::Build( constant: Sellers::SellerVersion::Invitation::Contract::Create )
+    step Contract::Build( constant: Sellers::CreateInvitationForm )
 
     def application_model!(options, params:, **)
       options[:application_model] = options['config.current_user'].seller_versions.find(params[:application_id])
