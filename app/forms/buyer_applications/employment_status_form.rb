@@ -1,5 +1,5 @@
-module Buyers::BuyerApplication::Contract
-  class EmploymentStatus < Base
+module BuyerApplications
+  class EmploymentStatusForm < BaseForm
     property :employment_status
 
     validation :default, inherit: true do

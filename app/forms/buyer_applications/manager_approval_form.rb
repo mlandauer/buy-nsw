@@ -1,5 +1,5 @@
-module Buyers::BuyerApplication::Contract
-  class ManagerApproval < Base
+module BuyerApplications
+  class ManagerApprovalForm < BaseForm
     property :manager_name
     property :manager_email
 

@@ -1,5 +1,5 @@
-module Buyers::BuyerApplication::Contract
-  class EmailApproval < Base
+module BuyerApplications
+  class EmailApprovalForm < BaseForm
     property :application_body
 
     validation :default do
