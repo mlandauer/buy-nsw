@@ -12,8 +12,6 @@ class BuyerApplicationFlow
       if application.reload.requires_manager_approval?
         steps << BuyerApplications::ManagerApprovalForm
       end
-
-      steps << BuyerApplications::TermsForm
     end
   end
 

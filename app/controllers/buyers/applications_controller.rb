@@ -26,17 +26,25 @@ class Buyers::ApplicationsController < Buyers::BaseController
 
     if operation.success?
       if last_step?
-        submit = Buyers::SubmitApplication.call(user: current_user)
-
-        if submit.success?
-          return redirect_to buyers_dashboard_path
-        end
-      else
-        return redirect_to buyers_application_step_path(application, next_step_slug)
+        return redirect_to review_buyers_application_path(application)
       end
+
+      return redirect_to buyers_application_step_path(application, next_step_slug)
     end
 
     render :show
+  end
+
+  def review; end
+
+  def submit
+    @operation = Buyers::SubmitApplication.call(user: current_user)
+
+    if operation.success?
+      return redirect_to buyers_dashboard_path
+    end
+
+    render :review
   end
 
   def manager_approve
@@ -56,7 +64,7 @@ private
   helper_method :operation
 
   def application
-    @application ||= current_user.buyer
+    @application ||= BuyerApplication.created.find_by!(user: current_user)
   end
   helper_method :application
 

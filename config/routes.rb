@@ -58,7 +58,12 @@ Rails.application.routes.draw do
   end
 
   namespace :buyers do
-    resources :applications
+    resources :applications do
+      member do
+        get :review
+        post :submit
+      end
+    end
     get '/applications/:id/manager-approve', to: 'applications#manager_approve', as: :manager_approve_application
     get '/applications/:id/:step', to: 'applications#show', as: :application_step
 
