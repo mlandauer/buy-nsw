@@ -11,5 +11,9 @@
 
   <%= render partial: presenter.key, locals: { f: f, operation: operation } %>
 
+  <fieldset class="actions">
+    <%= f.submit 'Next' %>
+  </fieldset>
+  
   <%= hidden_field_tag :step, presenter.slug %>
 <% end %>
