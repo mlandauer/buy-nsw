@@ -1,9 +1,11 @@
-<h1><%= operation['result.step'].name(:long) %></h1>
+<h1>Apply to become a buyer</h1>
 
-<%= buy_nsw_form_for form, url: buyers_application_path(application), as: :buyer_application, i18n_scope: operation['result.step'].i18n_base do |f| %>
+<h2><%= presenter.name(:long) %></h2>
+
+<%= buy_nsw_form_for form, url: buyers_application_path(application), as: :buyer_application, i18n_scope: presenter.i18n_base do |f| %>
   <%= display_block_errors(f) %>
 
-  <%= render partial: operation['result.step'].key, locals: { f: f, operation: operation } %>
+  <%= render partial: presenter.key, locals: { f: f, operation: operation } %>
 
-  <%= hidden_field_tag :step, operation['result.step'].slug %>
+  <%= hidden_field_tag :step, presenter.slug %>
 <% end %>

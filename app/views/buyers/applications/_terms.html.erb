@@ -1,33 +1,29 @@
 <fieldset class="actions">
-  <% if operation['result.ready_for_submission'].present? %>
-    <section class="detail-review">
-      <%= t('buyers.applications.steps.terms.intro_html') %>
-      <dl>
-        <dt><%= t('buyers.applications.steps.basic_details.name.label') %></dt>
-        <dd><%= operation[:application_model].name %></dd>
+  <section class="detail-review">
+    <%= t('buyers.applications.steps.terms.intro_html') %>
+    <dl>
+      <dt><%= t('buyers.applications.steps.basic_details.name.label') %></dt>
+      <dd><%= application.name %></dd>
 
-        <dt><%= t('buyers.applications.steps.basic_details.organisation.label') %></dt>
-        <dd><%= operation[:application_model].organisation %></dd>
+      <dt><%= t('buyers.applications.steps.basic_details.organisation.label') %></dt>
+      <dd><%= application.organisation %></dd>
 
-        <dt><%= t('buyers.applications.steps.email_approval.long') %></dt>
-        <dd><%= operation[:application_model].application_body %></dd>
+      <dt><%= t('buyers.applications.steps.email_approval.long') %></dt>
+      <dd><%= application.application_body %></dd>
 
-        <dt><%= t('buyers.applications.steps.employment_status.long') %></dt>
-        <dd><%= operation[:application_model].employment_status.text %></dd>
+      <dt><%= t('buyers.applications.steps.employment_status.long') %></dt>
+      <dd><%= application.employment_status.text %></dd>
 
-        <% if operation[:application_model].requires_manager_approval? %>
-          <dt><%= t('buyers.applications.steps.manager_approval.long') %></dt>
-          <dd>
-            <%= operation[:application_model].manager_name %>&mdash;
-            <%= operation[:application_model].manager_email %>
-          </dd>
-        <% end %>
+      <% if application.requires_manager_approval? %>
+        <dt><%= t('buyers.applications.steps.manager_approval.long') %></dt>
+        <dd>
+          <%= application.manager_name %>&mdash;
+          <%= application.manager_email %>
+        </dd>
+      <% end %>
 
-      </dl>
+    </dl>
 
-    </section>
-    <%= f.submit 'Submit application' %>
-  <% else %>
-    <p>Please complete all other steps before submitting your buyer application.</p>
-  <% end %>
+  </section>
+  <%= f.submit 'Submit application' %>
 </fieldset>
