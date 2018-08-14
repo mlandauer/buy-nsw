@@ -26,7 +26,7 @@ RSpec.describe Admin::BuildAssignSellerVersion do
 
   describe '#form' do
     it 'returns a form for the seller version' do
-      expect(subject.form).to be_a(Admin::SellerVersion::Contract::Assign)
+      expect(subject.form).to be_a(Admin::AssignSellerVersionForm)
       expect(subject.form.model).to eq(version)
     end
   end
