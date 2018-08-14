@@ -63,7 +63,7 @@ private
   helper_method :operation
 
   def application
-    @application ||= BuyerApplication.created.find_by!(user: current_user)
+    @application ||= BuyerApplication.created.find_by!(user: current_user, id: params[:id])
   end
   helper_method :application
 
