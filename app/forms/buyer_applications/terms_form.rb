@@ -1,5 +1,5 @@
-module Buyers::BuyerApplication::Contract
-  class Terms < Base
+module BuyerApplications
+  class TermsForm < BaseForm
     def valid?
       true
     end

@@ -1,5 +1,5 @@
-module Buyers::BuyerApplication::Contract
-  class BasicDetails < Base
+module BuyerApplications
+  class BasicDetailsForm < BaseForm
     property :name
     property :organisation
 

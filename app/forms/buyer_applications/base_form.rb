@@ -1,5 +1,5 @@
-module Buyers::BuyerApplication::Contract
-  class Base < Reform::Form
+module BuyerApplications
+  class BaseForm < Reform::Form
     include Concerns::Contracts::Status
     include Forms::ValidationHelper
 
