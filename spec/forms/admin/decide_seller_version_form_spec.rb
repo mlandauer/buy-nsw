@@ -1,15 +1,15 @@
 require 'rails_helper'
 
-RSpec.describe Admin::BuyerApplication::Contract::Decide do
+RSpec.describe Admin::DecideSellerVersionForm do
 
-  let(:application) { build_stubbed(:buyer_application) }
+  let(:application) { build_stubbed(:seller_version) }
 
-  it 'is valid with a decision and decision_body' do
+  it 'is valid with a decision and response' do
     form = described_class.new(application)
 
     form.validate(
        decision: 'approve',
-       decision_body: 'Response',
+       response: 'Response',
     )
 
     expect(form).to be_valid

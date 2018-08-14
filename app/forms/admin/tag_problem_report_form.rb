@@ -1,5 +1,5 @@
-module Admin::ProblemReport::Contract
-  class Tag < Reform::Form
+module Admin
+  class TagProblemReportForm < Reform::Form
     property :tags
 
     def tags=(string)

@@ -1,11 +1,11 @@
-module Admin::SellerVersion::Contract
-  class Decide < Reform::Form
+module Admin
+  class DecideBuyerApplicationForm < Reform::Form
     include Forms::ValidationHelper
 
-    model :seller_application
+    model :buyer_application
 
     property :decision, virtual: true
-    property :response
+    property :decision_body
 
     validation :default, inherit: true do
       required(:decision).filled(in_list?: ['approve', 'reject', 'return_to_applicant'])

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Admin::BuyerApplication::Contract::Assign do
+RSpec.describe Admin::AssignBuyerApplicationForm do
 
   let(:user) { create(:admin_user) }
   let(:application) { build_stubbed(:buyer_application) }

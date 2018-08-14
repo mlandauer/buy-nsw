@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Admin::WaitingSeller::Contract::Update do
+RSpec.describe Admin::UpdateWaitingSellerForm do
 
   let(:waiting_seller) { build_stubbed(:waiting_seller) }
   let(:atts) { attributes_for(:waiting_seller) }
