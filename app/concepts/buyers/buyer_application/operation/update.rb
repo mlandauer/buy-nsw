@@ -14,19 +14,19 @@ class Buyers::BuyerApplication::Update < Trailblazer::Operation
       end
 
       step_flow do |application|
-        step Buyers::BuyerApplication::Contract::BasicDetails
+        step BuyerApplications::BasicDetailsForm
 
         if application.requires_email_approval?
-          step Buyers::BuyerApplication::Contract::EmailApproval
+          step BuyerApplications::EmailApprovalForm
         end
 
-        step Buyers::BuyerApplication::Contract::EmploymentStatus
+        step BuyerApplications::EmploymentStatusForm
 
         if application.requires_manager_approval?
-          step Buyers::BuyerApplication::Contract::ManagerApproval
+          step BuyerApplications::ManagerApprovalForm
         end
 
-        step Buyers::BuyerApplication::Contract::Terms
+        step BuyerApplications::TermsForm
       end
     end
   end

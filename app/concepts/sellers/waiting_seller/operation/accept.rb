@@ -1,7 +1,7 @@
 class Sellers::WaitingSeller::Accept < Trailblazer::Operation
   class Present < Trailblazer::Operation
     step :model!
-    step Contract::Build( constant: Sellers::WaitingSeller::Contract::Accept )
+    step Contract::Build( constant: Sellers::AcceptWaitingSellerForm )
     success :setup_errors
     step :check_user_does_not_exist!
     step :check_seller_does_not_exist!, fail_fast: true

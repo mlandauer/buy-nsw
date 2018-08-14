@@ -1,14 +1,10 @@
-module Products
+module BuyerApplications
   class BaseForm < Reform::Form
     include Concerns::FormStatus
     include Forms::ValidationHelper
 
-    def product_id
-      model.id
-    end
-
-    def upload_for(key)
-      self.model.public_send(key)
+    def i18n_base
+      'buyers.applications.steps'
     end
   end
 end

@@ -26,7 +26,7 @@ RSpec.describe Admin::BuildAssignBuyerApplication do
 
   describe '#form' do
     it 'returns a form for the buyer application' do
-      expect(subject.form).to be_a(Admin::BuyerApplication::Contract::Assign)
+      expect(subject.form).to be_a(Admin::AssignBuyerApplicationForm)
       expect(subject.form.model).to eq(application)
     end
   end

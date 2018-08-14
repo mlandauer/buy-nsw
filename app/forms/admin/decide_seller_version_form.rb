@@ -1,0 +1,14 @@
+module Admin
+  class DecideSellerVersionForm < Reform::Form
+    include Forms::ValidationHelper
+
+    model :seller_application
+
+    property :decision, virtual: true
+    property :response
+
+    validation :default, inherit: true do
+      required(:decision).filled(in_list?: ['approve', 'reject', 'return_to_applicant'])
+    end
+  end
+end

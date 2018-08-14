@@ -12,7 +12,7 @@ class Admin::BuildDecideSellerVersion < ApplicationService
   end
 
   def form
-    @form ||= Admin::SellerVersion::Contract::Decide.new(seller_version)
+    @form ||= Admin::DecideSellerVersionForm.new(seller_version)
   end
 
   def seller_version
