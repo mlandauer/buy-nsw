@@ -8,6 +8,14 @@ FactoryBot.define do
       roles ['buyer']
     end
 
+    trait :inactive_buyer do
+      roles ['buyer']
+
+      after :create do |user|
+        create(:created_buyer_application, user: user)
+      end
+    end
+
     trait :active_buyer do
       roles ['buyer']
 
@@ -32,6 +40,7 @@ FactoryBot.define do
     end
 
     factory :buyer_user, traits: [:buyer]
+    factory :inactive_buyer_user, traits: [:inactive_buyer]
     factory :active_buyer_user, traits: [:active_buyer]
 
     factory :seller_user, traits: [:seller]
