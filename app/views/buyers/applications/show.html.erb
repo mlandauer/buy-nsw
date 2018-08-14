@@ -1,19 +1,21 @@
-<% unless first_step? %>
-  <p class="back-link">
-    <%= link_to 'Back', buyers_application_step_path(application, previous_step_slug) %>
-  </p>
-<% end %>
+<section class="view-buyers-applications">
+  <% unless first_step? %>
+    <p class="back-link">
+      <%= link_to 'Back', buyers_application_step_path(application, previous_step_slug) %>
+    </p>
+  <% end %>
 
-<h1><%= presenter.name(:long) %></h1>
+  <h1><%= presenter.name(:long) %></h1>
 
-<%= buy_nsw_form_for form, url: buyers_application_path(application), as: :buyer_application, i18n_scope: presenter.i18n_base do |f| %>
-  <%= display_block_errors(f) %>
+  <%= buy_nsw_form_for form, url: buyers_application_path(application), as: :buyer_application, i18n_scope: presenter.i18n_base do |f| %>
+    <%= display_block_errors(f) %>
 
-  <%= render partial: presenter.key, locals: { f: f, operation: operation } %>
+    <%= render partial: presenter.key, locals: { f: f, operation: operation } %>
 
-  <fieldset class="actions">
-    <%= f.submit 'Next' %>
-  </fieldset>
-  
-  <%= hidden_field_tag :step, presenter.slug %>
-<% end %>
+    <fieldset class="actions">
+      <%= f.submit 'Next' %>
+    </fieldset>
+
+    <%= hidden_field_tag :step, presenter.slug %>
+  <% end %>
+</section>

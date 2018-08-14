@@ -1,6 +1,6 @@
-<h1><%= t('buyers.applications.steps.review.title') %></h1>
+<section class="view-buyers-applications">
+  <h1><%= t('buyers.applications.steps.review.title') %></h1>
 
-<section class="detail-review">
   <%= t('buyers.applications.steps.review.intro_html') %>
   <dl class="check-answers">
     <dt><%= t('buyers.applications.steps.basic_details.name.label') %></dt>
@@ -35,8 +35,7 @@
         <%= application.manager_email %>
       </dd>
     <% end %>
-
   </dl>
 
+  <%= button_to 'Submit application', submit_buyers_application_path(application), method: :post %>
 </section>
-<%= button_to 'Submit application', submit_buyers_application_path(application), method: :post %>

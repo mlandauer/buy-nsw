@@ -1,6 +1,5 @@
 class Buyers::ApplicationsController < Buyers::BaseController
   before_action :authenticate_user!, except: :manager_approve
-  layout '../buyers/applications/_layout'
 
   def new
     run Buyers::BuyerApplication::Create do |result|
