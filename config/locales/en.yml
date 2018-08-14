@@ -8,26 +8,22 @@ en:
         changes_saved_with_errors: Your changes have been saved. However there were some errors.
       steps:
         basic_details:
-          short: 'Your details'
-          long: 'Your details'
+          long: 'Apply to become a buyer'
           name:
             label: Full name
           organisation:
             label: Organisation name
         email_approval:
-          short: 'Application'
           long: 'Why do you need access?'
           application_body:
             label: Please write a few lines to tell us why you need an account on buy.nsw
         manager_approval:
-          short: 'Your manager'
           long: 'Approval from your line manager'
           manager_name:
             label: "Your manager's full name"
           manager_email:
             label: "Your manager's email"
         employment_status:
-          short: Employment status
           long: 'Your employment status'
           employment_status:
             label: What is your employment status?
@@ -36,9 +32,8 @@ en:
               be authorised by a government employee or be an employee of another organisation that has
               <a href=\"https://www.procurepoint.nsw.gov.au/before-you-buy/buyer-eligibility-and-registration\">registered as an eligible buyer</a>.
               Choose the option below that matches your situation.
-        terms:
-          short: 'Review and submit'
-          long: 'Review and submit'
+        review:
+          title: 'Review your details'
           intro_html: |
             <p>Please double-check the details below before submitting your application.</p>
     dashboard:

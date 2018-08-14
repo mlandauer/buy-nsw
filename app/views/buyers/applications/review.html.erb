@@ -1,0 +1,41 @@
+<section class="view-buyers-applications">
+  <h1><%= t('buyers.applications.steps.review.title') %></h1>
+
+  <%= t('buyers.applications.steps.review.intro_html') %>
+  <dl class="check-answers">
+    <dt><%= t('buyers.applications.steps.basic_details.name.label') %></dt>
+    <dd>
+      <%= change_link 'basic-details' %>
+      <%= application.name %>
+    </dd>
+
+    <dt><%= t('buyers.applications.steps.basic_details.organisation.label') %></dt>
+    <dd>
+      <%= change_link 'basic-details' %>
+      <%= application.organisation %>
+    </dd>
+
+    <dt><%= t('buyers.applications.steps.email_approval.long') %></dt>
+    <dd>
+      <%= change_link 'email-approval' %>
+      <%= application.application_body %>
+    </dd>
+
+    <dt><%= t('buyers.applications.steps.employment_status.long') %></dt>
+    <dd>
+      <%= change_link 'employment-status' %>
+      <%= application.employment_status.text %>
+    </dd>
+
+    <% if application.requires_manager_approval? %>
+      <dt><%= t('buyers.applications.steps.manager_approval.long') %></dt>
+      <dd>
+        <%= change_link 'manager-approval' %>
+        <%= application.manager_name %>&mdash;
+        <%= application.manager_email %>
+      </dd>
+    <% end %>
+  </dl>
+
+  <%= button_to 'Submit application', submit_buyers_application_path(application), method: :post %>
+</section>

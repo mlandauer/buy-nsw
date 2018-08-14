@@ -63,27 +63,27 @@ RSpec.describe 'Buyer onboarding', type: :feature, js: true, skip_login: true do
     fill_in 'Full name', with: 'Sir Buy-a-lot'
     fill_in 'Organisation name', with: 'Department of Buying Things'
 
-    click_on 'Save and continue'
+    click_on 'Next'
   end
 
   def fill_in_application_body
     fill_in 'buyer_application[application_body]', with: 'I am an authorised buyer from another agency'
 
-    click_on 'Save and continue'
+    click_on 'Next'
   end
 
   def fill_in_employment_status(status)
     choose "I'm a NSW Government employee" if status == :employee
     choose "I'm a contractor" if status == :contractor
 
-    click_on 'Save and continue'
+    click_on 'Next'
   end
 
   def fill_in_manager_details
     fill_in "Your manager's full name", with: 'Manager Manager'
     fill_in "Your manager's email", with: 'm.manager@example.org'
 
-    click_on 'Save and continue'
+    click_on 'Next'
   end
 
   def review_and_submit
