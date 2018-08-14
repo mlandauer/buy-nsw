@@ -1,5 +1,5 @@
-module Sellers::SellerVersion::Invitation::Contract
-  class Create < Reform::Form
+module Sellers
+  class CreateInvitationForm < Reform::Form
     include Forms::ValidationHelper
 
     property :email

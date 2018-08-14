@@ -1,5 +1,5 @@
-module Sellers::SellerVersion::Invitation::Contract
-  class Accept < Reform::Form
+module Sellers
+  class AcceptInvitationForm < Reform::Form
     property :password
     property :password_confirmation, virtual: true
 

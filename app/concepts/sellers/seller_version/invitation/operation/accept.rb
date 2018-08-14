@@ -1,7 +1,7 @@
 class Sellers::SellerVersion::Invitation::Accept < Trailblazer::Operation
   class Present < Trailblazer::Operation
     step :validate_confirmation_token!
-    step Contract::Build( constant: Sellers::SellerVersion::Invitation::Contract::Accept )
+    step Contract::Build( constant: Sellers::AcceptInvitationForm )
 
     def validate_confirmation_token!(options, params:, **)
       options[:application_model] = SellerVersion.created.find_by_id(params[:application_id])
