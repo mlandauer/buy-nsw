@@ -12,7 +12,7 @@ class Admin::BuildAssignBuyerApplication < ApplicationService
   end
 
   def form
-    @form ||= Admin::BuyerApplication::Contract::Assign.new(buyer_application)
+    @form ||= Admin::AssignBuyerApplicationForm.new(buyer_application)
   end
 
   def buyer_application

@@ -12,7 +12,7 @@ class Admin::BuildDecideBuyerApplication < ApplicationService
   end
 
   def form
-    @form ||= Admin::BuyerApplication::Contract::Decide.new(buyer_application)
+    @form ||= Admin::DecideBuyerApplicationForm.new(buyer_application)
   end
 
   def buyer_application
