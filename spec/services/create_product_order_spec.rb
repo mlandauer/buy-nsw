@@ -3,7 +3,12 @@ require 'rails_helper'
 RSpec.describe CreateProductOrder do
   include ActiveJob::TestHelper
 
-  let(:product) { create(:active_product) }
+  # NOTE: Use the bang variant of `let` here so that the product is created
+  # before tests are run. This avoids the document scanning job being invoked
+  # when the product is implicitly created inside of a `perform_enqueued_jobs`
+  # block.
+  let!(:product) { create(:active_product) }
+
   let(:buyer_user) { create(:active_buyer_user) }
   let(:valid_atts) {
     {
