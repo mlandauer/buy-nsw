@@ -68,7 +68,7 @@ RSpec.describe BuildProductOrder do
 
   describe '#form' do
     it 'returns a form for the product order' do
-      expect(subject.form).to be_a(Buyers::ProductOrder::Contract::Create)
+      expect(subject.form).to be_a(CreateProductOrderForm)
       expect(subject.form.model).to be_a(ProductOrder)
     end
   end

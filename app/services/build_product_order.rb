@@ -25,7 +25,7 @@ class BuildProductOrder < ApplicationService
   end
 
   def form
-    @form ||= Buyers::ProductOrder::Contract::Create.new(product_order)
+    @form ||= CreateProductOrderForm.new(product_order)
   end
 
 private
