@@ -59,6 +59,13 @@ class BuyerApplication < ApplicationRecord
   end
 
   def requires_email_approval?
+    # NOTE: once over, we were going to automatically whitelist buyers with a
+    # `@nsw.gov.au` email address to avoid the need for manual review. However,
+    # we dedided not to do this before launch, and hard-coded this to `true`.
+    #
+    # This should be safe to remove once the state machine transitions above
+    # have been adjusted.
+    #
     true
   end
 

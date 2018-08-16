@@ -19,7 +19,10 @@ class Sellers::Applications::InvitationsController < Sellers::Applications::Base
   end
 
   def accept
-    @operation = run Sellers::SellerVersion::Invitation::Accept::Present
+    @operation = Sellers::BuildAcceptInvitation.call(
+      version_id: params[:application_id],
+      confirmation_token: params[:confirmation_token],
+    )
 
     if operation.failure?
       flash.alert = I18n.t('sellers.applications.messages.invitation_invalid')
@@ -28,11 +31,17 @@ class Sellers::Applications::InvitationsController < Sellers::Applications::Base
   end
 
   def update_accept
-    @operation = run Sellers::SellerVersion::Invitation::Accept do |result|
-      sign_in(result['model'])
+    @operation = Sellers::AcceptInvitation.call(
+      version_id: params[:application_id],
+      confirmation_token: params[:confirmation_token],
+      user_attributes: params[:user],
+    )
+
+    if operation.success?
+      sign_in(operation.user)
 
       flash.notice = I18n.t('sellers.applications.messages.invitation_accepted')
-      return redirect_to sellers_application_path(result[:application_model])
+      return redirect_to sellers_application_path(operation.version)
     end
 
     render :accept
@@ -45,7 +54,11 @@ private
   helper_method :operation
 
   def form
-    operation['contract.default']
+    if operation.is_a?(Sellers::AcceptInvitation) || operation.is_a?(Sellers::BuildAcceptInvitation)
+      operation.form
+    else
+      operation['contract.default']
+    end
   end
   helper_method :form
 
