@@ -4,14 +4,14 @@
     <h1>Your invitation to join this seller</h1>
 
     <p>You have been invited to join the seller profile
-      <% if operation[:application_model].name.present? %>
-        for <strong><%= operation[:application_model].name %></strong>.
+      <% if operation.version.name.present? %>
+        for <strong><%= operation.version.name %></strong>.
       <% end %>
     </p>
     <p>Before you join, set a password. You'll need this when you sign in again.</p>
   </header>
 
-  <%= buy_nsw_form_for form, url: update_accept_sellers_application_invitations_path(operation[:application_model]),
+  <%= buy_nsw_form_for form, url: update_accept_sellers_application_invitations_path(operation.version),
                                as: :user do |f| %>
 
     <%= display_block_errors(f) %>
