@@ -7,6 +7,8 @@ Likewise, as we get more practical experience of working with the particular mix
 
 In the run up to end-August 2018, we've focussed on using these learnings to refactor the application to make it easier for future team members to pick it up fresh. This is often called fixing 'technical debt'. We've made substantial progress on this across the application. This document explains the rationale behind our decisions, and some considerations for future team members working on the platform.
 
+**NOTE!** Whilst this document covers broader pieces of refactoring work, we've documented smaller chores or future ideas in [the list of issues on the GitHub repository](https://github.com/digitalnsw/buy-nsw/issues).
+
 ## 1. Moving to immutable records of seller and product details
 
 Integrity is a core foundation of buying processes in government. In our software, integrity means having robust processes for reviewing new and updated seller profiles, and having a clear audit history for what happened when.
