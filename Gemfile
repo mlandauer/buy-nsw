@@ -62,6 +62,7 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'capybara', '~> 2.18.0'
   gem 'capybara-selenium'
+  gem 'chromedriver-helper'
   gem 'database_cleaner'
   gem 'dotenv-rails', '~> 2.4.0'
   gem 'foreman'
