@@ -183,7 +183,7 @@ en:
         form:
           email_label: Email address
           password_label: Password
-          password_help: Passwords must be at least 8 characters long. Tip: create a password with 3 or more words – it's secure and easy to remember.
+          password_help: "Passwords must be at least 8 characters long. Tip: create a password with 3 or more words – it's secure and easy to remember."
           password_confirmation_label: Confirm your password
           submit_label: Continue
         confirm:
