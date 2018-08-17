@@ -16,7 +16,7 @@ en:
         email_approval:
           long: 'Why do you need access?'
           application_body:
-            label: Please write a few lines to tell us why you need an account on buy.nsw
+            label: Please write a few lines to tell us why you need an account on <strong>buy.nsw</strong>.
         manager_approval:
           long: 'Approval from your line manager'
           manager_name:
@@ -109,7 +109,7 @@ en:
     waiting_seller_not_existing_seller_abn?: A seller application has already been started with this ABN, they may have already been invited
     waiting_seller_unique_abn?: A seller with this ABN is already on the waitlist
     messages:
-      weak_password: "That's not strong enough. You must use a strong unique password for your account. Try a longer password with multiple words – it's more secure and easier to remember."
+      weak_password: "That's not strong enough. You must use a strong unique password for your account. Try a longer password with multiple random words – it's more secure and easier to remember."
   feedback:
     problem_report:
       label: Is there anything wrong with this page?
@@ -167,7 +167,6 @@ en:
       buyer:
         title: Create a buyer account
         body_html: |
-          <p>Once you've verified your details, you'll be able to log into your buyer account.</p>
           <p>Already have an account? %{sign_in}.</p>
         sign_in_label: Sign in
         form:
@@ -184,7 +183,7 @@ en:
         form:
           email_label: Email address
           password_label: Password
-          password_help: You must use a strong unique password for your account. Passwords must be at least 8 characters long, but try a longer password with multiple words – it's more secure and easier to remember.
+          password_help: "Passwords must be at least 8 characters long. Tip: create a password with 3 or more words – it's secure and easy to remember."
           password_confirmation_label: Confirm your password
           submit_label: Continue
         confirm:
@@ -201,7 +200,7 @@ en:
           label: Your new password
           hint_html: |
             Leave blank if you don't want to change it. <br>
-            You must use a strong unique password for your account. Passwords must be at least 8 characters long, but try a longer password with multiple words – it's more secure and easier to remember.
+            Passwords must be at least 8 characters long. Tip: create a password with 3 or more words – it's secure and easy to remember.
         password_confirmation:
           label: Confirm your new password
         current_password:
