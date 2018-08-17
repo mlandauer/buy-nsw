@@ -16,7 +16,7 @@ en:
         email_approval:
           long: 'Why do you need access?'
           application_body:
-            label: Please write a few lines to tell us why you need an account on <strong>buy.nsw</strong>.
+            label: Please write a few lines to tell us why you need an account on buy.nsw.
         manager_approval:
           long: 'Approval from your line manager'
           manager_name:
