@@ -9,10 +9,12 @@ class Buyers::SubmitApplication < ApplicationService
         validate_state
         validate_completion
         update_state
-        send_manager_approval_email
+        set_manager_approval_token
         log_event
-        send_slack_notification
       end
+
+      send_manager_approval_email
+      send_slack_notification
 
       self.state = :success
     rescue Failure
@@ -43,9 +45,11 @@ private
     application.submit!
   end
 
-  def send_manager_approval_email
+  def set_manager_approval_token
     application.set_manager_approval_token!
+  end
 
+  def send_manager_approval_email
     mailer = BuyerApplicationMailer.with(application: application)
     mailer.manager_approval_email.deliver_later
   end
