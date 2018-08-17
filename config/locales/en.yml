@@ -166,7 +166,7 @@ en:
     registrations:
       buyer:
         title: Create a buyer account
-        body_html:
+        body_html: |
           <p>Already have an account? %{sign_in}.</p>
         sign_in_label: Sign in
         form:
