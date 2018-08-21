@@ -68,7 +68,7 @@ RSpec.describe 'Buyer onboarding', type: :feature, js: true, skip_login: true do
 
   def fill_in_application_body
     fill_in 'buyer_application[application_body]', with: 'I am an authorised buyer from another agency'
-
+    choose "Yes, we’re currently looking"
     click_on 'Next'
   end
 

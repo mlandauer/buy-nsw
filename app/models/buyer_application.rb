@@ -12,6 +12,8 @@ class BuyerApplication < ApplicationRecord
   has_many :events, -> { order(created_at: :desc) }, as: :eventable, class_name: 'Event::Event'
   has_many :product_orders, foreign_key: :buyer_id
 
+  enumerize :cloud_purchase, in: ['make-purchase', 'plan-purchase', 'no-plan']
+  enumerize :contactable, in: ['phone-number', 'email', 'none']
   enumerize :employment_status, in: ['employee', 'contractor', 'other-eligible']
 
   aasm column: :state do
@@ -99,4 +101,6 @@ class BuyerApplication < ApplicationRecord
 
   scope :assigned_to, ->(user) { where('assigned_to_id = ?', user) }
   scope :for_review, -> { awaiting_assignment.or(ready_for_review) }
+
+
 end
