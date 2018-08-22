@@ -1,3 +1,14 @@
 <%= f.input :application_body, as: :text, input_html: { rows: 3 } %>
-
 <%= f.input :cloud_purchase, as: :radio_buttons, collection: BuyerApplication.cloud_purchase.options %>
+
+
+<fieldset class="multiple-choice-group radio-group"
+          data-module="further-details-fields"
+          data-further-details-values="phone-number">
+  <%= f.input :contactable, as: :radio_buttons, wrapper: false,
+  collection: BuyerApplication.contactable.options, input_html: { data: { further_details: 'input' } } %>
+
+  <div class="additional-fields" data-further-details="fields">
+      <%= f.input :contact_number, wrapper: false %>
+  </div>
+</fieldset>
