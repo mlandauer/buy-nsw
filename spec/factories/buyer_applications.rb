@@ -9,6 +9,8 @@ FactoryBot.define do
       organisation 'Organisation Name'
       application_body 'Text'
       employment_status 'employee'
+      cloud_purchase 'make-purchase'
+      contactable 'phone-number'
     end
 
     trait :contractor do
