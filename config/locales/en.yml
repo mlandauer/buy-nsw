@@ -14,15 +14,16 @@ en:
           organisation:
             label: Organisation name
         email_approval:
-          long: 'Why do you need access?'
+          long: 'About you and buy.nsw'
           application_body:
-            label: We’d like to know more about you and where you’re at in your buying journey. In a few sentences, please tell us how you plan to use buy.nsw.
+            label: In a few sentences, please tell us how you plan to use buy.nsw.
           cloud_purchase:
             label: Are you considering a cloud purchase soon?
           contactable:
             label: "Can we phone you to welcome you to buy.nsw and learn a little more about your needs? "
           contact_number:
             label: "Please enter your best contact number. We’ll only use it for this initial welcome call. "
+            error_label: Your best contact number is required.
         manager_approval:
           long: 'Approval from your line manager'
           manager_name:
@@ -32,12 +33,13 @@ en:
         employment_status:
           long: 'Your employment status'
           employment_status:
-            label: What is your employment status?
+            label: To create a buyer account you need to be?
             hint_html: |
-              To create a buyer account you need to be a government employee,
-              be authorised by a government employee or be an employee of another organisation that has
-              <a href=\"https://www.procurepoint.nsw.gov.au/before-you-buy/buyer-eligibility-and-registration\">registered as an eligible buyer</a>.
-              Choose the option below that matches your situation.
+              <ul>
+                <li>a government employee</li>
+                <li>authorised by a government employee</li>
+                <li>an employee an organisation <a href=\"https://www.procurepoint.nsw.gov.au/before-you-buy/buyer-eligibility-and-registration\">registered as an eligible buyer</a></li>
+              </ul>
         review:
           title: 'Review your details'
           intro_html: |
@@ -92,7 +94,6 @@ en:
         employee: "I'm a NSW Government employee and need access to buy.nsw to perform my role."
         contractor: "I'm a contractor working in state or local government."
         other-eligible: "I'm an employee of another organisation that has registered as an eligible buyer."
-
     document:
       scan_status:
         unscanned: Awaiting virus scan
