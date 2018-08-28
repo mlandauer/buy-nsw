@@ -14,13 +14,33 @@ RSpec.describe 'Buyer onboarding', type: :feature, js: true, skip_login: true do
       fill_in_buyer_details
 
       # NOTE: All employees now must complete the application form
-      fill_in_application_body
+      fill_in_application_body(:email)
 
       fill_in_employment_status(:employee)
       review_and_submit
 
       expect_submission_message
     end
+
+
+    it 'submits a valid employee application with phoneNumber' do
+      visit '/register/buyer'
+
+      complete_buyer_sign_up(user)
+      confirm_email_address(user)
+
+      fill_in_buyer_details
+
+      # NOTE: All employees now must complete the application form
+      fill_in_application_body(:phoneNumber)
+
+      fill_in_employment_status(:employee)
+      review_and_submit
+
+      expect_submission_message
+    end
+
+
 
     it 'submits a valid contractor application' do
       visit '/register/buyer'
@@ -31,7 +51,7 @@ RSpec.describe 'Buyer onboarding', type: :feature, js: true, skip_login: true do
       fill_in_buyer_details
 
       # NOTE: All employees now must complete the application form
-      fill_in_application_body
+      fill_in_application_body(:email)
 
       fill_in_employment_status(:contractor)
       fill_in_manager_details
@@ -66,10 +86,13 @@ RSpec.describe 'Buyer onboarding', type: :feature, js: true, skip_login: true do
     click_on 'Next'
   end
 
-  def fill_in_application_body
+  def fill_in_application_body(contactable)
     fill_in 'buyer_application[application_body]', with: 'I am an authorised buyer from another agency'
     choose "Yes, we’re currently looking"
-    choose "I'd prefer email."
+    choose "Yes." if contactable == :phone_number
+    fill_in 'buyer_application[contact_number]', with: '0419790000' if contactable == :phone_number
+     
+    choose "I'd prefer email." if contactable != :phone_number
     click_on 'Next'
   end
 
