@@ -16,7 +16,8 @@ module Admin::BuyerApplications::DetailHelper
         :employment_status,
       ],
       application: [
-        :application_body,
+        :application_body
+        :cloud_purchase,
       ],
       manager: [
         :manager_name,
