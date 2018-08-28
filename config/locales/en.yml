@@ -30,7 +30,7 @@ en:
             review: Best contact number
         manager_approval:
           long: 'Approval from your line manager'
-          manager_nam:
+          manager_name:
             label: "Your manager's full name"
           manager_email:
             label: "Your manager's email"
