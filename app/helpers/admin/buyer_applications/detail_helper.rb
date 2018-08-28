@@ -13,11 +13,13 @@ module Admin::BuyerApplications::DetailHelper
       basic: [
         :name,
         :organisation,
+        :cloud_purchase,
+        :contactable,
+        :contact_number,
         :employment_status,
       ],
       application: [
-        :application_body
-        :cloud_purchase,
+        :application_body        
       ],
       manager: [
         :manager_name,
