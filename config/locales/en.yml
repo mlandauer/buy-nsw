@@ -45,7 +45,7 @@ en:
                 <li>an employee an organisation <a href=\"https://www.procurepoint.nsw.gov.au/before-you-buy/buyer-eligibility-and-registration\">registered as an eligible buyer</a></li>
               </ul>
         review:
-          title: 'Review your details111'
+          title: 'Review your details'
           intro_html: |
             <p>Please double-check the details below before submitting your application.</p>
     dashboard:
