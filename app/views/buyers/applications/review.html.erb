@@ -1,34 +1,58 @@
 <section class="view-buyers-applications">
+  
+  <p class="back-link">
+      <%= link_to 'Back', buyers_application_step_path(application, previous_step_slug) %>
+    </p>
   <h1><%= t('buyers.applications.steps.review.title') %></h1>
-
+ 
   <%= t('buyers.applications.steps.review.intro_html') %>
   <dl class="check-answers">
-    <dt><%= t('buyers.applications.steps.basic_details.name.label') %></dt>
+    <dt><%= t('buyers.applications.steps.basic_details.name.review') %></dt>
     <dd>
       <%= change_link 'basic-details' %>
       <%= application.name %>
     </dd>
 
-    <dt><%= t('buyers.applications.steps.basic_details.organisation.label') %></dt>
+    <dt><%= t('buyers.applications.steps.basic_details.organisation.review') %></dt>
     <dd>
       <%= change_link 'basic-details' %>
       <%= application.organisation %>
     </dd>
 
-    <dt><%= t('buyers.applications.steps.email_approval.long') %></dt>
+    <dt><%= t('buyers.applications.steps.email_approval.application_body.review') %></dt>
     <dd>
       <%= change_link 'email-approval' %>
-      <%= application.application_body %>
+      <%= application.application_body %>      
     </dd>
+    
+    <dt><%= t('buyers.applications.steps.email_approval.cloud_purchase.review') %></dt>
+      <dd>
+        <%= change_link 'email-approval' %>
+        <%= application.cloud_purchase.text %>      
+      </dd>   
+ 
+    <dt><%= t('buyers.applications.steps.email_approval.contactable.review') %></dt>
+      <dd>
+        <%= change_link 'email-approval' %>
+        <%= application.contactable.text %>
+      </dd>
 
-    <dt><%= t('buyers.applications.steps.employment_status.long') %></dt>
+    <% if application.contactable == "phone-number"%>
+      <dt><%= t('buyers.applications.steps.email_approval.contact_number.review') %></dt>
+        <dd>
+          <%= change_link 'email-approval' %>
+          <%= application.contact_number %>      
+        </dd>
+    <% end %>
+
+    <dt><%= t('buyers.applications.steps.employment_status.review') %></dt>
     <dd>
       <%= change_link 'employment-status' %>
       <%= application.employment_status.text %>
     </dd>
 
     <% if application.requires_manager_approval? %>
-      <dt><%= t('buyers.applications.steps.manager_approval.long') %></dt>
+      <dt><%= t('buyers.applications.steps.manager_approval.review') %></dt>
       <dd>
         <%= change_link 'manager-approval' %>
         <%= application.manager_name %>&mdash;

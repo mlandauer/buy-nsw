@@ -1,6 +1,8 @@
-<%= f.input :application_body, as: :text, input_html: { rows: 3 } %>
-<%= f.input :cloud_purchase, as: :radio_buttons, collection: BuyerApplication.cloud_purchase.options %>
+<b>We’d like to know more about you and where you’re at in your buying journey.</b>
+<br /><br />
 
+<%= f.input :application_body, as: :text, input_html: { rows: 5 } %>
+<%= f.input :cloud_purchase, as: :radio_buttons, collection: BuyerApplication.cloud_purchase.options %>
 
 <fieldset class="multiple-choice-group radio-group"
           data-module="further-details-fields"
