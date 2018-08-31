@@ -1,5 +1,5 @@
 csv_builder = lambda do |csv|
-  csv << ['ID', 'Buyer name', 'Email', 'Organisation', 'Status']
+  csv << ['id', 'Buyer name', 'Email', 'Organisation', 'Status']
 
   search.results.each do |result|
     csv << [
