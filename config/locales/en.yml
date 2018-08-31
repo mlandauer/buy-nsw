@@ -14,6 +14,7 @@ en:
             review: Name
           organisation:
             label: Organisation name
+            hint: Please enter in full, for example Department of Premier and Cabinet, not DPC.
             review: Organisation
         email_approval:
           long: 'About you and buy.nsw'
