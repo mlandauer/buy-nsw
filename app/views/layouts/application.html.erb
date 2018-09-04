@@ -20,6 +20,7 @@
 
   <body class="<%= yield(:body_classes) %>">
     <%= render partial: 'layouts/skip_link' %>
+    <%= render partial: 'layouts/pretender' %>
 
     <% unless content_for(:skip_header) %>
     <header role="banner" class="global">

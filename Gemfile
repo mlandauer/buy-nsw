@@ -31,6 +31,7 @@ gem 'mime-types'
 gem 'money'
 gem 'nokogiri'
 gem 'premailer-rails', group: [:development, :production]
+gem 'pretender'
 gem 'rack-attack'
 gem 'reform-rails', '~> 0.1.7'
 gem 'simple_form'

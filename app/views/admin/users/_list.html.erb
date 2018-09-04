@@ -1,0 +1,28 @@
+<% if users.any? %>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Email</th>
+        <th scope="col">Roles</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% users.each do |user| %>
+      <tr>
+        <td><%= user.id %></td>
+        <td><%= user.email %></td>
+        <td><%= user.roles.values.join(", ") %></td>
+        <td class="actions">
+          <% if not user.roles.include?('admin') %>
+            <%= link_to 'Sign in as', impersonate_admin_user_path(user), method: :post %>
+          <% end %>
+        </td>
+     </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <%= render partial: 'admin/shared/no_records_message', locals: local_assigns.slice(:search) %>
+<% end %>

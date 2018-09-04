@@ -113,6 +113,11 @@ Rails.application.routes.draw do
       end
     end
 
+    resources :users, only: [:index] do
+      post :impersonate, on: :member
+      post :stop_impersonating, on: :collection
+    end
+
     resources :problem_reports, path: 'problem-reports', only: [:index, :show] do
       member do
         post :resolve
