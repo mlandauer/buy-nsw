@@ -223,3 +223,8 @@ en:
         filters:
           threshold:
             name: 'Value'
+    users:
+      search:
+        filters:
+          email:
+            name: 'Email Address'

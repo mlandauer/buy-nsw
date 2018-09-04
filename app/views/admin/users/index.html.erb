@@ -1,5 +1,25 @@
-<ul>
-  <% @users.each do |user| %>
-    <li>Sign in as <%= link_to user.email, impersonate_admin_user_path(user), method: :post %></li>
-  <% end %>
-</ul>
+<% content_for(:admin_content) do %>
+<section class="view-admin-users-list">
+  <div class="column-set">
+    <aside>
+      <h1>Users</h1>
+
+      <%= render partial: 'admin/shared/filters', locals: { search: search } %>
+    </aside>
+
+    <div class="current-view">
+      <section class="record-list">
+        <header>
+          <h2><%= pluralize(search.result_count, 'user') %></h2>
+        </header>
+
+        <%= render partial: 'list', locals: {
+              search: search,
+              users: search.paginated_results,
+            } %>
+        <%= paginate search.paginated_results %>
+      </section>
+    </div>
+  </div>
+</section>
+<% end %>
