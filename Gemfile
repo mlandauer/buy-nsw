@@ -73,6 +73,7 @@ group :development, :test do
   gem 'timecop'
   gem 'rspec_junit_formatter'
   gem 'brakeman', :require => false
+  gem 'rails-erd'
 end
 
 group :development do
