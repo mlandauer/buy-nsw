@@ -10,6 +10,8 @@ class ApplicationController < ActionController::Base
   rescue_from NotFound, with: :render_not_found
   rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
 
+  impersonates :user
+
 private
   def authenticate!
     return unless ENV['BASIC_USERNAME'].present? && ENV['BASIC_PASSWORD'].present?

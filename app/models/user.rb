@@ -39,9 +39,12 @@ class User < ApplicationRecord
   end
 
   scope :with_role, ->(role) { where(":role = ANY(roles)", role: role) }
+  scope :without_role, ->(role) { where(":role != ANY(roles)", role: role) }
   scope :admin, ->{ with_role('admin') }
   scope :seller, ->{ with_role('seller') }
   scope :buyer, ->{ with_role('buyer') }
+
+  scope :order_by_id, ->{ order('id' ) }
 
   scope :unconfirmed, ->{ where('confirmed_at IS NULL') }
 end
