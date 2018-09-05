@@ -10,7 +10,15 @@
     <% events.each do |event| %>
       <tr>
         <td><%= event.created_at.localtime.to_formatted_s(:long) %></td>
-        <td><%= event.user.email if event.user%></td>
+        <td>
+          <% if event.user %>
+            <% if event.user.discarded_at?%>
+              <del><%= event.user.email %></del>
+            <% else %>
+              <%= event.user.email%>
+            <% end %>
+          <% end %>
+        </td>
         <td><%= event.message %></td>
       </tr>
     <% end %>

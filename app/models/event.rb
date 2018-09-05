@@ -9,6 +9,10 @@ module Event
       "events.messages.#{type.demodulize.underscore}"
     end
 
+    def user
+      User.with_discarded.find_by(id: self[:user_id])
+    end
+
     # Default implementation
     def message
       I18n.t(locale_name)
