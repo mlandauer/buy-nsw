@@ -15,7 +15,7 @@
             <% if event.user.discarded_at?%>
               <del><%= event.user.email %></del>
             <% else %>
-              <%= event.user.email if event.user%>
+              <%= event.user.email%>
             <% end %>
           <% end %>
         </td>
