@@ -40,6 +40,21 @@ RSpec.describe User do
     end
   end
 
+  describe '#discarded_at?' do
+    it 'discarded_at flag is nil as default when creating a new user' do
+      user= User.new(roles: ['seller'])
+      expect(user.discarded?).to be_falsey
+    end
+
+    it 'is true when a user is discarded' do
+      user = User.new(roles: ['seller'])
+      user.discard
+      expect(user.discarded?).to be_truthy
+    end
+
+  end
+
+
   describe '#is_active_buyer?' do
     it 'is true when the user has the "buyer" role and an approved buyer application' do
       user = create(:user, roles: ['buyer'])

@@ -1,4 +1,8 @@
 class User < ApplicationRecord
+  include Discard::Model
+
+  default_scope -> { kept }
+
   extend Enumerize
 
   devise :database_authenticatable, :registerable,

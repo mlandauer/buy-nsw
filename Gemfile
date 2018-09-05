@@ -37,7 +37,7 @@ gem 'simple_form'
 gem 'textacular', '~> 5.0'
 gem 'trailblazer', '~> 2.0.0'
 gem 'trailblazer-rails', '~> 1.0.4'
-
+gem 'discard', '~> 1.0'
 gem 'jquery-rails', '~> 4.3.1'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'

@@ -124,6 +124,8 @@ GEM
       bootstrap (~> 4.0.0)
       sass (>= 3.5.2)
       sprockets (>= 3.7.0)
+    discard (1.0.0)
+      activerecord (>= 4.2, < 6)
     disposable (0.4.3)
       declarative (>= 0.0.9, < 1.0.0)
       declarative-builder (< 0.2.0)
@@ -437,6 +439,7 @@ DEPENDENCIES
   devise-async
   devise_zxcvbn
   digital_nsw_template (= 0.0.2)
+  discard (~> 1.0)
   dotenv-rails (~> 2.4.0)
   dry-validation
   enumerize
