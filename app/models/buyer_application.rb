@@ -6,6 +6,9 @@ class BuyerApplication < ApplicationRecord
 
   include Concerns::StateScopes
 
+  include Discard::Model
+  default_scope -> { kept }
+
   belongs_to :assigned_to, class_name: 'User', optional: true
   belongs_to :user
 

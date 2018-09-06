@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180903055122) do
+ActiveRecord::Schema.define(version: 20180906013446) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,6 +38,8 @@ ActiveRecord::Schema.define(version: 20180903055122) do
     t.string "cloud_purchase"
     t.string "contactable"
     t.string "contact_number"
+    t.datetime "discarded_at"
+    t.index ["discarded_at"], name: "index_buyer_applications_on_discarded_at"
   end
 
   create_table "documents", force: :cascade do |t|
@@ -234,6 +236,8 @@ ActiveRecord::Schema.define(version: 20180903055122) do
     t.integer "terms_id"
     t.text "features", default: [], array: true
     t.text "benefits", default: [], array: true
+    t.datetime "discarded_at"
+    t.index ["discarded_at"], name: "index_products_on_discarded_at"
   end
 
   create_table "seller_versions", force: :cascade do |t|
@@ -302,12 +306,16 @@ ActiveRecord::Schema.define(version: 20180903055122) do
     t.integer "professional_indemnity_certificate_id"
     t.integer "workers_compensation_certificate_id"
     t.integer "product_liability_certificate_id"
+    t.datetime "discarded_at"
+    t.index ["discarded_at"], name: "index_seller_versions_on_discarded_at"
   end
 
   create_table "sellers", force: :cascade do |t|
     t.string "state", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "discarded_at"
+    t.index ["discarded_at"], name: "index_sellers_on_discarded_at"
   end
 
   create_table "users", force: :cascade do |t|
