@@ -5,6 +5,9 @@ class Seller < ApplicationRecord
   include Concerns::Documentable
   include Concerns::StateScopes
 
+  include Discard::Model
+  default_scope -> { kept }
+
   has_many :owners, class_name: 'User'
   belongs_to :agreed_by, class_name: 'User', optional: true
 
@@ -41,5 +44,11 @@ class Seller < ApplicationRecord
 
   def approved_name
     approved_version&.name
+  end
+
+  after_discard do
+    products.discard_all
+    versions.discard_all
+    owners.discard_all
   end
 end

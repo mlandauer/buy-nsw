@@ -5,6 +5,9 @@ class Product < ApplicationRecord
   include Concerns::Documentable
   include Concerns::StateScopes
 
+  include Discard::Model
+  default_scope -> { kept }
+
   belongs_to :seller
 
   has_documents :terms

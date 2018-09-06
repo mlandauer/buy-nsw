@@ -5,6 +5,9 @@ class SellerVersion < ApplicationRecord
   include Concerns::StateScopes
   include Concerns::Documentable
 
+  include Discard::Model
+  default_scope -> { kept }
+
   before_save :normalise_abn
 
   belongs_to :seller

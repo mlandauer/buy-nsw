@@ -1,9 +1,8 @@
 class User < ApplicationRecord
-  include Discard::Model
-
-  default_scope -> { kept }
-
   extend Enumerize
+
+  include Discard::Model
+  default_scope -> { kept }
 
   devise :database_authenticatable, :registerable,
          :confirmable, :recoverable, :rememberable,
@@ -36,6 +35,19 @@ class User < ApplicationRecord
 
   def is_seller?
     roles.include?('seller')
+  end
+
+  after_discard do
+    if seller.present?
+      # only cascade discard to seller if there are no more owners.
+      if !seller.owners.any?
+        seller.discard
+      end
+    end
+
+    if buyer.present?
+      buyer.discard
+    end
   end
 
   scope :with_role, ->(role) { where(":role = ANY(roles)", role: role) }
