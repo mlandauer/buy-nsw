@@ -4,12 +4,9 @@ end
 
 module I18n
   module Debug
-    module Hook
-      alias_method :old_lookup, :lookup
-      def lookup(*args)
-        if ENV['I18N_DEBUG']
-          old_lookup(*args)
-        end
+    @on_lookup = lambda do |k, r|
+      if ENV['I18N_DEBUG']
+        logger.debug("[i18n-debug] #{key} => #{result.inspect}")
       end
     end
   end
