@@ -76,6 +76,7 @@ group :development, :test do
   gem 'rails-erd'
   gem 'pry'
   gem 'pry-rails'
+  gem 'pry-byebug'
 end
 
 group :development do
