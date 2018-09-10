@@ -88,6 +88,7 @@ class SellerVersion < ApplicationRecord
   scope :for_review, -> { awaiting_assignment.or(ready_for_review) }
 
   scope :unassigned, -> { where('assigned_to_id IS NULL') }
+  scope :assigned, -> { where('assigned_to_id IS NOT NULL') }
   scope :assigned_to, ->(user) { where('assigned_to_id = ?', user) }
 
   scope :disability, ->{ where(disability: true) }

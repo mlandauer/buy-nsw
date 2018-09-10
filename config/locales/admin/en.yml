@@ -173,6 +173,14 @@ en:
             name: Status
           assigned_to:
             name: Assigned to
+          business_identifiers:
+            name: Business Identifiers
+            options:
+                sme: SME
+          checkbox_filters:
+            name: ''
+            options:
+              reverted: Reverted (assigned but not submitted)
           sort:
             name: 'Sort by'
             options:
