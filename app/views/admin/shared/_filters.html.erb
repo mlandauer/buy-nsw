@@ -9,6 +9,17 @@
             <%= t("admin.#{controller_name}.search.filters.#{key}.name") %>
             <% if options == :term_filter %>
               <%= text_field_tag key, search.filter_value(key), class: 'form-control' %>
+            <% elsif key == :checkbox_filters %>
+              <ul class="options">
+                <% options.each do |option| %>
+                  <li>
+                    <%= check_box_tag "#{key}[]", option, search.filter_selected?(key, option), id: "#{key}_#{option}" %>
+                    <%= label_tag "#{key}_#{option}" do %>
+                      <%= t("admin.#{controller_name}.search.filters.#{key}.options.#{option}") %>
+                    <% end %>
+                  </li>
+                <% end %>
+              </ul>
             <% else %>
               <%= select_tag key, options_for_select(prepare_filter_options(controller_name, key, options), search.selected_filters[key]), class: 'form-control' %>
             <% end %>
