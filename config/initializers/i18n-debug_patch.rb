@@ -6,7 +6,7 @@ module I18n
   module Debug
     @on_lookup = lambda do |k, r|
       if ENV['I18N_DEBUG']
-        logger.debug("[i18n-debug] #{key} => #{result.inspect}")
+        logger.debug("[i18n-debug] #{k} => #{r.inspect}")
       end
     end
   end
