@@ -49,4 +49,52 @@
     </ul>
   </dd>
   <% end %>
+
+ <% if authorized_buyer %>
+    <dt>Receivership</td>
+    <dd>
+      <% if seller_version.legal_proceedings %>
+        Yes. <%= seller_version.legal_proceedings_details %>
+      <% else %>
+        <p>No</P>
+      <% end %>
+    </dd>
+
+    <dt>Legal Proceedings</td>
+    <dd>
+      <% if seller_version.legal_proceedings %>
+        Yes. <%= seller_version.legal_proceedings_details %>
+      <% else %>
+        <p>No</P>
+      <% end %>
+    </dd>
+
+    <dt>Insurance Claims</td>
+    <dd>
+      <% if seller_version.insurance_claims %>
+        Yes. <%= seller_version.insurance_claims_details %>
+      <% else %>
+        <p>No</P>
+      <% end %>
+    </dd>
+
+    <dt>Conflicts Of Interest</td>
+    <dd>
+      <% if seller_version.conflicts_of_interest %>
+        Yes. <%= seller_version.conflicts_of_interest_details %>
+      <% else %>
+        <p>No</P>
+      <% end %>
+    </dd>
+
+    <dt>Other Circumstances</td>
+    <dd>
+      <% if seller_version.other_circumstances %>
+        Yes. <%= seller_version.other_circumstances_details %>
+      <% else %>
+        <p>No</P>
+      <% end %>
+    </dd>
+  <% end %>
 </dl>
+
