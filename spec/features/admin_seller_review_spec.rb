@@ -29,6 +29,31 @@ RSpec.describe 'Reviewing seller applications', type: :feature, js: true do
       expect_application_state('approved')
     end
 
+    it 'can filter applications by business identifiers' do
+      application = create(:awaiting_assignment_seller_version)
+      application.update_attribute(:start_up, false)
+
+      visit '/ops'
+      click_on 'Seller applications'
+      click_on 'Reset filters'
+
+      expect_listed(application)
+
+      select 'Start Up', :from => 'Business Identifiers'
+      click_on 'Apply filters'
+
+      expect_unlisted(application)
+
+      binding.pry
+      application.update_attribute(:start_up, true)
+
+      refresh
+
+      binding.pry
+      expect_listed(application)
+
+    end
+
     it 'can filter to show reverted applications' do
       reverted_application = create(:ready_for_review_seller_version)
       reverted_application.return_to_applicant
@@ -80,7 +105,8 @@ RSpec.describe 'Reviewing seller applications', type: :feature, js: true do
       pic = create(:unscanned_document)
       wcc = create(:infected_document)
 
-      application = create(:awaiting_assignment_seller_version,
+      application = create(
+        :awaiting_assignment_seller_version,
         seller: seller,
         financial_statement_id: fs.id,
         professional_indemnity_certificate_id: pic.id,
@@ -243,9 +269,13 @@ RSpec.describe 'Reviewing seller applications', type: :feature, js: true do
   end
 
   def expect_unlisted(*applications)
-    within '.record-list table' do
-      applications.each do |app|
-        expect(page).to have_no_xpath(column_xpath(:ID), :text => app.id)
+    if page.has_no_selector?('.record-list table')
+      true
+    else
+      within '.record-list table' do
+        applications.each do |app|
+          expect(page).to have_no_xpath(column_xpath(:ID), :text => app.id)
+        end
       end
     end
   end
