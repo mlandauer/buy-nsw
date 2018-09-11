@@ -1,4 +1,5 @@
 module Admin::SellerVersions::DetailHelper
+  # this is to inherit the functionalities from Seller::ProfilesHelper
   include Sellers::ProfilesHelper
   def Sellers::ProfilesHelper; end
 
@@ -63,5 +64,4 @@ module Admin::SellerVersions::DetailHelper
       ]
     }
   end
-
 end

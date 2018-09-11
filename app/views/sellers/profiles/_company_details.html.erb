@@ -66,54 +66,54 @@
     <dt>Receivership</td>
     <dd>
       <% if seller_version.receivership %>
-        Yes. <%= seller_version.receivership_details %>
+        <%= seller_version.receivership_details %>
       <% else %>
-        <p>No</P>
+        <em>No</em>
       <% end %>
     </dd>
 
     <dt>Investigation</td>
     <dd>
       <% if seller_version.investigations %>
-        Yes. <%= seller_version.investigations_details %>
+        <%= seller_version.investigations_details %>
       <% else %>
-        <p>No</P>
+        <em>No</em>
       <% end %>
     </dd>
 
     <dt>Legal Proceedings</td>
     <dd>
       <% if seller_version.legal_proceedings %>
-        Yes. <%= seller_version.legal_proceedings_details %>
+        <%= seller_version.legal_proceedings_details %>
       <% else %>
-        <p>No</P>
+        <em>No</em>
       <% end %>
     </dd>
 
     <dt>Insurance Claims</td>
     <dd>
       <% if seller_version.insurance_claims %>
-        Yes. <%= seller_version.insurance_claims_details %>
+        <%= seller_version.insurance_claims_details %>
       <% else %>
-        <p>No</P>
+        <em>No</em>
       <% end %>
     </dd>
 
     <dt>Conflicts Of Interest</td>
     <dd>
       <% if seller_version.conflicts_of_interest %>
-        Yes. <%= seller_version.conflicts_of_interest_details %>
+        <%= seller_version.conflicts_of_interest_details %>
       <% else %>
-        <p>No</P>
+        <em>No</em>
       <% end %>
     </dd>
 
     <dt>Other Circumstances</td>
     <dd>
       <% if seller_version.other_circumstances %>
-        Yes. <%= seller_version.other_circumstances_details %>
+        <%= seller_version.other_circumstances_details %>
       <% else %>
-        <p>No</P>
+        <em>No</em>
       <% end %>
     </dd>
   <% end %>
