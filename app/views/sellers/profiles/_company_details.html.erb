@@ -1,53 +1,53 @@
 <dl id="company-details">
   <h2>Company details</h2>
   <% if authorized_buyer %>
-  <dt>Authorised representative</dt>
-  <dd>
-    <%= seller_version.representative_name %><br>
-    <%= tel_to seller_version.representative_phone, "data-module" => "track-outbound-link" %><br>
-    <%= mail_to seller_version.representative_email, seller_version.representative_email, "data-module" => "track-outbound-link" %>
-  </dd>
+    <dt>Authorised representative</dt>
+    <dd>
+      <%= seller_version.representative_name %><br>
+      <%= tel_to seller_version.representative_phone, "data-module" => "track-outbound-link" %><br>
+      <%= mail_to seller_version.representative_email, seller_version.representative_email, "data-module" => "track-outbound-link" %>
+    </dd>
   <% end %>
 
   <dt>ABN</dt>
   <dd><%= link_to formatted_abn(seller_version.abn), abn_lookup_url(seller_version.abn) %></dd>
 
   <% if authorized_buyer %>
-  <dt>Location</td>
-  <dd>
-    <ul class="addresses">
-      <% seller_version.addresses.each do |address| %>
-        <li>
-          <%= address.address %><br>
-          <%= address.suburb %><br>
-          <%= address.state %>, <%= address.postcode %><br>
-          <%= address.country %>
-        </li>
-      <% end %>
-    </ul>
-  </dd>
+    <dt>Location</dt>
+    <dd>
+      <ul class="addresses">
+        <% seller_version.addresses.each do |address| %>
+          <li>
+            <%= address.address %><br>
+            <%= address.suburb %><br>
+            <%= address.state %>, <%= address.postcode %><br>
+            <%= address.country %>
+          </li>
+        <% end %>
+      </ul>
+    </dd>
   <% end %>
 
   <% if seller_version.accreditations.any? %>
-  <dt>Accreditations</dt>
-  <dd>
-    <ul>
-      <% seller_version.accreditations.each do |item| %>
-        <li><%= item %></li>
-      <% end %>
-    </ul>
-  </dd>
+    <dt>Accreditations</dt>
+    <dd>
+      <ul>
+        <% seller_version.accreditations.each do |item| %>
+          <li><%= item %></li>
+        <% end %>
+      </ul>
+    </dd>
   <% end %>
 
   <% if seller_version.engagements.any? %>
-  <dt>Industry engagement</dt>
-  <dd>
-    <ul>
-      <% seller_version.engagements.each do |item| %>
-        <li><%= item %></li>
-      <% end %>
-    </ul>
-  </dd>
+    <dt>Industry engagement</dt>
+    <dd>
+      <ul>
+        <% seller_version.engagements.each do |item| %>
+          <li><%= item %></li>
+        <% end %>
+      </ul>
+    </dd>
   <% end %>
 
   <% if authorized_buyer %>
@@ -59,11 +59,11 @@
 
 </dl>
 
- <% if authorized_buyer %>
- <dl id="disclosures">
+<% if authorized_buyer %>
+  <dl id="disclosures">
     <h2>Disclosures</h2>
 
-    <dt>Receivership</td>
+    <dt>Receivership</dt>
     <dd>
       <% if seller_version.receivership %>
         <%= seller_version.receivership_details %>
@@ -72,7 +72,7 @@
       <% end %>
     </dd>
 
-    <dt>Investigation</td>
+    <dt>Investigation</dt>
     <dd>
       <% if seller_version.investigations %>
         <%= seller_version.investigations_details %>
@@ -81,7 +81,7 @@
       <% end %>
     </dd>
 
-    <dt>Legal Proceedings</td>
+    <dt>Legal Proceedings</dt>
     <dd>
       <% if seller_version.legal_proceedings %>
         <%= seller_version.legal_proceedings_details %>
@@ -90,7 +90,7 @@
       <% end %>
     </dd>
 
-    <dt>Insurance Claims</td>
+    <dt>Insurance Claims</dt>
     <dd>
       <% if seller_version.insurance_claims %>
         <%= seller_version.insurance_claims_details %>
@@ -99,7 +99,7 @@
       <% end %>
     </dd>
 
-    <dt>Conflicts Of Interest</td>
+    <dt>Conflicts Of Interest</dt>
     <dd>
       <% if seller_version.conflicts_of_interest %>
         <%= seller_version.conflicts_of_interest_details %>
@@ -108,7 +108,7 @@
       <% end %>
     </dd>
 
-    <dt>Other Circumstances</td>
+    <dt>Other Circumstances</dt>
     <dd>
       <% if seller_version.other_circumstances %>
         <%= seller_version.other_circumstances_details %>
@@ -116,6 +116,5 @@
         <em>No</em>
       <% end %>
     </dd>
-  <% end %>
-</dl>
-
+  </dl>
+<% end %>
