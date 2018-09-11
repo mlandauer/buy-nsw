@@ -44,12 +44,9 @@ RSpec.describe 'Reviewing seller applications', type: :feature, js: true do
 
       expect_unlisted(application)
 
-      binding.pry
       application.update_attribute(:start_up, true)
-
       refresh
 
-      binding.pry
       expect_listed(application)
 
     end
