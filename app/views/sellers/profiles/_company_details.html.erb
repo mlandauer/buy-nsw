@@ -50,11 +50,32 @@
   </dd>
   <% end %>
 
+  <% if authorized_buyer %>
+    <dt>Government Experience</dt>
+    <dd>
+      <%= government_experience_values(seller_version) %>
+    </dd>
+  <% end %>
+
+</dl>
+
  <% if authorized_buyer %>
+ <dl id="disclosures">
+    <h2>Disclosures</h2>
+
     <dt>Receivership</td>
     <dd>
-      <% if seller_version.legal_proceedings %>
-        Yes. <%= seller_version.legal_proceedings_details %>
+      <% if seller_version.receivership %>
+        Yes. <%= seller_version.receivership_details %>
+      <% else %>
+        <p>No</P>
+      <% end %>
+    </dd>
+
+    <dt>Investigation</td>
+    <dd>
+      <% if seller_version.investigations %>
+        Yes. <%= seller_version.investigations_details %>
       <% else %>
         <p>No</P>
       <% end %>
