@@ -180,7 +180,7 @@ en:
           checkbox_filters:
             name: ''
             options:
-              reverted: Reverted (assigned but not submitted)
+              reverted: Reverted (assigned & unsubmitted)
           sort:
             name: 'Sort by'
             options:

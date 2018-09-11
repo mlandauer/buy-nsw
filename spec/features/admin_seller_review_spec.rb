@@ -29,6 +29,50 @@ RSpec.describe 'Reviewing seller applications', type: :feature, js: true do
       expect_application_state('approved')
     end
 
+    it 'can filter to show reverted applications' do
+      reverted_application = create(:ready_for_review_seller_version)
+      reverted_application.return_to_applicant
+      reverted_application.save!
+      created_application   = create(:created_seller_version)
+      accepted_application  = create(:approved_seller_version)
+      rejected_application  = create(:rejected_seller_version)
+      submitted_application = create(:awaiting_assignment_seller_version)
+
+      visit '/ops'
+      click_on 'Seller applications'
+      click_on 'Reset filters'
+
+      expect_listed(
+        reverted_application, created_application, accepted_application,
+        rejected_application, submitted_application
+      )
+
+      check 'Reverted'
+      click_on 'Apply filters'
+
+      expect_listed(reverted_application)
+      expect_unlisted(
+        created_application, accepted_application,
+        rejected_application, submitted_application
+      )
+
+      uncheck 'Reverted'
+      select 'Awaiting Assignment', :from => 'Status'
+      click_on 'Apply filters'
+
+      select_application_from_list(submitted_application.name)
+      assign_application_to(@user.email)
+      decide_on_application(decision: 'Return', response: 'You need to change some things.')
+
+      visit '/ops/seller-applications'
+      click_on 'Reset filters'
+      check 'Reverted'
+      click_on 'Apply filters'
+
+      expect_listed(reverted_application, submitted_application)
+      expect_unlisted(created_application, rejected_application, accepted_application)
+    end
+
     it 'can see uploaded documents' do
       seller = create(:inactive_seller)
 
@@ -187,6 +231,22 @@ RSpec.describe 'Reviewing seller applications', type: :feature, js: true do
   def expect_flash_message(message)
     within '.messages' do
       expect(page).to have_content(message)
+    end
+  end
+
+  def expect_listed(*applications)
+    within '.record-list table' do
+      applications.each do |app|
+        expect(page).to have_xpath(column_xpath(:ID), :text => app.id)
+      end
+    end
+  end
+
+  def expect_unlisted(*applications)
+    within '.record-list table' do
+      applications.each do |app|
+        expect(page).to have_no_xpath(column_xpath(:ID), :text => app.id)
+      end
     end
   end
 
