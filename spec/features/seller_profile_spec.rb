@@ -22,6 +22,13 @@ RSpec.describe 'Seller profiles', type: :feature, js: true, skip_login: true do
       expect(page).to have_content('Accreditations')
       expect(page).to have_content('Industry engagement')
       expect(page).to have_content('Awards')
+      expect(page).to have_no_content('Government Experience')
+      expect(page).to have_no_content('Receivership')
+      expect(page).to have_no_content('Investigation')
+      expect(page).to have_no_content('Legal Proceedings')
+      expect(page).to have_no_content('Insurance Claims')
+      expect(page).to have_no_content('Conflicts Of Interest')
+      expect(page).to have_no_content('Other Circumstances')
     end
 
     it 'should tell you what you need to do to see the full seller profile' do
@@ -89,11 +96,22 @@ RSpec.describe 'Seller profiles', type: :feature, js: true, skip_login: true do
         )
         expect_list_entry('Accreditations', version.accreditations.first)
         expect_list_entry('Industry engagement', version.engagements.first)
+        expect(page).to have_content('Government Experience')
       end
 
       within '#recognition' do
         expect_list_entry('Awards', version.awards.first)
       end
+
+      within '#disclosures' do
+        expect(page).to have_content('Receivership')
+        expect(page).to have_content('Investigation')
+        expect(page).to have_content('Legal Proceedings')
+        expect(page).to have_content('Insurance Claims')
+        expect(page).to have_content('Conflicts Of Interest')
+        expect(page).to have_content('Other Circumstances')
+      end
+
     end
   end
 
