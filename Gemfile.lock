@@ -444,7 +444,7 @@ DEPENDENCIES
   abn
   active_elastic_job
   airbrake (~> 7.2)
-  awesome_print (~> 1.8)
+  awesome_print
   brakeman
   byebug
   capybara (~> 2.18.0)

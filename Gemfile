@@ -77,6 +77,7 @@ group :development, :test do
   gem 'pry'
   gem 'pry-rails'
   gem 'pry-byebug'
+  gem "awesome_print"
 end
 
 group :development do
@@ -94,5 +95,3 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 source 'https://rails-assets.org' do
   gem 'rails-assets-airbrake-js-client'
 end
-
-gem "awesome_print", "~> 1.8", :groups => [:development, :test]
