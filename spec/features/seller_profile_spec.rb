@@ -23,6 +23,12 @@ RSpec.describe 'Seller profiles', type: :feature, js: true, skip_login: true do
       expect(page).to have_content('Industry engagement')
       expect(page).to have_content('Awards')
       expect(page).to have_no_content('Government Experience')
+      expect(page).to have_no_content('Receivership')
+      expect(page).to have_no_content('Investigation')
+      expect(page).to have_no_content('Legal Proceedings')
+      expect(page).to have_no_content('Insurance Claims')
+      expect(page).to have_no_content('Conflicts Of Interest')
+      expect(page).to have_no_content('Other Circumstances')
     end
 
     it 'should tell you what you need to do to see the full seller profile' do
@@ -42,7 +48,6 @@ RSpec.describe 'Seller profiles', type: :feature, js: true, skip_login: true do
       visit sellers_profile_path(seller)
 
       expect(page).to have_content('To see the full seller profile you need to be an approved buyer')
-      expect(page).to have_no_content('Government Experience')
     end
   end
 
