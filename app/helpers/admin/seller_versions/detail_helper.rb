@@ -1,4 +1,7 @@
 module Admin::SellerVersions::DetailHelper
+  include Sellers::ProfilesHelper
+  def Sellers::ProfilesHelper; end
+
   def display_seller_list(type:, resource:)
     display_list(
       fields: seller_fields,
@@ -59,24 +62,6 @@ module Admin::SellerVersions::DetailHelper
         :agreed_by_email,
       ]
     }
-  end
-
-  def government_experience_values(seller)
-    labels = []
-    keys = [
-      :no_experience,
-      :local_government_experience,
-      :state_government_experience,
-      :federal_government_experience,
-      :international_government_experience,
-    ]
-    i18n_base = 'admin.seller_versions.fields.government_experience.values'
-
-    keys.each do |key|
-      labels << t("#{i18n_base}.#{key}") if seller.public_send("#{key}")
-    end
-
-    labels.join('<br>').html_safe
   end
 
 end
