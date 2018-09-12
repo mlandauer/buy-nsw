@@ -1,0 +1,2 @@
+#!/bin/sh
+git diff $(eb status app-production | awk '$2 == "Version:" {print $3}') HEAD
