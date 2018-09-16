@@ -29,3 +29,7 @@ exported_products.csv
 .DS_Store
 
 tags
+
+# env local should never be committed - it is for local env changes only
+# (i.e. changing the application port on your development machine)
+.env.local
