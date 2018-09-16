@@ -10,17 +10,17 @@
   </header>
 
   <%= buy_nsw_form_for(resource, as: resource_name, url: registration_path(user_type)) do |f| %>
-    <%= f.input :email, autocomplete: "email",
+    <%= f.input :email, input_html: { autocomplete: "username email" },
                         label: t('users.registrations.shared.form.email_label'),
                         hint: t("users.registrations.#{user_type}.form.email_help") %>
 
     <div data-module="password-strength">
-      <%= f.input :password, autocomplete: "off",
+      <%= f.input :password, input_html: { autocomplete: "new-password" },
                               label: t('users.registrations.shared.form.password_label'),
                               hint: t('users.registrations.shared.form.password_help') %>
     </div>
 
-    <%= f.input :password_confirmation, autocomplete: "off",
+    <%= f.input :password_confirmation, input_html: { autocomplete: "new-password" },
                                         label: t('users.registrations.shared.form.password_confirmation_label') %>
 
     <fieldset class="actions">

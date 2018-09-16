@@ -16,12 +16,12 @@
   <% else %>
     <%= buy_nsw_form_for(operation['contract.default'], as: :invitation, url: accept_sellers_waitlist_invitation_path(operation['model'].invitation_token)) do |f| %>
       <div data-module="password-strength">
-        <%= f.input :password, autocomplete: "off",
+        <%= f.input :password, input_html: { autocomplete: "new-password" },
                                label: t('users.registrations.shared.form.password_label'),
                                hint: t('users.registrations.shared.form.password_help') %>
       </div>
 
-      <%= f.input :password_confirmation, autocomplete: "off",
+      <%= f.input :password_confirmation, input_html: { autocomplete: "new-password" },
                                           label: t('users.registrations.shared.form.password_confirmation_label') %>
 
       <fieldset class="actions">
