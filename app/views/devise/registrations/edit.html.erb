@@ -17,14 +17,14 @@
 
     <fieldset>
       <div data-module="password-strength">
-        <%= f.input :password, autocomplete: "off" %>
+        <%= f.input :password, input_html: { autocomplete: "new-password" } %>
       </div>
 
-      <%= f.input :password_confirmation, autocomplete: "off" %>
+      <%= f.input :password_confirmation, input_html: { autocomplete: "new-password" } %>
     </fieldset>
 
     <fieldset class="actions">
-      <%= f.input :current_password, autocomplete: "off" %>
+      <%= f.input :current_password, input_html: { autocomplete: "current-password" } %>
 
       <p><%= f.submit "Update account details" %></p>
     </fieldset>

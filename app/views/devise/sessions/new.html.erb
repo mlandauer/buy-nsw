@@ -36,7 +36,7 @@
     <%= buy_nsw_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <%= f.input :email, autocomplete: "email",
                           label: t('users.sessions.sign_in.form.email_label') %>
-      <%= f.input :password, autocomplete: "off",
+      <%= f.input :password, input_html: { autocomplete: "current-password" },
                              label: t('users.sessions.sign_in.form.password_label')%>
 
       <% if devise_mapping.rememberable? -%>
