@@ -84,7 +84,7 @@ private
       selected_filters: params,
       default_values: {
         state: 'ready_for_review',
-        assigned_to: current_user.id,
+        sort: :submitted_at,
       },
       page: params.fetch(:page, 1),
       per_page: 25,
