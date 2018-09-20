@@ -5,7 +5,8 @@
     @include app-column-fixed;
     background: #f2f5f6;
     border-right: 3px solid #e4eaec;
-    width: 20vw;
+    width: 15vw;
+    min-width: 185px;
 
     h1 {
       font-size: 1.4rem;
