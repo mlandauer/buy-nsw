@@ -15,6 +15,9 @@
       %>
 
       <div class="message message-<%= key %>">
+        <button type="button" class="close" onclick="$('.message-<%= key %>').hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
         <div class="message-container">
           <div class="row">
             <p <% if key == 'alert' %>role="alert" tabindex="-1"<% end %>><%= value %></p>
