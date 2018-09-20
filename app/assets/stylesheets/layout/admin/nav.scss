@@ -1,5 +1,8 @@
 body.admin {
   .column-set .left-col.collapsible-nav {
+    &, nav {
+      overflow: auto;
+    }
     header, nav ul li a {
       display: inline-block;
       white-space: nowrap;
