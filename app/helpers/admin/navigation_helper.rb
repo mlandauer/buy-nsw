@@ -1,5 +1,5 @@
 module Admin::NavigationHelper
-  def nav_link_to(label, url, icon: nil, match_prefix: false)
+  def nav_link_to(label, url, icon: nil, match_prefix: false, short_label: nil)
     if match_prefix
       selected = current_page_or_prefix?(url)
     else
@@ -11,7 +11,9 @@ module Admin::NavigationHelper
 
     content_tag(:li, class: selected_class) do
       link_to(url) do
-        content_tag(:span, nil, class: icon_class, aria: { hidden: true }) + label
+        content_tag(:span, nil, class: icon_class, aria: { hidden: true }) +
+        content_tag(:span, label, class: :fullsize) +
+        content_tag(:span, short_label, class: :short)
       end
     end
   end

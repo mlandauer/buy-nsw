@@ -1,4 +1,38 @@
 body.admin {
+  .column-set .left-col.collapsible-nav {
+    header, nav ul li a {
+      display: inline-block;
+      white-space: nowrap;
+      width: 100%;
+      span.oi {
+        width: 1rem;
+        text-align: center;
+      }
+    }
+
+    &, header, nav h3 {
+      transition: all 0.3s ease-in-out 0s;
+    }
+    nav ul li a {
+      transition: padding 0.3s ease-in-out 0s;
+    }
+
+    &:not(.collapsed) .short {
+      display: none;
+    }
+
+    &.collapsed {
+      header, nav ul li a, nav h3 {
+        padding-left: 0.5rem;
+        padding-right:  0.5rem;
+      }
+      width: 52px;
+      min-width: 52px;
+      .fullsize {
+        display: none;
+      }
+    }
+  }
 
   nav.vertical {
     height: auto;
