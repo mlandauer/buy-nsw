@@ -16,4 +16,7 @@ module Admin::RootHelper
     BuyerApplication.assigned_to(current_user).for_review.count
   end
 
+  def active_products_count
+    Product.active.count
+  end
 end

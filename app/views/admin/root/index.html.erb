@@ -28,5 +28,11 @@
         <%= 'buyer application'.pluralize(buyer_applications_for_review_count) %> assigned to you
       <% end %>
     </li>
+    <li>
+      <%= link_to admin_seller_applications_path(state: :approved) do %>
+        <span class="big-number"><%= active_products_count %></span>
+        active products
+      <% end %>
+    </li>
   </ul>
 </section>
