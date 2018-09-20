@@ -6,47 +6,51 @@
 
 <% content_for(:content) do %>
   <div class="column-set">
-    <div class="left-col">
-      <header class="admin">
+    <div id="collapsing-nav-col" data-module="collapsible-nav" class="left-col collapsible-nav collapsed">
+      <header class="admin" data-collapse="toggle">
         <h1>
           <span class="logo">NSW Government</span>
-          <span class="title">Procurement<br> Ops</span>
+          <span class="title fullsize">Procurement<br> Ops</span>
         </h1>
       </header>
 
       <nav class="vertical">
         <ul>
-          <%= nav_link_to 'Dashboard', admin_root_path, icon: 'grid-three-up' %>
+          <%= nav_link_to 'Dashboard', admin_root_path, icon: 'grid-three-up', short_label: 'Db' %>
         </ul>
 
-        <h3>Applications</h3>
+        <h3 class="fullsize">Applications</h3>
+        <h3 class="short">Apps</h3>
         <ul>
-          <%= nav_link_to 'Buyer applications', admin_buyer_applications_path, icon: 'inbox', match_prefix: true %>
-          <%= nav_link_to 'Seller applications', admin_seller_applications_path, icon: 'inbox', match_prefix: true %>
+          <%= nav_link_to 'Buyer applications', admin_buyer_applications_path, icon: 'inbox', match_prefix: true, short_label: 'Ba' %>
+          <%= nav_link_to 'Seller applications', admin_seller_applications_path, icon: 'inbox', match_prefix: true, short_label: 'Sa' %>
         </ul>
 
-        <h3>Migration</h3>
+        <h3 class="fullsize">Migration</h3>
+        <h3 class="short">Migr</h3>
         <ul>
-          <%= nav_link_to 'Seller waitlist', admin_waiting_sellers_path, icon: 'bolt', match_prefix: true %>
+          <%= nav_link_to 'Seller waitlist', admin_waiting_sellers_path, icon: 'bolt', match_prefix: true, short_label: 'Wl' %>
         </ul>
 
-        <h3>Entities</h3>
+        <h3 class="fullsize">Entities</h3>
+        <h3 class="short">Enti</h3>
         <ul>
-          <%= nav_link_to 'Sellers', admin_sellers_path, icon: 'briefcase', match_prefix: true %>
-          <%= nav_link_to 'Product Orders', admin_product_orders_path, icon: 'dollar' %>
-          <%= nav_link_to 'Users', admin_users_path, icon: 'people' %>
+          <%= nav_link_to 'Sellers', admin_sellers_path, icon: 'briefcase', match_prefix: true, short_label: 'Sel' %>
+          <%= nav_link_to 'Product Orders', admin_product_orders_path, icon: 'dollar', short_label: 'Po' %>
+          <%= nav_link_to 'Users', admin_users_path, icon: 'people', short_label: 'Usr' %>
         </ul>
 
-        <h3>Performance</h3>
+        <h3 class="fullsize">Performance</h3>
+        <h3 class="short">Perf</h3>
         <ul>
-          <%= nav_link_to 'Problem reports', admin_problem_reports_path, icon: 'bug', match_prefix: true %>
+          <%= nav_link_to 'Problem reports', admin_problem_reports_path, icon: 'bug', match_prefix: true, short_label: 'Pr' %>
         </ul>
       </nav>
 
       <footer>
-        <h3><%= current_user.email %></h3>
+        <h3 class="fullsize"><%= current_user.email %></h3>
         <ul>
-          <li><%= link_to 'Your account', account_path %></li>
+          <li class="fullsize"><%= link_to 'Your account', account_path %></li>
           <li><%= link_to 'Sign out', destroy_user_session_path, method: :delete %></li>
         </ul>
       </footer>
