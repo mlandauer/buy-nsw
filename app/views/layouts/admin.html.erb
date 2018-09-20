@@ -54,6 +54,7 @@
 
     <div class="right-col">
       <%= content_for?(:admin_content) ? yield(:admin_content) : yield %>
+      <a href="javascript:void(0);" class="scrolltop" onclick="$('.current-view').animate({ scrollTop: 0 }, 'fast');">scroll to top</a>
     </div>
   </div>
 <% end %>
