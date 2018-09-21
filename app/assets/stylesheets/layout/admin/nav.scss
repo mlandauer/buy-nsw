@@ -11,6 +11,7 @@ body.admin {
     }
 
     &, header, nav h3 {
+      overflow-y: auto;
       transition: all 0.3s ease-in-out 0s;
     }
     nav ul li a {
@@ -37,7 +38,6 @@ body.admin {
   nav.vertical {
     height: auto;
     flex: 1;
-    overflow-y: scroll;
 
     ul {
       padding-left: 0;

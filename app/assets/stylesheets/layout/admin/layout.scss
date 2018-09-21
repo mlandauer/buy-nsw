@@ -1,6 +1,6 @@
 body.admin {
   * {
-    overflow: auto;
+    overflow: hidden;
   }
 
   .column-set {
@@ -51,7 +51,7 @@ body.admin {
 
   .scrolltop {
     position: absolute;
-    right: 10px;
+    right: 20px;
     bottom: 0px;
   }
 
