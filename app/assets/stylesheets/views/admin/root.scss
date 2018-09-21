@@ -3,6 +3,8 @@
   ul.dashboard-sections {
     @include make-row();
     padding-left: 0;
+    margin-left: 0px;
+    margin-right: 0px;
 
     li {
       @include make-col-ready();
