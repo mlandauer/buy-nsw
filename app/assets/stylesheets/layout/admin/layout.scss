@@ -1,8 +1,4 @@
 body.admin {
-  * {
-    overflow: auto;
-  }
-
   .column-set {
     @include app-column-container;
 
