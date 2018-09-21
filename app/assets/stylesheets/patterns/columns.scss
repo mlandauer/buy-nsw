@@ -1,6 +1,6 @@
 @mixin app-column {
   height: 100vh;
-  overflow-y: scroll;
+  overflow-y: auto;
   margin-bottom: 0;
 }
 

@@ -1,5 +1,8 @@
 body.admin {
   .column-set .left-col.collapsible-nav {
+    h1 {
+      overflow: hidden;
+    }
     header, nav ul li a {
       display: inline-block;
       white-space: nowrap;
@@ -37,7 +40,10 @@ body.admin {
   nav.vertical {
     height: auto;
     flex: 1;
-    overflow-y: scroll;
+
+    * {
+      overflow: hidden;
+    }
 
     ul {
       padding-left: 0;
