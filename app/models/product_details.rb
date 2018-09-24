@@ -49,8 +49,8 @@ private
   def additional_sections
     {
       "Product basics" => product_basics,
-      "Additional terms" => additional_terms,
       "Commercials" => commercials,
+      "Additional terms" => additional_terms,
     }
   end
 
@@ -167,20 +167,19 @@ private
         a["If yes which browsers are supported"] = product.supported_browsers.texts
       end
 
-      a["Do users need to download and install an application to use your product"] = product.installed_application
+      a["Has your product been designed to work on mobile devices"] = product.mobile_devices
 
+      if product.mobile_devices
+        a["Describe any differences between the mobile and desktop functionality"] = product.mobile_desktop_differences
+      end
+
+      a["Do users need to download and install an application to use your product"] = product.installed_application
       if product.installed_application
         a["Which operating systems are supported"] = product.supported_os.texts
 
         if product.supported_os.include?('other')
           a["If other specify the other operating systems"] = product.supported_os_other
         end
-      end
-
-      a["Has your product been designed to work on mobile devices"] = product.mobile_devices
-
-      if product.mobile_devices
-        a["Describe any differences between the mobile and desktop functionality"] = product.mobile_desktop_differences
       end
 
       a["What aspects of your product meet WCAG 2.0 AA or EN 301 549 standards"] = product.accessibility_type_text
