@@ -89,13 +89,13 @@ en:
         services:
           name: 'Do you provide cloud products, services or support?'
         govdc:
-          name: 'Do you offer services in NSW Government Data Centres (GovDC)'
+          name: 'Do you offer services in NSW Government Data Centres (GovDC)?'
         agree:
           name: 'Agreement to the ProcureIT Contracting Framework'
         number_of_employees_text:
           name: 'Number of employees'
         sme:
-          name: 'SME'
+          name: 'Small to medium-sized enterprise (SME)'
         start_up:
           name: 'Start-up'
         not_for_profit:
@@ -105,7 +105,7 @@ en:
         australian_owned:
           name: 'Australian owned'
         regional:
-          name: 'Regional or non-metropolitan business'
+          name: 'Is your head office located in a regional area?'
         disability:
           name: 'Australian disability enterprise'
         corporate_structure:
