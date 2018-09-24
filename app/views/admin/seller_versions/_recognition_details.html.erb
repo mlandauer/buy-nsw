@@ -1,7 +1,9 @@
 <dl>
   <% [:accreditations, :engagements, :awards].each do |kind| %>
-    <dt><%= t(:name, scope: [:admin, :seller_versions, :fields, kind]) %></dt>
-    <dd>
+    <dt <% if seller.changed_fields_unreviewed.include?(kind) %>class="changed"<% end %>>
+      <%= t(:name, scope: [:admin, :seller_versions, :fields, kind]) %>
+    </dt>
+    <dd <% if seller.changed_fields_unreviewed.include?(kind) %>class="changed"<% end %>>
       <% if seller.public_send(kind).any? %>
         <ul>
           <% seller.public_send(kind).each do |item| %>

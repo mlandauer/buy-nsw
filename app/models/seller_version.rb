@@ -99,6 +99,26 @@ class SellerVersion < ApplicationRecord
     }
   end
 
+  def changed_fields(rhs=self.previous_version)
+    # https://stackoverflow.com/a/43864734/10377598
+    if rhs.nil?
+      return []
+    end
+    (self.attributes.to_a - rhs.attributes.to_a).map{ |a| a.first.to_sym }
+  end
+
+  def changed_fields_unreviewed
+    binding.pry
+    if !state.to_sym.in?([:created, :unassigned, :ready_for_review])
+      return []
+    end
+    changed_fields
+  end
+
+  def all_events
+    Event::Event.where(eventable_id: seller.versions.map(&:id)).order('created_at DESC')
+  end
+
   scope :for_review, -> { awaiting_assignment.or(ready_for_review) }
 
   scope :unassigned, -> { where('assigned_to_id IS NULL') }

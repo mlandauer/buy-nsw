@@ -41,4 +41,15 @@ module Sellers::ProfilesHelper
     labels.join('<br>').html_safe
   end
 
+  def government_experience_values_changed?(seller)
+    keys = [
+      :no_experience,
+      :local_government_experience,
+      :state_government_experience,
+      :federal_government_experience,
+      :international_government_experience,
+    ]
+    (seller.changed_fields_unreviewed & keys).any?
+  end
+
 end

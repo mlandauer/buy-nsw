@@ -1,10 +1,10 @@
 module Admin::DetailHelper
-  def display_list(fields:, type:, resource:, resource_name:)
+  def display_list(fields:, type:, resource:, resource_name:, field_classes: {})
     content_tag(:dl, id: type) {
       fields[type].map {|field|
         [
-          content_tag(:dt, display_label_for(resource_name, type, field)) +
-          content_tag(:dd, display_value_for(resource, field))
+          content_tag(:dt, display_label_for(resource_name, type, field), :class => field_classes[field]) +
+          content_tag(:dd, display_value_for(resource, field), :class => field_classes[field])
         ]
       }.flatten.join.html_safe
     }
@@ -19,6 +19,7 @@ module Admin::DetailHelper
 
     value = 'yes' if value.is_a?(TrueClass)
     value = 'no' if value.is_a?(FalseClass)
+    value = value.text if value.is_a?(Enumerize::Value)
     value = extract_enumerize_set(value) if value.is_a?(Enumerize::Set)
     value = format_timestamp(value) if value.is_a?(Time)
 

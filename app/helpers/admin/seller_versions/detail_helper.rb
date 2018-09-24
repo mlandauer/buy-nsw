@@ -9,7 +9,12 @@ module Admin::SellerVersions::DetailHelper
       resource_name: :seller_versions,
       type: type,
       resource: resource,
+      field_classes: field_classes(resource)
     )
+  end
+
+  def field_classes(resource)
+    Hash[resource.changed_fields_unreviewed.collect {|f|  [f, :changed]}]
   end
 
   def seller_fields
@@ -46,7 +51,7 @@ module Admin::SellerVersions::DetailHelper
         :other_circumstances_details,
       ],
       details: [
-        :number_of_employees_text,
+        :number_of_employees,
         :start_up,
         :sme,
         :not_for_profit,
@@ -55,7 +60,7 @@ module Admin::SellerVersions::DetailHelper
         :indigenous,
         :disability,
         :female_owned,
-        :corporate_structure_text,
+        :corporate_structure,
       ],
       terms: [
         :agree,

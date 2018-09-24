@@ -73,9 +73,9 @@
   </section>
 
   <section class="events-list">
-    <% if application.events.any? %>
+    <% if application.all_events.any? %>
       <h2>History</h2>
-      <%= render partial: 'admin/shared/events', locals: { events: application.events } %>
+      <%= render partial: 'admin/shared/events', locals: { events: application.all_events } %>
     <% end %>
   </section>
 <% end %>
