@@ -79,7 +79,7 @@ en:
     seller_versions:
       fields:
         name:
-          name: 'Company name'
+          name: 'Business name'
         abn:
           name: 'ABN'
         website_url:
@@ -87,9 +87,9 @@ en:
         linkedin_url:
           name: 'LinkedIn URL'
         services:
-          name: 'ICT services categories'
+          name: 'Do you provide cloud products, services or support?'
         govdc:
-          name: 'GovDC infrastructure provider?'
+          name: 'Do you offer services in NSW Government Data Centres (GovDC)'
         agree:
           name: 'Agreement to the ProcureIT Contracting Framework'
         number_of_employees_text:
@@ -125,7 +125,7 @@ en:
         representative_phone:
           name: 'Authorised representative phone'
         government_experience:
-          name: 'Government experience'
+          name: 'Has your business worked with government before?'
           values:
             no_experience: Working with government for the first time
             local_government_experience: 'Local government'
