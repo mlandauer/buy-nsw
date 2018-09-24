@@ -6,7 +6,7 @@ class Sellers::SellerVersion::Create < Trailblazer::Operation
     def model!(options, **)
       options['model.seller'] = options['config.current_user'].seller || Seller.new
 
-      options['model.seller_version'] = options['model.seller'].versions.first ||
+      options['model.seller_version'] = options['model.seller'].versions.last ||
                                       SellerVersion.new(started_at: Time.now)
     end
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180906013446) do
+ActiveRecord::Schema.define(version: 20180917062559) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -307,6 +307,7 @@ ActiveRecord::Schema.define(version: 20180906013446) do
     t.integer "workers_compensation_certificate_id"
     t.integer "product_liability_certificate_id"
     t.datetime "discarded_at"
+    t.integer "previous_version_id"
     t.index ["discarded_at"], name: "index_seller_versions_on_discarded_at"
   end
 

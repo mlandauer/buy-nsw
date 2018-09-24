@@ -16,6 +16,8 @@ class Seller < ApplicationRecord
 
   has_many :versions, class_name: 'SellerVersion'
   has_one :approved_version, ->{ approved }, class_name: 'SellerVersion'
+  has_one :first_version, ->{ where(previous_version: nil) }, class_name: 'SellerVersion'
+  has_one :last_version, ->{ order started_at: :desc}, class_name: 'SellerVersion'
 
   aasm column: :state do
     state :inactive, initial: true
@@ -32,14 +34,6 @@ class Seller < ApplicationRecord
 
   def version_in_progress?
     versions.created.any?
-  end
-
-  def first_version
-    versions.first
-  end
-
-  def approved_version
-    versions.approved.first
   end
 
   def approved_name

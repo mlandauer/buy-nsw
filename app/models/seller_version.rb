@@ -16,6 +16,8 @@ class SellerVersion < ApplicationRecord
 
   has_many :events, -> { order(created_at: :desc) }, as: :eventable, class_name: 'Event::Event'
   has_many :owners, through: :seller, class_name: 'User'
+  belongs_to :previous_version, class_name: 'SellerVersion', optional: true
+  has_one :next_version, class_name: 'SellerVersion', foreign_key: :previous_version_id
 
   has_documents :financial_statement, :professional_indemnity_certificate,
                 :workers_compensation_certificate,
@@ -27,6 +29,7 @@ class SellerVersion < ApplicationRecord
     state :ready_for_review
     state :approved
     state :rejected
+    state :archived
 
     event :submit do
       transitions from: :created, to: :awaiting_assignment, guard: :unassigned?
@@ -44,6 +47,10 @@ class SellerVersion < ApplicationRecord
     event :approve do
       transitions from: :ready_for_review, to: :approved, guard: :no_approved_versions?
 
+      before do
+        seller.approved_version&.archive
+      end
+
       after do
         seller.make_active!
         seller.products.each(&:make_active!)
@@ -55,7 +62,14 @@ class SellerVersion < ApplicationRecord
     end
 
     event :return_to_applicant do
-      transitions from: [:ready_for_review, :approved], to: :created
+      transitions from: [:ready_for_review, :approved], to: :archived
+      after do
+        create_new_version
+      end
+    end
+
+    event :archive do
+      transitions from: :approved, to: :archived
     end
   end
 
@@ -119,4 +133,14 @@ private
   def normalise_abn
     self.abn = ABN.new(abn).to_s if ABN.valid?(abn)
   end
+
+  def create_new_version
+    copy = self.dup
+    copy.previous_version = self
+    copy.started_at = Time.now
+    copy.state = :created
+    copy.save!
+    copy
+  end
+
 end
