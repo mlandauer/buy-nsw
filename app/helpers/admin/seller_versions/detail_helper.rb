@@ -31,9 +31,12 @@ module Admin::SellerVersions::DetailHelper
         :contact_phone,
         :representative_name,
         :representative_email,
-        :representative_phone
+        :representative_phone,
+        :representative_position,
       ],
       disclosures: [
+        :receivership,
+        :receivership_details,
         :investigations,
         :investigations_details,
         :legal_proceedings,
