@@ -98,8 +98,14 @@ RSpec.describe Admin::DecideSellerVersion do
         expect(operation).to be_success
       end
 
-      it 'transitions to the "created" state' do
-        expect(operation.seller_version.state).to eq('created')
+      it 'transitions to the "archived" state' do
+        expect(operation.seller_version.state).to eq('archived')
+      end
+
+      it 'creates a new version of the application' do
+        expect(operation.seller_version.next_version).to_not be_nil
+        expect(operation.seller_version.next_version.previous_version).to eq(operation.seller_version)
+        expect(operation.seller_version.next_version.state).to eq('created')
       end
 
       it 'logs an event' do

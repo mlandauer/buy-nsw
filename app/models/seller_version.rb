@@ -108,7 +108,6 @@ class SellerVersion < ApplicationRecord
   end
 
   def changed_fields_unreviewed
-    binding.pry
     if !state.to_sym.in?([:created, :unassigned, :ready_for_review])
       return []
     end

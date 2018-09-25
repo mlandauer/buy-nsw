@@ -51,10 +51,11 @@ RSpec.describe 'Reviewing seller applications', type: :feature, js: true do
 
     end
 
-    it 'can filter to show reverted applications' do
+    it 'can filter to show the next version of reverted applications' do
       reverted_application = create(:ready_for_review_seller_version)
       reverted_application.return_to_applicant
       reverted_application.save!
+      next_application = reverted_application.next_version
       created_application   = create(:created_seller_version)
       accepted_application  = create(:approved_seller_version)
       rejected_application  = create(:rejected_seller_version)
@@ -65,17 +66,19 @@ RSpec.describe 'Reviewing seller applications', type: :feature, js: true do
       click_on 'Reset filters'
 
       expect_listed(
-        reverted_application, created_application, accepted_application,
+        next_application, created_application, accepted_application,
         rejected_application, submitted_application
       )
+      # we expect reverted to never be listed again, as it has been archived.
+      expect_unlisted(reverted_application)
 
       check 'Reverted'
       click_on 'Apply filters'
 
-      expect_listed(reverted_application)
+      expect_listed(next_application)
       expect_unlisted(
         created_application, accepted_application,
-        rejected_application, submitted_application
+        rejected_application, submitted_application, reverted_application
       )
 
       uncheck 'Reverted'
@@ -91,8 +94,12 @@ RSpec.describe 'Reviewing seller applications', type: :feature, js: true do
       check 'Reverted'
       click_on 'Apply filters'
 
-      expect_listed(reverted_application, submitted_application)
-      expect_unlisted(created_application, rejected_application, accepted_application)
+      expect_listed(next_application, submitted_application.next_version)
+      expect_unlisted(
+        created_application, rejected_application,
+        accepted_application, reverted_application,
+        submitted_application,
+      )
     end
 
     it 'can see uploaded documents' do
