@@ -5,6 +5,19 @@
         <h1>
           <span class="type">Seller application</span>
           <%= application.name %>
+          <span class="version">v<%= application.version %> <%= '(archived)' if application.archived? %></span>
+          <div class="version-links">
+            <% if application.previous_version.nil? %>
+              <%= link_to 'Prev', nil, style: 'visibility: hidden' %>
+            <% else %>
+              <%= link_to 'Prev', url_for(:id => application.previous_version) %>
+            <% end %>
+            <% if application.next_version.nil? %>
+              <%= link_to 'Next', nil, style: 'visibility: hidden' %>
+            <% else %>
+              <%= link_to 'Next', url_for(:id => application.next_version) %>
+            <% end %>
+          </div>
         </h1>
         <nav class="vertical">
           <ul>
