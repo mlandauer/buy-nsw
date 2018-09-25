@@ -23,6 +23,8 @@ class SellerVersion < ApplicationRecord
                 :workers_compensation_certificate,
                 :product_liability_certificate
 
+  validates :started_at, presence: true
+
   aasm column: :state do
     state :created, initial: true
     state :awaiting_assignment
@@ -75,6 +77,15 @@ class SellerVersion < ApplicationRecord
 
   def owners
     seller.owners
+  end
+
+  def version
+    day_count = seller.versions.where(
+      'started_at BETWEEN ? and ?',
+      started_at.beginning_of_day,
+      started_at
+    ).count
+    started_at.strftime("%y.%m.%d.") + day_count.to_s
   end
 
   def assignee_present?

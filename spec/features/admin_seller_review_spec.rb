@@ -102,6 +102,37 @@ RSpec.describe 'Reviewing seller applications', type: :feature, js: true do
       )
     end
 
+    it 'can browse through different versions of an application' do
+      submitted_application = create(:ready_for_review_seller_version)
+      submitted_application.return_to_applicant
+      submitted_application.save!
+      next_application = submitted_application.next_version
+      next_application.name += "version 2!"
+      next_application.save!
+
+      visit '/ops'
+      click_on 'Seller applications'
+      select 'Created', :from => 'Status'
+      click_on 'Apply filters'
+
+      expect_listed next_application
+
+      select_application_from_list next_application.name
+
+      expect_application_state 'created'
+      expect_application_name next_application.name
+
+      click_on 'Prev'
+
+      expect_application_state 'archived'
+      expect_application_name submitted_application.name
+
+      click_on 'Next'
+
+      expect_application_state 'created'
+      expect_application_name next_application.name
+    end
+
     it 'can see uploaded documents' do
       seller = create(:inactive_seller)
 
@@ -281,6 +312,12 @@ RSpec.describe 'Reviewing seller applications', type: :feature, js: true do
           expect(page).to have_no_xpath(column_xpath(:ID), :text => app.id)
         end
       end
+    end
+  end
+
+  def expect_application_name(name)
+    within '.view-admin-seller-applications-show aside h1' do
+      expect(page).to have_content(name)
     end
   end
 

@@ -61,6 +61,7 @@ FactoryBot.define do
 
     trait :created do
       state 'created'
+      started_at Time.now
     end
 
     trait :awaiting_assignment do

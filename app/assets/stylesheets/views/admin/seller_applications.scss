@@ -75,4 +75,15 @@
     background: #ffe9b3;
   }
 
+  .version-links {
+    display: flex;
+    justify-content: space-between;
+    a {
+      @include button;
+      width: auto;
+      padding: 0.2rem 0.7rem;
+      font-size: 1rem;
+    }
+  }
+
 }
