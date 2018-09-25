@@ -57,7 +57,7 @@ class Admin::SellerVersionsController < Admin::BaseController
 
     if operation.success?
       flash.notice = I18n.t("admin.seller_versions.messages.revert_success")
-      return redirect_to admin_seller_application_path(application)
+      return redirect_to admin_seller_application_path(application.next_version)
     else
       render :show
     end

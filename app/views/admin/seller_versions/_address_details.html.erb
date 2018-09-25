@@ -1,6 +1,8 @@
 <dl>
-  <dt><%= t('admin.seller_versions.fields.addresses.name') %></dt>
-  <dd>
+  <dt <% if seller.changed_fields_unreviewed.include? :addresses %>class="changed"<% end %>>
+    <%= t('admin.seller_versions.fields.addresses.name') %>
+  </dt>
+  <dd <% if seller.changed_fields_unreviewed.include? :addresses %>class="changed"<% end %>>
     <ul>
       <% seller.addresses.each do |address| %>
         <li>

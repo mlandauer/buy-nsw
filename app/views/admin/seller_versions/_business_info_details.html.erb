@@ -1,6 +1,8 @@
 <dl>
-  <dt><%= t('admin.seller_versions.fields.government_experience.name') %></dt>
-  <dd>
+  <dt <% if government_experience_values_changed?(seller) %>class="changed"<% end %>>
+    <%= t('admin.seller_versions.fields.government_experience.name') %>
+  </dt>
+  <dd <% if government_experience_values_changed?(seller) %>class="changed"<% end %>>
     <%= government_experience_values(seller) %>
   </dd>
 </dl>

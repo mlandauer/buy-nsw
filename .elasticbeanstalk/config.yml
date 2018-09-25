@@ -1,6 +1,6 @@
 branch-defaults:
   master:
-    environment: staging
+    environment: app-staging
 global:
   application_name: nsw-procurement-hub
   branch: null

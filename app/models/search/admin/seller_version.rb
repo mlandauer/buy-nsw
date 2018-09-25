@@ -18,7 +18,7 @@ module Search::Admin
     include Concerns::Search::SellerTagFilters
 
     def base_relation
-      ::SellerVersion.all
+      ::SellerVersion.where("state != 'archived'")
     end
 
     def state_keys
