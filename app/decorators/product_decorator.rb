@@ -48,6 +48,14 @@ class ProductDecorator < BaseDecorator
     ProductDetails.new(__getobj__, include_all: true).details
   end
 
+  def verbose_details
+    VerboseProductDetails.new(__getobj__).details
+  end
+
+  def verbose_all_details
+    VerboseProductDetails.new(__getobj__, include_all: true).details
+  end
+
 private
   def parse_money(amount)
     return nil if pricing_currency.blank?
