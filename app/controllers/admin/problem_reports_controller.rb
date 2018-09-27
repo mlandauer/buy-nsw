@@ -1,6 +1,6 @@
 class Admin::ProblemReportsController < Admin::BaseController
-
   def index; end
+
   def show; end
 
   def resolve
@@ -33,7 +33,8 @@ class Admin::ProblemReportsController < Admin::BaseController
     redirect_to admin_problem_report_path(operation.problem_report)
   end
 
-private
+  private
+
   def search
     @search ||= Search::ProblemReport.new(
       selected_filters: params,

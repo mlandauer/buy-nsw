@@ -1,15 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe SellerVersions::ProductLiabilityForm do
-  let(:version) { build_stubbed(:seller_version) }
   subject { described_class.new(version) }
 
-  let(:example_pdf) {
+  let(:version) { build_stubbed(:seller_version) }
+
+  let(:example_pdf) do
     Rack::Test::UploadedFile.new(
       Rails.root.join('spec', 'fixtures', 'files', 'example.pdf'),
       'application/pdf'
     )
-  }
+  end
   let(:future_date) { Date.today + 1.year }
   let(:historical_date) { Date.today - 1.year }
 
@@ -39,7 +40,7 @@ RSpec.describe SellerVersions::ProductLiabilityForm do
     end
 
     it 'is is invalid' do
-      expect(subject).to_not be_valid
+      expect(subject).not_to be_valid
       expect(subject.errors[:product_liability_certificate_expiry]).to be_present
     end
   end
@@ -70,7 +71,7 @@ RSpec.describe SellerVersions::ProductLiabilityForm do
     end
 
     it 'is is invalid' do
-      expect(subject).to_not be_valid
+      expect(subject).not_to be_valid
       expect(subject.errors[:product_liability_certificate_expiry]).to be_present
     end
   end
@@ -86,7 +87,7 @@ RSpec.describe SellerVersions::ProductLiabilityForm do
     end
 
     it 'is is invalid' do
-      expect(subject).to_not be_valid
+      expect(subject).not_to be_valid
       expect(subject.errors[:product_liability_certificate_file]).to be_present
     end
   end

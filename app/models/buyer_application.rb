@@ -87,7 +87,7 @@ class BuyerApplication < ApplicationRecord
   end
 
   def unassigned?
-    ! assignee_present?
+    !assignee_present?
   end
 
   def self.find_by_user_and_application(user_id, application_id)
@@ -104,6 +104,4 @@ class BuyerApplication < ApplicationRecord
 
   scope :assigned_to, ->(user) { where('assigned_to_id = ?', user) }
   scope :for_review, -> { awaiting_assignment.or(ready_for_review) }
-
-
 end

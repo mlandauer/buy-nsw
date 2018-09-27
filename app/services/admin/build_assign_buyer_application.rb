@@ -19,7 +19,7 @@ class Admin::BuildAssignBuyerApplication < ApplicationService
     @buyer_application ||= BuyerApplication.find(buyer_application_id)
   end
 
-private
-  attr_reader :buyer_application_id
+  private
 
+  attr_reader :buyer_application_id
 end

@@ -6,7 +6,7 @@ class TextFieldDateInput < SimpleForm::Inputs::DateTimeInput
     [:day, :month, :year].each_with_index do |type, index|
       value = date.is_a?(Date) ? date.send(type) : nil
 
-      i = "#{3-index}i"
+      i = "#{3 - index}i"
       key = "#{attribute_name}(#{i})"
       classes = "form-control #{type}"
 

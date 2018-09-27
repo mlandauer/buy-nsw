@@ -1,5 +1,4 @@
 class Buyers::BuyerApplication::ManagerApprove < Trailblazer::Operation
-
   step Rescue {
     step :model!
   }

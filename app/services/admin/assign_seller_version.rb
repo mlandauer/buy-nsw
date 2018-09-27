@@ -10,23 +10,22 @@ class Admin::AssignSellerVersion < ApplicationService
   end
 
   def call
-    begin
-      raise Failure unless build_operation.success?
+    raise Failure unless build_operation.success?
 
-      ActiveRecord::Base.transaction do
-        assign_and_validate_attributes
-        change_application_state
-        persist_seller_version
-        log_event
-      end
-
-      self.state = :success
-    rescue Failure
-      self.state = :failure
+    ActiveRecord::Base.transaction do
+      assign_and_validate_attributes
+      change_application_state
+      persist_seller_version
+      log_event
     end
+
+    self.state = :success
+  rescue Failure
+    self.state = :failure
   end
 
-private
+  private
+
   attr_reader :seller_version_id, :current_user, :attributes
 
   def build_operation
@@ -54,5 +53,4 @@ private
       email: seller_version.assigned_to.email
     )
   end
-
 end

@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Admin::DeactivateBuyer do
-
   let(:application) { create(:approved_buyer_application) }
 
   describe '.call' do
@@ -19,5 +18,4 @@ RSpec.describe Admin::DeactivateBuyer do
       expect(result).to be_failure
     end
   end
-
 end

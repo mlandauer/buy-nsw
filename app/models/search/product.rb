@@ -2,7 +2,7 @@ module Search
   class Product < Base
     attr_reader :term, :section
 
-    def initialize(args={})
+    def initialize(args = {})
       @section = args.delete(:section)
       term = args.delete(:term)
 
@@ -23,7 +23,7 @@ module Search
         business_identifiers: [:disability, :indigenous, :not_for_profit, :regional, :start_up, :sme],
         reseller_type: [:reseller, :not_reseller],
         security_standards: security_standards_keys + [:irap_assessed, :asd_certified],
-        government_network_type: government_network_type_keys
+        government_network_type: government_network_type_keys,
       }
     end
 
@@ -31,7 +31,8 @@ module Search
       filter_value(:term)
     end
 
-  private
+    private
+
     include Concerns::Search::SellerTagFilters
 
     def base_relation
@@ -40,26 +41,26 @@ module Search
 
     def apply_filters(scope)
       scope.yield_self(&method(:term_filter)).
-            yield_self(&method(:audiences_filter)).
-            yield_self(&method(:start_up_filter)).
-            yield_self(&method(:sme_filter)).
-            yield_self(&method(:disability_filter)).
-            yield_self(&method(:regional_filter)).
-            yield_self(&method(:indigenous_filter)).
-            yield_self(&method(:not_for_profit_filter)).
-            yield_self(&method(:reseller_filter)).
-            yield_self(&method(:free_version_filter)).
-            yield_self(&method(:free_trial_filter)).
-            yield_self(&method(:education_pricing_filter)).
-            yield_self(&method(:not_for_profit_pricing_filter)).
-            yield_self(&method(:government_network_type_filter)).
-            yield_self(&method(:data_location_filter)).
-            yield_self(&method(:api_filter)).
-            yield_self(&method(:mobile_devices_filter)).
-            yield_self(&method(:security_standards_filter)).
-            yield_self(&method(:irap_assessed_filter)).
-            yield_self(&method(:asd_certified_filter)).
-            yield_self(&method(:all_accessible_filter))
+        yield_self(&method(:audiences_filter)).
+        yield_self(&method(:start_up_filter)).
+        yield_self(&method(:sme_filter)).
+        yield_self(&method(:disability_filter)).
+        yield_self(&method(:regional_filter)).
+        yield_self(&method(:indigenous_filter)).
+        yield_self(&method(:not_for_profit_filter)).
+        yield_self(&method(:reseller_filter)).
+        yield_self(&method(:free_version_filter)).
+        yield_self(&method(:free_trial_filter)).
+        yield_self(&method(:education_pricing_filter)).
+        yield_self(&method(:not_for_profit_pricing_filter)).
+        yield_self(&method(:government_network_type_filter)).
+        yield_self(&method(:data_location_filter)).
+        yield_self(&method(:api_filter)).
+        yield_self(&method(:mobile_devices_filter)).
+        yield_self(&method(:security_standards_filter)).
+        yield_self(&method(:irap_assessed_filter)).
+        yield_self(&method(:asd_certified_filter)).
+        yield_self(&method(:all_accessible_filter))
     end
 
     def term_filter(relation)
@@ -200,7 +201,7 @@ module Search
 
     def security_standards_keys
       [
-        :iso_27001, :iso_27017, :iso_27018, :csa_star, :pci_dss, :soc_2
+        :iso_27001, :iso_27017, :iso_27018, :csa_star, :pci_dss, :soc_2,
       ]
     end
   end

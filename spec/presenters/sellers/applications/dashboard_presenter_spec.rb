@@ -1,13 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe Sellers::Applications::DashboardPresenter do
+  subject { described_class.new(seller_version, steps) }
 
   let(:seller_version) { create(:created_seller_version) }
-  let(:steps) {
+  let(:steps) do
     Sellers::Applications::StepsController.steps(seller_version)
-  }
-
-  subject { described_class.new(seller_version, steps) }
+  end
 
   describe '#ineligible?' do
     context 'when the "services" step has not been started' do
@@ -48,5 +47,4 @@ RSpec.describe Sellers::Applications::DashboardPresenter do
       end
     end
   end
-
 end

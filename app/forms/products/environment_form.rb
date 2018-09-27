@@ -41,7 +41,7 @@ module Products
       required(:addon_extension_details).maybe(:str?)
 
       rule(addon_extension_details: [:addon_extension_type, :addon_extension_details]) do |radio, field|
-        ( radio.eql?('yes') | radio.eql?('yes-and-standalone') ).then(field.filled?)
+        (radio.eql?('yes') | radio.eql?('yes-and-standalone')).then(field.filled?)
       end
 
       required(:api).filled(in_list?: Product.api.values)
@@ -49,10 +49,10 @@ module Products
       required(:api_automation).maybe(:str?)
 
       rule(api_capabilities: [:api, :api_capabilities]) do |radio, field|
-        ( radio.eql?('rest') | radio.eql?('non-rest') ).then(field.filled?)
+        (radio.eql?('rest') | radio.eql?('non-rest')).then(field.filled?)
       end
       rule(api_automation: [:api, :api_automation]) do |radio, field|
-        ( radio.eql?('rest') | radio.eql?('non-rest') ).then(field.filled?)
+        (radio.eql?('rest') | radio.eql?('non-rest')).then(field.filled?)
       end
 
       required(:government_network_type).filled(one_of?: Product.government_network_type.values)

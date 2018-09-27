@@ -1,6 +1,5 @@
 FactoryBot.define do
   factory :seller do
-
     # NOTE: The following blocks maintain support for passing an owner into the
     # factory (as per the previous behaviour)
     #

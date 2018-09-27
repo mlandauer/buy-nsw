@@ -1,10 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Admin::BuildDecideBuyerApplication do
+  subject { described_class.new(buyer_application_id: application.id) }
 
   let(:application) { create(:ready_for_review_buyer_application) }
-
-  subject { described_class.new(buyer_application_id: application.id) }
 
   describe '.call' do
     let(:operation) { described_class.call(buyer_application_id: application.id) }
@@ -17,9 +16,9 @@ RSpec.describe Admin::BuildDecideBuyerApplication do
 
     context 'when the application does not exist' do
       it 'raises an exception' do
-        expect{
+        expect do
           described_class.call(buyer_application_id: '1234567')
-        }.to raise_error(ActiveRecord::RecordNotFound)
+        end.to raise_error(ActiveRecord::RecordNotFound)
       end
     end
 
@@ -44,5 +43,4 @@ RSpec.describe Admin::BuildDecideBuyerApplication do
       expect(subject.buyer_application).to eq(application)
     end
   end
-
 end

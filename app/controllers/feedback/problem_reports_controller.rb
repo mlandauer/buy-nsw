@@ -1,5 +1,4 @@
 class Feedback::ProblemReportsController < ApplicationController
-
   def create
     operation = CreateProblemReport.call(
       params: params,
@@ -8,23 +7,24 @@ class Feedback::ProblemReportsController < ApplicationController
 
     respond_to do |format|
       if operation.success?
-        format.html {
+        format.html do
           flash.notice = success_message
           redirect_to(root_path)
-        }
-        format.json {
+        end
+        format.json do
           render status: 200, json: { message: success_message }
-        }
+        end
       else
         format.html { render :new }
-        format.json {
+        format.json do
           render status: 422, json: { message: invalid_message }
-        }
+        end
       end
     end
   end
 
-private
+  private
+
   def success_message
     I18n.t('feedback.problem_report.messages.success')
   end
@@ -32,5 +32,4 @@ private
   def invalid_message
     I18n.t('feedback.problem_report.messages.invalid')
   end
-
 end

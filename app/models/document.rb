@@ -50,11 +50,12 @@ class Document < ApplicationRecord
     DocumentScanJob.perform_later(self)
   end
 
-private
+  private
+
   def force_immutable
-    if self.changed? && self.persisted? && self.changes.keys != ['scan_status']
+    if changed? && persisted? && changes.keys != ['scan_status']
       errors.add(:base, :immutable)
-      self.reload
+      reload
     end
   end
 
@@ -62,5 +63,4 @@ private
     self.original_filename = document.file.original_filename
     self.content_type = document.file.content_type
   end
-
 end

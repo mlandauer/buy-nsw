@@ -10,23 +10,22 @@ class Admin::AssignBuyerApplication < ApplicationService
   end
 
   def call
-    begin
-      raise Failure unless build_operation.success?
+    raise Failure unless build_operation.success?
 
-      ActiveRecord::Base.transaction do
-        assign_and_validate_attributes
-        change_application_state
-        persist_buyer_application
-        log_event
-      end
-
-      self.state = :success
-    rescue Failure
-      self.state = :failure
+    ActiveRecord::Base.transaction do
+      assign_and_validate_attributes
+      change_application_state
+      persist_buyer_application
+      log_event
     end
+
+    self.state = :success
+  rescue Failure
+    self.state = :failure
   end
 
-private
+  private
+
   attr_reader :buyer_application_id, :current_user, :attributes
 
   def build_operation
@@ -54,5 +53,4 @@ private
       email: buyer_application.assigned_to.email
     )
   end
-
 end

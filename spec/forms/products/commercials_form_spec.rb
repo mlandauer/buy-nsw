@@ -1,10 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe Products::CommercialsForm do
-  let(:product) { build_stubbed(:inactive_product) }
   subject { described_class.new(product) }
 
-  let(:atts) {
+  let(:product) { build_stubbed(:inactive_product) }
+
+  let(:atts) do
     {
       free_version: false,
       free_trial: false,
@@ -16,9 +17,9 @@ RSpec.describe Products::CommercialsForm do
       education_pricing: false,
       not_for_profit_pricing: false,
       free_trial_url: 'https://foo.com/blah',
-      pricing_calculator_url: 'https://foo.com/blah'
+      pricing_calculator_url: 'https://foo.com/blah',
     }
-  }
+  end
 
   assert_invalidity_of_blank_field :free_version
   assert_invalidity_of_blank_field :free_trial
@@ -39,24 +40,24 @@ RSpec.describe Products::CommercialsForm do
   it 'is not valid with an invalid free trial url' do
     subject.validate(atts.merge(free_trial_url: 'foo'))
 
-    expect(subject).to_not be_valid
+    expect(subject).not_to be_valid
   end
 
   it 'is not valid with a free trial url without a host' do
     subject.validate(atts.merge(free_trial_url: '/blah'))
 
-    expect(subject).to_not be_valid
+    expect(subject).not_to be_valid
   end
 
   it 'is not valid with a bad pricing calculator url' do
     subject.validate(atts.merge(pricing_calculator_url: 'foo'))
 
-    expect(subject).to_not be_valid
+    expect(subject).not_to be_valid
   end
 
   it 'is not valid with an invalid currency' do
     subject.validate(atts.merge(pricing_currency: 'other', pricing_currency_other: 'blah'))
 
-    expect(subject).to_not be_valid
+    expect(subject).not_to be_valid
   end
 end

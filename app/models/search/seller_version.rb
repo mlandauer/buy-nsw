@@ -1,6 +1,6 @@
 module Search
   class SellerVersion < Base
-    def initialize(args={})
+    def initialize(args = {})
       term = args.delete(:term)
 
       if term.present?
@@ -16,7 +16,7 @@ module Search
         term: :term_filter,
         services: service_keys,
         business_identifiers: [:disability, :indigenous, :not_for_profit, :regional, :start_up, :sme],
-        govdc: [:govdc]
+        govdc: [:govdc],
       }
     end
 
@@ -24,7 +24,8 @@ module Search
       filter_value(:term)
     end
 
-  private
+    private
+
     include Concerns::Search::SellerTagFilters
 
     def base_relation
@@ -33,14 +34,14 @@ module Search
 
     def apply_filters(scope)
       scope.yield_self(&method(:term_filter)).
-            yield_self(&method(:start_up_filter)).
-            yield_self(&method(:sme_filter)).
-            yield_self(&method(:disability_filter)).
-            yield_self(&method(:regional_filter)).
-            yield_self(&method(:indigenous_filter)).
-            yield_self(&method(:not_for_profit_filter)).
-            yield_self(&method(:services_filter)).
-            yield_self(&method(:govdc_filter))
+        yield_self(&method(:start_up_filter)).
+        yield_self(&method(:sme_filter)).
+        yield_self(&method(:disability_filter)).
+        yield_self(&method(:regional_filter)).
+        yield_self(&method(:indigenous_filter)).
+        yield_self(&method(:not_for_profit_filter)).
+        yield_self(&method(:services_filter)).
+        yield_self(&method(:govdc_filter))
     end
 
     def term_filter(relation)

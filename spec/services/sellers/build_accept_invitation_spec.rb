@@ -1,15 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe Sellers::BuildAcceptInvitation do
+  subject { perform_operation }
 
   let(:token) { 'my-confirmation-token' }
 
   let!(:version) { create(:created_seller_version) }
-  let!(:invited_user) {
+  let!(:invited_user) do
     create(:seller_user, seller: version.seller,
                          confirmed_at: nil,
                          confirmation_token: token)
-  }
+  end
 
   def perform_operation(**args)
     options = {
@@ -19,8 +20,6 @@ RSpec.describe Sellers::BuildAcceptInvitation do
 
     described_class.call(options.merge(**args))
   end
-
-  subject { perform_operation }
 
   describe '.call' do
     context 'with valid arguments' do
@@ -46,8 +45,9 @@ RSpec.describe Sellers::BuildAcceptInvitation do
     end
 
     context 'when the version state is not "created"' do
-      let(:other_version) { create(:approved_seller_version) }
       subject { perform_operation(version_id: other_version.id) }
+
+      let(:other_version) { create(:approved_seller_version) }
 
       it 'fails' do
         expect(subject).to be_failure
@@ -71,13 +71,13 @@ RSpec.describe Sellers::BuildAcceptInvitation do
     end
 
     context 'when the user does not belong to the seller' do
+      subject { perform_operation(confirmation_token: other_token) }
+
       let(:other_token) { 'not this one' }
 
-      let(:user) {
+      let(:user) do
         create(:seller_user, confirmed_at: Time.now, confirmation_token: other_token)
-      }
-
-      subject { perform_operation(confirmation_token: other_token) }
+      end
 
       it 'fails' do
         expect(subject).to be_failure
@@ -85,9 +85,9 @@ RSpec.describe Sellers::BuildAcceptInvitation do
     end
 
     context 'when the user is already confirmed' do
-      before(:each) {
+      before(:each) do
         invited_user.update_attribute(:confirmed_at, Time.now)
-      }
+      end
 
       it 'fails' do
         expect(subject).to be_failure
@@ -113,5 +113,4 @@ RSpec.describe Sellers::BuildAcceptInvitation do
       expect(subject.user).to eq(invited_user)
     end
   end
-
 end

@@ -34,7 +34,7 @@ module Forms::ValidationHelper
         end
 
         def contains?(matching_word, input)
-          input.any? {|w| w == matching_word }
+          input.any? { |w| w == matching_word }
         end
 
         def email?(value)

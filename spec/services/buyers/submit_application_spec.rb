@@ -3,10 +3,10 @@ require 'rails_helper'
 RSpec.describe Buyers::SubmitApplication do
   include ActiveJob::TestHelper
 
+  subject { perform_operation(user: buyer_user) }
+
   let(:buyer_user) { create(:buyer_user) }
   let!(:application) { create(:completed_buyer_application, user: buyer_user) }
-
-  subject { perform_operation(user: buyer_user) }
 
   def perform_operation(user: buyer_user)
     described_class.call(user: user)
@@ -34,18 +34,18 @@ RSpec.describe Buyers::SubmitApplication do
     end
 
     context 'when manager approval is required' do
-      let!(:application) {
+      let!(:application) do
         create(:completed_manager_approval_buyer_application, user: buyer_user)
-      }
+      end
 
       it 'sends an email' do
         # NOTE: Stub the Slack job as it is automatically performed when we
         # run perform_enqueued_jobs
         allow(SlackPostJob).to receive(:perform_later)
 
-        expect {
+        expect do
           perform_enqueued_jobs { subject }
-        }.to change { ActionMailer::Base.deliveries.count }.by(1)
+        end.to change { ActionMailer::Base.deliveries.count }.by(1)
       end
 
       it 'sets the manager approval token' do
@@ -82,5 +82,4 @@ RSpec.describe Buyers::SubmitApplication do
       end
     end
   end
-
 end

@@ -1,12 +1,11 @@
 FactoryBot.define do
-
   factory :document do
-    document {
+    document do
       Rack::Test::UploadedFile.new(
         Rails.root.join('spec', 'fixtures', 'files', 'example.pdf'),
         'application/pdf'
       )
-    }
+    end
     original_filename 'example.pdf'
     content_type 'application/pdf'
 
@@ -15,20 +14,19 @@ FactoryBot.define do
     end
 
     trait :clean do
-      after(:create) { |document|
+      after(:create) do |document|
         document.update_attribute(:scan_status, 'clean')
-      }
+      end
     end
 
     trait :infected do
-      after(:create) { |document|
+      after(:create) do |document|
         document.update_attribute(:scan_status, 'infected')
-      }
+      end
     end
 
     factory :unscanned_document, traits: [:unscanned]
     factory :clean_document, traits: [:clean]
     factory :infected_document, traits: [:infected]
   end
-
 end

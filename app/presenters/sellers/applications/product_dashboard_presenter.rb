@@ -40,7 +40,8 @@ module Sellers::Applications
       progress_report.products_progress[product.id][step.key] == true
     end
 
-  private
+    private
+
     attr_reader :steps, :application, :product
 
     def section(key)
@@ -53,6 +54,5 @@ module Sellers::Applications
         product_steps: steps,
       )
     end
-
   end
 end

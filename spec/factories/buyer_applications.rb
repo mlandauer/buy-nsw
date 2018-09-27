@@ -25,7 +25,7 @@ FactoryBot.define do
     end
 
     trait :with_manager_approval_token do
-      sequence(:manager_approval_token) {|n| n }
+      sequence(:manager_approval_token) { |n| n }
     end
 
     trait :created do

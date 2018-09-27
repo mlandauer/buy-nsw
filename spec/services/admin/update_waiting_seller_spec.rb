@@ -1,20 +1,19 @@
 require 'rails_helper'
 
 RSpec.describe Admin::UpdateWaitingSeller do
-
   let(:waiting_seller) { create(:waiting_seller) }
-  let(:attributes) {
+  let(:attributes) do
     attributes_for(:waiting_seller).slice(:name, :contact_name, :contact_email)
-  }
+  end
 
   describe '.call' do
     context 'given valid attributes' do
-      subject {
+      subject do
         described_class.call(
           waiting_seller_id: waiting_seller.id,
           attributes: attributes,
         )
-      }
+      end
 
       it 'is successful' do
         expect(subject).to be_success
@@ -27,12 +26,12 @@ RSpec.describe Admin::UpdateWaitingSeller do
     end
 
     context 'given invalid attributes' do
-      subject {
+      subject do
         described_class.call(
           waiting_seller_id: waiting_seller.id,
           attributes: { contact_email: '' },
         )
-      }
+      end
 
       it 'fails' do
         expect(subject).to be_failure
@@ -40,6 +39,13 @@ RSpec.describe Admin::UpdateWaitingSeller do
     end
 
     context 'when Admin::BuildUpdateWaitingSeller fails' do
+      subject do
+        described_class.call(
+          waiting_seller_id: waiting_seller.id,
+          attributes: attributes,
+        )
+      end
+
       before(:each) do
         expect(Admin::BuildUpdateWaitingSeller).to receive(:call).
           with(waiting_seller_id: waiting_seller.id, skip_prevalidate: true).
@@ -48,17 +54,9 @@ RSpec.describe Admin::UpdateWaitingSeller do
           )
       end
 
-      subject {
-        described_class.call(
-          waiting_seller_id: waiting_seller.id,
-          attributes: attributes,
-        )
-      }
-
       it 'fails' do
         expect(subject).to be_failure
       end
     end
   end
-
 end

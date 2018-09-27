@@ -16,16 +16,16 @@ RSpec.describe Admin::DecideBuyerApplication do
     end
 
     context 'approving an application' do
-      let(:operation) {
+      let(:operation) do
         perform_operation(attributes: {
           decision: 'approve',
           decision_body: 'Response',
         })
-      }
+      end
 
       it 'is successful' do
         expect(operation).to be_success
-        expect(operation).to_not be_failure
+        expect(operation).not_to be_failure
       end
 
       it 'transitions to the "approved" state' do
@@ -38,9 +38,9 @@ RSpec.describe Admin::DecideBuyerApplication do
       end
 
       it 'sends an email' do
-        expect {
+        expect do
           perform_enqueued_jobs { operation }
-        }.to change { ActionMailer::Base.deliveries.count }.by(1)
+        end.to change { ActionMailer::Base.deliveries.count }.by(1)
       end
 
       it 'sets a timestamp' do
@@ -55,12 +55,12 @@ RSpec.describe Admin::DecideBuyerApplication do
     end
 
     context 'rejecting an application' do
-      let(:operation) {
+      let(:operation) do
         perform_operation(attributes: {
           decision: 'reject',
           decision_body: 'Response',
         })
-      }
+      end
 
       it 'is successful' do
         expect(operation).to be_success
@@ -76,5 +76,4 @@ RSpec.describe Admin::DecideBuyerApplication do
       end
     end
   end
-
 end

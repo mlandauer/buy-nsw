@@ -26,6 +26,4 @@ class Admin::UsersController < Admin::BaseController
     )
   end
   helper_method :search
-
-
 end

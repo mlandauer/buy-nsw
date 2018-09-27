@@ -31,20 +31,21 @@ class Sellers::Applications::StepsController < Sellers::Applications::BaseContro
       SellerVersions::ServicesForm,
       SellerVersions::WorkersCompensationForm,
     ]
-    base_contracts.tap {|contracts|
+    base_contracts.tap do |contracts|
       if seller_version.services.include?('cloud-services')
         contracts << SellerVersions::DeclarationForm
       end
-    }
+    end
   end
 
   def self.steps(seller_version)
-    contracts(seller_version).map {|contract|
+    contracts(seller_version).map do |contract|
       Sellers::Applications::StepPresenter.new(contract)
-    }
+    end
   end
 
-private
+  private
+
   def _run_options(options)
     options.merge(
       'config.current_user' => current_user,
@@ -53,7 +54,7 @@ private
   end
 
   def step
-    self.class.steps(seller_version).find {|step| step.slug == params[:step] } || raise(NotFound)
+    self.class.steps(seller_version).find { |step| step.slug == params[:step] } || raise(NotFound)
   end
   helper_method :step
 
@@ -61,9 +62,7 @@ private
     step.contract_class
   end
 
-  def operation
-    @operation
-  end
+  attr_reader :operation
   helper_method :operation
 
   def seller

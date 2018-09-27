@@ -1,13 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe Buyers::ApplicationsController do
-
   describe 'GET manager_approve' do
-
     let(:application) { create(:buyer_application) }
-    let(:operation) {
+    let(:operation) do
       { 'result.approved' => true }
-    }
+    end
 
     it 'invokes the operation' do
       expect(controller).to receive(:run).and_return(operation)
@@ -42,7 +40,5 @@ RSpec.describe Buyers::ApplicationsController do
 
       expect(controller.flash.notice).to eq('String')
     end
-
   end
-
 end

@@ -10,24 +10,23 @@ class CreateProductOrder < ApplicationService
   end
 
   def call
-    begin
-      raise Failure unless build_operation.success?
+    raise Failure unless build_operation.success?
 
-      ActiveRecord::Base.transaction do
-        assign_and_validate_attributes
-        set_order_details
-        persist_product_order
-        send_confirmation_email
-        send_slack_notification
-      end
-
-      self.state = :success
-    rescue Failure
-      self.state = :failure
+    ActiveRecord::Base.transaction do
+      assign_and_validate_attributes
+      set_order_details
+      persist_product_order
+      send_confirmation_email
+      send_slack_notification
     end
+
+    self.state = :success
+  rescue Failure
+    self.state = :failure
   end
 
-private
+  private
+
   attr_reader :user, :product_id, :attributes
 
   def build_operation
@@ -57,5 +56,4 @@ private
   def send_slack_notification
     SlackPostJob.perform_later(product_order.id, :new_product_order.to_s)
   end
-
 end

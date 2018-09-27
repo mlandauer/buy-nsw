@@ -11,7 +11,7 @@ class MigrateSellerDocumentsToVersions < ActiveRecord::Migration[5.1]
 
       if seller.present?
         seller.versions.update_all({
-          "#{kind}_id" => document['id']
+          "#{kind}_id" => document['id'],
         })
         puts "Doc ##{document['id']} => seller versions update: #{seller.versions.map(&:id).join(', ')}"
       end

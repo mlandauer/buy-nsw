@@ -6,12 +6,13 @@ module Search
       {
         threshold: {
           "#{number_with_delimiter(ProductOrder::THRESHOLD)} or over": "over",
-          "under #{number_with_delimiter(ProductOrder::THRESHOLD)}": "under"
-        }
+          "under #{number_with_delimiter(ProductOrder::THRESHOLD)}": "under",
+        },
       }
     end
 
-  private
+    private
+
     def base_relation
       ::ProductOrder.all
     end

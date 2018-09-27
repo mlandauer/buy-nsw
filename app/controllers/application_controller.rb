@@ -12,7 +12,8 @@ class ApplicationController < ActionController::Base
 
   impersonates :user
 
-private
+  private
+
   def authenticate!
     return unless ENV['BASIC_USERNAME'].present? && ENV['BASIC_PASSWORD'].present?
 
@@ -41,10 +42,10 @@ private
   end
 
   def errors_controller
-    ErrorsController.new.tap {|controller|
+    ErrorsController.new.tap do |controller|
       controller.request = request
       controller.response = response
-    }
+    end
   end
 
   def csv_request?

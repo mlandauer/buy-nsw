@@ -1,7 +1,6 @@
 require 'csv'
 
 class Admin::SellersController < Admin::BaseController
-
   after_action :set_content_disposition, if: :csv_request?, only: :index
 
   def index
@@ -11,7 +10,8 @@ class Admin::SellersController < Admin::BaseController
     end
   end
 
-private
+  private
+
   def search
     @search ||= Search::Admin::Seller.new(
       selected_filters: params,

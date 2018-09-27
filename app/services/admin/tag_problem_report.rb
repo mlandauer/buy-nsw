@@ -16,7 +16,8 @@ class Admin::TagProblemReport < ApplicationService
     end
   end
 
-private
+  private
+
   attr_reader :problem_report_id, :tags
 
   def build_operation
@@ -28,5 +29,4 @@ private
   def persist_tags
     form.validate(tags: tags) && form.save
   end
-
 end

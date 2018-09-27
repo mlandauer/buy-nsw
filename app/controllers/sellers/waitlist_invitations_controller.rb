@@ -15,14 +15,12 @@ class Sellers::WaitlistInvitationsController < Sellers::BaseController
     render :show
   end
 
-private
+  private
+
   def ensure_user_signed_out!
     raise NotAuthorized if user_signed_in?
   end
 
-  def operation
-    @operation
-  end
+  attr_reader :operation
   helper_method :operation
-
 end

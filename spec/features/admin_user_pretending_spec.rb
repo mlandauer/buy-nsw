@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe 'Logging in as a user via pretend', type: :feature, js: true do
-
   let(:resolved_message) { I18n.t('admin.problem_reports.messages.resolved') }
   let(:updated_message) { I18n.t('admin.problem_reports.messages.updated') }
 

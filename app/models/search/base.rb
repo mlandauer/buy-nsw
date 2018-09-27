@@ -23,7 +23,7 @@ module Search
     end
 
     def available_filters
-      { }
+      {}
     end
 
     def selected_filters
@@ -57,7 +57,8 @@ module Search
       selected_filters.keys.any?
     end
 
-  private
+    private
+
     attr_reader :page, :per_page, :default_values
 
     def base_relation

@@ -4,29 +4,28 @@ class Buyers::SubmitApplication < ApplicationService
   end
 
   def call
-    begin
-      ActiveRecord::Base.transaction do
-        validate_state
-        validate_completion
-        update_state
-        set_manager_approval_token
-        log_event
-      end
-
-      send_manager_approval_email
-      send_slack_notification
-
-      self.state = :success
-    rescue Failure
-      self.state = :failure
+    ActiveRecord::Base.transaction do
+      validate_state
+      validate_completion
+      update_state
+      set_manager_approval_token
+      log_event
     end
+
+    send_manager_approval_email
+    send_slack_notification
+
+    self.state = :success
+  rescue Failure
+    self.state = :failure
   end
 
   def application
     @application ||= user.buyer
   end
 
-private
+  private
+
   attr_reader :user
 
   def flow

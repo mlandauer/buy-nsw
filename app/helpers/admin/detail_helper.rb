@@ -1,13 +1,13 @@
 module Admin::DetailHelper
   def display_list(fields:, type:, resource:, resource_name:, field_classes: {})
-    content_tag(:dl, id: type) {
-      fields[type].map {|field|
+    content_tag(:dl, id: type) do
+      fields[type].map do |field|
         [
           content_tag(:dt, display_label_for(resource_name, type, field), :class => field_classes[field]) +
-          content_tag(:dd, display_value_for(resource, field), :class => field_classes[field])
+          content_tag(:dd, display_value_for(resource, field), :class => field_classes[field]),
         ]
-      }.flatten.join.html_safe
-    }
+      end.flatten.join.html_safe
+    end
   end
 
   def display_label_for(resource_name, type, field)
@@ -39,7 +39,7 @@ module Admin::DetailHelper
   end
 
   def extract_enumerize_set(set)
-    set.map {|key| key.text }.join('<br>').html_safe
+    set.map { |key| key.text }.join('<br>').html_safe
   end
 
   def format_timestamp(time)

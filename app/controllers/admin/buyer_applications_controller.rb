@@ -1,10 +1,9 @@
 require 'csv'
 
 class Admin::BuyerApplicationsController < Admin::BaseController
-
   after_action :set_content_disposition, if: :csv_request?, only: :index
 
-  layout ->{
+  layout -> {
     action_name == 'index' ? 'admin' : '../admin/buyer_applications/_layout'
   }
 
@@ -67,7 +66,8 @@ class Admin::BuyerApplicationsController < Admin::BaseController
     redirect_to admin_buyer_application_path(application)
   end
 
-private
+  private
+
   def search
     @search ||= Search::BuyerApplication.new(
       selected_filters: params,

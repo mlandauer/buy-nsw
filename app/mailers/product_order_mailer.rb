@@ -7,5 +7,4 @@ class ProductOrderMailer < ApplicationMailer
       subject: "buy.nsw: Your order for #{@product_order.product.name} (Order ##{@product_order.id})",
     )
   end
-
 end

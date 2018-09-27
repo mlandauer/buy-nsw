@@ -1,7 +1,7 @@
 class Sellers::WaitingSeller::Accept < Trailblazer::Operation
   class Present < Trailblazer::Operation
     step :model!
-    step Contract::Build( constant: Sellers::AcceptWaitingSellerForm )
+    step Contract::Build(constant: Sellers::AcceptWaitingSellerForm)
     success :setup_errors
     step :check_user_does_not_exist!
     step :check_seller_does_not_exist!, fail_fast: true
@@ -35,7 +35,7 @@ class Sellers::WaitingSeller::Accept < Trailblazer::Operation
   end
 
   step Nested(Present)
-  step Contract::Validate( key: :invitation ), fail_fast: true
+  step Contract::Validate(key: :invitation), fail_fast: true
 
   step :create_user!
   failure :include_devise_errors!, fail_fast: true
@@ -76,7 +76,7 @@ class Sellers::WaitingSeller::Accept < Trailblazer::Operation
         state: model.state,
         postcode: model.postcode,
         country: model.country,
-      }],
+      },],
     )
     options['application'].save!
   end

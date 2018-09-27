@@ -1,13 +1,13 @@
 module Search::Admin
   class Seller < Search::Base
-
     def available_filters
       {
         state: state_keys,
       }
     end
 
-  private
+    private
+
     include Concerns::Search::ApplicationFilters
 
     def base_relation

@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe 'Managing sellers', type: :feature, js: true do
-
   describe 'as an admin user', user: :admin_user do
     it 'can revert a seller' do
       seller = create(:approved_seller_version, assigned_to: @user)
@@ -46,5 +45,4 @@ RSpec.describe 'Managing sellers', type: :feature, js: true do
       expect(page).to have_content(message)
     end
   end
-
 end

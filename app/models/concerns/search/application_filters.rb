@@ -10,7 +10,7 @@ module Concerns::Search::ApplicationFilters
 
   def assigned_to_filter(relation)
     if filter_selected?(:assigned_to)
-      relation.assigned_to( filter_value(:assigned_to) )
+      relation.assigned_to(filter_value(:assigned_to))
     else
       relation
     end
@@ -27,6 +27,6 @@ module Concerns::Search::ApplicationFilters
   end
 
   def sort_keys
-    [ 'started_at', 'submitted_at', 'decided_at' ]
+    ['started_at', 'submitted_at', 'decided_at']
   end
 end

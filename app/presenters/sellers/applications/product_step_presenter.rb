@@ -20,7 +20,8 @@ module Sellers::Applications
       end
     end
 
-  private
+    private
+
     def build_contract(application, product)
       contract_class.new(product)
     end

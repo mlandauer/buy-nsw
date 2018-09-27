@@ -11,7 +11,6 @@ module BuyerApplications
       required(:contactable, in_list?: BuyerApplication.contactable.options).filled
       required(:contact_number).maybe(:str?)
 
-
       rule(contact_number: [:contactable, :contact_number]) do |contactable, contact_number|
         contactable.eql?('phone-number').then(contact_number.filled?)
       end

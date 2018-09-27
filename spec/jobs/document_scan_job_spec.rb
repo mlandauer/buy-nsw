@@ -2,12 +2,11 @@ require 'rails_helper'
 require 'carrierwave/storage/fog'
 
 RSpec.describe DocumentScanJob, type: :job do
-
   let(:document) { create(:unscanned_document) }
   let(:file_path) { document.document.file.path }
-  let(:example_file_body) {
-    File.open(Rails.root.join('spec','fixtures','files','example.pdf'))
-  }
+  let(:example_file_body) do
+    File.open(Rails.root.join('spec', 'fixtures', 'files', 'example.pdf'))
+  end
 
   describe '#perform' do
     it 'sets the status of a clean file' do
@@ -40,5 +39,4 @@ RSpec.describe DocumentScanJob, type: :job do
       end
     end
   end
-
 end
