@@ -65,12 +65,13 @@ class Sellers::Applications::ProductsController < Sellers::Applications::BaseCon
   end
 
   def self.steps
-    contracts.map {|contract|
+    contracts.map do |contract|
       Sellers::Applications::ProductStepPresenter.new(contract)
-    }
+    end
   end
 
-private
+  private
+
   def _run_options(options)
     if ['edit', 'update'].include?(action_name)
       options = options.merge(
@@ -84,7 +85,7 @@ private
   end
 
   def step
-    self.class.steps.find {|step| step.slug == params[:step] } || raise(NotFound)
+    self.class.steps.find { |step| step.slug == params[:step] } || raise(NotFound)
   end
   helper_method :step
 
@@ -123,9 +124,7 @@ private
   end
   helper_method :presenter
 
-  def operation
-    @operation
-  end
+  attr_reader :operation
   helper_method :operation
 
   def form
@@ -135,7 +134,7 @@ private
 
   def ensure_cloud_services_provided!
     unless application.services.include?('cloud-services')
-      return redirect_to sellers_application_path(application)
+      redirect_to sellers_application_path(application)
     end
   end
 end

@@ -47,10 +47,9 @@ class Sellers::Applications::InvitationsController < Sellers::Applications::Base
     render :accept
   end
 
-private
-  def operation
-    @operation
-  end
+  private
+
+  attr_reader :operation
   helper_method :operation
 
   def form

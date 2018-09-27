@@ -10,7 +10,8 @@ module Search
       }
     end
 
-  private
+    private
+
     def base_relation
       ::ProblemReport.all
     end
@@ -21,8 +22,8 @@ module Search
 
     def apply_filters(scope)
       scope.yield_self(&method(:url_filter)).
-            yield_self(&method(:tag_filter)).
-            yield_self(&method(:state_filter))
+        yield_self(&method(:tag_filter)).
+        yield_self(&method(:state_filter))
     end
 
     def url_filter(relation)
@@ -45,7 +46,7 @@ module Search
 
     def state_filter(relation)
       if filter_selected?(:state)
-        relation.in_state( filter_value(:state) )
+        relation.in_state(filter_value(:state))
       else
         relation
       end

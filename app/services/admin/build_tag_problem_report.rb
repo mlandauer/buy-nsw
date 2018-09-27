@@ -1,5 +1,4 @@
 class Admin::BuildTagProblemReport < ApplicationService
-
   def initialize(problem_report_id:)
     @problem_report_id = problem_report_id
   end
@@ -20,7 +19,7 @@ class Admin::BuildTagProblemReport < ApplicationService
     @problem_report ||= ProblemReport.find(problem_report_id)
   end
 
-private
-  attr_reader :problem_report_id
+  private
 
+  attr_reader :problem_report_id
 end

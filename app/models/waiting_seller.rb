@@ -30,7 +30,8 @@ class WaitingSeller < ApplicationRecord
 
   scope :in_invitation_state, ->(state) { where(invitation_state: state) }
 
-private
+  private
+
   def normalise_abn
     self.abn = ABN.new(abn).to_s if ABN.valid?(abn)
   end

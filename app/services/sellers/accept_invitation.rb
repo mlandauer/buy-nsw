@@ -10,20 +10,19 @@ class Sellers::AcceptInvitation < ApplicationService
   end
 
   def call
-    begin
-      raise Failure unless build_operation.success?
+    raise Failure unless build_operation.success?
 
-      set_password
-      confirm_user
-      persist_user
+    set_password
+    confirm_user
+    persist_user
 
-      self.state = :success
-    rescue Failure
-      self.state = :failure
-    end
+    self.state = :success
+  rescue Failure
+    self.state = :failure
   end
 
-private
+  private
+
   attr_reader :version_id, :confirmation_token, :user_attributes
 
   def build_operation

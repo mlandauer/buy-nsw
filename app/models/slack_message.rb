@@ -7,7 +7,7 @@ class SlackMessage
       params: {
         buyer: link_to(order.buyer.name, admin_buyer_application_url(order.buyer)),
         organisation: order.buyer.organisation,
-        product: link_to(order.product.name, pathway_product_url(order.product.section, order.product))
+        product: link_to(order.product.name, pathway_product_url(order.product.section, order.product)),
       },
       button_url: admin_product_orders_url
     )
@@ -18,7 +18,7 @@ class SlackMessage
       :buyer_application_submitted,
       params: {
         buyer: application.name,
-        organisation: application.organisation
+        organisation: application.organisation,
       },
       button_url: admin_buyer_application_url(application)
     )
@@ -28,7 +28,7 @@ class SlackMessage
     message_type_with_button(
       :seller_version_submitted,
       params: {
-        seller: version.name
+        seller: version.name,
       },
       button_url: admin_seller_application_url(version)
     )
@@ -75,8 +75,8 @@ class SlackMessage
       actions: [
         type: "button",
         text: button_text,
-        url: button_url
-      ]
+        url: button_url,
+      ],
     }
 
     if fields.present?
@@ -85,13 +85,13 @@ class SlackMessage
 
     message(
       text: text,
-      attachments: [ attachment ],
+      attachments: [attachment],
     )
   end
 
   def message(params)
     if slack_webhook_url.present?
-      RestClient.post slack_webhook_url, params.to_json, {content_type: :json}
+      RestClient.post slack_webhook_url, params.to_json, { content_type: :json }
     end
   end
 

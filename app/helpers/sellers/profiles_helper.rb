@@ -1,20 +1,20 @@
 module Sellers::ProfilesHelper
   def seller_profile_tags(seller_version)
-    content_tag(:ul, class: 'tags') {
-      [:start_up, :sme, :indigenous, :not_for_profit, :govdc, :regional].select {|tag|
+    content_tag(:ul, class: 'tags') do
+      [:start_up, :sme, :indigenous, :not_for_profit, :govdc, :regional].select do |tag|
         seller_version.public_send(tag) == true
-      }.map {|tag|
+      end.map do |tag|
         content_tag(:li, I18n.t("sellers.tags.#{tag}"), class: "tag-#{tag.to_s.dasherize}")
-      }.join(' ').html_safe
-    }.html_safe
+      end.join(' ').html_safe
+    end.html_safe
   end
 
   def abn_lookup_url(abn)
-    "https://abr.business.gov.au/SearchByAbn.aspx?SearchText=#{URI::encode(formatted_abn(abn))}"
+    "https://abr.business.gov.au/SearchByAbn.aspx?SearchText=#{URI.encode(formatted_abn(abn))}"
   end
 
   def formatted_abn(abn)
-    abn = (abn || '').gsub(' ','')
+    abn = (abn || '').gsub(' ', '')
 
     abn = abn.insert(2, ' ') if abn.length > 2
     abn = abn.insert(6, ' ') if abn.length > 6
@@ -51,5 +51,4 @@ module Sellers::ProfilesHelper
     ]
     (seller.changed_fields_unreviewed & keys).any?
   end
-
 end

@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Sellers::ProfilesHelper, type: :helper do
-
   describe '#formatted_abn' do
     it 'can format a valid ABN' do
       abn = '12345678910'
@@ -22,7 +21,5 @@ RSpec.describe Sellers::ProfilesHelper, type: :helper do
         expect(helper.formatted_abn(input)).to eq(output)
       end
     end
-
   end
-
 end

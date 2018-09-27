@@ -25,11 +25,9 @@ module Products
     validation :default, inherit: true do
       configure do
         def currency?(value)
-          begin
-            Money::Currency.new(value)
-          rescue Money::Currency::UnknownCurrency
-            false
-          end
+          Money::Currency.new(value)
+        rescue Money::Currency::UnknownCurrency
+          false
         end
       end
 

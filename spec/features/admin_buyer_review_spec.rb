@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe 'Reviewing buyer applications', type: :feature, js: true do
-
   describe 'as an admin user', user: :admin_user do
     it 'can approve an application' do
       application = create(:awaiting_assignment_buyer_application)
@@ -83,5 +82,4 @@ RSpec.describe 'Reviewing buyer applications', type: :feature, js: true do
 
     click_on 'Make decision'
   end
-
 end

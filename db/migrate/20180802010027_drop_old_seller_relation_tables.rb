@@ -3,7 +3,7 @@ class DropOldSellerRelationTables < ActiveRecord::Migration[5.1]
     remove_foreign_key :seller_accreditations, :sellers
     remove_foreign_key :seller_awards, :sellers
     remove_foreign_key :seller_engagements, :sellers
-    
+
     drop_table :seller_accreditations
     drop_table :seller_addresses
     drop_table :seller_awards

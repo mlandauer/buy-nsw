@@ -2,7 +2,8 @@ class Admin::ProductOrdersController < Admin::BaseController
   def index
   end
 
-private
+  private
+
   def search
     @search ||= Search::ProductOrders.new(
       selected_filters: params,
@@ -12,5 +13,4 @@ private
     )
   end
   helper_method :search
-
 end

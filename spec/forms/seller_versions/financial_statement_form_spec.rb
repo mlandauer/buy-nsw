@@ -1,23 +1,24 @@
 require 'rails_helper'
 
 RSpec.describe SellerVersions::FinancialStatementForm do
-  let(:version) { create(:seller_version) }
   subject { described_class.new(version) }
 
-  let(:example_pdf) {
+  let(:version) { create(:seller_version) }
+
+  let(:example_pdf) do
     Rack::Test::UploadedFile.new(
       Rails.root.join('spec', 'fixtures', 'files', 'example.pdf'),
       'application/pdf'
     )
-  }
+  end
   let(:historical_date) { Date.today - 1.year }
 
-  let(:atts) {
+  let(:atts) do
     {
       financial_statement_file: example_pdf,
       financial_statement_expiry: historical_date,
     }
-  }
+  end
 
   it 'validates with valid attributes' do
     expect(subject.validate(atts)).to eq(true)
@@ -27,7 +28,7 @@ RSpec.describe SellerVersions::FinancialStatementForm do
     it 'is invalid when blank' do
       subject.validate(atts.merge(financial_statement_file: nil))
 
-      expect(subject).to_not be_valid
+      expect(subject).not_to be_valid
       expect(subject.errors[:financial_statement_file]).to be_present
     end
 
@@ -59,7 +60,7 @@ RSpec.describe SellerVersions::FinancialStatementForm do
     it 'is invalid when blank' do
       subject.validate(atts.merge(financial_statement_expiry: nil))
 
-      expect(subject).to_not be_valid
+      expect(subject).not_to be_valid
       expect(subject.errors[:financial_statement_expiry]).to be_present
     end
   end

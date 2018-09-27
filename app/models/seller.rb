@@ -15,9 +15,9 @@ class Seller < ApplicationRecord
   has_many :products
 
   has_many :versions, class_name: 'SellerVersion'
-  has_one :approved_version, ->{ approved }, class_name: 'SellerVersion'
-  has_one :first_version, ->{ where(previous_version: nil) }, class_name: 'SellerVersion'
-  has_one :last_version, ->{ order started_at: :desc}, class_name: 'SellerVersion'
+  has_one :approved_version, -> { approved }, class_name: 'SellerVersion'
+  has_one :first_version, -> { where(previous_version: nil) }, class_name: 'SellerVersion'
+  has_one :last_version, -> { order started_at: :desc }, class_name: 'SellerVersion'
 
   aasm column: :state do
     state :inactive, initial: true

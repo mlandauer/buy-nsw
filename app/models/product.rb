@@ -52,10 +52,10 @@ class Product < ApplicationRecord
   enumerize :api, in: ['rest', 'non-rest', 'no']
   enumerize :government_network_type, multiple: true, in: ['govdc', 'govlink', 'aarnet', 'id-hub', 'icon', 'other']
   enumerize :supported_browsers, multiple: true, in: [
-    'ie7', 'ie8', 'ie9', 'ie10', 'ie11', 'ms-edge', 'firefox', 'chrome', 'safari9', 'opera'
+    'ie7', 'ie8', 'ie9', 'ie10', 'ie11', 'ms-edge', 'firefox', 'chrome', 'safari9', 'opera',
   ]
   enumerize :supported_os, multiple: true, in: [
-    'windows', 'macos', 'linux-unix', 'android', 'ios', 'windows-phone', 'other'
+    'windows', 'macos', 'linux-unix', 'android', 'ios', 'windows-phone', 'other',
   ]
   enumerize :accessibility_type, in: ['all', 'exclusions', 'none']
   enumerize :scaling_type, in: ['automatic', 'manual', 'none']
@@ -83,7 +83,7 @@ class Product < ApplicationRecord
   enumerize :security_classification_types, multiple: true, in: ['unclassified-dlm', 'protected', 'secret', 'top-secret']
 
   enumerize :virtualisation_implementor, in: ['supplier', 'third-party']
-  enumerize :virtualisation_technologies, multiple: true, in: ['vmware','hyper-v','citrix-xenserver','oracle-vm','red-hat-virtualisation','kvm-hypervisor','other']
+  enumerize :virtualisation_technologies, multiple: true, in: ['vmware', 'hyper-v', 'citrix-xenserver', 'oracle-vm', 'red-hat-virtualisation', 'kvm-hypervisor', 'other']
 
   enumerize :secure_development_approach, in: ['independently-assessed', 'self-assessed', 'supplier-defined']
   enumerize :penetration_testing_frequency, in: ['at-least-6-months', 'at-least-once-year', 'less-than-once-year', 'never']
@@ -99,14 +99,14 @@ class Product < ApplicationRecord
   enumerize :metrics_channel_types, multiple: true, in: ['api', 'real-time', 'regular', 'on-request', 'other']
   enumerize :usage_channel_types, multiple: true, in: ['email', 'sms', 'api', 'other']
 
-  scope :with_section, ->(section){ where("section = :section", section: section) }
-  scope :with_audience, ->(audience){ where(":audience = ANY(audiences)", audience: audience) }
-  scope :start_up, ->{ joins(:seller_versions).where('seller_versions.start_up' => true) }
-  scope :disability, ->{ joins(:seller_versions).where('seller_versions.disability' => true) }
-  scope :indigenous, ->{ joins(:seller_versions).where('seller_versions.indigenous' => true) }
-  scope :not_for_profit, ->{ joins(:seller_versions).where('seller_versions.not_for_profit' => true) }
-  scope :regional, ->{ joins(:seller_versions).where('seller_versions.regional' => true) }
-  scope :sme, ->{ joins(:seller_versions).where('seller_versions.sme' => true) }
+  scope :with_section, ->(section) { where("section = :section", section: section) }
+  scope :with_audience, ->(audience) { where(":audience = ANY(audiences)", audience: audience) }
+  scope :start_up, -> { joins(:seller_versions).where('seller_versions.start_up' => true) }
+  scope :disability, -> { joins(:seller_versions).where('seller_versions.disability' => true) }
+  scope :indigenous, -> { joins(:seller_versions).where('seller_versions.indigenous' => true) }
+  scope :not_for_profit, -> { joins(:seller_versions).where('seller_versions.not_for_profit' => true) }
+  scope :regional, -> { joins(:seller_versions).where('seller_versions.regional' => true) }
+  scope :sme, -> { joins(:seller_versions).where('seller_versions.sme' => true) }
 
   scope :reseller, -> { where(reseller_type: ['no-extras', 'extra-support', 'extra-features-support']) }
   scope :not_reseller, -> { where(reseller_type: 'own-product') }
@@ -114,20 +114,20 @@ class Product < ApplicationRecord
   scope :free_trial, -> { where(:free_trial => true) }
   scope :education_pricing, -> { where(:education_pricing => true) }
   scope :not_for_profit_pricing, -> { where(:not_for_profit_pricing => true) }
-  scope :with_data_location, ->(location){ where(data_location: location) }
+  scope :with_data_location, ->(location) { where(data_location: location) }
   scope :with_data_in_australia, -> { where(data_location: ['australia-default', 'australia-request']) }
-  scope :with_api, ->{ where(api: ['rest', 'non-rest']) }
-  scope :mobile_devices, ->{ where(mobile_devices: true) }
+  scope :with_api, -> { where(api: ['rest', 'non-rest']) }
+  scope :mobile_devices, -> { where(mobile_devices: true) }
   scope :accessible, -> { where(accessibility_type: 'all') }
 
   scope :with_government_network_type, ->(type) { where(":type = ANY(government_network_type)", type: type) }
 
-  scope :iso_27001, ->{ where(iso_27001: true) }
-  scope :iso_27017, ->{ where(iso_27017: true) }
-  scope :iso_27018, ->{ where(iso_27018: true) }
-  scope :csa_star, ->{ where(csa_star: true) }
-  scope :pci_dss, ->{ where(pci_dss: true) }
-  scope :soc_2, ->{ where(soc_2: true) }
+  scope :iso_27001, -> { where(iso_27001: true) }
+  scope :iso_27017, -> { where(iso_27017: true) }
+  scope :iso_27018, -> { where(iso_27018: true) }
+  scope :csa_star, -> { where(csa_star: true) }
+  scope :pci_dss, -> { where(pci_dss: true) }
+  scope :soc_2, -> { where(soc_2: true) }
   scope :irap_assessed, -> { where("irap_type != 'not-assessed'") }
-  scope :asd_certified, -> { where(asd_certified: true)}
+  scope :asd_certified, -> { where(asd_certified: true) }
 end

@@ -1,6 +1,5 @@
 class Users::ConfirmationsController < Devise::ConfirmationsController
-
-protected
+  protected
 
   def after_confirmation_path_for(resource_name, resource)
     sign_in(resource)
@@ -11,5 +10,4 @@ protected
       new_buyers_application_path
     end
   end
-
 end

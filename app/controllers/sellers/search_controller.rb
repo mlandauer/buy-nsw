@@ -4,7 +4,8 @@ class Sellers::SearchController < Sellers::BaseController
   def search
   end
 
-private
+  private
+
   def search
     @search ||= Search::SellerVersion.new(
       selected_filters: params,

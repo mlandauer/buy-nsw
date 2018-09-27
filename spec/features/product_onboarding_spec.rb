@@ -1,10 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe 'Product onboarding', type: :feature, js: true, user: :seller_user_with_seller do
-
-  let(:existing_application) {
+  let(:existing_application) do
     create(:created_seller_version, seller: @user.seller, services: ['cloud-services'])
-  }
+  end
 
   it 'can complete product basics' do
     visit sellers_application_products_path(existing_application)
@@ -24,7 +23,7 @@ RSpec.describe 'Product onboarding', type: :feature, js: true, user: :seller_use
       fill_in '2', with: 'Feature 2'
       8.times do |i|
         click_on 'Add another row'
-        fill_in i+3, with: "Feature #{i+3}"
+        fill_in i + 3, with: "Feature #{i + 3}"
       end
     end
 
@@ -33,7 +32,7 @@ RSpec.describe 'Product onboarding', type: :feature, js: true, user: :seller_use
       fill_in '2', with: 'Benefit 2'
       8.times do |i|
         click_on 'Add another row'
-        fill_in i+3, with: "Benefit #{i+3}"
+        fill_in i + 3, with: "Benefit #{i + 3}"
       end
     end
 
@@ -65,5 +64,4 @@ RSpec.describe 'Product onboarding', type: :feature, js: true, user: :seller_use
   def enumerize_value(field, value)
     I18n.t(value, scope: [:enumerize, :product, field])
   end
-
 end

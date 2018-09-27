@@ -10,13 +10,13 @@ RSpec.describe CreateProductOrder do
   let!(:product) { create(:active_product) }
 
   let(:buyer_user) { create(:active_buyer_user) }
-  let(:valid_atts) {
+  let(:valid_atts) do
     {
       estimated_contract_value: 123000,
       contacted_seller: true,
       purchased_cloud_before: true,
     }
-  }
+  end
 
   describe '.call' do
     def perform_operation(user: buyer_user, product_id: product.id, attributes: valid_atts)
@@ -29,7 +29,7 @@ RSpec.describe CreateProductOrder do
 
     context 'with valid parameters' do
       it 'creates a product order' do
-        expect{ perform_operation }.to change{ ProductOrder.count }.from(0).to(1)
+        expect { perform_operation }.to change(ProductOrder, :count).from(0).to(1)
       end
 
       it 'sets the buyer from the current user' do
@@ -62,11 +62,11 @@ RSpec.describe CreateProductOrder do
       it 'sends an email' do
         allow(SlackPostJob).to receive(:perform_later)
 
-        expect {
+        expect do
           perform_enqueued_jobs do
             perform_operation
           end
-        }.to change { ActionMailer::Base.deliveries.count }.by(1)
+        end.to change { ActionMailer::Base.deliveries.count }.by(1)
       end
 
       it 'notifies slack of the new order' do
@@ -95,5 +95,4 @@ RSpec.describe CreateProductOrder do
       end
     end
   end
-
 end

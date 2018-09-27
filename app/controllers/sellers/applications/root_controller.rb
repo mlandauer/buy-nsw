@@ -30,7 +30,8 @@ class Sellers::Applications::RootController < Sellers::Applications::BaseControl
     render :submit
   end
 
-private
+  private
+
   attr_reader :operation
   helper_method :operation
 
@@ -53,6 +54,6 @@ private
   helper_method :submit_form
 
   def assert_application_presence!
-    raise NotFound unless seller_version.present?
+    raise NotFound if seller_version.blank?
   end
 end

@@ -1,19 +1,18 @@
 require 'rails_helper'
 
 RSpec.describe Admin::SellersController, type: :controller, sign_in: :admin_user do
-
   describe 'GET index' do
     describe 'format CSV' do
       render_views
 
       let!(:sellers) { create_list(:seller, 5) }
-      let(:params) {
+      let(:params) do
         {
           # Reset the default filters
           skip_filters: true,
           format: :csv,
         }
-      }
+      end
 
       it 'is successful' do
         get :index, params: params
@@ -39,5 +38,4 @@ RSpec.describe Admin::SellersController, type: :controller, sign_in: :admin_user
       end
     end
   end
-
 end

@@ -1,5 +1,5 @@
 class MoveBuyerDataToBuyerApplications < ActiveRecord::Migration[5.1]
-  FIELDS = [:name, :organisation, :employment_status, :user_id]
+  FIELDS = [:name, :organisation, :employment_status, :user_id].freeze
 
   def up
     change_table :buyer_applications do |t|

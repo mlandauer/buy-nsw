@@ -1,11 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Buyers::BuildUpdateApplication do
+  subject { described_class.new(user: buyer_user, form_class: form) }
 
   let(:buyer_user) { create(:inactive_buyer_user) }
   let(:form) { BuyerApplications::BasicDetailsForm }
-
-  subject { described_class.new(user: buyer_user, form_class: form) }
 
   describe '.call' do
     def perform_operation(user: buyer_user, form_class: form)
@@ -63,5 +62,4 @@ RSpec.describe Buyers::BuildUpdateApplication do
       expect(subject.application).to eq(buyer_user.buyer)
     end
   end
-
 end

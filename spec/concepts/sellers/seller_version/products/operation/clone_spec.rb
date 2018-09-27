@@ -1,31 +1,29 @@
 require 'rails_helper'
 
 RSpec.describe Sellers::SellerVersion::Products::Clone do
-
   let!(:application) { create(:created_seller_version) }
   let!(:current_user) { create(:seller_user, seller: application.seller) }
 
-  let!(:product) {
+  let!(:product) do
     create(:product,
-      seller: application.seller,
-      name: 'Product',
-      summary: 'Overview text',
-      contact_name: 'Example Name',
-      free_version: true,
-      free_version_details: 'Free tier available',
-      features: ['one', 'two', 'three'],
-    )
-  }
+           seller: application.seller,
+           name: 'Product',
+           summary: 'Overview text',
+           contact_name: 'Example Name',
+           free_version: true,
+           free_version_details: 'Free tier available',
+           features: ['one', 'two', 'three'],)
+  end
 
   def perform_operation
-    described_class.({
+    described_class.call({
       application_id: application.id,
-      id: product.id
+      id: product.id,
     }, 'config.current_user' => current_user)
   end
 
   it 'creates a new product' do
-    expect { perform_operation }.to change { Product.count }.from(1).to(2)
+    expect { perform_operation }.to change(Product, :count).from(1).to(2)
   end
 
   it 'copies attributes from the existing product to the new product' do
@@ -54,8 +52,8 @@ RSpec.describe Sellers::SellerVersion::Products::Clone do
       result = perform_operation
       new_product = result[:new_product_model]
 
-      expect(new_product.created_at.to_i).to_not eq(product.created_at.to_i)
-      expect(new_product.updated_at.to_i).to_not eq(product.updated_at.to_i)
+      expect(new_product.created_at.to_i).not_to eq(product.created_at.to_i)
+      expect(new_product.updated_at.to_i).not_to eq(product.updated_at.to_i)
     end
   end
 
@@ -83,9 +81,9 @@ RSpec.describe Sellers::SellerVersion::Products::Clone do
 
   describe 'finding the product' do
     it 'fails with an empty user' do
-      result = described_class.({
+      result = described_class.call({
         application_id: application.id,
-        id: product.id
+        id: product.id,
       }, 'config.current_user' => nil)
 
       expect(result).to be_failure
@@ -95,24 +93,23 @@ RSpec.describe Sellers::SellerVersion::Products::Clone do
     it 'fails with a different user' do
       other_user = create(:seller_user)
 
-      expect {
-        described_class.({
+      expect do
+        described_class.call({
           application_id: application.id,
-          id: product.id
+          id: product.id,
         }, 'config.current_user' => other_user)
-      }.to raise_error(ActiveRecord::RecordNotFound)
+      end.to raise_error(ActiveRecord::RecordNotFound)
     end
 
     it 'fails given a product from a different seller' do
       other_product = create(:product)
 
-      expect {
-        described_class.({
+      expect do
+        described_class.call({
           application_id: application.id,
-          id: other_product.id
+          id: other_product.id,
         }, 'config.current_user' => current_user)
-      }.to raise_error(ActiveRecord::RecordNotFound)
+      end.to raise_error(ActiveRecord::RecordNotFound)
     end
   end
-
 end

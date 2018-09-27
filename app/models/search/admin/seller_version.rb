@@ -1,6 +1,5 @@
 module Search::Admin
   class SellerVersion < Search::Base
-
     def available_filters
       {
         assigned_to: assigned_to_keys,
@@ -13,7 +12,8 @@ module Search::Admin
       }
     end
 
-  private
+    private
+
     include Concerns::Search::ApplicationFilters
     include Concerns::Search::SellerTagFilters
 
@@ -26,24 +26,24 @@ module Search::Admin
     end
 
     def assigned_to_keys
-      ::User.admin.map {|user|
-        [ user.email, user.id ]
-      }
+      ::User.admin.map do |user|
+        [user.email, user.id]
+      end
     end
 
     def apply_filters(scope)
       scope.yield_self(&method(:state_filter)).
-            yield_self(&method(:assigned_to_filter)).
-            yield_self(&method(:sort_filter)).
-            yield_self(&method(:name_filter)).
-            yield_self(&method(:email_filter)).
-            yield_self(&method(:start_up_filter)).
-            yield_self(&method(:sme_filter)).
-            yield_self(&method(:disability_filter)).
-            yield_self(&method(:regional_filter)).
-            yield_self(&method(:indigenous_filter)).
-            yield_self(&method(:not_for_profit_filter)).
-            yield_self(&method(:reverted_filter))
+        yield_self(&method(:assigned_to_filter)).
+        yield_self(&method(:sort_filter)).
+        yield_self(&method(:name_filter)).
+        yield_self(&method(:email_filter)).
+        yield_self(&method(:start_up_filter)).
+        yield_self(&method(:sme_filter)).
+        yield_self(&method(:disability_filter)).
+        yield_self(&method(:regional_filter)).
+        yield_self(&method(:indigenous_filter)).
+        yield_self(&method(:not_for_profit_filter)).
+        yield_self(&method(:reverted_filter))
     end
 
     def name_filter(relation)

@@ -9,24 +9,23 @@ class Admin::RevertSellerVersion < ApplicationService
   end
 
   def call
-    begin
-      ActiveRecord::Base.transaction do
-        validate_current_user
-        validate_state
-        update_version_state
-        update_seller_state
-        update_product_states
-        persist_version
-        log_event
-      end
-
-      self.state = :success
-    rescue Failure
-      self.state = :failure
+    ActiveRecord::Base.transaction do
+      validate_current_user
+      validate_state
+      update_version_state
+      update_seller_state
+      update_product_states
+      persist_version
+      log_event
     end
+
+    self.state = :success
+  rescue Failure
+    self.state = :failure
   end
 
-private
+  private
+
   attr_reader :seller_version_id, :current_user
 
   def seller

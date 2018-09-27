@@ -31,6 +31,6 @@ class AddFieldsForSellerRecognition < ActiveRecord::Migration[5.1]
     sql = "SELECT * FROM #{table} WHERE seller_id = '#{seller_id}'"
     result = ActiveRecord::Base.connection.execute(sql)
 
-    result.each.map {|row| row[key] }
+    result.each.map { |row| row[key] }
   end
 end

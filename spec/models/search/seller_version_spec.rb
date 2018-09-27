@@ -2,7 +2,6 @@ require 'rails_helper'
 require_relative '../concerns/search/seller_tag_filters'
 
 RSpec.describe Search::SellerVersion do
-
   it_behaves_like 'Concerns::Search::SellerTagFilters', term: 'test'
 
   context 'pagination' do
@@ -26,5 +25,4 @@ RSpec.describe Search::SellerVersion do
       expect(second_page.paginated_results.size).to eq(3)
     end
   end
-
 end

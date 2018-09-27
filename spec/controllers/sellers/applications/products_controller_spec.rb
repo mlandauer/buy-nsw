@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Sellers::Applications::ProductsController, type: :controller, sign_in: :seller_user_with_seller do
-
   describe 'GET index' do
     context 'when the seller does not provide cloud services' do
       let!(:seller_version) { create(:created_seller_version, seller: @user.seller, services: []) }
@@ -21,5 +20,4 @@ RSpec.describe Sellers::Applications::ProductsController, type: :controller, sig
       end
     end
   end
-
 end

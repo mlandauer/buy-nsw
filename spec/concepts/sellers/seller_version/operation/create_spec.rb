@@ -1,11 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Sellers::SellerVersion::Create do
-
   let(:user) { create(:seller_user) }
 
   def perform_operation
-    described_class.({ }, 'config.current_user' => user)
+    described_class.call({}, 'config.current_user' => user)
   end
 
   it 'creates a seller and seller version' do
@@ -72,5 +71,4 @@ RSpec.describe Sellers::SellerVersion::Create do
 
     expect(result).to be_failure
   end
-
 end

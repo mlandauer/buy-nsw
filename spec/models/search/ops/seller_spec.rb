@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Search::Admin::Seller do
-
   it 'returns all sellers' do
     create_list(:active_seller, 5)
     create_list(:inactive_seller, 5)
@@ -22,5 +21,4 @@ RSpec.describe Search::Admin::Seller do
 
     expect(search.results.size).to eq(3)
   end
-
 end

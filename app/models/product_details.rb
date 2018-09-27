@@ -1,5 +1,4 @@
 class ProductDetails
-
   def initialize(product, include_all: false)
     @product = product
     @include_all = include_all
@@ -9,19 +8,20 @@ class ProductDetails
     if include_all
       sections
     else
-      sections.tap {|sections|
+      sections.tap do |sections|
         # Filter out empty fields from the list – eg. conditional fields
         #
-        sections.each {|key, fields|
-          fields.delete_if {|label, value|
+        sections.each do |key, fields|
+          fields.delete_if do |label, value|
             value.nil? || (value.is_a?(Array) && value.empty?)
-          }
-        }
-      }
+          end
+        end
+      end
     end
   end
 
-private
+  private
+
   attr_reader :product, :include_all
 
   def sections
@@ -81,7 +81,7 @@ private
 
   def additional_terms
     {
-      'Additional terms document' => (product.terms.present? ? product.terms : 'Not provided')
+      'Additional terms document' => (product.terms.present? ? product.terms : 'Not provided'),
     }
   end
 
@@ -149,7 +149,7 @@ private
 
       a["API"] = product.api
 
-      if ['rest','non-rest'].include?(product.api)
+      if ['rest', 'non-rest'].include?(product.api)
         a["What users can and can't do using the API"] = product.api_capabilities
         a["Compatible API automation tools"] = product.api_automation
       end
@@ -419,12 +419,11 @@ private
       'Protective monitoring approach' => product.protective_monitoring_approach,
       'Crisis and incident management processes' => product.incident_management_processes_text,
       'Crisis and incident management plan' => product.incident_management_approach,
-      'How often access controls are tested' => product.access_control_testing_frequency_text
+      'How often access controls are tested' => product.access_control_testing_frequency_text,
     }
   end
 
   def attributes(&block)
     {}.tap(&block)
   end
-
 end

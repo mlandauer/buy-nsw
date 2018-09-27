@@ -1,5 +1,4 @@
 class Admin::BuildInviteWaitingSellers < ApplicationService
-
   def initialize(waiting_seller_ids:)
     @waiting_seller_ids = waiting_seller_ids || []
   end
@@ -17,18 +16,19 @@ class Admin::BuildInviteWaitingSellers < ApplicationService
   end
 
   def waiting_sellers
-    @waiting_sellers ||= waiting_seller_ids.map {|id|
+    @waiting_sellers ||= waiting_seller_ids.map do |id|
       WaitingSeller.created.find(id)
-    }
+    end
   end
 
   def invalid_waiting_sellers
-    @invalid_waiting_sellers ||= waiting_sellers.reject {|seller|
+    @invalid_waiting_sellers ||= waiting_sellers.reject do |seller|
       form_class.new(seller).valid?
-    }
+    end
   end
 
-private
+  private
+
   attr_reader :waiting_seller_ids
 
   def form_class
@@ -38,5 +38,4 @@ private
   def valid_waiting_sellers?
     waiting_sellers.any? && invalid_waiting_sellers.empty?
   end
-
 end

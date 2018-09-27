@@ -13,20 +13,18 @@ class Admin::UploadWaitingSellers < ApplicationService
   end
 
   def call
-    begin
-      ActiveRecord::Base.transaction do
-        validate_file
-        set_file_contents
-        parse_from_csv
-        build_seller_objects
-        validate_rows
-        persist_rows
-      end
-
-      self.state = :success
-    rescue Failure
-      self.state = :failure
+    ActiveRecord::Base.transaction do
+      validate_file
+      set_file_contents
+      parse_from_csv
+      build_seller_objects
+      validate_rows
+      persist_rows
     end
+
+    self.state = :success
+  rescue Failure
+    self.state = :failure
   end
 
   def persisted?
@@ -37,7 +35,8 @@ class Admin::UploadWaitingSellers < ApplicationService
     @persist.present?
   end
 
-private
+  private
+
   attr_reader :file, :csv
 
   def validate_file
@@ -53,17 +52,15 @@ private
   end
 
   def parse_from_csv
-    begin
-      @csv = CSV.parse(file_contents, headers: true)
-    rescue CSV::MalformedCSVError
-      raise Failure
-    end
+    @csv = CSV.parse(file_contents, headers: true)
+  rescue CSV::MalformedCSVError
+    raise Failure
   end
 
   def build_seller_objects
-    @waiting_sellers = csv.map {|row|
+    @waiting_sellers = csv.map do |row|
       WaitingSeller.new(prepare_fields(row))
-    }
+    end
   end
 
   def validate_rows
@@ -78,14 +75,15 @@ private
   end
 
   def prepare_fields(row)
-    row.to_hash.slice(*fields).tap {|atts|
+    row.to_hash.slice(*fields).tap do |atts|
       atts['state'].downcase! if atts['state'].present?
-    }
+    end
   end
 
   def fields
-    ['name', 'abn', 'address', 'suburb', 'postcode', 'state', 'country',
-      'contact_name', 'contact_email', 'contact_position', 'website_url']
+    [
+      'name', 'abn', 'address', 'suburb', 'postcode', 'state', 'country',
+      'contact_name', 'contact_email', 'contact_position', 'website_url',
+    ]
   end
-
 end

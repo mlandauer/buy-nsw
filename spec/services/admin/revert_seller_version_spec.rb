@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Admin::RevertSellerVersion do
-
   let(:current_user) { create(:admin_user) }
   let(:version) { create(:approved_seller_version, assigned_to: current_user) }
   let!(:product) { create(:active_product, seller: version.seller) }
@@ -19,7 +18,7 @@ RSpec.describe Admin::RevertSellerVersion do
 
       it 'is successful' do
         expect(operation).to be_success
-        expect(operation).to_not be_failure
+        expect(operation).not_to be_failure
       end
 
       it 'transitions to the "archived" state' do
@@ -27,7 +26,7 @@ RSpec.describe Admin::RevertSellerVersion do
       end
 
       it 'creates a new version of the application' do
-        expect(operation.seller_version.next_version).to_not be_nil
+        expect(operation.seller_version.next_version).not_to be_nil
         expect(operation.seller_version.next_version.previous_version).to eq(operation.seller_version)
         expect(operation.seller_version.next_version.state).to eq('created')
       end
@@ -64,5 +63,4 @@ RSpec.describe Admin::RevertSellerVersion do
       end
     end
   end
-
 end

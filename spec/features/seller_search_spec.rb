@@ -1,25 +1,22 @@
 require 'rails_helper'
 
 RSpec.describe 'Searching sellers', type: :feature, js: true do
-
-  let!(:seller_1) {
+  let!(:seller_1) do
     create(:approved_seller_version,
-      name: 'Construction Ltd',
-      summary: 'Buildings',
-      start_up: false,
-      regional: false,
-      services: ['cloud-services']
-    )
-  }
-  let!(:seller_2) {
+           name: 'Construction Ltd',
+           summary: 'Buildings',
+           start_up: false,
+           regional: false,
+           services: ['cloud-services'])
+  end
+  let!(:seller_2) do
     create(:approved_seller_version,
-      name: 'Cloud Ltd',
-      summary: 'Digital',
-      start_up: true,
-      regional: false,
-      services: []
-    )
-  }
+           name: 'Cloud Ltd',
+           summary: 'Digital',
+           start_up: true,
+           regional: false,
+           services: [])
+  end
 
   it 'returns a result for a given term' do
     visit sellers_search_path

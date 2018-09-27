@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe CreateProblemReport do
   include ActiveJob::TestHelper
 
-  let(:params) {
+  let(:params) do
     {
       task: 'task',
       issue: 'issue',
@@ -11,14 +11,14 @@ RSpec.describe CreateProblemReport do
       referer: 'http://example.org/referer',
       browser: 'ExampleBrowser/10.0',
     }
-  }
+  end
   let(:user) { create(:seller_user) }
 
   describe '.call' do
     context 'with valid attributes' do
-      let(:operation) {
+      let(:operation) do
         described_class.call(params: params, current_user: nil)
-      }
+      end
 
       it 'is successful' do
         expect(operation).to be_success
@@ -35,18 +35,18 @@ RSpec.describe CreateProblemReport do
       end
 
       it 'sends report to zendesk' do
-        expect {
+        expect do
           perform_enqueued_jobs do
             operation
           end
-        }.to change { ActionMailer::Base.deliveries.count }.by(1)
+        end.to change { ActionMailer::Base.deliveries.count }.by(1)
       end
     end
 
     context 'with a user object' do
-      let(:operation) {
+      let(:operation) do
         described_class.call(params: params, current_user: user)
-      }
+      end
 
       it 'assigns the user' do
         report = operation.problem_report.reload
@@ -54,24 +54,23 @@ RSpec.describe CreateProblemReport do
       end
 
       it 'sends report to zendesk' do
-        expect {
+        expect do
           perform_enqueued_jobs do
             operation
           end
-        }.to change { ActionMailer::Base.deliveries.count }.by(1)
+        end.to change { ActionMailer::Base.deliveries.count }.by(1)
       end
-
     end
 
     context 'with invalid attributes' do
-      let(:operation) {
+      o
+      let(:operation) do
         described_class.call(params: params.merge(task: nil, issue: nil), current_user: nil)
-      }
+      end
 
       it 'fails' do
         expect(operation).to be_failure
       end
     end
   end
-
 end

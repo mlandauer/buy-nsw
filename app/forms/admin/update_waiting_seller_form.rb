@@ -14,7 +14,7 @@ module Admin
     property :contact_position
     property :website_url
 
-    validation :default, inherit: true, with: {form: true} do
+    validation :default, inherit: true, with: { form: true } do
       configure do
         option :form
 

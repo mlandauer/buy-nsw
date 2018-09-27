@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe SellerApplicationMailer, type: :mailer do
-
   describe '#application_approved_email' do
     let(:application) { create(:approved_seller_version) }
     let(:mail) { SellerApplicationMailer.with(application: application).application_approved_email }
@@ -16,11 +15,11 @@ RSpec.describe SellerApplicationMailer, type: :mailer do
       expect(mail.body.encoded).to match('application has been successful')
     end
 
-    it 'should include the name of the seller' do
+    it 'includes the name of the seller' do
       expect(mail.body.encoded).to match(application.name)
     end
 
-    it 'should include the feedback from the reviewer' do
+    it 'includes the feedback from the reviewer' do
       expect(mail.body.encoded).to match(application.response)
     end
 
@@ -49,11 +48,11 @@ RSpec.describe SellerApplicationMailer, type: :mailer do
       expect(mail.body.encoded).to match('sorry')
     end
 
-    it 'should include the name of the seller' do
+    it 'includes the name of the seller' do
       expect(mail.body.encoded).to match(application.name)
     end
 
-    it 'should include the feedback from the reviewer' do
+    it 'includes the feedback from the reviewer' do
       expect(mail.body.encoded).to match(application.response)
     end
   end
@@ -72,13 +71,12 @@ RSpec.describe SellerApplicationMailer, type: :mailer do
       expect(mail.body.encoded).to match('update your application')
     end
 
-    it 'should include the name of the seller' do
+    it 'includes the name of the seller' do
       expect(mail.body.encoded).to match(application.name)
     end
 
-    it 'should include the feedback from the reviewer' do
+    it 'includes the feedback from the reviewer' do
       expect(mail.body.encoded).to match(application.response)
     end
   end
-
 end

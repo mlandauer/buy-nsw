@@ -93,7 +93,7 @@ class SellerVersion < ApplicationRecord
   end
 
   def unassigned?
-    ! assignee_present?
+    !assignee_present?
   end
 
   def no_approved_versions?
@@ -105,17 +105,17 @@ class SellerVersion < ApplicationRecord
   end
 
   def addresses
-    Array(self[:addresses]).map {|value|
+    Array(self[:addresses]).map do |value|
       SellerAddress.new(value)
-    }
+    end
   end
 
-  def changed_fields(rhs=self.previous_version)
+  def changed_fields(rhs = previous_version)
     # https://stackoverflow.com/a/43864734/10377598
     if rhs.nil?
       return []
     end
-    (self.attributes.to_a - rhs.attributes.to_a).map{ |a| a.first.to_sym }
+    (attributes.to_a - rhs.attributes.to_a).map { |a| a.first.to_sym }
   end
 
   def changed_fields_unreviewed
@@ -135,14 +135,14 @@ class SellerVersion < ApplicationRecord
   scope :assigned, -> { where('assigned_to_id IS NOT NULL') }
   scope :assigned_to, ->(user) { where('assigned_to_id = ?', user) }
 
-  scope :disability, ->{ where(disability: true) }
-  scope :indigenous, ->{ where(indigenous: true) }
-  scope :not_for_profit, ->{ where(not_for_profit: true) }
-  scope :regional, ->{ where(regional: true) }
-  scope :sme, ->{ where(sme: true) }
-  scope :start_up, ->{ where(start_up: true) }
-  scope :govdc, ->{ where(govdc: true) }
-  scope :with_service, ->(service){ where(":service = ANY(services)", service: service) }
+  scope :disability, -> { where(disability: true) }
+  scope :indigenous, -> { where(indigenous: true) }
+  scope :not_for_profit, -> { where(not_for_profit: true) }
+  scope :regional, -> { where(regional: true) }
+  scope :sme, -> { where(sme: true) }
+  scope :start_up, -> { where(start_up: true) }
+  scope :govdc, -> { where(govdc: true) }
+  scope :with_service, ->(service) { where(":service = ANY(services)", service: service) }
 
   enumerize :number_of_employees, in: ['sole', '2to4', '5to19', '20to49', '50to99', '100to199', '200plus']
   enumerize :corporate_structure, in: ['standalone', 'subsidiary']
@@ -159,18 +159,18 @@ class SellerVersion < ApplicationRecord
     'training-learning',
   ]
 
-private
+  private
+
   def normalise_abn
     self.abn = ABN.new(abn).to_s if ABN.valid?(abn)
   end
 
   def create_new_version
-    copy = self.dup
+    copy = dup
     copy.previous_version = self
     copy.started_at = Time.now
     copy.state = :created
     copy.save!
     copy
   end
-
 end

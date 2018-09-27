@@ -4,8 +4,8 @@ module SellerVersions
     include Forms::ValidationHelper
 
     AddressPrepopulator = ->(_) {
-      if self.addresses.size < 1
-        self.addresses << SellerAddress.new(country: 'AU')
+      if addresses.size < 1
+        addresses << SellerAddress.new(country: 'AU')
       end
     }
 
@@ -16,7 +16,7 @@ module SellerVersions
       # If we don't do this, Reform's collection weirdness means we have to
       # handle deltas.
       #
-      unless @collection_cleared.present?
+      if @collection_cleared.blank?
         collection.clear
         @collection_cleared = true
       end
@@ -76,6 +76,5 @@ module SellerVersions
         end
       end
     end
-
   end
 end

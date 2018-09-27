@@ -1,19 +1,20 @@
 require 'rails_helper'
 
 RSpec.describe SellerVersions::ServicesForm do
-  let(:version) { create(:seller_version) }
   subject { described_class.new(version) }
 
-  let(:atts) {
+  let(:version) { create(:seller_version) }
+
+  let(:atts) do
     {
       offers_cloud: 'true',
       govdc: 'false',
       services: [
         'managed-services',
         'software-development',
-      ]
+      ],
     }
-  }
+  end
 
   it 'validates with valid attributes' do
     expect(subject.validate(atts)).to eq(true)
@@ -30,7 +31,7 @@ RSpec.describe SellerVersions::ServicesForm do
   it 'is invalid given a service that is not in the pre-existing list' do
     subject.validate(atts.merge(services: ['baking']))
 
-    expect(subject).to_not be_valid
+    expect(subject).not_to be_valid
     expect(subject.errors[:services]).to be_present
   end
 
@@ -55,7 +56,7 @@ RSpec.describe SellerVersions::ServicesForm do
       subject.validate(atts.merge(offers_cloud: 'false'))
       subject.save
 
-      expect(version.reload.services).to_not include('cloud-services')
+      expect(version.reload.services).not_to include('cloud-services')
     end
 
     it 'removes "cloud-services" from the list when "offers_cloud" is false' do
@@ -64,7 +65,7 @@ RSpec.describe SellerVersions::ServicesForm do
       subject.validate(atts.merge(offers_cloud: 'false'))
       subject.save!
 
-      expect(version.reload.services).to_not include('cloud-services')
+      expect(version.reload.services).not_to include('cloud-services')
     end
   end
 
@@ -80,14 +81,14 @@ RSpec.describe SellerVersions::ServicesForm do
       subject.validate(atts.merge(govdc: 'false'))
       subject.save
 
-      expect(version.reload.services).to_not include('infrastructure')
+      expect(version.reload.services).not_to include('infrastructure')
     end
   end
 
   it 'is invalid when both "govdc" and "offers_cloud" is false' do
     subject.validate(atts.merge(offers_cloud: 'false', govdc: 'false'))
 
-    expect(subject).to_not be_valid
+    expect(subject).not_to be_valid
     expect(subject.errors[:eligible_seller]).to be_present
   end
 
@@ -95,7 +96,7 @@ RSpec.describe SellerVersions::ServicesForm do
     create(:product, seller: version.seller)
     subject.validate(atts.merge(offers_cloud: 'false', govdc: 'true'))
 
-    expect(subject).to_not be_valid
+    expect(subject).not_to be_valid
     expect(subject.errors[:offers_cloud]).to be_present
   end
 end

@@ -5,7 +5,7 @@ FactoryBot.define do
       weights = [3, 5, 7, 9, 11, 13, 15, 17, 19]
       sum = 0
       (0..8).each do |i|
-        digit = main[i,1].to_i
+        digit = main[i, 1].to_i
         sum += weights[i] * digit
       end
       checksum = 99 - sum % 89

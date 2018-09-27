@@ -1,5 +1,4 @@
 module Pathways::ProductsHelper
-
   def product_field(key, value)
     content_tag(:dt, key) +
       content_tag(:dd, product_value(value))
@@ -8,9 +7,9 @@ module Pathways::ProductsHelper
   def product_value(value)
     case
     when value.is_a?(Array)
-      content_tag(:ul) {
-        value.map {|item| content_tag(:li, h(item)) }.join.html_safe
-      }
+      content_tag(:ul) do
+        value.map { |item| content_tag(:li, h(item)) }.join.html_safe
+      end
     when value.is_a?(Date)
       value.strftime('%d/%m/%Y')
     when value.is_a?(Document)
@@ -30,7 +29,7 @@ module Pathways::ProductsHelper
     end
 
     out = [
-      h(upload.original_filename)
+      h(upload.original_filename),
     ]
 
     case upload.scan_status
@@ -47,5 +46,4 @@ module Pathways::ProductsHelper
 
     out.join(' ').html_safe
   end
-
 end

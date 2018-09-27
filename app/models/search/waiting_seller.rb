@@ -9,7 +9,8 @@ module Search
       }
     end
 
-  private
+    private
+
     def base_relation
       ::WaitingSeller.all
     end
@@ -20,7 +21,7 @@ module Search
 
     def apply_filters(scope)
       scope.yield_self(&method(:term_filter)).
-            yield_self(&method(:invitation_state_filter))
+        yield_self(&method(:invitation_state_filter))
     end
 
     def term_filter(relation)
@@ -38,7 +39,7 @@ module Search
 
     def invitation_state_filter(relation)
       if filter_selected?(:invitation_state)
-        relation.in_invitation_state( filter_value(:invitation_state) )
+        relation.in_invitation_state(filter_value(:invitation_state))
       else
         relation
       end

@@ -4,7 +4,8 @@ class Sellers::DashboardController < Sellers::BaseController
 
   def show; end
 
-private
+  private
+
   def seller
     @seller ||= current_user.seller
   end

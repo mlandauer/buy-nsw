@@ -1,10 +1,9 @@
 require 'csv'
 
 class Admin::SellerVersionsController < Admin::BaseController
-
   after_action :set_content_disposition, if: :csv_request?, only: :index
 
-  layout ->{
+  layout -> {
     action_name == 'index' ? 'admin' : '../admin/seller_versions/_layout'
   }
 
@@ -73,7 +72,8 @@ class Admin::SellerVersionsController < Admin::BaseController
     redirect_to admin_seller_application_path(application)
   end
 
-private
+  private
+
   def applications
     @applications ||= SellerVersion.includes(:seller)
   end
@@ -113,7 +113,7 @@ private
   helper_method :decide_form
 
   def _run_options(options)
-    options.merge( "current_user" => current_user )
+    options.merge("current_user" => current_user)
   end
 
   def csv_filename

@@ -1,19 +1,19 @@
 module Sellers::ApplicationsHelper
   def other_service_options
-    SellerVersion.services.options.reject {|(_, key)|
+    SellerVersion.services.options.reject do |(_, key)|
       key == 'cloud-services'
-    }
+    end
   end
 
   def seller_application_root_breadcrumbs
     [
-      [ 'Your application', sellers_application_path(application) ]
+      ['Your application', sellers_application_path(application)],
     ]
   end
 
   def seller_application_invitations_breadcrumbs
     seller_application_root_breadcrumbs + [
-      [ 'Your team members', sellers_application_invitations_path(application) ]
+      ['Your team members', sellers_application_invitations_path(application)],
     ]
   end
 
@@ -25,8 +25,7 @@ module Sellers::ApplicationsHelper
 
   def seller_application_product_breadcrumbs
     seller_application_products_list_breadcrumbs + [
-      [ (product.name.present? ? product.name : 'Product'), sellers_application_product_path(application, product) ]
+      [(product.name.present? ? product.name : 'Product'), sellers_application_product_path(application, product)],
     ]
   end
-
 end

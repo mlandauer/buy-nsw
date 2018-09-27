@@ -1,35 +1,33 @@
 class Admin::ResolveProblemReport < ApplicationService
-
   def initialize(problem_report_id:, current_user:)
     @problem_report_id = problem_report_id
     @current_user = current_user
   end
 
   def call
-    begin
-      ActiveRecord::Base.transaction do
-        validate_current_user
-        validate_state
-        update_state
-        set_timestamp_and_user
-        persist_report
-      end
-
-      self.state = :success
-    rescue Failure
-      self.state = :failure
+    ActiveRecord::Base.transaction do
+      validate_current_user
+      validate_state
+      update_state
+      set_timestamp_and_user
+      persist_report
     end
+
+    self.state = :success
+  rescue Failure
+    self.state = :failure
   end
 
   def problem_report
     @problem_report ||= ProblemReport.find(problem_report_id)
   end
 
-private
+  private
+
   attr_reader :problem_report_id, :current_user
 
   def validate_current_user
-    raise Failure unless current_user.present?
+    raise Failure if current_user.blank?
   end
 
   def validate_state
@@ -48,5 +46,4 @@ private
   def persist_report
     raise Failure unless problem_report.save
   end
-
 end

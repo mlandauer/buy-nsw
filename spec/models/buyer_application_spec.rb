@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe BuyerApplication do
-
   describe 'state changes' do
     describe '#submit' do
       let(:application) { create(:buyer_application) }
@@ -90,5 +89,4 @@ RSpec.describe BuyerApplication do
       expect(application.manager_approval_token).to eq('random string')
     end
   end
-
 end

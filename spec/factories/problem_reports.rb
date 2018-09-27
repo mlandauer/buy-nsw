@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :problem_report do
     task 'try to do something'
-    sequence(:issue) {|n| "For #{n} times it does not work" }
+    sequence(:issue) { |n| "For #{n} times it does not work" }
     browser 'ExampleBrowser 5/1.2.3'
     url 'http://example.org/cloud'
     referer 'http://example.org/referer'

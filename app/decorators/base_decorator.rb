@@ -4,6 +4,7 @@ class BaseDecorator < SimpleDelegator
     @view_context = view_context
   end
 
-private
+  private
+
   attr_reader :view_context
 end

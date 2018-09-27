@@ -1,8 +1,7 @@
 class Pathways::ProductsController < ApplicationController
-
   def show; end
 
-private
+  private
 
   def product
     @product ||= ProductDecorator.new(
@@ -16,5 +15,4 @@ private
     params[:section]
   end
   helper_method :section
-
 end

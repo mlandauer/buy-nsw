@@ -28,7 +28,8 @@ class BuildProductOrder < ApplicationService
     @form ||= CreateProductOrderForm.new(product_order)
   end
 
-private
+  private
+
   attr_reader :user, :product_id
 
   def active_buyer?

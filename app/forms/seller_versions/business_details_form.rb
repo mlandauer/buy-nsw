@@ -3,7 +3,7 @@ module SellerVersions
     property :name
     property :abn
 
-    validation :default, with: {form: true} do
+    validation :default, with: { form: true } do
       configure do
         option :form
 

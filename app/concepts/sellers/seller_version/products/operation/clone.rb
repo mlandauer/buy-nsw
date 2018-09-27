@@ -6,7 +6,7 @@ class Sellers::SellerVersion::Products::Clone < Trailblazer::Operation
   step :persist_new_product!
 
   def model!(options, params:, **)
-    return false unless options['config.current_user'].present?
+    return false if options['config.current_user'].blank?
 
     options[:application_model] = options['config.current_user'].seller_versions.find(params[:application_id])
     options[:seller_model] = options[:application_model].seller
@@ -31,6 +31,6 @@ class Sellers::SellerVersion::Products::Clone < Trailblazer::Operation
   end
 
   def excluded_attributes
-    [ 'id', 'created_at', 'updated_at', 'state' ]
+    ['id', 'created_at', 'updated_at', 'state']
   end
 end

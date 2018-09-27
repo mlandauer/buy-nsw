@@ -4,9 +4,10 @@ class Sellers::Applications::BaseController < Sellers::BaseController
 
   helper Sellers::ApplicationsHelper
 
-private
+  private
+
   def _run_options(options)
-    options.merge( 'config.current_user' => current_user )
+    options.merge('config.current_user' => current_user)
   end
 
   def seller_version

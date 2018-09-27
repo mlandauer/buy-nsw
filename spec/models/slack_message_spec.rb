@@ -29,9 +29,9 @@ RSpec.describe SlackMessage do
         actions: [
           type: 'button',
           text: 'View product order',
-          url: order_url
-        ]
-      }]
+          url: order_url,
+        ],
+      },]
     )
     s.new_product_order(order)
   end
@@ -48,9 +48,9 @@ RSpec.describe SlackMessage do
         actions: [
           type: 'button',
           text: 'Review application',
-          url: application_url
-        ]
-      }]
+          url: application_url,
+        ],
+      },]
     )
     s.buyer_application_submitted(application)
   end
@@ -67,9 +67,9 @@ RSpec.describe SlackMessage do
         actions: [
           type: 'button',
           text: 'Review application',
-          url: version_url
-        ]
-      }]
+          url: version_url,
+        ],
+      },]
     )
     s.seller_version_submitted(version)
   end
@@ -78,10 +78,10 @@ RSpec.describe SlackMessage do
     let(:report) { build_stubbed(:problem_report) }
     let(:report_url) { admin_problem_report_url(report) }
 
-    let(:message_text) {
+    let(:message_text) do
       "A new problem was reported :mega: :speech_balloon:"
-    }
-    let(:message_fields) {
+    end
+    let(:message_fields) do
       [
         {
           title: "Task",
@@ -92,14 +92,14 @@ RSpec.describe SlackMessage do
           value: report.issue,
         },
       ]
-    }
-    let(:message_actions) {
+    end
+    let(:message_actions) do
       [
         type: 'button',
         text: 'View problem report',
-        url: report_url
+        url: report_url,
       ]
-    }
+    end
 
     context 'an anonymous problem report' do
       let(:report) { build_stubbed(:problem_report, user_id: nil) }
@@ -113,7 +113,7 @@ RSpec.describe SlackMessage do
               fallback: "View problem report at #{report_url}",
               fields: message_fields,
               actions: message_actions,
-            }
+            },
           ]
         )
         s.new_problem_report(report)
@@ -131,10 +131,10 @@ RSpec.describe SlackMessage do
               {
                 title: "User",
                 value: report.user.email,
-              }
+              },
             ],
             actions: message_actions,
-          }
+          },
         ]
       )
       s.new_problem_report(report)

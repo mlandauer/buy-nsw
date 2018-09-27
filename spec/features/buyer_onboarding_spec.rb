@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe 'Buyer onboarding', type: :feature, js: true, skip_login: true do
-
   describe 'as a buyer' do
     let(:user) { build(:buyer_user) }
 
@@ -22,7 +21,6 @@ RSpec.describe 'Buyer onboarding', type: :feature, js: true, skip_login: true do
       expect_submission_message
     end
 
-
     it 'submits a valid employee application with phoneNumber' do
       visit '/register/buyer'
 
@@ -39,8 +37,6 @@ RSpec.describe 'Buyer onboarding', type: :feature, js: true, skip_login: true do
 
       expect_submission_message
     end
-
-
 
     it 'submits a valid contractor application' do
       visit '/register/buyer'
@@ -91,7 +87,7 @@ RSpec.describe 'Buyer onboarding', type: :feature, js: true, skip_login: true do
     choose "Yes, we’re currently looking"
     choose "Yes." if contactable == :phone_number
     fill_in 'buyer_application[contact_number]', with: '0419790000' if contactable == :phone_number
-     
+
     choose "I'd prefer email." if contactable != :phone_number
     click_on 'Next'
   end
@@ -117,5 +113,4 @@ RSpec.describe 'Buyer onboarding', type: :feature, js: true, skip_login: true do
     message = I18n.t(:awaiting_review_title, scope: [:buyers, :dashboard, :status])
     expect(page).to have_content(message)
   end
-
 end
