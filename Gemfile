@@ -77,7 +77,8 @@ group :development, :test do
   gem 'pry'
   gem 'pry-rails'
   gem 'pry-byebug'
-  gem "awesome_print"
+  gem 'awesome_print'
+  gem 'rubocop-airbnb'
 end
 
 group :development do
