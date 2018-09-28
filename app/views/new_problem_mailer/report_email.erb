@@ -1,0 +1,21 @@
+<h3>Task</h3>
+<p>
+<%= @task %>
+</p>
+
+<h3>Issue</h3>
+<p>
+<%= @issue %>
+</p>
+
+<p>
+  <%= link_to @url do %>
+    <strong>Link to Ops</strong>
+  <% end %>
+</p>
+
+<% if @user_email %>
+  <p><strong>User: </strong><%= @user_email %></p>
+<% end %>
+
+<p><strong>Browser: </strong><%= @browser %></p>
