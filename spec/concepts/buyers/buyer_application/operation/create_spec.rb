@@ -15,8 +15,8 @@ RSpec.describe Buyers::BuyerApplication::Create do
   end
 
   it 'does not create an additional application when one exists' do
-    application = create(:buyer_application, user: user)
-    result = Buyers::BuyerApplication::Create.call({}, 'current_user' => user)
+    create(:buyer_application, user: user)
+    Buyers::BuyerApplication::Create.call({}, 'current_user' => user)
 
     expect(BuyerApplication.count).to eq(1)
   end

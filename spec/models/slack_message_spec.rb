@@ -23,7 +23,8 @@ RSpec.describe SlackMessage do
 
     s = SlackMessage.new
     expect(s).to receive(:message).with(
-      text: "<#{buyer_url}|#{application.name}> from #{application.organisation} wants to buy <#{product_url}|Product name>. :moneyBag: :tada:",
+      text: "<#{buyer_url}|#{application.name}> from #{application.organisation} wants to buy " \
+            "<#{product_url}|Product name>. :moneyBag: :tada:",
       attachments: [{
         fallback: "View product order at #{order_url}",
         actions: [
@@ -42,7 +43,8 @@ RSpec.describe SlackMessage do
 
     s = SlackMessage.new
     expect(s).to receive(:message).with(
-      text: "#{application.name} from #{application.organisation} just submitted an application to become a buyer. :saxophone: :tada:",
+      text: "#{application.name} from #{application.organisation} just submitted an application " \
+            "to become a buyer. :saxophone: :tada:",
       attachments: [{
         fallback: "Review application at #{application_url}",
         actions: [

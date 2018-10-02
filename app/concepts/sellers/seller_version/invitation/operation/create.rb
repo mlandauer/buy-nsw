@@ -1,3 +1,4 @@
+# rubocop:disable Airbnb/ClassOrModuleDeclaredInWrongFile
 class Sellers::SellerVersion::Invitation::Create < Trailblazer::Operation
   class Present < Trailblazer::Operation
     step :application_model!
@@ -5,7 +6,8 @@ class Sellers::SellerVersion::Invitation::Create < Trailblazer::Operation
     step Contract::Build(constant: Sellers::CreateInvitationForm)
 
     def application_model!(options, params:, **)
-      options[:application_model] = options['config.current_user'].seller_versions.find(params[:application_id])
+      options[:application_model] = options['config.current_user'].seller_versions.
+        find(params[:application_id])
     end
 
     def build_user!(options, **)
@@ -47,3 +49,4 @@ class Sellers::SellerVersion::Invitation::Create < Trailblazer::Operation
     mailer.seller_invitation_email.deliver_later
   end
 end
+# rubocop:enable Airbnb/ClassOrModuleDeclaredInWrongFile

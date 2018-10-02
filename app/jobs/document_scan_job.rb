@@ -8,7 +8,8 @@ class DocumentScanJob < ApplicationJob
              when false then document.mark_as_infected!
              else
                raise ScanFailure
-              end
+             end
+    status
   end
 
   private

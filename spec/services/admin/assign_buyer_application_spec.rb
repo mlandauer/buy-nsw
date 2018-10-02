@@ -37,7 +37,9 @@ RSpec.describe Admin::AssignBuyerApplication do
 
       it 'logs an event' do
         expect(application.events.first.user).to eq(current_user)
-        expect(application.events.first.message).to eq("Assigned application to #{assignee_user.email}")
+        expect(application.events.first.message).to eq(
+          "Assigned application to #{assignee_user.email}"
+        )
       end
     end
 

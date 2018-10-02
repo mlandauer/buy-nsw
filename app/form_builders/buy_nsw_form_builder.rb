@@ -63,7 +63,8 @@ class BuyNswFormBuilder < SimpleForm::FormBuilder
   def translate_hint(attribute_name)
     scope = [i18n_scope, attribute_name]
 
-    if html = translate_if_exists(:hint_html, scope)
+    html = translate_if_exists(:hint_html, scope)
+    if html
       html.html_safe
     else
       translate_if_exists(:hint, scope)

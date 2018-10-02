@@ -1,4 +1,5 @@
 class VerboseProductDetails < ProductDetails
+  # rubocop:disable Metrics/LineLength
   private
 
   def product_basics
@@ -368,4 +369,5 @@ class VerboseProductDetails < ProductDetails
       'How often do you test your access controls' => product.access_control_testing_frequency_text,
     }
   end
+  # rubocop:enable Metrics/LineLength
 end

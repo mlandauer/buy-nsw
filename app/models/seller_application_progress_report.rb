@@ -46,22 +46,28 @@ class SellerApplicationProgressReport
       cache_key = "sellers.products.#{product.id}.#{validate_optional_steps}"
 
       progress = Rails.cache.fetch(cache_key, expires_in: cache_length) do
-        build_step_progress(product_steps, application, product)
+        build_step_progress(product_steps, application, product: product)
       end
       progress['_overall'] = progress.reject { |_, v| v == true }.empty?
 
       [product.id, progress]
     end
 
-    progress = Hash[tuples]
+    Hash[tuples]
   end
 
-  def build_step_progress(steps, application, product = nil)
+  def build_step_progress(steps, application, product: nil)
     {}.tap do |output|
       steps.each do |step|
-        output[step.key] = product.present? ?
-          step.complete?(application, product, validate_optional_steps: validate_optional_steps) :
-          step.complete?(application, validate_optional_steps: validate_optional_steps)
+        if product.present?
+          output[step.key] = step.complete?(
+            application, product, validate_optional_steps: validate_optional_steps
+          )
+        else
+          output[step.key] = step.complete?(
+            application, validate_optional_steps: validate_optional_steps
+          )
+        end
       end
     end
   end

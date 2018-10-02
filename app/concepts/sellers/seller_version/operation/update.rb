@@ -1,3 +1,4 @@
+# rubocop:disable Airbnb/ClassOrModuleDeclaredInWrongFile
 class Sellers::SellerVersion::Update < Trailblazer::Operation
   class Present < Trailblazer::Operation
     step :model!
@@ -89,3 +90,4 @@ class Sellers::SellerVersion::Update < Trailblazer::Operation
     options['result.valid']
   end
 end
+# rubocop:enable Airbnb/ClassOrModuleDeclaredInWrongFile

@@ -6,7 +6,7 @@ class Admin::BaseController < ApplicationController
   private
 
   def authenticate_admin!
-    unless current_user && current_user.is_admin?
+    if !(current_user && current_user.is_admin?)
       raise NotAuthorized
     end
   end

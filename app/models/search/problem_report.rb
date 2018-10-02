@@ -29,7 +29,7 @@ module Search
     def url_filter(relation)
       if filter_selected?(:url)
         url = filter_value(:url)
-        relation = relation.where('url LIKE ?', "%#{sanitize_sql_like(url)}%")
+        relation.where('url LIKE ?', "%#{sanitize_sql_like(url)}%")
       else
         relation
       end
@@ -38,7 +38,7 @@ module Search
     def tag_filter(relation)
       if filter_selected?(:tag)
         tag = filter_value(:tag)
-        relation = relation.with_tag(tag)
+        relation.with_tag(tag)
       else
         relation
       end

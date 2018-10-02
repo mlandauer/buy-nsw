@@ -2,7 +2,7 @@ class User < ApplicationRecord
   extend Enumerize
 
   include Discard::Model
-  default_scope -> { kept }
+  default_scope -> { kept } # rubocop:disable Airbnb/DefaultScope
 
   devise :database_authenticatable, :registerable,
          :confirmable, :recoverable, :rememberable,

@@ -37,13 +37,13 @@ class Admin::RevertSellerVersion < ApplicationService
   end
 
   def validate_current_user
-    unless current_user.present? && seller_version.assigned_to == current_user
+    if current_user.blank? || seller_version.assigned_to != current_user
       raise Failure
     end
   end
 
   def validate_state
-    unless seller_version.approved? && seller_version.may_return_to_applicant?
+    if !(seller_version.approved? && seller_version.may_return_to_applicant?)
       raise Failure
     end
   end

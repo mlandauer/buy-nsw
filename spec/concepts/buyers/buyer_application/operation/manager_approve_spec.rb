@@ -43,7 +43,9 @@ RSpec.describe Buyers::BuyerApplication::ManagerApprove do
   it 'logs an event' do
     Buyers::BuyerApplication::ManagerApprove.call(valid_params)
 
-    expect(application.reload.events.last.message).to eq('Manager Manager Manager (manager@example.org) approved the buyer')
+    expect(application.reload.events.last.message).to eq(
+      'Manager Manager Manager (manager@example.org) approved the buyer'
+    )
     expect(application.reload.events.last.user).to be_nil
   end
 
@@ -56,7 +58,9 @@ RSpec.describe Buyers::BuyerApplication::ManagerApprove do
 
     it 'fails when the token is not correct' do
       expect(
-        Buyers::BuyerApplication::ManagerApprove.call(id: application.id, token: 'not a valid token')
+        Buyers::BuyerApplication::ManagerApprove.call(
+          id: application.id, token: 'not a valid token'
+        )
       ).to be_failure
     end
 

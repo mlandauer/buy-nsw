@@ -58,7 +58,7 @@ class Admin::BuyerApplicationsController < Admin::BaseController
 
   def notes
     application = BuyerApplication.find(params[:id])
-    event = Event::Note.create(
+    Event::Note.create(
       user: current_user,
       eventable: application,
       note: params[:event_note]['note']

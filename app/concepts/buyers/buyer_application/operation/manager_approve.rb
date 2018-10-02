@@ -1,3 +1,4 @@
+# rubocop:disable Airbnb/ClassOrModuleDeclaredInWrongFile
 class Buyers::BuyerApplication::ManagerApprove < Trailblazer::Operation
   step Rescue {
     step :model!
@@ -38,3 +39,4 @@ class Buyers::BuyerApplication::ManagerApprove < Trailblazer::Operation
     )
   end
 end
+# rubocop:enable Airbnb/ClassOrModuleDeclaredInWrongFile

@@ -18,9 +18,13 @@ module CsvConvert
       else
         Seller.create!(atts)
       end
+
       # Now do the addresses
-      number_of_addresses =
-        row.select { |k, v| k.split('.')[0] == 'seller_address' }.map { |k, v| k.split('.')[1].to_i }.max
+      number_of_addresses = row.
+        select { |k, v| k.split('.')[0] == 'seller_address' }.
+        map { |k, v| k.split('.')[1].to_i }.
+        max
+
       (1..number_of_addresses).each do |i|
         atts = {}
         row.each do |k, v|

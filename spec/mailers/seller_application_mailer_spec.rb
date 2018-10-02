@@ -59,7 +59,9 @@ RSpec.describe SellerApplicationMailer, type: :mailer do
 
   describe "#application_return_to_applicant_email" do
     let(:application) { create(:returned_to_applicant_seller_version) }
-    let(:mail) { SellerApplicationMailer.with(application: application).application_return_to_applicant_email }
+    let(:mail) do
+      SellerApplicationMailer.with(application: application).application_return_to_applicant_email
+    end
 
     it 'renders the headers' do
       expect(mail.subject).to match("Your application needs some changes before it can be approved")

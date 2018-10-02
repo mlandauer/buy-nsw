@@ -34,7 +34,9 @@ RSpec.describe Admin::DecideBuyerApplication do
 
       it 'logs an event' do
         expect(operation.buyer_application.events.first.user).to eq(current_user)
-        expect(operation.buyer_application.events.first.message).to eq("Approved application. Response: Response")
+        expect(operation.buyer_application.events.first.message).to eq(
+          "Approved application. Response: Response"
+        )
       end
 
       it 'sends an email' do
@@ -72,7 +74,9 @@ RSpec.describe Admin::DecideBuyerApplication do
 
       it 'logs an event' do
         expect(operation.buyer_application.events.first.user).to eq(current_user)
-        expect(operation.buyer_application.events.first.message).to eq("Rejected application. Response: Response")
+        expect(operation.buyer_application.events.first.message).to eq(
+          "Rejected application. Response: Response"
+        )
       end
     end
   end

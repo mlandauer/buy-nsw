@@ -28,7 +28,7 @@ module Search
       if filter_selected?(:term)
         term = filter_value(:term)
 
-        relation = relation.basic_search({
+        relation.basic_search({
           name: term,
           contact_name: term,
         }, false)

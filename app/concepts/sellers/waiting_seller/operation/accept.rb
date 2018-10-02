@@ -1,3 +1,4 @@
+# rubocop:disable Airbnb/ClassOrModuleDeclaredInWrongFile
 class Sellers::WaitingSeller::Accept < Trailblazer::Operation
   class Present < Trailblazer::Operation
     step :model!
@@ -111,3 +112,4 @@ class Sellers::WaitingSeller::Accept < Trailblazer::Operation
     end
   end
 end
+# rubocop:enable Airbnb/ClassOrModuleDeclaredInWrongFile

@@ -15,7 +15,9 @@ class ApplicationController < ActionController::Base
   private
 
   def authenticate!
-    return unless ENV['BASIC_USERNAME'].present? && ENV['BASIC_PASSWORD'].present?
+    if ENV['BASIC_USERNAME'].blank? || ENV['BASIC_PASSWORD'].blank?
+      return
+    end
 
     authenticate_or_request_with_http_basic do |username, password|
       username == ENV['BASIC_USERNAME'] && password == ENV['BASIC_PASSWORD']
@@ -23,7 +25,7 @@ class ApplicationController < ActionController::Base
   end
 
   def authorize_buyer!
-    unless current_user.buyer.present? && current_user.buyer.active?
+    if !(current_user.buyer.present? && current_user.buyer.active?)
       raise NotAuthorized
     end
   end

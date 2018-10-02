@@ -5,8 +5,11 @@ class Sellers::Applications::RootController < Sellers::Applications::BaseControl
     @operation = run Sellers::SellerVersion::Create::Present
 
     if operation.failure?
-      return redirect_to sellers_dashboard_path if operation['application_submitted']
-      return redirect_to sellers_application_path(operation['model.seller_version'].id) if operation['application_created']
+      if operation['application_submitted']
+        return redirect_to sellers_dashboard_path
+      elsif operation['application_created']
+        return redirect_to sellers_application_path(operation['model.seller_version'].id)
+      end
     end
   end
 

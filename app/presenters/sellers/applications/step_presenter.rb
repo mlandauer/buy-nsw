@@ -10,7 +10,7 @@ module Sellers::Applications
       contract_class == other.contract_class
     end
 
-    def name(type = :short)
+    def name(type: :short)
       I18n.t("#{i18n_base}.#{type}", default: I18n.t("#{i18n_base}.short"))
     end
 

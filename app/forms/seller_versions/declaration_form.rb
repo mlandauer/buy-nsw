@@ -1,7 +1,10 @@
 module SellerVersions
   class DeclarationForm < BaseForm
     def representative_details_provided?
-      [:representative_name, :representative_email, :representative_phone, :representative_position].map do |field|
+      [
+        :representative_name, :representative_email,
+        :representative_phone, :representative_position,
+      ].map do |field|
         model.send(field)
       end.reject(&:present?).empty?
     end

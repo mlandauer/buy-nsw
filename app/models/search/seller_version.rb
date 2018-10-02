@@ -15,7 +15,9 @@ module Search
       {
         term: :term_filter,
         services: service_keys,
-        business_identifiers: [:disability, :indigenous, :not_for_profit, :regional, :start_up, :sme],
+        business_identifiers: [
+          :disability, :indigenous, :not_for_profit, :regional, :start_up, :sme,
+        ],
         govdc: [:govdc],
       }
     end
@@ -46,7 +48,7 @@ module Search
 
     def term_filter(relation)
       if term.present?
-        relation = relation.basic_search(term)
+        relation.basic_search(term)
       else
         relation
       end
