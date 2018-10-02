@@ -64,7 +64,7 @@ class Admin::SellerVersionsController < Admin::BaseController
 
   def notes
     application = SellerVersion.find(params[:id])
-    event = Event::Note.create(
+    Event::Note.create(
       user: current_user,
       eventable: application,
       note: params[:event_note]['note']

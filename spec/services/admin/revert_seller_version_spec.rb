@@ -27,7 +27,9 @@ RSpec.describe Admin::RevertSellerVersion do
 
       it 'creates a new version of the application' do
         expect(operation.seller_version.next_version).not_to be_nil
-        expect(operation.seller_version.next_version.previous_version).to eq(operation.seller_version)
+        expect(operation.seller_version.next_version.previous_version).to eq(
+          operation.seller_version
+        )
         expect(operation.seller_version.next_version.state).to eq('created')
       end
 

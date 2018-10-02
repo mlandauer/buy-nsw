@@ -38,7 +38,9 @@ RSpec.describe Admin::DecideSellerVersion do
 
       it 'logs an event' do
         expect(operation.seller_version.events.first.user).to eq(current_user)
-        expect(operation.seller_version.events.first.message).to eq("Approved application. Response: Response")
+        expect(operation.seller_version.events.first.message).to eq(
+          "Approved application. Response: Response"
+        )
       end
 
       it 'sends an email' do
@@ -76,7 +78,9 @@ RSpec.describe Admin::DecideSellerVersion do
 
       it 'logs an event' do
         expect(operation.seller_version.events.first.user).to eq(current_user)
-        expect(operation.seller_version.events.first.message).to eq("Rejected application. Response: Response")
+        expect(operation.seller_version.events.first.message).to eq(
+          "Rejected application. Response: Response"
+        )
       end
 
       it 'sends an email' do
@@ -104,13 +108,17 @@ RSpec.describe Admin::DecideSellerVersion do
 
       it 'creates a new version of the application' do
         expect(operation.seller_version.next_version).not_to be_nil
-        expect(operation.seller_version.next_version.previous_version).to eq(operation.seller_version)
+        expect(operation.seller_version.next_version.previous_version).to eq(
+          operation.seller_version
+        )
         expect(operation.seller_version.next_version.state).to eq('created')
       end
 
       it 'logs an event' do
         expect(operation.seller_version.events.first.user).to eq(current_user)
-        expect(operation.seller_version.events.first.message).to eq("Returned application to seller. Response: Response")
+        expect(operation.seller_version.events.first.message).to eq(
+          "Returned application to seller. Response: Response"
+        )
       end
 
       it 'sends an email' do

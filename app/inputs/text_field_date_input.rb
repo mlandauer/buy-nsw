@@ -12,7 +12,13 @@ class TextFieldDateInput < SimpleForm::Inputs::DateTimeInput
 
       field = template.content_tag(:div, class: 'form-group') do
         @builder.label(key, for: key, label: type.to_s.capitalize) +
-        @builder.text_field(attribute_name, name: "#{@builder.object_name}[#{key}]", value: value, id: key, class: classes)
+        @builder.text_field(
+          attribute_name,
+          name: "#{@builder.object_name}[#{key}]",
+          value: value,
+          id: key,
+          class: classes
+        )
       end
       out << field
     end

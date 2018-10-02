@@ -10,8 +10,8 @@ class FormErrorDecorator < BaseDecorator
   private
 
   def friendly_format_messages(messages)
-    tuples = messages.map do |key, messages|
-      formatted = messages.yield_self(&method(:remove_blank_messages)).
+    tuples = messages.map do |key, message|
+      formatted = message.yield_self(&method(:remove_blank_messages)).
         yield_self(&method(:downcase_other_messages)).
         yield_self(&method(:limit_politeness))
       [key, formatted]

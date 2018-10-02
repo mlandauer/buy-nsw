@@ -7,7 +7,9 @@ class SlackMessage
       params: {
         buyer: link_to(order.buyer.name, admin_buyer_application_url(order.buyer)),
         organisation: order.buyer.organisation,
-        product: link_to(order.product.name, pathway_product_url(order.product.section, order.product)),
+        product: link_to(
+          order.product.name, pathway_product_url(order.product.section, order.product)
+        ),
       },
       button_url: admin_product_orders_url
     )

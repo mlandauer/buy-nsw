@@ -6,7 +6,7 @@ class Product < ApplicationRecord
   include Concerns::StateScopes
 
   include Discard::Model
-  default_scope -> { kept }
+  default_scope -> { kept } # rubocop:disable Airbnb/DefaultScope
 
   belongs_to :seller
 
@@ -45,18 +45,15 @@ class Product < ApplicationRecord
     'sales-marketing',
     'security-cyber',
   ]
+  # rubocop:disable Metrics/LineLength
   enumerize :reseller_type, in: ['own-product', 'no-extras', 'extra-support', 'extra-features-support']
   enumerize :pricing_currency, in: ['aud', 'usd', 'other']
   enumerize :deployment_model, multiple: true, in: ['govdc', 'public-cloud', 'other-cloud']
   enumerize :addon_extension_type, in: ['yes', 'yes-and-standalone', 'no']
   enumerize :api, in: ['rest', 'non-rest', 'no']
   enumerize :government_network_type, multiple: true, in: ['govdc', 'govlink', 'aarnet', 'id-hub', 'icon', 'other']
-  enumerize :supported_browsers, multiple: true, in: [
-    'ie7', 'ie8', 'ie9', 'ie10', 'ie11', 'ms-edge', 'firefox', 'chrome', 'safari9', 'opera',
-  ]
-  enumerize :supported_os, multiple: true, in: [
-    'windows', 'macos', 'linux-unix', 'android', 'ios', 'windows-phone', 'other',
-  ]
+  enumerize :supported_browsers, multiple: true, in: ['ie7', 'ie8', 'ie9', 'ie10', 'ie11', 'ms-edge', 'firefox', 'chrome', 'safari9', 'opera']
+  enumerize :supported_os, multiple: true, in: ['windows', 'macos', 'linux-unix', 'android', 'ios', 'windows-phone', 'other']
   enumerize :accessibility_type, in: ['all', 'exclusions', 'none']
   enumerize :scaling_type, in: ['automatic', 'manual', 'none']
   enumerize :support_options, multiple: true, in: ['phone', 'email', 'web-chat', 'online', 'onsite']
@@ -130,4 +127,6 @@ class Product < ApplicationRecord
   scope :soc_2, -> { where(soc_2: true) }
   scope :irap_assessed, -> { where("irap_type != 'not-assessed'") }
   scope :asd_certified, -> { where(asd_certified: true) }
+
+  # rubocop:enable Metrics/LineLength
 end

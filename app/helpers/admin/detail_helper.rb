@@ -3,7 +3,9 @@ module Admin::DetailHelper
     content_tag(:dl, id: type) do
       fields[type].map do |field|
         [
-          content_tag(:dt, display_label_for(resource_name, type, field), :class => field_classes[field]) +
+          content_tag(
+            :dt, display_label_for(resource_name, type, field), :class => field_classes[field]
+          ) +
           content_tag(:dd, display_value_for(resource, field), :class => field_classes[field]),
         ]
       end.flatten.join.html_safe

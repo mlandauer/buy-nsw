@@ -6,7 +6,7 @@ class SellerVersion < ApplicationRecord
   include Concerns::Documentable
 
   include Discard::Model
-  default_scope -> { kept }
+  default_scope -> { kept } # rubocop:disable Airbnb/DefaultScope
 
   before_save :normalise_abn
 
@@ -110,7 +110,7 @@ class SellerVersion < ApplicationRecord
     end
   end
 
-  def changed_fields(rhs = previous_version)
+  def changed_fields(rhs: previous_version)
     # https://stackoverflow.com/a/43864734/10377598
     if rhs.nil?
       return []
@@ -144,7 +144,9 @@ class SellerVersion < ApplicationRecord
   scope :govdc, -> { where(govdc: true) }
   scope :with_service, ->(service) { where(":service = ANY(services)", service: service) }
 
-  enumerize :number_of_employees, in: ['sole', '2to4', '5to19', '20to49', '50to99', '100to199', '200plus']
+  enumerize :number_of_employees, in: [
+    'sole', '2to4', '5to19', '20to49', '50to99', '100to199', '200plus',
+  ]
   enumerize :corporate_structure, in: ['standalone', 'subsidiary']
   enumerize :services, multiple: true, in: [
     'cloud-services',

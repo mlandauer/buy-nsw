@@ -3,7 +3,12 @@ module AccessibleHintComponent
 
   def accessible_hint(wrapper_options = {})
     if hint_exists?
-      @builder.hint(hint_text, hint_tag: wrapper_options[:tag], class: wrapper_options[:class], id: options[:hint_id])
+      @builder.hint(
+        hint_text,
+        hint_tag: wrapper_options[:tag],
+        class: wrapper_options[:class],
+        id: options[:hint_id],
+      )
     end
   end
 

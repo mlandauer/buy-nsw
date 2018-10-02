@@ -6,7 +6,8 @@ module Sellers::Applications
 
     def path(application:, product:)
       Rails.application.routes.url_helpers.send(
-        :sellers_application_product_step_path, id: product.id, application_id: application.id, step: slug
+        :sellers_application_product_step_path,
+        id: product.id, application_id: application.id, step: slug,
       )
     end
 

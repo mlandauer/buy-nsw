@@ -19,7 +19,7 @@ class ProblemReport < ApplicationRecord
   scope :with_tag, ->(tag) { where(":tag = ANY(tags)", tag: tag) }
 
   def validate_presence_of_task_or_issue
-    unless task.present? || issue.present?
+    if task.blank? && issue.blank?
       errors.add(:base, 'must be have a task or issue')
     end
   end

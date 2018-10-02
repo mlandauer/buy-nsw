@@ -1,3 +1,4 @@
+# rubocop:disable Airbnb/ClassOrModuleDeclaredInWrongFile
 class Buyers::BuyerApplication::Create < Trailblazer::Operation
   step :model!
   step :check_application_state!
@@ -6,7 +7,7 @@ class Buyers::BuyerApplication::Create < Trailblazer::Operation
 
   def model!(options, **)
     options[:application_model] = options['current_user'].buyer ||
-                                    BuyerApplication.new(started_at: Time.now, user: options['current_user'])
+      BuyerApplication.new(started_at: Time.now, user: options['current_user'])
   end
 
   def check_application_state!(options, **)
@@ -24,3 +25,4 @@ class Buyers::BuyerApplication::Create < Trailblazer::Operation
     )
   end
 end
+# rubocop:enable Airbnb/ClassOrModuleDeclaredInWrongFile

@@ -1,6 +1,6 @@
 <% content_for(:seller_application_class, 'application-step') %>
 
-<%= render_breadcrumbs(seller_application_product_breadcrumbs, step.name(:short)) %>
+<%= render_breadcrumbs(seller_application_product_breadcrumbs, step.name(type: :short)) %>
 
 <%= render partial: 'sellers/applications/steps/step', locals: {
   form: form,

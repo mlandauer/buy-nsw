@@ -8,7 +8,9 @@ class Sellers::Applications::ProductsController < Sellers::Applications::BaseCon
 
   def new
     @operation = run Sellers::SellerVersion::Products::Create do |result|
-      return redirect_to sellers_application_product_path(result[:application_model], result[:product_model])
+      return redirect_to sellers_application_product_path(
+        result[:application_model], result[:product_model]
+      )
     end
   end
 
@@ -21,7 +23,9 @@ class Sellers::Applications::ProductsController < Sellers::Applications::BaseCon
 
     @operation = run Sellers::SellerVersion::Products::Update do |result|
       flash.notice = I18n.t('sellers.applications.messages.changes_saved')
-      return redirect_to sellers_application_product_path(result['model.application'], result['model.product'])
+      return redirect_to sellers_application_product_path(
+        result['model.application'], result['model.product']
+      )
     end
 
     render :edit

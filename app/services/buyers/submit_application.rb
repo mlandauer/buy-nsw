@@ -33,7 +33,9 @@ class Buyers::SubmitApplication < ApplicationService
   end
 
   def validate_state
-    raise Failure unless user.present? && application.present? && application.may_submit?
+    if !(user.present? && application.present? && application.may_submit?)
+      raise Failure
+    end
   end
 
   def validate_completion

@@ -1,6 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe Sellers::Applications::StepsController, type: :controller, sign_in: :seller_user_with_seller do
+RSpec.describe Sellers::Applications::StepsController,
+               type: :controller, sign_in: :seller_user_with_seller do
   describe '.contracts' do
     context 'given a seller who does not offer cloud services' do
       let(:seller_version) { create(:created_seller_version, services: []) }

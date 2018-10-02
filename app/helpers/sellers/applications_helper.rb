@@ -25,7 +25,10 @@ module Sellers::ApplicationsHelper
 
   def seller_application_product_breadcrumbs
     seller_application_products_list_breadcrumbs + [
-      [(product.name.present? ? product.name : 'Product'), sellers_application_product_path(application, product)],
+      [
+        (product.name.present? ? product.name : 'Product'),
+        sellers_application_product_path(application, product),
+      ],
     ]
   end
 end

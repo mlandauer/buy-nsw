@@ -6,7 +6,9 @@ module Search::Admin
         state: state_keys,
         name: :term_filter,
         email: :term_filter,
-        business_identifiers: [:disability, :indigenous, :not_for_profit, :regional, :start_up, :sme],
+        business_identifiers: [
+          :disability, :indigenous, :not_for_profit, :regional, :start_up, :sme,
+        ],
         checkbox_filters: [:reverted],
         sort: sort_keys,
       }

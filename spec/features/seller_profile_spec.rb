@@ -33,7 +33,9 @@ RSpec.describe 'Seller profiles', type: :feature, js: true, skip_login: true do
     it 'tells you what you need to do to see the full seller profile' do
       visit sellers_profile_path(seller)
 
-      expect(page).to have_content('To see the full seller profile, create a buyer account, or sign in')
+      expect(page).to have_content(
+        'To see the full seller profile, create a buyer account, or sign in'
+      )
     end
   end
 
@@ -46,7 +48,9 @@ RSpec.describe 'Seller profiles', type: :feature, js: true, skip_login: true do
     it 'tells you what you need to do to see the full seller profile' do
       visit sellers_profile_path(seller)
 
-      expect(page).to have_content('To see the full seller profile you need to be an approved buyer')
+      expect(page).to have_content(
+        'To see the full seller profile you need to be an approved buyer'
+      )
     end
   end
 

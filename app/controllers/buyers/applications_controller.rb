@@ -49,9 +49,11 @@ class Buyers::ApplicationsController < Buyers::BaseController
   def manager_approve
     @operation = run Buyers::BuyerApplication::ManagerApprove
 
-    flash.notice = (operation['result.approved'] == true) ?
-      I18n.t('buyers.applications.messages.manager_approve_success') :
-        I18n.t('buyers.applications.messages.manager_approve_failure')
+    if operation['result.approved'] == true
+      flash.notice = I18n.t('buyers.applications.messages.manager_approve_success')
+    else
+      flash.notice = I18n.t('buyers.applications.messages.manager_approve_failure')
+    end
 
     redirect_to root_path
   end

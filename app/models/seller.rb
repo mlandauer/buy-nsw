@@ -6,7 +6,7 @@ class Seller < ApplicationRecord
   include Concerns::StateScopes
 
   include Discard::Model
-  default_scope -> { kept }
+  default_scope -> { kept } # rubocop:disable Airbnb/DefaultScope
 
   has_many :owners, class_name: 'User'
   belongs_to :agreed_by, class_name: 'User', optional: true

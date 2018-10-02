@@ -1,8 +1,10 @@
+# rubocop:disable Airbnb/ClassOrModuleDeclaredInWrongFile
 class Sellers::SellerVersion::Products::Update < Trailblazer::Operation
   class Present < Sellers::SellerVersion::Update::Present
     def model!(options, params:, **)
       options['model.seller'] = options['config.current_user'].seller
-      options['model.application'] ||= options['model.seller'].versions.created.find(params[:application_id])
+      options['model.application'] ||= options['model.seller'].versions.created.
+        find(params[:application_id])
       options['model.product'] = options['model.seller'].products.find(params[:id])
 
       options['model.product'].present?
@@ -48,3 +50,4 @@ class Sellers::SellerVersion::Products::Update < Trailblazer::Operation
     options['result.valid']
   end
 end
+# rubocop:enable Airbnb/ClassOrModuleDeclaredInWrongFile

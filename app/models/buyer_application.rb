@@ -7,7 +7,7 @@ class BuyerApplication < ApplicationRecord
   include Concerns::StateScopes
 
   include Discard::Model
-  default_scope -> { kept }
+  default_scope -> { kept } # rubocop:disable Airbnb/DefaultScope
 
   belongs_to :assigned_to, class_name: 'User', optional: true
   belongs_to :user
@@ -32,8 +32,10 @@ class BuyerApplication < ApplicationRecord
       transitions from: :created, to: :approved, guard: :no_approval_required?
       transitions from: :created, to: :awaiting_manager_approval, guard: :requires_manager_approval?
 
-      transitions from: :created, to: :awaiting_assignment, guard: [:requires_email_approval?, :unassigned?]
-      transitions from: :created, to: :ready_for_review, guard: [:requires_email_approval?, :assignee_present?]
+      transitions from: :created, to: :awaiting_assignment,
+                  guard: [:requires_email_approval?, :unassigned?]
+      transitions from: :created, to: :ready_for_review,
+                  guard: [:requires_email_approval?, :assignee_present?]
 
       before do
         self.submitted_at = Time.now
@@ -41,8 +43,10 @@ class BuyerApplication < ApplicationRecord
     end
 
     event :manager_approve do
-      transitions from: :awaiting_manager_approval, to: :awaiting_assignment, guard: [:requires_email_approval?, :unassigned?]
-      transitions from: :awaiting_manager_approval, to: :ready_for_review, guard: [:requires_email_approval?, :assignee_present?]
+      transitions from: :awaiting_manager_approval, to: :awaiting_assignment,
+                  guard: [:requires_email_approval?, :unassigned?]
+      transitions from: :awaiting_manager_approval, to: :ready_for_review,
+                  guard: [:requires_email_approval?, :assignee_present?]
       transitions from: :awaiting_manager_approval, to: :approved
     end
 

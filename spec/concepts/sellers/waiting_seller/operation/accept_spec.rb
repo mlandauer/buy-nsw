@@ -3,15 +3,15 @@ require 'rails_helper'
 RSpec.describe Sellers::WaitingSeller::Accept do
   let(:waiting_seller) { create(:invited_waiting_seller) }
 
-  def perform_operation(params = {})
-    described_class.call({ id: waiting_seller.invitation_token, invitation: params })
-  end
-
   let(:default_params) do
     {
       password: 'a long secure password',
       password_confirmation: 'a long secure password',
     }
+  end
+
+  def perform_operation(params = {})
+    described_class.call({ id: waiting_seller.invitation_token, invitation: params })
   end
 
   describe '::Present' do

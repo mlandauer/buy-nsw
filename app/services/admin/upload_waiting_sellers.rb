@@ -40,7 +40,9 @@ class Admin::UploadWaitingSellers < ApplicationService
   attr_reader :file, :csv
 
   def validate_file
-    raise Failure unless file.present? || file_contents.present?
+    if file.blank? && file_contents.blank?
+      raise Failure
+    end
   end
 
   def set_file_contents

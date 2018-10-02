@@ -49,7 +49,9 @@ module Concerns::Documentable
         end
 
         define_method("remove_#{field}=") do |value|
-          send("#{field}_id=", nil) unless value.blank? || value == '0'
+          if !(value.blank? || value == '0')
+            send("#{field}_id=", nil)
+          end
         end
       end
     end

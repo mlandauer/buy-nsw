@@ -1,4 +1,5 @@
 class ProductDetails
+  # rubocop:disable Metrics/LineLength
   def initialize(product, include_all: false)
     @product = product
     @include_all = include_all
@@ -426,4 +427,5 @@ class ProductDetails
   def attributes(&block)
     {}.tap(&block)
   end
+  # rubocop:enable Metrics/LineLength
 end

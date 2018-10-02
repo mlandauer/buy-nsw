@@ -9,7 +9,9 @@ RSpec.describe Sellers::SellerVersion::Submit do
   end
 
   it 'fails if the seller application is not complete' do
-    expect_any_instance_of(SellerApplicationProgressReport).to receive(:all_steps_valid?).and_return(false)
+    expect_any_instance_of(SellerApplicationProgressReport).to(
+      receive(:all_steps_valid?).and_return(false)
+    )
     result = perform_operation
 
     expect(result).to be_failure
@@ -17,7 +19,9 @@ RSpec.describe Sellers::SellerVersion::Submit do
 
   describe 'given a complete application' do
     before do
-      expect_any_instance_of(SellerApplicationProgressReport).to receive(:all_steps_valid?).and_return(true)
+      expect_any_instance_of(SellerApplicationProgressReport).to(
+        receive(:all_steps_valid?).and_return(true)
+      )
     end
 
     it 'is successful if the application is in a valid state' do

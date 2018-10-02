@@ -63,10 +63,15 @@ module Products
       required(:education_pricing_eligibility).maybe(:str?)
       required(:education_pricing_differences).maybe(:str?)
 
-      rule(education_pricing_eligibility: [:education_pricing, :education_pricing_eligibility]) do |radio, field|
+      rule(
+        education_pricing_eligibility: [:education_pricing, :education_pricing_eligibility]
+      ) do |radio, field|
         radio.true?.then(field.filled?)
       end
-      rule(education_pricing_differences: [:education_pricing, :education_pricing_differences]) do |radio, field|
+
+      rule(
+        education_pricing_differences: [:education_pricing, :education_pricing_differences]
+      ) do |radio, field|
         radio.true?.then(field.filled?)
       end
 
@@ -74,10 +79,15 @@ module Products
       required(:not_for_profit_pricing_eligibility).maybe(:str?)
       required(:not_for_profit_pricing_differences).maybe(:str?)
 
-      rule(not_for_profit_pricing_eligibility: [:not_for_profit_pricing, :not_for_profit_pricing_eligibility]) do |radio, field|
+      rule(not_for_profit_pricing_eligibility: [
+        :not_for_profit_pricing, :not_for_profit_pricing_eligibility,
+      ]) do |radio, field|
         radio.true?.then(field.filled?)
       end
-      rule(not_for_profit_pricing_differences: [:not_for_profit_pricing, :not_for_profit_pricing_differences]) do |radio, field|
+
+      rule(not_for_profit_pricing_differences: [
+        :not_for_profit_pricing, :not_for_profit_pricing_differences,
+      ]) do |radio, field|
         radio.true?.then(field.filled?)
       end
     end
