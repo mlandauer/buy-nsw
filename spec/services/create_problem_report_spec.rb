@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe CreateProblemReport do
+  include ActiveJob::TestHelper
 
   let(:params) {
     {
@@ -33,9 +34,12 @@ RSpec.describe CreateProblemReport do
         expect(report.browser).to eq(params[:browser])
       end
 
-      it 'notifies slack of the problem report' do
-        expect(SlackPostJob).to receive(:perform_later)
-        operation
+      it 'sends report to zendesk' do
+        expect {
+          perform_enqueued_jobs do
+            operation
+          end
+        }.to change { ActionMailer::Base.deliveries.count }.by(1)
       end
     end
 
@@ -48,6 +52,15 @@ RSpec.describe CreateProblemReport do
         report = operation.problem_report.reload
         expect(report.user).to eq(user)
       end
+
+      it 'sends report to zendesk' do
+        expect {
+          perform_enqueued_jobs do
+            operation
+          end
+        }.to change { ActionMailer::Base.deliveries.count }.by(1)
+      end
+
     end
 
     context 'with invalid attributes' do

@@ -9,7 +9,7 @@ class CreateProblemReport < ApplicationService
     begin
       assign_attributes
       persist_problem_report
-      send_slack_notification
+      send_zen_desk_email
 
       self.state = :success
     rescue Failure
@@ -23,6 +23,11 @@ class CreateProblemReport < ApplicationService
 
 private
   attr_reader :params, :current_user
+
+  def send_zen_desk_email
+    mailer = NewProblemMailer.with(report_params)
+    mailer.report_email.deliver_later
+  end
 
   def report_params
     {
