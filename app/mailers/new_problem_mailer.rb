@@ -10,7 +10,7 @@ class NewProblemMailer < ApplicationMailer
     @browser = params[:browser]
 
     subject = "buy.nsw: A new problem was reported"
-    subject = Rails.env.upcase + " | " + subject unless Rails.env.production?
+    subject.prepend("%s | " % Rails.env.upcase) unless Rails.env.production?
     mail(subject: subject, reply_to: @user_email)
   end
 end

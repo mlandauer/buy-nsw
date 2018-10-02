@@ -3,20 +3,18 @@ require 'rails_helper'
 RSpec.describe NewProblemMailer, type: :mailer do
 
   describe '#report_email' do
-    let(:user) { create(:user) }
-    let(:task) { 'doing something' }
-    let(:issue) { 'something happened' }
+    let(:problem) { create(:problem_report) }
 
-    let(:mail) { described_class.with(user: user, task: task, issue: issue, url: 'http://localhost:3000/ops/problem-reports/5').report_email }
+    let(:mail) { described_class.with(user: problem.user, task: problem.task, issue: problem.issue, url: problem.url).report_email }
 
     it 'renders the headers' do
       expect(mail.subject).to match("buy.nsw: A new problem was reported")
-      expect(mail.reply_to).to contain_exactly(user.email)
+      expect(mail.reply_to).to contain_exactly(problem.user.email)
     end
 
     it 'should include the task and issue' do
-      expect(mail.body.encoded).to match(task)
-      expect(mail.body.encoded).to match(issue)
+      expect(mail.body.encoded).to match(problem.task)
+      expect(mail.body.encoded).to match(problem.issue)
     end
   end
 end
