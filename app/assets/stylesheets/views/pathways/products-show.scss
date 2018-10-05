@@ -70,6 +70,10 @@
       }
     }
 
+    .demo-video {
+      text-align: left;
+    }
+
     .features-benefits {
       @include make-row;
 

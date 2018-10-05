@@ -79,6 +79,7 @@ class VerboseProductDetails < ProductDetails
     {
       "How do you help buyers get started with your product" => product.onboarding_assistance,
       "What assistance do you provide when a buyer no longer needs your product" => product.offboarding_assistance,
+      "Link to a demo video of your product (optional)" => product.demo_video_url,
     }
   end
 
