@@ -23,7 +23,7 @@
   }
 
   PasswordStrength.prototype.insertStrengthOMeter = function insertStrengthOMeter () {
-    var $container = $('<div></div>')
+    var $container = $('<div aria-live="assertive"></div>')
     var $label = $('<span></span>')
 
     $label.appendTo($container)
