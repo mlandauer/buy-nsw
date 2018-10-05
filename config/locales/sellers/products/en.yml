@@ -90,6 +90,8 @@ en:
             offboarding_assistance:
               label: What assistance do you provide when a buyer no longer needs your product?
               hint: Do you provide any assistance in addition to your contractual obligations, and is there any additional cost?
+            demo_video_url:
+              label: Link to a demo video of your product (optional)
           environment:
             short: Environment
             long: Environment

@@ -106,5 +106,11 @@
         <% end %>
       </div>
     </div>
+    <% if product.demo_video_url.present? %>
+    <hr>
+    <div class="demo-video">
+        <a href="<%= product.demo_video_url %>">Demonstration Video</a>
+    </div>
+    <% end %>
   </div>
 </div>

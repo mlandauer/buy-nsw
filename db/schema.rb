@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180917062559) do
+ActiveRecord::Schema.define(version: 20181005035640) do
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "pg_trgm"
@@ -236,6 +237,7 @@ ActiveRecord::Schema.define(version: 20180917062559) do
     t.text "features", default: [], array: true
     t.text "benefits", default: [], array: true
     t.datetime "discarded_at"
+    t.text "demo_video_url"
     t.index ["discarded_at"], name: "index_products_on_discarded_at"
   end
 
