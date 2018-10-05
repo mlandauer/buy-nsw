@@ -62,28 +62,32 @@
           <%= simpler_format product.pricing_variables %>
         </dd>
       <% end %>
-      <% if product.education_pricing? %>
-        <dt>Education pricing</dt>
-        <dd>
+      <dt>Education pricing</dt>
+      <dd>
+        <% if product.education_pricing? %>
           <dl class="nested">
             <dt>Eligibility</dt>
             <dd><%= simpler_format product.education_pricing_eligibility %></dd>
             <dt>Pricing differences</dt>
             <dd><%= simpler_format product.education_pricing_differences %></dd>
           </dl>
-        </dd>
-      <% end %>
-      <% if product.not_for_profit_pricing? %>
-        <dt>Not-for-profit pricing</dt>
-        <dd>
+        <% else %>
+          Not Available
+        <% end %>
+      </dd>
+      <dt>Not-for-profit pricing</dt>
+      <dd>
+        <% if product.not_for_profit_pricing? %>
           <dl class="nested">
             <dt>Eligibility</dt>
             <dd><%= simpler_format product.not_for_profit_pricing_eligibility %></dd>
             <dt>Pricing differences</dt>
             <dd><%= simpler_format product.not_for_profit_pricing_differences %></dd>
           </dl>
-        </dd>
-      <% end %>
+        <% else %>
+          Not Available
+        <% end %>
+      </dd>
     </dl>
   </div>
 
