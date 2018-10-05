@@ -8,7 +8,7 @@
       <p>Not required to have workers compensation insurance.</p>
     <% else %>
       <% if (expiry = application.send("#{key}_expiry")) && expiry.present? %>
-        <p>
+        <p <% if application.changed_fields.include?("#{key}_expiry".to_sym) %>class="changed"<% end %> >
           <% if local_assigns[:no_expiry] %>
             Document date:
           <% else %>
@@ -21,7 +21,9 @@
       <% end %>
 
       <% if (upload = application.send(key)) && upload.document.present? %>
-        <p class="file-name"><%= upload.original_filename %></p>
+        <p class="file-name<% if application.changed_fields.include?("#{key}_id".to_sym) %> changed<% end %>">
+          <%= upload.original_filename %>
+        </p>
 
         <% if file_clean?(upload) %>
           <p>
