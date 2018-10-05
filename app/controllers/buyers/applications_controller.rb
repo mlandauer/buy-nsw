@@ -49,17 +49,18 @@ class Buyers::ApplicationsController < Buyers::BaseController
   def manager_approve
     @operation = run Buyers::BuyerApplication::ManagerApprove
 
-    flash.notice = (operation['result.approved'] == true) ?
-      I18n.t('buyers.applications.messages.manager_approve_success') :
-        I18n.t('buyers.applications.messages.manager_approve_failure')
+    if operation['result.approved'] == true
+      flash.notice = I18n.t('buyers.applications.messages.manager_approve_success')
+    else
+      flash.notice = I18n.t('buyers.applications.messages.manager_approve_failure')
+    end
 
-    return redirect_to root_path
+    redirect_to root_path
   end
 
-private
-  def operation
-    @operation
-  end
+  private
+
+  attr_reader :operation
   helper_method :operation
 
   def application
@@ -74,9 +75,9 @@ private
   end
 
   def form_class
-    @form_class ||= steps.find {|step|
-                      BuyerStepPresenter.new(step).slug == params[:step]
-                    } || steps.first
+    @form_class ||= steps.find do |step|
+      BuyerStepPresenter.new(step).slug == params[:step]
+    end || steps.first
   end
   helper_method :form_class
 
@@ -96,7 +97,7 @@ private
   helper_method :steps
 
   def next_step
-    @next_step ||= steps[ steps.index(form_class) + 1 ]
+    @next_step ||= steps[steps.index(form_class) + 1]
   end
   helper_method :next_step
 
@@ -106,7 +107,7 @@ private
   helper_method :next_step_slug
 
   def previous_step
-    @previous_step ||= steps[ steps.index(form_class) - 1 ]
+    @previous_step ||= steps[steps.index(form_class) - 1]
   end
   helper_method :previous_step
 
@@ -124,6 +125,4 @@ private
     form_class == steps.first
   end
   helper_method :first_step?
-
-
 end

@@ -9,11 +9,11 @@ class SellerAddress < OpenStruct
   extend Enumerize
   extend Forwardable
 
-  FIELDS = [:address, :suburb, :postcode, :country]
+  FIELDS = [:address, :suburb, :postcode, :country].freeze
 
-  enumerize :state, in: [ :nsw, :act, :nt, :qld, :sa, :tas, :vic, :wa, :outside_au ]
+  enumerize :state, in: [:nsw, :act, :nt, :qld, :sa, :tas, :vic, :wa, :outside_au]
 
-  def initialize(attributes={})
+  def initialize(attributes = {})
     attributes.symbolize_keys! if attributes.is_a?(Hash)
 
     # NOTE: As we have defined the `state` field in enumerize, we need to

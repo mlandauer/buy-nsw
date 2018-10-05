@@ -4,6 +4,6 @@ class ProductOrder < ApplicationRecord
 
   THRESHOLD = 150000
 
-  scope :below_threshold, ->{ where('estimated_contract_value < ?', THRESHOLD) }
-  scope :above_threshold, ->{ where('estimated_contract_value >= ?', THRESHOLD) }
+  scope :below_threshold, -> { where('estimated_contract_value < ?', THRESHOLD) }
+  scope :above_threshold, -> { where('estimated_contract_value >= ?', THRESHOLD) }
 end

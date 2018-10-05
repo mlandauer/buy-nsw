@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Document do
-
   let(:documentable) { create(:inactive_seller) }
   let(:attributes) { attributes_for(:document) }
 
@@ -18,7 +17,7 @@ RSpec.describe Document do
       subject { Document.new(attributes.merge(document: nil)) }
 
       it 'is invalid' do
-        expect(subject).to_not be_valid
+        expect(subject).not_to be_valid
         expect(subject.errors.keys).to include(:document)
       end
     end
@@ -35,12 +34,12 @@ RSpec.describe Document do
       context 'on update with changes' do
         subject { Document.create!(attributes) }
 
-        before(:each) {
+        before(:each) do
           subject.original_filename = 'foo.jpg'
-        }
+        end
 
         it 'is invalid' do
-          expect(subject).to_not be_valid
+          expect(subject).not_to be_valid
           expect(subject.errors).to include(:base)
         end
       end
@@ -48,9 +47,9 @@ RSpec.describe Document do
       context 'on update with only scan_status changes' do
         subject { Document.create!(attributes) }
 
-        before(:each) {
+        before(:each) do
           subject.scan_status = :clean
-        }
+        end
 
         it 'is valid' do
           expect(subject).to be_valid
@@ -84,13 +83,12 @@ RSpec.describe Document do
   end
 
   describe '#reset_scan_status!' do
-
     context 'when infected' do
       subject { Document.create!(attributes) }
 
-      before(:each) {
+      before(:each) do
         subject.mark_as_infected!
-      }
+      end
 
       it 'resets the scan_status to unscanned' do
         expect(subject.reset_scan_status!).to be_truthy
@@ -101,21 +99,21 @@ RSpec.describe Document do
     context 'when clean' do
       subject { Document.create!(attributes) }
 
-      before(:each) {
+      before(:each) do
         subject.mark_as_clean!
-      }
+      end
 
       it 'resets the scan_status to unscanned' do
         expect(subject.reset_scan_status!).to be_truthy
         expect(subject.reload.scan_status).to eq('unscanned')
       end
     end
-
   end
 
   describe '#update_document_attributes' do
     context 'on create' do
       subject { Document.create!(attributes).reload }
+
       let(:file) { attributes[:document] }
 
       it 'sets the content_type' do

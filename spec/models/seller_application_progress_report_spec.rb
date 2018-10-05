@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe SellerApplicationProgressReport do
-
   class BaseStepOne < SellerVersions::BaseForm
     property :name
 
@@ -32,35 +31,35 @@ RSpec.describe SellerApplicationProgressReport do
     end
   end
 
-  let(:seller_version) { create(:created_seller_version) }
-
-  let(:base_steps) {
-    [
-      Sellers::Applications::StepPresenter.new(BaseStepOne),
-      Sellers::Applications::StepPresenter.new(BaseStepTwo),
-    ]
-  }
-  let(:product_steps) {
-    [
-      Sellers::Applications::ProductStepPresenter.new(ProductStepOne),
-      Sellers::Applications::ProductStepPresenter.new(ProductStepTwo),
-    ]
-  }
-
-  let(:valid_base_atts) {
-    { name: 'Name', contact_name: 'Contact Name' }
-  }
-  let(:valid_product_atts) {
-    { name: 'Name', summary: 'Summary' }
-  }
-
-  subject {
+  subject do
     described_class.new(
       application: seller_version,
       base_steps: base_steps,
       product_steps: product_steps,
     )
-  }
+  end
+
+  let(:seller_version) { create(:created_seller_version) }
+
+  let(:base_steps) do
+    [
+      Sellers::Applications::StepPresenter.new(BaseStepOne),
+      Sellers::Applications::StepPresenter.new(BaseStepTwo),
+    ]
+  end
+  let(:product_steps) do
+    [
+      Sellers::Applications::ProductStepPresenter.new(ProductStepOne),
+      Sellers::Applications::ProductStepPresenter.new(ProductStepTwo),
+    ]
+  end
+
+  let(:valid_base_atts) do
+    { name: 'Name', contact_name: 'Contact Name' }
+  end
+  let(:valid_product_atts) do
+    { name: 'Name', summary: 'Summary' }
+  end
 
   describe "#all_steps_valid?" do
     context 'when all steps are valid' do
@@ -149,7 +148,7 @@ RSpec.describe SellerApplicationProgressReport do
             'product_step_one' => true,
             'product_step_two' => true,
             '_overall' => true,
-          }
+          },
         })
       end
     end
@@ -165,10 +164,9 @@ RSpec.describe SellerApplicationProgressReport do
             'product_step_one' => true,
             'product_step_two' => false,
             '_overall' => false,
-          }
+          },
         })
       end
     end
   end
-
 end

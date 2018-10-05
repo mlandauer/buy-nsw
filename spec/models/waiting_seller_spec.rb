@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe WaitingSeller, type: :model do
-
   let(:waiting_seller) { create(:waiting_seller) }
 
   describe '#invitation_state' do
@@ -27,5 +26,4 @@ RSpec.describe WaitingSeller, type: :model do
       expect(invited_seller.invitation_state).to eq('joined')
     end
   end
-
 end

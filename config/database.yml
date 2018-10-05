@@ -14,3 +14,6 @@ production:
   password: <%= ENV['RDS_PASSWORD'] %>
   host: <%= ENV['RDS_HOSTNAME'] %>
   port: <%= ENV['RDS_PORT'] %>
+
+test:
+  url: <%= ENV['DATABASE_URL'] %><%= ENV['TEST_ENV_NUMBER'] %>

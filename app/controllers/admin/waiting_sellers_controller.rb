@@ -1,5 +1,4 @@
 class Admin::WaitingSellersController < Admin::BaseController
-
   def edit
     @operation = Admin::BuildUpdateWaitingSeller.call(waiting_seller_id: params[:id])
   end
@@ -62,10 +61,9 @@ class Admin::WaitingSellersController < Admin::BaseController
     end
   end
 
-private
-  def operation
-    @operation
-  end
+  private
+
+  attr_reader :operation
   helper_method :operation
 
   def search
@@ -78,10 +76,9 @@ private
   helper_method :search
 
   def statistics
-    @statistics ||= WaitingSeller.aasm.states.map {|state|
+    @statistics ||= WaitingSeller.aasm.states.map do |state|
       [state.name, WaitingSeller.in_invitation_state(state.name).count]
-    }
+    end
   end
   helper_method :statistics
-
 end

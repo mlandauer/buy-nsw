@@ -1,10 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe SellerVersions::DisclosuresForm do
-  let(:version) { build_stubbed(:seller_version) }
   subject { described_class.new(version) }
 
-  let(:atts) {
+  let(:version) { build_stubbed(:seller_version) }
+
+  let(:atts) do
     {
       receivership: true,
       investigations: true,
@@ -20,7 +21,7 @@ RSpec.describe SellerVersions::DisclosuresForm do
       conflicts_of_interest_details: 'Information',
       other_circumstances_details: 'Information',
     }
-  }
+  end
 
   context '#started?' do
     it 'returns true when a radio button is false' do
@@ -43,7 +44,7 @@ RSpec.describe SellerVersions::DisclosuresForm do
     it 'is invalid when true and the details field is blank' do
       subject.validate(atts.merge(investigations: true, investigations_details: ''))
 
-      expect(subject).to_not be_valid
+      expect(subject).not_to be_valid
       expect(subject.errors[:investigations_details]).to be_present
     end
   end
@@ -58,7 +59,7 @@ RSpec.describe SellerVersions::DisclosuresForm do
     it 'is invalid when true and the details field is blank' do
       subject.validate(atts.merge(legal_proceedings: true, legal_proceedings_details: ''))
 
-      expect(subject).to_not be_valid
+      expect(subject).not_to be_valid
       expect(subject.errors[:legal_proceedings_details]).to be_present
     end
   end
@@ -73,7 +74,7 @@ RSpec.describe SellerVersions::DisclosuresForm do
     it 'is invalid when true and the details field is blank' do
       subject.validate(atts.merge(insurance_claims: true, insurance_claims_details: ''))
 
-      expect(subject).to_not be_valid
+      expect(subject).not_to be_valid
       expect(subject.errors[:insurance_claims_details]).to be_present
     end
   end
@@ -88,7 +89,7 @@ RSpec.describe SellerVersions::DisclosuresForm do
     it 'is invalid when true and the details field is blank' do
       subject.validate(atts.merge(conflicts_of_interest: true, conflicts_of_interest_details: ''))
 
-      expect(subject).to_not be_valid
+      expect(subject).not_to be_valid
       expect(subject.errors[:conflicts_of_interest_details]).to be_present
     end
   end
@@ -103,7 +104,7 @@ RSpec.describe SellerVersions::DisclosuresForm do
     it 'is invalid when true and the details field is blank' do
       subject.validate(atts.merge(other_circumstances: true, other_circumstances_details: ''))
 
-      expect(subject).to_not be_valid
+      expect(subject).not_to be_valid
       expect(subject.errors[:other_circumstances_details]).to be_present
     end
   end

@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Search::Admin::SellerVersion do
-
   describe '#available_filters' do
     it 'returns all admin users in the assigned_to filter' do
       user = create(:admin_user)
@@ -11,7 +10,7 @@ RSpec.describe Search::Admin::SellerVersion do
 
       expect(search.available_filters[:assigned_to]).to eq(
         [
-          [ user.email, user.id ]
+          [user.email, user.id],
         ]
       )
     end
@@ -48,7 +47,7 @@ RSpec.describe Search::Admin::SellerVersion do
 
     search = described_class.new(
       selected_filters: {
-        state: 'created'
+        state: 'created',
       }
     )
 
@@ -61,11 +60,10 @@ RSpec.describe Search::Admin::SellerVersion do
 
     search = described_class.new(
       selected_filters: {
-        name: 'Bar'
+        name: 'Bar',
       }
     )
 
     expect(search.results.size).to eq(3)
   end
-
 end

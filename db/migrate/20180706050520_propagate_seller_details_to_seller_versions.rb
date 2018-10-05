@@ -1,5 +1,4 @@
 class PropagateSellerDetailsToSellerVersions < ActiveRecord::Migration[5.1]
-
   FIELDS = [
     :name,
     :abn,
@@ -50,17 +49,17 @@ class PropagateSellerDetailsToSellerVersions < ActiveRecord::Migration[5.1]
     :agree,
     :agreed_at,
     :agreed_by_id,
-  ]
+  ].freeze
 
   def up
-    Seller.all.each {|seller|
+    Seller.all.each do |seller|
       if seller.first_version.present?
         seller.first_version.update_attributes!(
           seller.attributes.symbolize_keys.slice(*FIELDS)
         )
         puts "Updated: Seller ##{seller.id} => SellerVersion ##{seller.first_version.id}"
       end
-    }
+    end
   end
 
   def down

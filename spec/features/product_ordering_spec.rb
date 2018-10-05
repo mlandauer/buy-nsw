@@ -23,6 +23,6 @@ RSpec.describe 'Ordering products', type: :feature, js: true, user: :active_buye
   end
 
   def label(key)
-    I18n.t(:label, scope: [ :buyers, :product_orders, key ])
+    I18n.t(:label, scope: [:buyers, :product_orders, key])
   end
 end

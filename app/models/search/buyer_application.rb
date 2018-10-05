@@ -1,6 +1,5 @@
 module Search
   class BuyerApplication < Base
-
     def available_filters
       {
         assigned_to: assigned_to_keys,
@@ -11,7 +10,8 @@ module Search
       }
     end
 
-  private
+    private
+
     include Concerns::Search::ApplicationFilters
 
     def base_relation
@@ -23,17 +23,17 @@ module Search
     end
 
     def assigned_to_keys
-      ::User.admin.map {|user|
-        [ user.email, user.id ]
-      }
+      ::User.admin.map do |user|
+        [user.email, user.id]
+      end
     end
 
     def apply_filters(scope)
       scope.yield_self(&method(:state_filter)).
-            yield_self(&method(:assigned_to_filter)).
-            yield_self(&method(:sort_filter)).
-            yield_self(&method(:name_filter)).
-            yield_self(&method(:email_filter))
+        yield_self(&method(:assigned_to_filter)).
+        yield_self(&method(:sort_filter)).
+        yield_self(&method(:name_filter)).
+        yield_self(&method(:email_filter))
     end
 
     def name_filter(relation)

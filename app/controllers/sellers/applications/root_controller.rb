@@ -5,8 +5,11 @@ class Sellers::Applications::RootController < Sellers::Applications::BaseControl
     @operation = run Sellers::SellerVersion::Create::Present
 
     if operation.failure?
-      return redirect_to sellers_dashboard_path if operation['application_submitted']
-      return redirect_to sellers_application_path(operation['model.seller_version'].id) if operation['application_created']
+      if operation['application_submitted']
+        return redirect_to sellers_dashboard_path
+      elsif operation['application_created']
+        return redirect_to sellers_application_path(operation['model.seller_version'].id)
+      end
     end
   end
 
@@ -30,7 +33,8 @@ class Sellers::Applications::RootController < Sellers::Applications::BaseControl
     render :submit
   end
 
-private
+  private
+
   attr_reader :operation
   helper_method :operation
 
@@ -53,6 +57,6 @@ private
   helper_method :submit_form
 
   def assert_application_presence!
-    raise NotFound unless seller_version.present?
+    raise NotFound if seller_version.blank?
   end
 end

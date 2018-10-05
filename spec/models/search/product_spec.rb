@@ -2,10 +2,9 @@ require 'rails_helper'
 require_relative '../concerns/search/seller_tag_filters'
 
 RSpec.describe Search::Product do
+  let(:section) { 'applications-software' }
 
   it_behaves_like 'Concerns::Search::SellerTagFilters', term: 'test', section: 'section'
-
-  let(:section) { 'applications-software' }
 
   context 'pagination' do
     it 'returns results only for the specific page' do
@@ -37,11 +36,10 @@ RSpec.describe Search::Product do
     search = described_class.new(
       section: section,
       selected_filters: {
-        characteristics: [ :all_accessible ]
+        characteristics: [:all_accessible],
       }
     )
 
     expect(search.results).to contain_exactly(accessible_product)
   end
-
 end

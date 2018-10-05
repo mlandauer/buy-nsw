@@ -4,9 +4,9 @@ module Forms::LabelHelper
   end
 
   def form_options_with_labels(i18n_scope, field, values)
-    values.map {|value|
+    values.map do |value|
       label = I18n.t(value, scope: [i18n_scope, field])
-      [ label, value ]
-    }
+      [label, value]
+    end
   end
 end

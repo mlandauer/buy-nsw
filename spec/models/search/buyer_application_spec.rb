@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Search::BuyerApplication do
-
   describe '#available_filters' do
     it 'returns all admin users in the assigned_to filter' do
       user = create(:admin_user)
@@ -11,7 +10,7 @@ RSpec.describe Search::BuyerApplication do
 
       expect(search.available_filters[:assigned_to]).to eq(
         [
-          [ user.email, user.id ]
+          [user.email, user.id],
         ]
       )
     end
@@ -48,7 +47,7 @@ RSpec.describe Search::BuyerApplication do
 
     search = described_class.new(
       selected_filters: {
-        state: 'created'
+        state: 'created',
       }
     )
 
@@ -70,13 +69,11 @@ RSpec.describe Search::BuyerApplication do
     emails = ['foo@example.org', 'bar@example.org', 'baz@example.org']
     emails.each do |email|
       create(:buyer_application,
-        user: create(:user, email: email),
-      )
+             user: create(:user, email: email),)
     end
 
     search = described_class.new(selected_filters: { email: emails.first })
 
     expect(search.results.map(&:user).map(&:email)).to contain_exactly(emails.first)
   end
-
 end

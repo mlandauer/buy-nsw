@@ -4,7 +4,8 @@ class Sellers::ProfilesController < Sellers::BaseController
   def show
   end
 
-private
+  private
+
   def sellers
     @sellers ||= Seller.active
   end
@@ -19,7 +20,7 @@ private
   helper_method :seller_version
 
   def require_seller_version!
-    raise NotFound unless seller_version.present?
+    raise NotFound if seller_version.blank?
   end
 
   def authorized_buyer

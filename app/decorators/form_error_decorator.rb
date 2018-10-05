@@ -7,21 +7,22 @@ class FormErrorDecorator < BaseDecorator
     messages[name] || []
   end
 
-private
+  private
+
   def friendly_format_messages(messages)
-    tuples = messages.map {|key, messages|
-      formatted = messages.yield_self(&method(:remove_blank_messages)).
-                           yield_self(&method(:downcase_other_messages)).
-                           yield_self(&method(:limit_politeness))
+    tuples = messages.map do |key, message|
+      formatted = message.yield_self(&method(:remove_blank_messages)).
+        yield_self(&method(:downcase_other_messages)).
+        yield_self(&method(:limit_politeness))
       [key, formatted]
-    }
+    end
     Hash[tuples]
   end
 
   def remove_blank_messages(messages)
-    messages.reject {|msg|
+    messages.reject do |msg|
       msg.blank?
-    }
+    end
   end
 
   def downcase_other_messages(messages)
@@ -33,9 +34,9 @@ private
 
   def limit_politeness(messages)
     if messages.size > 1
-      messages[1..-1].each {|msg|
+      messages[1..-1].each do |msg|
         msg.gsub!(/please/i, '')
-      }
+      end
     end
     messages
   end

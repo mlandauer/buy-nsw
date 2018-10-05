@@ -1,5 +1,4 @@
 module Admin::RootHelper
-
   def seller_applications_for_review_count
     SellerVersion.for_review.count
   end

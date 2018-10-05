@@ -5,7 +5,7 @@ module SellerVersions
     property :govdc
 
     def offers_cloud
-      self.services.any? ? self.services.include?('cloud-services') : nil
+      services.any? ? services.include?('cloud-services') : nil
     end
 
     def deserialize!(document)
@@ -26,7 +26,7 @@ module SellerVersions
       hash
     end
 
-    validation :default, inherit: true, with: {form: true} do
+    validation :default, inherit: true, with: { form: true } do
       configure do
         option :form
 

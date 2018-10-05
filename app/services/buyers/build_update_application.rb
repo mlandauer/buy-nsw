@@ -20,6 +20,7 @@ class Buyers::BuildUpdateApplication < ApplicationService
     @form ||= form_class.new(application)
   end
 
-private
+  private
+
   attr_reader :user, :form_class
 end

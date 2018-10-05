@@ -1,15 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe Admin::UploadWaitingSellers do
-
-  let(:csv_file) {
+  let(:csv_file) do
     Rack::Test::UploadedFile.new(
-      Rails.root.join('spec','fixtures','files','waiting_seller_list.csv')
+      Rails.root.join('spec', 'fixtures', 'files', 'waiting_seller_list.csv')
     )
-  }
+  end
 
   describe '#parse_from_csv' do
-
     describe 'given a CSV file' do
       it 'parses WaitingSeller objects' do
         result = described_class.call(file: csv_file)
@@ -108,7 +106,7 @@ RSpec.describe Admin::UploadWaitingSellers do
     it 'does not persist rows when the "persist" parameter is false' do
       result = described_class.call(file: csv_file, persist: false)
 
-      expect(result).to_not be_persisted
+      expect(result).not_to be_persisted
       expect(WaitingSeller.count).to eq(0)
     end
 
@@ -127,5 +125,4 @@ RSpec.describe Admin::UploadWaitingSellers do
       expect(seller.abn).to eq('42 002 780 289')
     end
   end
-
 end

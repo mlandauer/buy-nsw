@@ -19,11 +19,11 @@ class Admin::BuildDecideSellerVersion < ApplicationService
     @seller_version ||= SellerVersion.find(seller_version_id)
   end
 
-private
+  private
+
   attr_reader :seller_version_id
 
   def can_be_decided?
     seller_version.may_approve?
   end
-
 end

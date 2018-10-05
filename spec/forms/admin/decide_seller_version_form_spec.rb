@@ -1,15 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe Admin::DecideSellerVersionForm do
-
   let(:application) { build_stubbed(:seller_version) }
 
   it 'is valid with a decision and response' do
     form = described_class.new(application)
 
     form.validate(
-       decision: 'approve',
-       response: 'Response',
+      decision: 'approve',
+      response: 'Response',
     )
 
     expect(form).to be_valid
@@ -19,10 +18,10 @@ RSpec.describe Admin::DecideSellerVersionForm do
     form = described_class.new(application)
 
     form.validate(
-       decision: nil,
+      decision: nil,
     )
 
-    expect(form).to_not be_valid
+    expect(form).not_to be_valid
     expect(form.errors[:decision]).to be_present
   end
 
@@ -30,11 +29,10 @@ RSpec.describe Admin::DecideSellerVersionForm do
     form = described_class.new(application)
 
     form.validate(
-       decision: 'blah',
+      decision: 'blah',
     )
 
-    expect(form).to_not be_valid
+    expect(form).not_to be_valid
     expect(form.errors[:decision]).to be_present
   end
-
 end

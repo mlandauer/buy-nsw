@@ -1,11 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe BuildProductOrder do
+  subject { described_class.new(user: buyer_user, product_id: product.id) }
 
   let(:product) { create(:active_product) }
   let(:buyer_user) { create(:active_buyer_user) }
-
-  subject { described_class.new(user: buyer_user, product_id: product.id) }
 
   describe '.call' do
     def perform_operation(user: buyer_user, product_id: product.id)
@@ -51,17 +50,17 @@ RSpec.describe BuildProductOrder do
       end
 
       it 'fails when the product is blank' do
-        expect {
+        expect do
           perform_operation(product_id: nil)
-        }.to raise_error(ActiveRecord::RecordNotFound)
+        end.to raise_error(ActiveRecord::RecordNotFound)
       end
 
       it 'fails when the product is inactive' do
         product = create(:inactive_product)
 
-        expect {
+        expect do
           perform_operation(product_id: product.id)
-        }.to raise_error(ActiveRecord::RecordNotFound)
+        end.to raise_error(ActiveRecord::RecordNotFound)
       end
     end
   end
@@ -91,5 +90,4 @@ RSpec.describe BuildProductOrder do
       expect(subject.product_order.product).to eq(product)
     end
   end
-
 end

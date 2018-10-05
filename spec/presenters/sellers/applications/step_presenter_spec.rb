@@ -1,11 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Sellers::Applications::StepPresenter do
+  subject { described_class.new(contract) }
 
   let(:seller_version) { create(:created_seller_version) }
   let(:contract) { SellerVersions::BusinessDetailsForm }
-
-  subject { described_class.new(contract) }
 
   describe '#started?' do
     before(:each) do
@@ -86,5 +85,4 @@ RSpec.describe Sellers::Applications::StepPresenter do
       end
     end
   end
-
 end

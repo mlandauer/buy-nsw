@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe 'Seller onboarding', type: :feature, js: true, skip_login: true do
-
   it 'submits a successful application' do
     visit '/register/seller'
 
@@ -33,7 +32,9 @@ RSpec.describe 'Seller onboarding', type: :feature, js: true, skip_login: true d
     submit_application
 
     expect(page).to have_content('Seller dashboard')
-    expect(page).to have_content("We'll be in touch by email soon with the outcome of your application")
+    expect(page).to have_content(
+      "We'll be in touch by email soon with the outcome of your application"
+    )
   end
 
   def complete_seller_sign_up
@@ -135,10 +136,10 @@ RSpec.describe 'Seller onboarding', type: :feature, js: true, skip_login: true d
     click_on_step 'disclosures'
 
     fill_in_disclosure :receivership, 'No'
-    fill_in_disclosure :investigations, 'Yes', 'Further details'
+    fill_in_disclosure :investigations, 'Yes', details: 'Further details'
     fill_in_disclosure :legal_proceedings, 'No'
-    fill_in_disclosure :insurance_claims, 'Yes', 'Further details'
-    fill_in_disclosure :conflicts_of_interest, 'Yes', 'Further details'
+    fill_in_disclosure :insurance_claims, 'Yes', details: 'Further details'
+    fill_in_disclosure :conflicts_of_interest, 'Yes', details: 'Further details'
     fill_in_disclosure :other_circumstances, 'No'
     click_on 'Save'
   end
@@ -209,7 +210,8 @@ RSpec.describe 'Seller onboarding', type: :feature, js: true, skip_login: true d
   def complete_declaration
     click_on_step 'declaration'
 
-    check 'I am Churchill Smith-Winston, an authorised representative of OpenAustralia Foundation Ltd (ABN: 24 138 089 942)'
+    check 'I am Churchill Smith-Winston, an authorised representative ' \
+          'of OpenAustralia Foundation Ltd (ABN: 24 138 089 942)'
     click_on 'Save'
   end
 
@@ -240,7 +242,7 @@ RSpec.describe 'Seller onboarding', type: :feature, js: true, skip_login: true d
     expect(page).to have_content('accepted')
   end
 
-  def fill_in_disclosure(field, option, details=nil)
+  def fill_in_disclosure(field, option, details: nil)
     fieldset = "field-#{field.to_s.dasherize}"
 
     within_fieldset fieldset do
@@ -280,5 +282,4 @@ RSpec.describe 'Seller onboarding', type: :feature, js: true, skip_login: true d
   def form_label(key)
     I18n.t("sellers.applications.steps.#{key}")
   end
-
 end

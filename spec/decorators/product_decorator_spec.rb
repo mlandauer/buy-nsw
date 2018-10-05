@@ -1,11 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe ProductDecorator do
+  subject { described_class.new(product, mock_context) }
 
   let(:product) { create(:product) }
   let(:mock_context) { double('view context') }
-
-  subject { described_class.new(product, mock_context) }
 
   describe '#display_additional_terms?' do
     context 'when no document is present' do
@@ -15,9 +14,9 @@ RSpec.describe ProductDecorator do
     end
 
     context 'when a clean document is present' do
-      before(:each) {
+      before(:each) do
         product.terms = create(:clean_document)
-      }
+      end
 
       it 'returns true' do
         expect(subject.display_additional_terms?).to be_truthy
@@ -25,9 +24,9 @@ RSpec.describe ProductDecorator do
     end
 
     context 'when an unscanned document is present' do
-      before(:each) {
+      before(:each) do
         product.terms = create(:unscanned_document)
-      }
+      end
 
       it 'returns false' do
         expect(subject.display_additional_terms?).to be_falsey
@@ -35,9 +34,9 @@ RSpec.describe ProductDecorator do
     end
 
     context 'when an infected document is present' do
-      before(:each) {
+      before(:each) do
         product.terms = create(:infected_document)
-      }
+      end
 
       it 'returns false' do
         expect(subject.display_additional_terms?).to be_falsey
@@ -47,9 +46,9 @@ RSpec.describe ProductDecorator do
 
   describe '#pricing_currency' do
     context 'when not "other"' do
-      before(:each) {
+      before(:each) do
         allow(product).to receive(:pricing_currency).and_return('usd')
-      }
+      end
 
       it 'returns the existing value' do
         expect(subject.pricing_currency).to eq('usd')
@@ -57,10 +56,10 @@ RSpec.describe ProductDecorator do
     end
 
     context 'when "other"' do
-      before(:each) {
+      before(:each) do
         allow(product).to receive(:pricing_currency).and_return('other')
         allow(product).to receive(:pricing_currency_other).and_return('foo')
-      }
+      end
 
       it 'returns the existing value' do
         expect(subject.pricing_currency).to eq('foo')
@@ -71,10 +70,10 @@ RSpec.describe ProductDecorator do
   shared_examples_for '#parse_money' do |value_method, decorator_method|
     let(:value) { BigDecimal.new("100.00") }
 
-    before(:each) {
+    before(:each) do
       allow(product).to receive(:pricing_currency).and_return(currency)
       allow(product).to receive(value_method).and_return(value)
-    }
+    end
 
     context 'when a currency exists' do
       let(:currency) { 'aud' }
@@ -112,9 +111,9 @@ RSpec.describe ProductDecorator do
   shared_examples_for '#formatted_pricing_*' do |value_method, decorator_method|
     let(:money) { Money.new('10000', :aud) }
 
-    before(:each) {
+    before(:each) do
       expect(subject).to receive(value_method).and_return(money)
-    }
+    end
 
     it 'formats a money object as currency' do
       expect(subject.send(decorator_method)).to eq('$100.00 AUD')
@@ -136,5 +135,4 @@ RSpec.describe ProductDecorator do
   describe '#formatted_pricing_max' do
     it_should_behave_like '#formatted_pricing_*', :pricing_max_with_currency, :formatted_pricing_max
   end
-
 end

@@ -19,7 +19,7 @@ class Admin::BuildAssignSellerVersion < ApplicationService
     @seller_version ||= SellerVersion.find(seller_version_id)
   end
 
-private
-  attr_reader :seller_version_id
+  private
 
+  attr_reader :seller_version_id
 end

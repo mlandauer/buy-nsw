@@ -8,23 +8,22 @@ class Admin::InviteWaitingSellers < ApplicationService
   end
 
   def call
-    begin
-      raise Failure unless build_operation.success?
+    raise Failure unless build_operation.success?
 
-      waiting_sellers.each do |seller|
-        ActiveRecord::Base.transaction do
-          update_seller_attributes(seller)
-          send_invitation_email(seller)
-        end
+    waiting_sellers.each do |seller|
+      ActiveRecord::Base.transaction do
+        update_seller_attributes(seller)
+        send_invitation_email(seller)
       end
-
-      self.state = :success
-    rescue Failure
-      self.state = :failure
     end
+
+    self.state = :success
+  rescue Failure
+    self.state = :failure
   end
 
-private
+  private
+
   attr_reader :waiting_seller_ids
 
   def build_operation
@@ -44,5 +43,4 @@ private
     mailer = WaitingSellerMailer.with(waiting_seller: seller.reload)
     mailer.invitation_email.deliver_later
   end
-
 end

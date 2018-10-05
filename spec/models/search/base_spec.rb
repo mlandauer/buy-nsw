@@ -1,32 +1,32 @@
 require 'rails_helper'
 
 RSpec.describe Search::Base do
-
   it 'raises an exception when the base scope has not been set' do
-    expect {
+    expect do
       Search::Base.new(
         selected_filters: {},
       ).results
-    }.to raise_error(Search::MissingBaseRelation)
+    end.to raise_error(Search::MissingBaseRelation)
   end
 
   it 'raises an exception when pagination methods are called without a page parameter' do
     test_search_class = Class.new(Search::Base) do
                           private
-                            def base_relation
-                              ::Seller.all
-                            end
-                        end
 
-    expect {
+                          def base_relation
+                            ::Seller.all
+                          end
+    end
+
+    expect do
       test_search_class.new(
         selected_filters: {},
       ).paginated_results
-    }.to raise_error(Search::MissingPaginationArgument)
+    end.to raise_error(Search::MissingPaginationArgument)
   end
 
   describe '#selected_filters' do
-    let(:test_search_class) {
+    let(:test_search_class) do
       Class.new(Search::Base) do
         def available_filters
           {
@@ -35,14 +35,14 @@ RSpec.describe Search::Base do
           }
         end
       end
-    }
+    end
 
-    let(:defaults) {
+    let(:defaults) do
       {
         filter_one: 'one',
         filter_two: 'five',
       }
-    }
+    end
 
     it 'returns default values when no filters are set' do
       search = test_search_class.new(
@@ -56,7 +56,7 @@ RSpec.describe Search::Base do
     it 'returns only selected values when filters are set' do
       search = test_search_class.new(
         selected_filters: {
-          filter_one: 'three'
+          filter_one: 'three',
         },
         default_values: defaults,
       )
@@ -91,7 +91,7 @@ RSpec.describe Search::Base do
   end
 
   describe '#selected_filters_string' do
-    let(:test_search_class) {
+    let(:test_search_class) do
       Class.new(Search::Base) do
         def available_filters
           {
@@ -101,7 +101,7 @@ RSpec.describe Search::Base do
           }
         end
       end
-    }
+    end
 
     it 'returns a parameterized string of the current active filters' do
       search = test_search_class.new(
@@ -115,5 +115,4 @@ RSpec.describe Search::Base do
       expect(search.selected_filters_string).to eq('colour-red-state-open-food-ham-eggs-chips')
     end
   end
-
 end

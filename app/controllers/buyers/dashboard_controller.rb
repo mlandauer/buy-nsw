@@ -2,7 +2,8 @@ class Buyers::DashboardController < Buyers::BaseController
   before_action :authenticate_user!
   before_action :validate_buyer!
 
-private
+  private
+
   def buyer
     @buyer ||= current_user.buyer
   end
@@ -13,5 +14,4 @@ private
       redirect_to new_buyers_application_path
     end
   end
-
 end

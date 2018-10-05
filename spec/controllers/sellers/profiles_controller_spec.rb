@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Sellers::ProfilesController, type: :controller do
-
   describe 'GET show' do
     let(:seller) { create(:active_seller) }
 
@@ -30,5 +29,4 @@ RSpec.describe Sellers::ProfilesController, type: :controller do
       end
     end
   end
-
 end

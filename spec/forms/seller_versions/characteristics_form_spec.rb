@@ -1,11 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe SellerVersions::CharacteristicsForm do
-  let(:version) { build_stubbed(:seller_version) }
-
   subject { described_class.new(version) }
 
-  let(:atts) {
+  let(:version) { build_stubbed(:seller_version) }
+
+  let(:atts) do
     {
       number_of_employees: '2to4',
       corporate_structure: 'standalone',
@@ -23,7 +23,7 @@ RSpec.describe SellerVersions::CharacteristicsForm do
       federal_government_experience: false,
       international_government_experience: true,
     }
-  }
+  end
 
   it 'validates with valid attributes' do
     expect(subject.validate(atts)).to eq(true)
@@ -32,14 +32,14 @@ RSpec.describe SellerVersions::CharacteristicsForm do
   it 'is invalid when the number of employees is blank' do
     subject.validate(atts.merge(number_of_employees: nil))
 
-    expect(subject).to_not be_valid
+    expect(subject).not_to be_valid
     expect(subject.errors[:number_of_employees]).to be_present
   end
 
   it 'is invalid when the number of employees is not a valid value' do
     subject.validate(atts.merge(number_of_employees: 'something else'))
 
-    expect(subject).to_not be_valid
+    expect(subject).not_to be_valid
     expect(subject.errors[:number_of_employees]).to be_present
   end
 end

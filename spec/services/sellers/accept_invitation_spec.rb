@@ -1,23 +1,24 @@
 require 'rails_helper'
 
 RSpec.describe Sellers::AcceptInvitation do
+  subject { perform_operation }
 
   let(:token) { 'my-confirmation-token' }
   let(:password) { 'foo bar baz' }
 
   let!(:version) { create(:created_seller_version) }
-  let!(:invited_user) {
+  let!(:invited_user) do
     create(:seller_user, seller: version.seller,
                          confirmed_at: nil,
                          confirmation_token: token)
-  }
+  end
 
-  let(:user_attributes) {
+  let(:user_attributes) do
     {
       password: password,
       password_confirmation: password,
     }
-  }
+  end
 
   def perform_operation(**args)
     options = {
@@ -28,8 +29,6 @@ RSpec.describe Sellers::AcceptInvitation do
 
     described_class.call(options.merge(**args))
   end
-
-  subject { perform_operation }
 
   describe '.call' do
     context 'with valid arguments' do
@@ -72,5 +71,4 @@ RSpec.describe Sellers::AcceptInvitation do
       end
     end
   end
-
 end

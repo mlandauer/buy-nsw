@@ -1,27 +1,25 @@
 class CreateProblemReport < ApplicationService
-
   def initialize(params:, current_user: nil)
     @params = params
     @current_user = current_user
   end
 
   def call
-    begin
-      assign_attributes
-      persist_problem_report
-      send_zen_desk_email
+    assign_attributes
+    persist_problem_report
+    send_zen_desk_email
 
-      self.state = :success
-    rescue Failure
-      self.state = :failure
-    end
+    self.state = :success
+  rescue Failure
+    self.state = :failure
   end
 
   def problem_report
     @problem_report ||= ProblemReport.new
   end
 
-private
+  private
+
   attr_reader :params, :current_user
 
   def send_zen_desk_email
@@ -51,5 +49,4 @@ private
   def send_slack_notification
     SlackPostJob.perform_later(problem_report.id, :new_problem_report.to_s)
   end
-
 end

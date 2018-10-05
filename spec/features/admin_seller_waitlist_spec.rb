@@ -1,22 +1,21 @@
 require 'rails_helper'
 
 RSpec.describe 'Managing the seller waitlist', type: :feature, js: true do
-
-  let(:csv_file) {
+  let(:csv_file) do
     Rails.root.join('spec', 'fixtures', 'files', 'waiting_seller_list.csv')
-  }
+  end
 
-  let(:csv) {
+  let(:csv) do
     CSV.read(csv_file, headers: true)
-  }
+  end
 
   let(:record) { csv.first }
 
-  let(:status_filter_label) {
+  let(:status_filter_label) do
     I18n.t(:name, scope: [
-      :admin, :waiting_sellers, :search, :filters, :invitation_state
+      :admin, :waiting_sellers, :search, :filters, :invitation_state,
     ])
-  }
+  end
 
   describe 'as an admin user', user: :admin_user do
     it 'can filter the list' do
@@ -110,5 +109,4 @@ RSpec.describe 'Managing the seller waitlist', type: :feature, js: true do
       within(row, &block)
     end
   end
-
 end

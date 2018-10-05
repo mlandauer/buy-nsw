@@ -1,18 +1,17 @@
 require 'rails_helper'
 
 RSpec.describe Sellers::SellerVersion::Products::Update do
-
   let(:application) { create(:created_seller_version) }
   let(:product) { create(:product, seller: application.seller) }
 
   let(:current_user) { create(:user, seller: application.seller) }
-  let(:default_params) {
+  let(:default_params) do
     { section: Product.section.values.first }
-  }
+  end
   let(:default_contract) { Products::TypeForm }
 
   def perform_operation(user: current_user, params: default_params, contract: default_contract)
-    described_class.(
+    described_class.call(
       { id: product.id, application_id: application.id, seller_application: params },
       'config.current_user' => user,
       'config.contract_class' => contract

@@ -1,8 +1,8 @@
 class PerformanceController < ApplicationController
-
   def index; end
 
-private
+  private
+
   def seller_application_started_count
     SellerVersion.created.count
   end
@@ -28,7 +28,6 @@ private
   end
 
   helper_method :seller_application_started_count, :seller_application_in_review_count,
-    :seller_application_approved_count, :buyer_application_started_count,
-    :buyer_application_in_review_count, :buyer_application_approved_count
-
+                :seller_application_approved_count, :buyer_application_started_count,
+                :buyer_application_in_review_count, :buyer_application_approved_count
 end

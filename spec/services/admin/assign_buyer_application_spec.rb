@@ -1,15 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe Admin::AssignBuyerApplication do
-
   let(:application) { create(:awaiting_assignment_buyer_application) }
 
   let(:current_user) { create(:admin_user) }
   let(:assignee_user) { create(:admin_user) }
 
-  let(:valid_attributes) {
+  let(:valid_attributes) do
     { assigned_to_id: assignee_user.id }
-  }
+  end
 
   describe '.call' do
     def perform_operation(attributes: valid_attributes)
@@ -25,7 +24,7 @@ RSpec.describe Admin::AssignBuyerApplication do
 
       it 'is successful' do
         expect(operation).to be_success
-        expect(operation).to_not be_failure
+        expect(operation).not_to be_failure
       end
 
       it 'assigns a user to the application' do
@@ -38,7 +37,9 @@ RSpec.describe Admin::AssignBuyerApplication do
 
       it 'logs an event' do
         expect(application.events.first.user).to eq(current_user)
-        expect(application.events.first.message).to eq("Assigned application to #{assignee_user.email}")
+        expect(application.events.first.message).to eq(
+          "Assigned application to #{assignee_user.email}"
+        )
       end
     end
 
@@ -82,5 +83,4 @@ RSpec.describe Admin::AssignBuyerApplication do
       end
     end
   end
-
 end

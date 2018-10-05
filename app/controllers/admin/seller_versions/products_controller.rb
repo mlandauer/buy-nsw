@@ -4,7 +4,8 @@ class Admin::SellerVersions::ProductsController < Admin::BaseController
   def show
   end
 
-private
+  private
+
   def application
     @application ||= SellerVersion.find(params[:seller_application_id])
   end

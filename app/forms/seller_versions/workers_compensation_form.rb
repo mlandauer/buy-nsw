@@ -90,11 +90,15 @@ module SellerVersions
 
       required(:workers_compensation_certificate_file, Types::File).maybe(:file_uploaded?)
 
-      rule(workers_compensation_certificate_expiry: [:workers_compensation_exempt, :workers_compensation_certificate_expiry]) do |exempt, expiry|
+      rule(workers_compensation_certificate_expiry: [
+        :workers_compensation_exempt, :workers_compensation_certificate_expiry,
+      ]) do |exempt, expiry|
         (exempt.false? | exempt.eql?('0')).then(expiry.filled?)
       end
 
-      rule(workers_compensation_certificate_file: [:workers_compensation_exempt, :workers_compensation_certificate_file]) do |exempt, document|
+      rule(workers_compensation_certificate_file: [
+        :workers_compensation_exempt, :workers_compensation_certificate_file,
+      ]) do |exempt, document|
         (exempt.false? | exempt.eql?('0')).then(document.filled?)
       end
     end

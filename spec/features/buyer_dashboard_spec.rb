@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe 'Buyer dashboard', type: :feature, user: :buyer_user do
-
   it 'shows a message to buyers awaiting review' do
     create(:ready_for_review_buyer_application, user: @user)
 
@@ -21,6 +20,4 @@ RSpec.describe 'Buyer dashboard', type: :feature, user: :buyer_user do
     expect(page).to have_content('Your buyer account')
     expect(page).to have_content('Your buyer account is active')
   end
-
-
 end

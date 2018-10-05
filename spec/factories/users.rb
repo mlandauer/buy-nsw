@@ -1,8 +1,8 @@
 FactoryBot.define do
   factory :user do
-    sequence(:email) {|n| "user-#{n}@example.org" }
+    sequence(:email) { |n| "user-#{n}@example.org" }
     sequence(:password) { SecureRandom.hex(8) }
-    confirmed_at 1.day.ago
+    confirmed_at { 1.day.ago }
 
     trait :buyer do
       roles ['buyer']

@@ -10,7 +10,8 @@ module Search
       }
     end
 
-  private
+    private
+
     def base_relation
       ::ProblemReport.all
     end
@@ -21,14 +22,14 @@ module Search
 
     def apply_filters(scope)
       scope.yield_self(&method(:url_filter)).
-            yield_self(&method(:tag_filter)).
-            yield_self(&method(:state_filter))
+        yield_self(&method(:tag_filter)).
+        yield_self(&method(:state_filter))
     end
 
     def url_filter(relation)
       if filter_selected?(:url)
         url = filter_value(:url)
-        relation = relation.where('url LIKE ?', "%#{sanitize_sql_like(url)}%")
+        relation.where('url LIKE ?', "%#{sanitize_sql_like(url)}%")
       else
         relation
       end
@@ -37,7 +38,7 @@ module Search
     def tag_filter(relation)
       if filter_selected?(:tag)
         tag = filter_value(:tag)
-        relation = relation.with_tag(tag)
+        relation.with_tag(tag)
       else
         relation
       end
@@ -45,7 +46,7 @@ module Search
 
     def state_filter(relation)
       if filter_selected?(:state)
-        relation.in_state( filter_value(:state) )
+        relation.in_state(filter_value(:state))
       else
         relation
       end

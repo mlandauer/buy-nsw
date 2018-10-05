@@ -1,7 +1,8 @@
 class Pathways::SearchController < ApplicationController
   helper Sellers::ProfilesHelper
 
-private
+  private
+
   def search
     @search ||= Search::Product.new(
       term: params[:q],
@@ -17,5 +18,4 @@ private
     params[:section]
   end
   helper_method :section
-
 end

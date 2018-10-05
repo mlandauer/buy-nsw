@@ -72,5 +72,5 @@ end
 
 Rack::Attack.throttled_response = lambda do |env|
   error_html = File.read(Rails.root.join('public', '429.html'))
-  [ 429, {}, [error_html]]
+  [429, {}, [error_html]]
 end

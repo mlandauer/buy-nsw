@@ -1,11 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Admin::UpdateWaitingSellerForm do
+  subject { described_class.new(waiting_seller) }
 
   let(:waiting_seller) { build_stubbed(:waiting_seller) }
   let(:atts) { attributes_for(:waiting_seller) }
-
-  subject { described_class.new(waiting_seller) }
 
   it 'is valid with all required atts' do
     form = described_class.new(waiting_seller)
@@ -22,7 +21,7 @@ RSpec.describe Admin::UpdateWaitingSellerForm do
     form = described_class.new(waiting_seller)
     form.validate(atts.merge(state: 'something else'))
 
-    expect(form).to_not be_valid
+    expect(form).not_to be_valid
     expect(form.errors[:state]).to be_present
   end
 
@@ -34,7 +33,7 @@ RSpec.describe Admin::UpdateWaitingSellerForm do
       contact_email: existing_waiting_seller.contact_email
     ))
 
-    expect(form).to_not be_valid
+    expect(form).not_to be_valid
     expect(form.errors[:contact_email]).to be_present
   end
 
@@ -44,7 +43,7 @@ RSpec.describe Admin::UpdateWaitingSellerForm do
     form = described_class.new(waiting_seller)
     form.validate(atts.merge(contact_email: existing_user.email))
 
-    expect(form).to_not be_valid
+    expect(form).not_to be_valid
     expect(form.errors[:contact_email]).to be_present
   end
 
@@ -56,7 +55,7 @@ RSpec.describe Admin::UpdateWaitingSellerForm do
       abn: existing_waiting_seller.abn
     ))
 
-    expect(form).to_not be_valid
+    expect(form).not_to be_valid
     expect(form.errors[:abn]).to be_present
   end
 
@@ -66,8 +65,7 @@ RSpec.describe Admin::UpdateWaitingSellerForm do
     form = described_class.new(waiting_seller)
     form.validate(atts.merge(abn: existing_seller.abn))
 
-    expect(form).to_not be_valid
+    expect(form).not_to be_valid
     expect(form.errors[:abn]).to be_present
   end
-
 end

@@ -9,24 +9,23 @@ class Admin::RevertSellerVersion < ApplicationService
   end
 
   def call
-    begin
-      ActiveRecord::Base.transaction do
-        validate_current_user
-        validate_state
-        update_version_state
-        update_seller_state
-        update_product_states
-        persist_version
-        log_event
-      end
-
-      self.state = :success
-    rescue Failure
-      self.state = :failure
+    ActiveRecord::Base.transaction do
+      validate_current_user
+      validate_state
+      update_version_state
+      update_seller_state
+      update_product_states
+      persist_version
+      log_event
     end
+
+    self.state = :success
+  rescue Failure
+    self.state = :failure
   end
 
-private
+  private
+
   attr_reader :seller_version_id, :current_user
 
   def seller
@@ -38,13 +37,13 @@ private
   end
 
   def validate_current_user
-    unless current_user.present? && seller_version.assigned_to == current_user
+    if current_user.blank? || seller_version.assigned_to != current_user
       raise Failure
     end
   end
 
   def validate_state
-    unless seller_version.approved? && seller_version.may_return_to_applicant?
+    if !(seller_version.approved? && seller_version.may_return_to_applicant?)
       raise Failure
     end
   end

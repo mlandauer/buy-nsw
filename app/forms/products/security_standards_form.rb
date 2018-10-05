@@ -42,7 +42,8 @@ module Products
     property :security_information_url
 
     validation :default, inherit: true do
-      required(:data_centre_security_standards).filled(in_list?: Product.data_centre_security_standards.values)
+      required(:data_centre_security_standards).
+        filled(in_list?: Product.data_centre_security_standards.values)
 
       required(:iso_27001).filled(:bool?)
       required(:iso_27001_accreditor).maybe(:str?)
@@ -140,7 +141,8 @@ module Products
 
       required(:irap_type).filled(:str?, in_list?: Product.irap_type.values)
       required(:asd_certified).filled(:bool?)
-      required(:security_classification_types).filled(one_of?: Product.security_classification_types.values)
+      required(:security_classification_types).
+        filled(one_of?: Product.security_classification_types.values)
       required(:security_information_url).maybe(:str?, :url?)
     end
   end

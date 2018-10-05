@@ -4,7 +4,7 @@ RSpec.shared_examples 'Concerns::Search::SellerTagFilters' do |model_args|
   def args_with_filter(filters)
     model_args.merge(
       selected_filters: {
-        business_identifiers: [ filters ].flatten
+        business_identifiers: [filters].flatten,
       }
     )
   end

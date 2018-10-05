@@ -10,7 +10,7 @@ module Sellers::Applications
       contract_class == other.contract_class
     end
 
-    def name(type = :short)
+    def name(type: :short)
       I18n.t("#{i18n_base}.#{type}", default: I18n.t("#{i18n_base}.short"))
     end
 
@@ -27,7 +27,7 @@ module Sellers::Applications
     end
 
     def key
-      contract_class.name.demodulize.sub(/Form$/,'').underscore
+      contract_class.name.demodulize.sub(/Form$/, '').underscore
     end
 
     def slug
@@ -54,7 +54,8 @@ module Sellers::Applications
       build_contract(version).started?
     end
 
-  private
+    private
+
     def build_contract(version)
       contract_class.new(version)
     end

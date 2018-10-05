@@ -1,5 +1,4 @@
 class Sellers::BuildAcceptInvitation < ApplicationService
-
   def initialize(version_id:, confirmation_token:)
     @version_id = version_id
     @confirmation_token = confirmation_token
@@ -25,11 +24,11 @@ class Sellers::BuildAcceptInvitation < ApplicationService
     @form ||= Sellers::AcceptInvitationForm.new(user)
   end
 
-private
+  private
+
   attr_reader :version_id, :confirmation_token
 
   def unconfirmed_users
     version.seller.owners.unconfirmed
   end
-
 end
