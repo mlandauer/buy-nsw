@@ -63,7 +63,6 @@ RSpec.describe CreateProblemReport do
     end
 
     context 'with invalid attributes' do
-      o
       let(:operation) do
         described_class.call(params: params.merge(task: nil, issue: nil), current_user: nil)
       end
