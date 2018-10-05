@@ -1,8 +1,6 @@
 inherit_from:
-  - .rubocop_todo.yml
   - .rubocop_airbnb.yml
-
-
+  - .rubocop_todo.yml
 
 AllCops:
   Exclude:
