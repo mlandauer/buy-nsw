@@ -1,25 +1,28 @@
 require 'rails_helper'
 
 RSpec.describe Sellers::SellerVersion::Submit do
-
   let(:application) { create(:created_seller_version) }
   let(:current_user) { create(:user, seller: application.seller) }
 
   def perform_operation
-    described_class.({ id: application.id }, 'config.current_user' => current_user)
+    described_class.call({ id: application.id }, 'config.current_user' => current_user)
   end
 
   it 'fails if the seller application is not complete' do
-    expect_any_instance_of(SellerApplicationProgressReport).to receive(:all_steps_valid?).and_return(false)
+    expect_any_instance_of(SellerApplicationProgressReport).to(
+      receive(:all_steps_valid?).and_return(false)
+    )
     result = perform_operation
 
     expect(result).to be_failure
   end
 
   describe 'given a complete application' do
-    before {
-      expect_any_instance_of(SellerApplicationProgressReport).to receive(:all_steps_valid?).and_return(true)
-    }
+    before do
+      expect_any_instance_of(SellerApplicationProgressReport).to(
+        receive(:all_steps_valid?).and_return(true)
+      )
+    end
 
     it 'is successful if the application is in a valid state' do
       result = perform_operation
@@ -32,7 +35,7 @@ RSpec.describe Sellers::SellerVersion::Submit do
       approved_application = create(:approved_seller_version)
       current_user = create(:user, seller: approved_application.seller)
 
-      result = described_class.(
+      result = described_class.call(
         { id: approved_application.id },
         'config.current_user' => current_user,
       )

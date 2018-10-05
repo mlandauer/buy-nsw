@@ -2,12 +2,11 @@ require 'rails_helper'
 require 'carrierwave/storage/fog'
 
 RSpec.describe DocumentScanJob, type: :job do
-
   let(:document) { create(:unscanned_document) }
   let(:file_path) { document.document.file.path }
-  let(:example_file_body) {
-    File.open(Rails.root.join('spec','fixtures','files','example.pdf'))
-  }
+  let(:example_file_body) do
+    File.open(Rails.root.join('spec', 'fixtures', 'files', 'example.pdf'))
+  end
 
   describe '#perform' do
     it 'sets the status of a clean file' do
@@ -29,9 +28,13 @@ RSpec.describe DocumentScanJob, type: :job do
         tmp_file_path = Rails.root.join('tmp', 'scan', document.to_param, 'example.pdf').to_s
         url = "http://example.org/uploads/document/#{document.to_param}/example.pdf"
 
-        expect(CarrierWave::Uploader::Base).to receive(:storage).and_return(CarrierWave::Storage::Fog)
+        expect(CarrierWave::Uploader::Base).to receive(:storage).and_return(
+          CarrierWave::Storage::Fog
+        )
         expect(document.document).to receive(:url).and_return(url)
-        expect_any_instance_of(described_class).to receive(:open).with(url).and_return(example_file_body)
+        expect_any_instance_of(described_class).to receive(:open).with(url).and_return(
+          example_file_body
+        )
         expect(Clamby).to receive(:safe?).with(tmp_file_path).and_return(true)
 
         described_class.perform_now(document)
@@ -40,5 +43,4 @@ RSpec.describe DocumentScanJob, type: :job do
       end
     end
   end
-
 end

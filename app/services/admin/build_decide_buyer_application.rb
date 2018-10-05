@@ -19,11 +19,11 @@ class Admin::BuildDecideBuyerApplication < ApplicationService
     @buyer_application ||= BuyerApplication.find(buyer_application_id)
   end
 
-private
+  private
+
   attr_reader :buyer_application_id
 
   def can_be_decided?
     buyer_application.may_approve?
   end
-
 end

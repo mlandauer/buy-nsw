@@ -1,5 +1,7 @@
 class VerboseProductDetails < ProductDetails
-private
+  # rubocop:disable Metrics/LineLength
+  private
+
   def product_basics
     attributes do |a|
       a["Tell us the name of your product"] = product.name
@@ -27,7 +29,7 @@ private
 
   def additional_terms
     {
-      'Additional terms document' => (product.terms.present? ? product.terms : 'Not provided')
+      'Additional terms document' => (product.terms.present? ? product.terms : 'Not provided'),
     }
   end
 
@@ -95,7 +97,7 @@ private
 
       a["Is there an API for your product"] = product.api
 
-      if ['rest','non-rest'].include?(product.api)
+      if ['rest', 'non-rest'].include?(product.api)
         a["If yes then describe what users can do using your API"] = product.api_capabilities
         a["If yes then describe what automation tools work with your product's API"] = product.api_automation
       end
@@ -364,7 +366,8 @@ private
       'Describe your protective monitoring process' => product.protective_monitoring_approach,
       'Which crisis and incident management processes does your organisation follow' => product.incident_management_processes_text,
       'Describe your crisis and incident management plan' => product.incident_management_approach,
-      'How often do you test your access controls' => product.access_control_testing_frequency_text
+      'How often do you test your access controls' => product.access_control_testing_frequency_text,
     }
   end
+  # rubocop:enable Metrics/LineLength
 end

@@ -16,11 +16,12 @@ class BuyerApplicationFlow
   end
 
   def valid?
-    steps.map {|step|
+    steps.map do |step|
       step.new(application)
-    }.reject(&:valid?).empty?
+    end.reject(&:valid?).empty?
   end
 
-private
+  private
+
   attr_reader :application
 end

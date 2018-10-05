@@ -1,18 +1,17 @@
 require 'rails_helper'
 
 RSpec.describe Sellers::SellerVersion::Update do
-
   let(:seller_version) { create(:created_seller_version) }
   let(:abn) { attributes_for(:created_seller_version_with_profile)[:abn] }
 
   let(:current_user) { create(:user, seller: seller_version.seller) }
-  let(:default_params) {
+  let(:default_params) do
     { name: 'Company', abn: abn }
-  }
+  end
   let(:default_contract) { SellerVersions::BusinessDetailsForm }
 
   def perform_operation(user: current_user, params: default_params, contract: default_contract)
-    described_class.(
+    described_class.call(
       { id: seller_version.id, seller_application: params },
       'config.current_user' => user,
       'config.contract_class' => contract
@@ -31,9 +30,9 @@ RSpec.describe Sellers::SellerVersion::Update do
   end
 
   context 'for legals' do
-    let(:contract) {
+    let(:contract) do
       SellerVersions::DeclarationForm
-    }
+    end
 
     def fill_required_details(email: current_user.email)
       seller_version.update_attributes!(

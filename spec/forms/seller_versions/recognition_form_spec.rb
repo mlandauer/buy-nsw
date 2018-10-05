@@ -1,16 +1,17 @@
 require 'rails_helper'
 
 RSpec.describe SellerVersions::RecognitionForm do
-  let(:version) { create(:seller_version) }
   subject { described_class.new(version) }
 
-  let(:atts) {
+  let(:version) { create(:seller_version) }
+
+  let(:atts) do
     {
-      accreditations: [ 'Certified Test Case' ],
-      awards: [ 'Test Case of the Year' ],
-      engagements: [ 'Test Case Board Member' ],
+      accreditations: ['Certified Test Case'],
+      awards: ['Test Case of the Year'],
+      engagements: ['Test Case Board Member'],
     }
-  }
+  end
 
   it 'can save accreditations' do
     subject.validate(atts)
@@ -40,7 +41,7 @@ RSpec.describe SellerVersions::RecognitionForm do
   end
 
   it 'updates an accreditation' do
-    version.update_attribute(:accreditations, [ 'Existing' ])
+    version.update_attribute(:accreditations, ['Existing'])
 
     subject.validate(atts.merge(
       accreditations: ['Updated']
@@ -53,7 +54,7 @@ RSpec.describe SellerVersions::RecognitionForm do
   end
 
   it 'removes an accreditation given a blank value' do
-    version.update_attribute(:accreditations, [ 'Existing' ])
+    version.update_attribute(:accreditations, ['Existing'])
 
     subject.validate(atts.merge(
       accreditations: ['']

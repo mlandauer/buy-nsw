@@ -1,7 +1,7 @@
 module Admin::SellerVersions::DetailHelper
   # this is to inherit the functionalities from Seller::ProfilesHelper
   include Sellers::ProfilesHelper
-  def Sellers::ProfilesHelper; end
+  def Sellers.ProfilesHelper; end
 
   def display_seller_list(type:, resource:)
     display_list(
@@ -14,7 +14,7 @@ module Admin::SellerVersions::DetailHelper
   end
 
   def field_classes(resource)
-    Hash[resource.changed_fields_unreviewed.collect {|f|  [f, :changed]}]
+    Hash[resource.changed_fields_unreviewed.collect { |f| [f, :changed] }]
   end
 
   def seller_fields
@@ -24,7 +24,7 @@ module Admin::SellerVersions::DetailHelper
         :abn,
         :summary,
         :website_url,
-        :linkedin_url
+        :linkedin_url,
       ],
       industry: [
         :services,
@@ -69,7 +69,7 @@ module Admin::SellerVersions::DetailHelper
         :agree,
         :agreed_at,
         :agreed_by_email,
-      ]
+      ],
     }
   end
 end

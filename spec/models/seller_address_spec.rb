@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe SellerAddress do
-  let(:attributes) { attributes_for(:seller_address) }
-
   subject { described_class.new(attributes) }
+
+  let(:attributes) { attributes_for(:seller_address) }
 
   describe '#initialize' do
     it 'can be initialized with attributes' do

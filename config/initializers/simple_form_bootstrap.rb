@@ -45,7 +45,6 @@ SimpleForm.setup do |config|
   config.input_field_error_class = 'is-invalid'
   config.input_field_valid_class = 'is-valid'
 
-
   # vertical forms
   #
   # vertical default_wrapper
@@ -135,7 +134,6 @@ SimpleForm.setup do |config|
     b.use :input, class: 'form-control-range', error_class: 'is-invalid'
     b.use :accessible_error, wrap_with: { tag: 'div', class: 'invalid-feedback d-block' }
   end
-
 
   # horizontal forms
   #
@@ -239,7 +237,6 @@ SimpleForm.setup do |config|
     end
   end
 
-
   # inline forms
   #
   # inline default_wrapper
@@ -267,7 +264,6 @@ SimpleForm.setup do |config|
     b.use :accessible_error, wrap_with: { tag: 'div', class: 'invalid-feedback' }
     b.optional :hint, tag: 'small', class: 'form-text text-muted'
   end
-
 
   # bootstrap custom forms
   #
@@ -358,7 +354,6 @@ SimpleForm.setup do |config|
     b.use :accessible_error, wrap_with: { tag: 'div', class: 'invalid-feedback d-block' }
   end
 
-
   # Input Group - custom component
   # see example app and config at https://github.com/rafaelfranca/simple_form-bootstrap
   # config.wrappers :input_group, tag: 'div', class: 'form-group', error_class: 'form-group-invalid', valid_class: 'form-group-valid' do |b|
@@ -378,7 +373,6 @@ SimpleForm.setup do |config|
   #   b.use :accessible_error, wrap_with: { tag: 'div', class: 'invalid-feedback d-block' }
   #   b.use :accessible_hint, tag: 'small', class: 'form-text text-muted'
   # end
-
 
   # Floating Labels form
   #
@@ -406,7 +400,6 @@ SimpleForm.setup do |config|
     b.use :accessible_error, wrap_with: { tag: 'div', class: 'invalid-feedback' }
     b.use :accessible_hint, tag: 'small', class: 'form-text text-muted'
   end
-
 
   # The default wrapper to be used by the FormBuilder.
   config.default_wrapper = :vertical_form

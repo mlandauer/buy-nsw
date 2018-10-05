@@ -1,6 +1,8 @@
 module Search
+  # rubocop:disable Airbnb/ClassOrModuleDeclaredInWrongFile
   class MissingBaseRelation < StandardError; end
   class MissingPaginationArgument < StandardError; end
+  # rubocop:enable Airbnb/ClassOrModuleDeclaredInWrongFile
 
   class Base
     def initialize(selected_filters: {}, default_values: {}, page: nil, per_page: nil)
@@ -23,7 +25,7 @@ module Search
     end
 
     def available_filters
-      { }
+      {}
     end
 
     def selected_filters
@@ -39,11 +41,11 @@ module Search
       selected_filters.to_a.flatten.join('-').dasherize.parameterize
     end
 
-    def filter_selected?(filter, option = nil)
+    def filter_selected?(filter, options = {})
       value = filter_value(filter)
 
-      if option.present? && value.present?
-        value.is_a?(Array) ? value.map(&:to_s).include?(option.to_s) : value.to_s == option.to_s
+      if options.present? && value.present?
+        value.is_a?(Array) ? value.map(&:to_s).include?(options.to_s) : value.to_s == options.to_s
       else
         filter_value(filter).present?
       end
@@ -57,11 +59,13 @@ module Search
       selected_filters.keys.any?
     end
 
-  private
+    private
+
     attr_reader :page, :per_page, :default_values
 
     def base_relation
-      raise(MissingBaseRelation, 'Missing base_relation method. You need to override this in your Search subclass.')
+      raise(MissingBaseRelation, 'Missing base_relation method. You need to override ' \
+                                 'this in your Search subclass.')
     end
 
     def apply_filters(scope)
@@ -72,7 +76,9 @@ module Search
       if page
         scope.page(page).per(per_page)
       else
-        raise(MissingPaginationArgument, 'Missing the `page` parameter required for pagination. Pass this into your search object, or instead call `results` for the full result list.')
+        raise(MissingPaginationArgument, 'Missing the `page` parameter required for pagination. ' \
+                                         'Pass this into your search object, or instead call ' \
+                                         '`results` for the full result list.')
       end
     end
 

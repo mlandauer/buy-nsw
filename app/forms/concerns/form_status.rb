@@ -2,18 +2,18 @@ module Concerns::FormStatus
   extend ActiveSupport::Concern
 
   def started?(&block)
-    out = schema.keys.map {|key|
+    out = schema.keys.map do |key|
       value = send(key)
 
       if value.is_a?(Array)
-        value.any? {|item|
+        value.any? do |item|
           case
           when item.respond_to?(:address) then item.address.present?
           when item.respond_to?(:id) then item.id.present?
           else
             item.present?
           end
-        }
+        end
       elsif value.is_a?(DocumentUploader)
         value.file.present?
       else
@@ -23,7 +23,7 @@ module Concerns::FormStatus
           value.present? || value == false
         end
       end
-    }.compact
+    end.compact
 
     out.any?
   end

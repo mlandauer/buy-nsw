@@ -4,7 +4,7 @@ module SellerVersions
     include Forms::ValidationHelper
 
     def upload_for(key)
-      self.model.public_send(key)
+      model.public_send(key)
     end
   end
 end

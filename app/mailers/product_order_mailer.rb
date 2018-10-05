@@ -4,8 +4,8 @@ class ProductOrderMailer < ApplicationMailer
 
     mail(
       to: @product_order.buyer.user.email,
-      subject: "buy.nsw: Your order for #{@product_order.product.name} (Order ##{@product_order.id})",
+      subject: "buy.nsw: Your order for #{@product_order.product.name} " \
+               "(Order ##{@product_order.id})",
     )
   end
-
 end

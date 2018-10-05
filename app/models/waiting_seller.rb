@@ -4,7 +4,7 @@ class WaitingSeller < ApplicationRecord
   before_save :normalise_abn
   belongs_to :seller, optional: true
 
-  default_scope -> { order('name ASC') }
+  default_scope -> { order('name ASC') } # rubocop:disable Airbnb/DefaultScope
 
   aasm column: :invitation_state do
     state :created, initial: true
@@ -30,7 +30,8 @@ class WaitingSeller < ApplicationRecord
 
   scope :in_invitation_state, ->(state) { where(invitation_state: state) }
 
-private
+  private
+
   def normalise_abn
     self.abn = ABN.new(abn).to_s if ABN.valid?(abn)
   end

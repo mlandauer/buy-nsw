@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe BuyerApplicationMailer, type: :mailer do
-
   describe '#manager_approval_email' do
     let(:application) { create(:awaiting_manager_approval_buyer_application) }
     let(:mail) { BuyerApplicationMailer.with(application: application).manager_approval_email }
@@ -29,7 +28,7 @@ RSpec.describe BuyerApplicationMailer, type: :mailer do
       expect(mail.to).to contain_exactly(application.user.email)
     end
 
-    it 'should include the feedback from the reviewer' do
+    it 'includes the feedback from the reviewer' do
       expect(mail.body.encoded).to match(application.decision_body)
     end
   end
@@ -43,9 +42,8 @@ RSpec.describe BuyerApplicationMailer, type: :mailer do
       expect(mail.to).to contain_exactly(application.user.email)
     end
 
-    it 'should include the feedback from the reviewer' do
+    it 'includes the feedback from the reviewer' do
       expect(mail.body.encoded).to match(application.decision_body)
     end
   end
-
 end

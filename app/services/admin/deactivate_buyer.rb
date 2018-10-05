@@ -15,6 +15,7 @@ class Admin::DeactivateBuyer < ApplicationService
     end
   end
 
-private
+  private
+
   attr_reader :buyer_application_id
 end

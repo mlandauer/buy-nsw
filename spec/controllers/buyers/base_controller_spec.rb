@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Buyers::BaseController do
-
   describe '#validate_active_buyer!' do
     before(:each) { bypass_rescue }
 
@@ -20,9 +19,9 @@ RSpec.describe Buyers::BaseController do
     end
 
     context 'when the user is not an active buyer', sign_in: :user do
-      before(:each) {
+      before(:each) do
         expect_any_instance_of(User).to receive(:is_active_buyer?).and_return(false)
-      }
+      end
 
       it 'raises an exception' do
         expect { get :index }.to raise_error(ApplicationController::NotAuthorized)
@@ -30,9 +29,9 @@ RSpec.describe Buyers::BaseController do
     end
 
     context 'when the user is an active buyer', sign_in: :user do
-      before(:each) {
+      before(:each) do
         expect_any_instance_of(User).to receive(:is_active_buyer?).and_return(true)
-      }
+      end
 
       it 'performs the action' do
         get :index
@@ -40,5 +39,4 @@ RSpec.describe Buyers::BaseController do
       end
     end
   end
-
 end

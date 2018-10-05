@@ -1,3 +1,4 @@
+# rubocop:disable Airbnb/ClassOrModuleDeclaredInWrongFile
 class Sellers::SellerVersion::Update < Trailblazer::Operation
   class Present < Trailblazer::Operation
     step :model!
@@ -40,7 +41,7 @@ class Sellers::SellerVersion::Update < Trailblazer::Operation
 
         if !options['contract.default'].representative_details_provided?
           errors['missing_representative_details'] = true
-        elsif !(current_user_email.casecmp?(representative_email))
+        elsif !current_user_email.casecmp?(representative_email)
           errors['not_authorised_representative'] = true
         end
         unless options['contract.default'].business_details_provided?
@@ -89,3 +90,4 @@ class Sellers::SellerVersion::Update < Trailblazer::Operation
     options['result.valid']
   end
 end
+# rubocop:enable Airbnb/ClassOrModuleDeclaredInWrongFile

@@ -19,7 +19,7 @@ FactoryBot.define do
       abn
       website_url 'http://example.org'
       linkedin_url 'http://linkedin.com/example'
-      services [ 'cloud-services' ]
+      services ['cloud-services']
     end
 
     trait :with_full_seller_profile do
@@ -38,19 +38,19 @@ FactoryBot.define do
       representative_email 'signy@example.org'
       representative_phone '02 9765 4321'
 
-      sequence(:accreditations) {|n|
-        [ "ISO#{27000+n} compliance" ]
-      }
+      sequence(:accreditations) do |n|
+        ["ISO#{27000 + n} compliance"]
+      end
       engagements [
-        "Board member, Australian Bakers' Association"
+        "Board member, Australian Bakers' Association",
       ]
-      sequence(:awards) {|n|
-        [ "Baker of the year #{2010+n}" ]
-      }
+      sequence(:awards) do |n|
+        ["Baker of the year #{2010 + n}"]
+      end
 
-      addresses {
-        [ attributes_for(:seller_address) ]
-      }
+      addresses do
+        [attributes_for(:seller_address)]
+      end
 
       agree true
     end
@@ -61,7 +61,7 @@ FactoryBot.define do
 
     trait :created do
       state 'created'
-      started_at Time.now
+      started_at { Time.now }
     end
 
     trait :awaiting_assignment do

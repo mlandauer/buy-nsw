@@ -1,10 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Admin::BuildAssignSellerVersion do
+  subject { described_class.new(seller_version_id: version.id) }
 
   let(:version) { create(:awaiting_assignment_seller_version) }
-
-  subject { described_class.new(seller_version_id: version.id) }
 
   describe '.call' do
     context 'given an existing version' do
@@ -17,9 +16,9 @@ RSpec.describe Admin::BuildAssignSellerVersion do
 
     context 'when the version does not exist' do
       it 'raises an exception' do
-        expect{
+        expect do
           described_class.call(seller_version_id: '1234567')
-        }.to raise_error(ActiveRecord::RecordNotFound)
+        end.to raise_error(ActiveRecord::RecordNotFound)
       end
     end
   end
@@ -36,5 +35,4 @@ RSpec.describe Admin::BuildAssignSellerVersion do
       expect(subject.seller_version).to eq(version)
     end
   end
-
 end

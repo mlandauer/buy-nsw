@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe SellerInvitationMailer, type: :mailer do
-
   describe '#seller_invitation_email' do
     let(:version) { create(:approved_seller_version) }
     let(:user) { create(:user, seller: version.seller) }
@@ -14,7 +13,7 @@ RSpec.describe SellerInvitationMailer, type: :mailer do
       expect(mail.to).to contain_exactly(user.email)
     end
 
-    it 'should include the name of the seller' do
+    it 'includes the name of the seller' do
       expect(mail.body.encoded).to match(version.name)
     end
   end

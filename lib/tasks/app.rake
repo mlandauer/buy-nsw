@@ -1,12 +1,10 @@
 require 'csv'
 require 'factory_bot'
 
-include FactoryBot::Syntax::Methods
-
 namespace :app do
   namespace :sellers do
     namespace :create do
-
+      include FactoryBot::Syntax::Methods
       desc "Create fake sellers data - WARNING deletes MOST data in the database"
       task fake: :environment do
         User.destroy_all
@@ -30,43 +28,42 @@ namespace :app do
 
         (1..20).each do |i|
           seller = create(:active_seller)
-          seller_version = create(:approved_seller_version,
-            seller_id: seller.id,
-            name: Faker::Company.unique.name,
-            abn: Faker::Company.unique.australian_business_number,
-            summary: Faker::Company.catch_phrase,
-            website_url: "https://#{Faker::Internet.domain_name}",
-            linkedin_url: "http://linkedin.com/#{Faker::Internet.slug}",
-            number_of_employees: SellerVersion.number_of_employees.values.sample,
-            start_up: [false, true].sample,
-            sme: [false, true].sample,
-            not_for_profit: [false, true].sample,
-            regional: [false, true].sample,
-            disability: [false, true].sample,
-            female_owned: [false, true].sample,
-            indigenous: [false, true].sample,
-            no_experience: [false, true].sample,
-            local_government_experience: [false, true].sample,
-            state_government_experience: [false, true].sample,
-            federal_government_experience: [false, true].sample,
-            international_government_experience: [false, true].sample,
-            contact_name: contact_name,
-            contact_email: Faker::Internet.email(contact_name),
-            contact_phone: Faker::PhoneNumber.phone_number,
-            representative_name: representative_name,
-            representative_email: Faker::Internet.email(representative_name),
-            representative_phone: Faker::PhoneNumber.phone_number,
-            investigations: false,
-            legal_proceedings: false,
-            insurance_claims: false,
-            conflicts_of_interest: false,
-            other_circumstances: false,
-            services: services,
-            australian_owned: [false, true].sample,
-            workers_compensation_exempt: false
-          )
+          create(:approved_seller_version,
+                 seller_id: seller.id,
+                 name: Faker::Company.unique.name,
+                 abn: Faker::Company.unique.australian_business_number,
+                 summary: Faker::Company.catch_phrase,
+                 website_url: "https://#{Faker::Internet.domain_name}",
+                 linkedin_url: "http://linkedin.com/#{Faker::Internet.slug}",
+                 number_of_employees: SellerVersion.number_of_employees.values.sample,
+                 start_up: [false, true].sample,
+                 sme: [false, true].sample,
+                 not_for_profit: [false, true].sample,
+                 regional: [false, true].sample,
+                 disability: [false, true].sample,
+                 female_owned: [false, true].sample,
+                 indigenous: [false, true].sample,
+                 no_experience: [false, true].sample,
+                 local_government_experience: [false, true].sample,
+                 state_government_experience: [false, true].sample,
+                 federal_government_experience: [false, true].sample,
+                 international_government_experience: [false, true].sample,
+                 contact_name: contact_name,
+                 contact_email: Faker::Internet.email(contact_name),
+                 contact_phone: Faker::PhoneNumber.phone_number,
+                 representative_name: representative_name,
+                 representative_email: Faker::Internet.email(representative_name),
+                 representative_phone: Faker::PhoneNumber.phone_number,
+                 investigations: false,
+                 legal_proceedings: false,
+                 insurance_claims: false,
+                 conflicts_of_interest: false,
+                 other_circumstances: false,
+                 services: services,
+                 australian_owned: [false, true].sample,
+                 workers_compensation_exempt: false)
           # Each seller has between 1 and 5 products
-          (1..Faker::Number.between(1,5)).each do |i|
+          (1..Faker::Number.between(1, 5)).each do |j|
             audiences = []
             Product.audiences.values.each do |value|
               audiences << value if [false, true].sample
@@ -93,13 +90,12 @@ namespace :app do
     namespace :import do
       desc "Import all sellers from a csv file - WARNING overwrites data in the database"
       task csv: :environment do
-        CsvConvert::import_sellers('exported_sellers.csv')
-        CsvConvert::import_products('exported_products.csv')
+        CsvConvert.import_sellers('exported_sellers.csv')
+        CsvConvert.import_products('exported_products.csv')
       end
     end
 
     namespace :export do
-
       #
       # Exports data from the following tables:
       # sellers, seller_addresses, products
@@ -108,8 +104,8 @@ namespace :app do
       #
       desc "Export all sellers as a csv file which can be loaded into a spreadsheet"
       task csv: :environment do
-        CsvConvert::export_sellers('exported_sellers.csv')
-        CsvConvert::export_products('exported_products.csv')
+        CsvConvert.export_sellers('exported_sellers.csv')
+        CsvConvert.export_products('exported_products.csv')
       end
     end
   end

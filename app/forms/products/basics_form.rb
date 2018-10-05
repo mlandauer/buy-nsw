@@ -26,8 +26,12 @@ module Products
     property :contact_email
     property :contact_phone
 
-    collection :features, prepopulator: ->(_){ TextFieldArrayPrepopulator.(self, name: :features, limit: 10) }
-    collection :benefits, prepopulator: ->(_){ TextFieldArrayPrepopulator.(self, name: :benefits, limit: 10) }
+    collection :features, prepopulator: ->(_) {
+      TextFieldArrayPrepopulator.call(self, name: :features, limit: 10)
+    }
+    collection :benefits, prepopulator: ->(_) {
+      TextFieldArrayPrepopulator.call(self, name: :benefits, limit: 10)
+    }
 
     validation :default, inherit: true do
       required(:name).filled
@@ -57,6 +61,5 @@ module Products
       required(:features).value(max_items?: 10)
       required(:benefits).value(max_items?: 10)
     end
-
   end
 end

@@ -8,7 +8,7 @@ FactoryBot.define do
     state 'nsw'
     country 'AU'
     contact_name 'Joe Bloggs'
-    sequence(:contact_email) {|n| "waiting-seller-#{n}@test.buy.nsw.gov.au" }
+    sequence(:contact_email) { |n| "waiting-seller-#{n}@test.buy.nsw.gov.au" }
     contact_position 'Chief of Staff'
     website_url 'https://example.buy.nsw.gov.au'
 

@@ -6,7 +6,7 @@ module Sellers::Applications
       end
 
       def path(application:, product: nil)
-        Rails.application.routes.url_helpers.send(self.route_helper, application)
+        Rails.application.routes.url_helpers.send(route_helper, application)
       end
     end
 
@@ -16,9 +16,9 @@ module Sellers::Applications
     end
 
     def task_list
-      tuples = all_tasks.map {|section, steps|
+      tuples = all_tasks.map do |section, steps|
         [section, steps.compact] if steps.compact.any?
-      }.compact
+      end.compact
 
       Hash[tuples]
     end
@@ -49,7 +49,7 @@ module Sellers::Applications
         section('apply') => [
           step('declaration'),
           InlineStep.new(:submit, :submit_sellers_application_path),
-        ]
+        ],
       }
     end
 
@@ -62,11 +62,12 @@ module Sellers::Applications
         (!govdc_seller? && !provides_cloud_services?)
     end
 
-  private
+    private
+
     attr_reader :steps, :seller_version
 
     def step(key)
-      steps.find {|s| s.key == key }
+      steps.find { |s| s.key == key }
     end
 
     def section(key)
@@ -93,6 +94,5 @@ module Sellers::Applications
         InlineStep.new(:products, :sellers_application_products_path)
       end
     end
-
   end
 end

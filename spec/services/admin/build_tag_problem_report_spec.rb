@@ -1,10 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Admin::BuildTagProblemReport do
+  subject { described_class.new(problem_report_id: problem_report.id) }
 
   let(:problem_report) { create(:open_problem_report) }
-
-  subject { described_class.new(problem_report_id: problem_report.id) }
 
   describe '.call' do
     context 'given an existing problem_report' do
@@ -17,9 +16,9 @@ RSpec.describe Admin::BuildTagProblemReport do
 
     context 'when the problem report does not exist' do
       it 'raises an exception' do
-        expect{
+        expect do
           described_class.call(problem_report_id: '1234567')
-        }.to raise_error(ActiveRecord::RecordNotFound)
+        end.to raise_error(ActiveRecord::RecordNotFound)
       end
     end
   end
@@ -36,5 +35,4 @@ RSpec.describe Admin::BuildTagProblemReport do
       expect(subject.problem_report).to eq(problem_report)
     end
   end
-
 end

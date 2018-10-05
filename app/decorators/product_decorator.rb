@@ -1,5 +1,4 @@
 class ProductDecorator < BaseDecorator
-
   def is_reselling?
     reseller_type && reseller_type != 'own-product'
   end
@@ -56,14 +55,14 @@ class ProductDecorator < BaseDecorator
     VerboseProductDetails.new(__getobj__, include_all: true).details
   end
 
-private
+  private
+
   def parse_money(amount)
     return nil if pricing_currency.blank?
     begin
-      Money.new(amount*100, pricing_currency)
+      Money.new(amount * 100, pricing_currency)
     rescue Money::Currency::UnknownCurrency
       nil
     end
   end
-
 end

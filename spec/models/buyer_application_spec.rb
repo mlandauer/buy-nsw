@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe BuyerApplication do
-
   describe 'state changes' do
     describe '#submit' do
       let(:application) { create(:buyer_application) }
@@ -13,7 +12,7 @@ RSpec.describe BuyerApplication do
         expect(application.state).to eq('awaiting_manager_approval')
       end
 
-      it 'transitions to `awaiting_assignment` when email approval is required, but no assignee is present' do
+      it 'transitions to `awaiting_assignment` when email approval is required, but no assignee is present' do # rubocop:disable Metrics/LineLength
         application.user.email = 'foo@outside.org'
         application.submit
 
@@ -32,7 +31,7 @@ RSpec.describe BuyerApplication do
     describe '#manager_approve' do
       let(:application) { create(:awaiting_manager_approval_buyer_application) }
 
-      it 'transitions to `awaiting_assignment` when email approval is required and no assignee is present' do
+      it 'transitions to `awaiting_assignment` when email approval is required and no assignee is present' do # rubocop:disable Metrics/LineLength
         application.user.email = 'foo@outside.org'
         application.manager_approve
 
@@ -90,5 +89,4 @@ RSpec.describe BuyerApplication do
       expect(application.manager_approval_token).to eq('random string')
     end
   end
-
 end

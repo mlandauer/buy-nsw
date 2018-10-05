@@ -19,10 +19,14 @@ module Products
       required(:data_location_other).maybe(:str?)
       required(:data_location_unknown_reason).maybe(:str?)
 
-      rule(data_location_other: [:data_location, :data_location_other]) do |radio, field|
+      rule(data_location_other: [
+        :data_location, :data_location_other,
+      ]) do |radio, field|
         radio.eql?('other-known').then(field.filled?)
       end
-      rule(data_location_unknown_reason: [:data_location, :data_location_unknown_reason]) do |radio, field|
+      rule(data_location_unknown_reason: [
+        :data_location, :data_location_unknown_reason,
+      ]) do |radio, field|
         radio.eql?('dont-know').then(field.filled?)
       end
 
@@ -36,7 +40,9 @@ module Products
       required(:third_party_involved).filled(:bool?)
       required(:third_party_involved_details).maybe(:str?)
 
-      rule(third_party_involved_details: [:third_party_involved, :third_party_involved_details]) do |radio, field|
+      rule(third_party_involved_details: [
+        :third_party_involved, :third_party_involved_details,
+      ]) do |radio, field|
         radio.true?.then(field.filled?)
       end
     end

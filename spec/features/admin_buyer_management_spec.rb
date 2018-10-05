@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe 'Managing buyers', type: :feature, js: true do
-
   describe 'as an admin user', user: :admin_user do
     it 'can deactivate a buyer' do
       buyer = create(:approved_buyer_application)
@@ -45,5 +44,4 @@ RSpec.describe 'Managing buyers', type: :feature, js: true do
       expect(page).to have_content(message)
     end
   end
-
 end

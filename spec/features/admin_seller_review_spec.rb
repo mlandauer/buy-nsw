@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe 'Reviewing seller applications', type: :feature, js: true do
-
   describe 'as an admin user', user: :admin_user do
     it 'can approve an application' do
       application = create(:awaiting_assignment_seller_version)
@@ -48,7 +47,6 @@ RSpec.describe 'Reviewing seller applications', type: :feature, js: true do
       refresh
 
       expect_listed(application)
-
     end
 
     it 'can filter to show the next version of reverted applications' do
@@ -195,12 +193,12 @@ RSpec.describe 'Reviewing seller applications', type: :feature, js: true do
       context 'for an unscanned document' do
         let!(:document) { create(:unscanned_document) }
 
-        before(:example) {
+        before(:example) do
           product.update_attribute(:terms_id, document.id)
 
           visit admin_seller_application_path(application)
           click_navigation_item(product.name)
-        }
+        end
 
         it 'shows a holding message' do
           within_product_detail('Additional terms document') do
@@ -213,12 +211,12 @@ RSpec.describe 'Reviewing seller applications', type: :feature, js: true do
       context 'for a clean document' do
         let!(:document) { create(:clean_document) }
 
-        before(:example) {
+        before(:example) do
           product.update_attribute(:terms_id, document.id)
 
           visit admin_seller_application_path(application)
           click_navigation_item(product.name)
-        }
+        end
 
         it 'shows a download button' do
           within_product_detail('Additional terms document') do
@@ -231,12 +229,12 @@ RSpec.describe 'Reviewing seller applications', type: :feature, js: true do
       context 'for an infected document' do
         let!(:document) { create(:infected_document) }
 
-        before(:example) {
+        before(:example) do
           product.update_attribute(:terms_id, document.id)
 
           visit admin_seller_application_path(application)
           click_navigation_item(product.name)
-        }
+        end
 
         it 'shows an error message' do
           within_product_detail('Additional terms document') do
@@ -354,7 +352,7 @@ RSpec.describe 'Reviewing seller applications', type: :feature, js: true do
   end
 
   def admin_field_label(key)
-    I18n.t("#{key}.name", scope: [ :admin, :seller_versions, :fields ])
+    I18n.t("#{key}.name", scope: [:admin, :seller_versions, :fields])
   end
 
   def click_navigation_item(label)
@@ -371,5 +369,4 @@ RSpec.describe 'Reviewing seller applications', type: :feature, js: true do
     term = page.find(:xpath, "//dt[contains(text(),'#{label}')]/following-sibling::dd[1]")
     within(term, &block)
   end
-
 end

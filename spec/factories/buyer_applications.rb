@@ -25,7 +25,7 @@ FactoryBot.define do
     end
 
     trait :with_manager_approval_token do
-      sequence(:manager_approval_token) {|n| n }
+      sequence(:manager_approval_token) { |n| n }
     end
 
     trait :created do
@@ -69,7 +69,9 @@ FactoryBot.define do
     factory :created_buyer_application, traits: [:created]
     factory :created_manager_approval_buyer_application, traits: [:created, :manager_approval]
     factory :completed_buyer_application, traits: [:created, :completed]
-    factory :completed_manager_approval_buyer_application, traits: [:created, :completed, :manager_approval]
+    factory :completed_manager_approval_buyer_application, traits: [
+      :created, :completed, :manager_approval,
+    ]
     factory :awaiting_manager_approval_buyer_application, traits: [:awaiting_manager_approval]
     factory :awaiting_assignment_buyer_application, traits: [:awaiting_assignment]
     factory :ready_for_review_buyer_application, traits: [:ready_for_review]

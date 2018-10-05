@@ -25,6 +25,6 @@ class MigrateFeaturesBenefitsToProducts < ActiveRecord::Migration[5.1]
     sql = "SELECT * FROM #{table} WHERE product_id = '#{product_id}'"
     result = ActiveRecord::Base.connection.execute(sql)
 
-    result.each.map {|row| row[key] }
+    result.each.map { |row| row[key] }
   end
 end

@@ -1,10 +1,10 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
-  unless ENV['FEATURE_FLAG_DISABLE_RATE_LIMITING'].present?
+  if ENV['FEATURE_FLAG_DISABLE_RATE_LIMITING'].blank?
     config.middleware.use Rack::Attack
   end
-  
+
   # Code is not reloaded between requests.
   config.cache_classes = true
 
@@ -54,8 +54,8 @@ Rails.application.configure do
   config.force_ssl = true
   config.ssl_options = {
     redirect: {
-      exclude: -> request { request.path == '/health' }
-    }
+      exclude: -> request { request.path == '/health' },
+    },
   }
 
   # Use the lowest log level to ensure availability of diagnostic information
@@ -63,13 +63,13 @@ Rails.application.configure do
   config.log_level = :debug
 
   # Prepend all log lines with the following tags.
-  config.log_tags = [ :request_id ]
+  config.log_tags = [:request_id]
 
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
 
   # Use a real queuing backend for Active Job (and separate queues per environment)
-  config.active_job.queue_adapter     = :active_elastic_job
+  config.active_job.queue_adapter = :active_elastic_job
   # config.active_job.queue_name_prefix = "procurement-hub_#{Rails.env}"
 
   config.action_mailer.perform_caching = false
@@ -103,16 +103,16 @@ Rails.application.configure do
 
   if ENV['CARRIERWAVE_AWS_ACCESS_KEY'].present?
     CarrierWave.configure do |config|
-        config.fog_provider = 'fog/aws'
-        config.fog_credentials = {
-          provider:              'AWS',
-          aws_access_key_id:     ENV['CARRIERWAVE_AWS_ACCESS_KEY'],
-          aws_secret_access_key: ENV['CARRIERWAVE_AWS_SECRET_KEY'],
-          region:                ENV['CARRIERWAVE_AWS_REGION']
-        }
-        config.fog_directory  = ENV['CARRIERWAVE_AWS_BUCKET']
-        config.fog_public     = false
-        config.storage = :fog
+      config.fog_provider = 'fog/aws'
+      config.fog_credentials = {
+        provider:              'AWS',
+        aws_access_key_id:     ENV['CARRIERWAVE_AWS_ACCESS_KEY'],
+        aws_secret_access_key: ENV['CARRIERWAVE_AWS_SECRET_KEY'],
+        region:                ENV['CARRIERWAVE_AWS_REGION'],
+      }
+      config.fog_directory  = ENV['CARRIERWAVE_AWS_BUCKET']
+      config.fog_public     = false
+      config.storage = :fog
     end
   end
 end

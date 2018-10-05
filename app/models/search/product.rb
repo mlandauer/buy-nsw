@@ -1,8 +1,8 @@
 module Search
   class Product < Base
-    attr_reader :term, :section
+    attr_reader :section
 
-    def initialize(args={})
+    def initialize(args = {})
       @section = args.delete(:section)
       term = args.delete(:term)
 
@@ -20,10 +20,12 @@ module Search
         audiences: audiences_keys,
         characteristics: [:data_in_australia, :api, :mobile_devices, :all_accessible],
         pricing: [:free_version, :free_trial, :education, :not_for_profit],
-        business_identifiers: [:disability, :indigenous, :not_for_profit, :regional, :start_up, :sme],
+        business_identifiers: [
+          :disability, :indigenous, :not_for_profit, :regional, :start_up, :sme,
+        ],
         reseller_type: [:reseller, :not_reseller],
         security_standards: security_standards_keys + [:irap_assessed, :asd_certified],
-        government_network_type: government_network_type_keys
+        government_network_type: government_network_type_keys,
       }
     end
 
@@ -31,7 +33,8 @@ module Search
       filter_value(:term)
     end
 
-  private
+    private
+
     include Concerns::Search::SellerTagFilters
 
     def base_relation
@@ -40,31 +43,31 @@ module Search
 
     def apply_filters(scope)
       scope.yield_self(&method(:term_filter)).
-            yield_self(&method(:audiences_filter)).
-            yield_self(&method(:start_up_filter)).
-            yield_self(&method(:sme_filter)).
-            yield_self(&method(:disability_filter)).
-            yield_self(&method(:regional_filter)).
-            yield_self(&method(:indigenous_filter)).
-            yield_self(&method(:not_for_profit_filter)).
-            yield_self(&method(:reseller_filter)).
-            yield_self(&method(:free_version_filter)).
-            yield_self(&method(:free_trial_filter)).
-            yield_self(&method(:education_pricing_filter)).
-            yield_self(&method(:not_for_profit_pricing_filter)).
-            yield_self(&method(:government_network_type_filter)).
-            yield_self(&method(:data_location_filter)).
-            yield_self(&method(:api_filter)).
-            yield_self(&method(:mobile_devices_filter)).
-            yield_self(&method(:security_standards_filter)).
-            yield_self(&method(:irap_assessed_filter)).
-            yield_self(&method(:asd_certified_filter)).
-            yield_self(&method(:all_accessible_filter))
+        yield_self(&method(:audiences_filter)).
+        yield_self(&method(:start_up_filter)).
+        yield_self(&method(:sme_filter)).
+        yield_self(&method(:disability_filter)).
+        yield_self(&method(:regional_filter)).
+        yield_self(&method(:indigenous_filter)).
+        yield_self(&method(:not_for_profit_filter)).
+        yield_self(&method(:reseller_filter)).
+        yield_self(&method(:free_version_filter)).
+        yield_self(&method(:free_trial_filter)).
+        yield_self(&method(:education_pricing_filter)).
+        yield_self(&method(:not_for_profit_pricing_filter)).
+        yield_self(&method(:government_network_type_filter)).
+        yield_self(&method(:data_location_filter)).
+        yield_self(&method(:api_filter)).
+        yield_self(&method(:mobile_devices_filter)).
+        yield_self(&method(:security_standards_filter)).
+        yield_self(&method(:irap_assessed_filter)).
+        yield_self(&method(:asd_certified_filter)).
+        yield_self(&method(:all_accessible_filter))
     end
 
     def term_filter(relation)
       if term.present?
-        relation = relation.basic_search(term)
+        relation.basic_search(term)
       else
         relation
       end
@@ -103,7 +106,7 @@ module Search
 
     def free_version_filter(relation)
       if filter_selected?(:pricing, :free_version)
-        relation = relation.free_version
+        relation.free_version
       else
         relation
       end
@@ -111,7 +114,7 @@ module Search
 
     def free_trial_filter(relation)
       if filter_selected?(:pricing, :free_trial)
-        relation = relation.free_trial
+        relation.free_trial
       else
         relation
       end
@@ -119,7 +122,7 @@ module Search
 
     def education_pricing_filter(relation)
       if filter_selected?(:pricing, :education)
-        relation = relation.education_pricing
+        relation.education_pricing
       else
         relation
       end
@@ -127,7 +130,7 @@ module Search
 
     def not_for_profit_pricing_filter(relation)
       if filter_selected?(:pricing, :not_for_profit)
-        relation = relation.not_for_profit_pricing
+        relation.not_for_profit_pricing
       else
         relation
       end
@@ -135,7 +138,7 @@ module Search
 
     def data_location_filter(relation)
       if filter_selected?(:characteristics, :data_in_australia)
-        relation = relation.with_data_in_australia
+        relation.with_data_in_australia
       else
         relation
       end
@@ -143,7 +146,7 @@ module Search
 
     def api_filter(relation)
       if filter_selected?(:characteristics, :api)
-        relation = relation.with_api
+        relation.with_api
       else
         relation
       end
@@ -151,7 +154,7 @@ module Search
 
     def mobile_devices_filter(relation)
       if filter_selected?(:characteristics, :mobile_devices)
-        relation = relation.mobile_devices
+        relation.mobile_devices
       else
         relation
       end
@@ -168,7 +171,7 @@ module Search
 
     def irap_assessed_filter(relation)
       if filter_selected?(:security_standards, :irap_assessed)
-        relation = relation.irap_assessed
+        relation.irap_assessed
       else
         relation
       end
@@ -176,7 +179,7 @@ module Search
 
     def asd_certified_filter(relation)
       if filter_selected?(:security_standards, :asd_certified)
-        relation = relation.asd_certified
+        relation.asd_certified
       else
         relation
       end
@@ -184,7 +187,7 @@ module Search
 
     def all_accessible_filter(relation)
       if filter_selected?(:characteristics, :all_accessible)
-        relation = relation.accessible
+        relation.accessible
       else
         relation
       end
@@ -200,7 +203,7 @@ module Search
 
     def security_standards_keys
       [
-        :iso_27001, :iso_27017, :iso_27018, :csa_star, :pci_dss, :soc_2
+        :iso_27001, :iso_27017, :iso_27018, :csa_star, :pci_dss, :soc_2,
       ]
     end
   end

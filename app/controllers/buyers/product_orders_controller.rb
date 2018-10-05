@@ -22,7 +22,8 @@ class Buyers::ProductOrdersController < Buyers::BaseController
     end
   end
 
-private
+  private
+
   attr_reader :operation
 
   def contract

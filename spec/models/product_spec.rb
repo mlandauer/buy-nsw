@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Product do
-
   describe '#approved_seller_version' do
     it 'returns the approved seller version' do
       seller = create(:active_seller)
@@ -23,5 +22,4 @@ RSpec.describe Product do
       expect(results).to contain_exactly(accessible_product)
     end
   end
-
 end

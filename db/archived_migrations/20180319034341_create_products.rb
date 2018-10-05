@@ -4,7 +4,7 @@ class CreateProducts < ActiveRecord::Migration[5.1]
       t.integer :seller_id, null: false
       t.string :state, null: false
       t.string :name
-      
+
       t.timestamps
     end
   end

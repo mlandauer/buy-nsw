@@ -9,13 +9,13 @@ class SellerApplicationProgressReport
   end
 
   def all_steps_valid?
-    base_valid = base_progress.reject {|_, valid|
+    base_valid = base_progress.reject do |_, valid|
       valid == true
-    }.empty?
+    end.empty?
 
-    products_valid = products_progress.reject {|id, product|
+    products_valid = products_progress.reject do |id, product|
       product['_overall'] == true
-    }.empty?
+    end.empty?
 
     base_valid && products_valid
   end
@@ -28,12 +28,13 @@ class SellerApplicationProgressReport
     @products_progress ||= build_products_progress
   end
 
-private
+  private
+
   attr_reader :application, :cache_length, :base_steps, :product_steps,
-    :validate_optional_steps
+              :validate_optional_steps
 
   def build_base_progress
-    cache_key = "sellers.applications.#{application.id}.#{validate_optional_steps.to_s}"
+    cache_key = "sellers.applications.#{application.id}.#{validate_optional_steps}"
 
     Rails.cache.fetch(cache_key, expires_in: cache_length) do
       build_step_progress(base_steps, application)
@@ -42,25 +43,31 @@ private
 
   def build_products_progress
     tuples = application.seller.products.map do |product|
-      cache_key = "sellers.products.#{product.id}.#{validate_optional_steps.to_s}"
+      cache_key = "sellers.products.#{product.id}.#{validate_optional_steps}"
 
       progress = Rails.cache.fetch(cache_key, expires_in: cache_length) do
-        build_step_progress(product_steps, application, product)
+        build_step_progress(product_steps, application, product: product)
       end
-      progress['_overall'] = progress.reject {|_,v| v == true }.empty?
+      progress['_overall'] = progress.reject { |_, v| v == true }.empty?
 
       [product.id, progress]
     end
 
-    progress = Hash[tuples]
+    Hash[tuples]
   end
 
-  def build_step_progress(steps, application, product = nil)
+  def build_step_progress(steps, application, product: nil)
     {}.tap do |output|
       steps.each do |step|
-        output[step.key] = product.present? ?
-          step.complete?(application, product, validate_optional_steps: validate_optional_steps) :
-          step.complete?(application, validate_optional_steps: validate_optional_steps)
+        if product.present?
+          output[step.key] = step.complete?(
+            application, product, validate_optional_steps: validate_optional_steps
+          )
+        else
+          output[step.key] = step.complete?(
+            application, validate_optional_steps: validate_optional_steps
+          )
+        end
       end
     end
   end

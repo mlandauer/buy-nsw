@@ -5,7 +5,7 @@
     </p>
   <% end %>
 
-  <h1><%= presenter.name(:long) %></h1>
+  <h1><%= presenter.name(type: :long) %></h1>
 
   <%= buy_nsw_form_for form, url: buyers_application_path(application), as: :buyer_application, i18n_scope: presenter.i18n_base do |f| %>
     <%= display_block_errors(f) %>

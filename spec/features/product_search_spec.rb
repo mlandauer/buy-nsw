@@ -1,30 +1,27 @@
 require 'rails_helper'
 
 RSpec.describe 'Searching products', type: :feature, js: true do
-
   let(:section) { 'applications-software' }
 
   let(:seller_version_1) { create(:approved_seller_version, start_up: true) }
   let(:seller_version_2) { create(:approved_seller_version, start_up: false) }
 
-  let!(:product_1) {
+  let!(:product_1) do
     create(:active_product,
-      name: 'Cloud-o-matic',
-      summary: 'Summary',
-      section: section,
-      audiences: ['developers'],
-      seller: seller_version_2.seller,
-    )
-  }
-  let!(:product_2) {
+           name: 'Cloud-o-matic',
+           summary: 'Summary',
+           section: section,
+           audiences: ['developers'],
+           seller: seller_version_2.seller,)
+  end
+  let!(:product_2) do
     create(:active_product,
-      name: 'Cloud-o-matic Unlimited',
-      summary: 'Summary',
-      section: section,
-      audiences: ['legal'],
-      seller: seller_version_1.seller,
-    )
-  }
+           name: 'Cloud-o-matic Unlimited',
+           summary: 'Summary',
+           section: section,
+           audiences: ['legal'],
+           seller: seller_version_1.seller,)
+  end
 
   it 'returns a result for a given term' do
     visit pathway_search_path(section)

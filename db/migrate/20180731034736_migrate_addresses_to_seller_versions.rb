@@ -9,9 +9,9 @@ class MigrateAddressesToSellerVersions < ActiveRecord::Migration[5.1]
 
       seller.versions.each do |version|
         version.update_attributes!(
-          addresses: addresses.map {|address|
+          addresses: addresses.map do |address|
             address.slice('address', 'suburb', 'postcode', 'state', 'country')
-          }
+          end
         )
       end
     end

@@ -1,19 +1,18 @@
 require 'rails_helper'
 
 RSpec.describe Admin::BuyerApplicationsController, type: :controller, sign_in: :admin_user do
-
   describe 'GET index' do
     describe 'format CSV' do
       render_views
 
       let!(:buyer_applications) { create_list(:buyer_application, 5) }
-      let(:params) {
+      let(:params) do
         {
           # Reset the default filters
           skip_filters: true,
           format: :csv,
         }
-      }
+      end
 
       it 'is successful' do
         get :index, params: params
@@ -46,7 +45,6 @@ RSpec.describe Admin::BuyerApplicationsController, type: :controller, sign_in: :
     let(:application) { create(:approved_buyer_application) }
 
     describe 'on success' do
-
       it 'redirects to the buyer page' do
         post :deactivate, params: { id: application.id }
 
@@ -61,7 +59,5 @@ RSpec.describe Admin::BuyerApplicationsController, type: :controller, sign_in: :
         expect(controller.flash.notice).to eq('String')
       end
     end
-
   end
-
 end

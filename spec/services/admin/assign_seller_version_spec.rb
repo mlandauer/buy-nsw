@@ -1,15 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe Admin::AssignSellerVersion do
-
   let(:version) { create(:awaiting_assignment_seller_version) }
 
   let(:current_user) { create(:admin_user) }
   let(:assignee_user) { create(:admin_user) }
 
-  let(:valid_attributes) {
+  let(:valid_attributes) do
     { assigned_to_id: assignee_user.id }
-  }
+  end
 
   describe '.call' do
     def perform_operation(attributes: valid_attributes)
@@ -25,7 +24,7 @@ RSpec.describe Admin::AssignSellerVersion do
 
       it 'is successful' do
         expect(operation).to be_success
-        expect(operation).to_not be_failure
+        expect(operation).not_to be_failure
       end
 
       it 'assigns a user to the version' do
@@ -82,5 +81,4 @@ RSpec.describe Admin::AssignSellerVersion do
       end
     end
   end
-
 end

@@ -1,11 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Sellers::SellerVersion::Create do
-
   let(:user) { create(:seller_user) }
 
   def perform_operation
-    described_class.({ }, 'config.current_user' => user)
+    described_class.call({}, 'config.current_user' => user)
   end
 
   it 'creates a seller and seller version' do
@@ -24,8 +23,8 @@ RSpec.describe Sellers::SellerVersion::Create do
   end
 
   it 'does not create an additional seller when one exists' do
-    seller = create(:seller, owner: user)
-    result = perform_operation
+    create(:seller, owner: user)
+    perform_operation
 
     expect(Seller.count).to eq(1)
     expect(SellerVersion.count).to eq(1)
@@ -33,9 +32,9 @@ RSpec.describe Sellers::SellerVersion::Create do
 
   it 'does not create an additional version when one exists' do
     seller = create(:seller, owner: user)
-    application = create(:seller_version, seller: seller)
+    create(:seller_version, seller: seller)
 
-    result = perform_operation
+    perform_operation
 
     expect(Seller.count).to eq(1)
     expect(SellerVersion.count).to eq(1)
@@ -66,11 +65,10 @@ RSpec.describe Sellers::SellerVersion::Create do
 
   it 'fails when an version has already been submitted' do
     seller = create(:seller, owner: user)
-    application = create(:awaiting_assignment_seller_version, seller: seller)
+    create(:awaiting_assignment_seller_version, seller: seller)
 
     result = perform_operation
 
     expect(result).to be_failure
   end
-
 end

@@ -9,9 +9,9 @@ RSpec.describe Admin::InviteWaitingSellers do
   let(:token) { 'not a secret token' }
 
   describe '.call' do
-    subject {
+    subject do
       described_class.call(waiting_seller_ids: waiting_seller_ids)
-    }
+    end
 
     context 'given valid arguments' do
       it 'is successful' do
@@ -44,12 +44,12 @@ RSpec.describe Admin::InviteWaitingSellers do
 
       it 'sends an invitation email' do
         allow(WaitingSellerMailer).to receive(:with).
-                                        with(waiting_seller: kind_of(WaitingSeller)).
-                                        and_call_original
+          with(waiting_seller: kind_of(WaitingSeller)).
+          and_call_original
 
-        expect {
+        expect do
           perform_enqueued_jobs { subject }
-        }.to change { ActionMailer::Base.deliveries.count }.by(5)
+        end.to change { ActionMailer::Base.deliveries.count }.by(5)
       end
     end
 
@@ -66,7 +66,5 @@ RSpec.describe Admin::InviteWaitingSellers do
         expect(subject).to be_failure
       end
     end
-
   end
-
 end

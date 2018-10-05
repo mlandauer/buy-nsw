@@ -3,50 +3,50 @@ require 'rails_helper'
 RSpec.describe Sellers::WaitingSeller::Accept do
   let(:waiting_seller) { create(:invited_waiting_seller) }
 
-  def perform_operation(params = {})
-    described_class.({ id: waiting_seller.invitation_token, invitation: params })
-  end
-
-  let(:default_params) {
+  let(:default_params) do
     {
       password: 'a long secure password',
       password_confirmation: 'a long secure password',
     }
-  }
+  end
+
+  def perform_operation(params = {})
+    described_class.call({ id: waiting_seller.invitation_token, invitation: params })
+  end
 
   describe '::Present' do
     subject { Sellers::WaitingSeller::Accept::Present }
 
     it 'is successful given a valid token' do
-      result = subject.({ id: waiting_seller.invitation_token })
+      result = subject.call({ id: waiting_seller.invitation_token })
 
       expect(result).to be_success
     end
 
     it 'assigns the model' do
-      result = subject.({ id: waiting_seller.invitation_token })
+      result = subject.call({ id: waiting_seller.invitation_token })
 
       expect(result['model']).to eq(waiting_seller)
     end
 
-    it 'it raises an exception given an invalid token' do
-      expect {
-        subject.({ id: 'invalid-token' })
-      }.to raise_error(ActiveRecord::RecordNotFound)
+    it 'raises an exception given an invalid token' do
+      expect do
+        subject.call({ id: 'invalid-token' })
+      end.to raise_error(ActiveRecord::RecordNotFound)
     end
 
-    it 'it raises an exception given a token for a non-invited object' do
+    it 'raises an exception given a token for a non-invited object' do
       other_waiting_seller = create(:waiting_seller, invitation_token: 'foo')
 
-      expect {
-        subject.({ id: other_waiting_seller.invitation_token })
-      }.to raise_error(ActiveRecord::RecordNotFound)
+      expect do
+        subject.call({ id: other_waiting_seller.invitation_token })
+      end.to raise_error(ActiveRecord::RecordNotFound)
     end
 
     describe '#check_seller_does_not_exist!' do
       it 'fails when the ABN already exists' do
         create(:seller_version, abn: waiting_seller.abn)
-        result = subject.({ id: waiting_seller.invitation_token })
+        result = subject.call({ id: waiting_seller.invitation_token })
 
         expect(result).to be_failure
         expect(result['errors']).to include('seller_exists')
@@ -62,9 +62,9 @@ RSpec.describe Sellers::WaitingSeller::Accept do
 
   describe '#create_user!' do
     it 'creates a user from the WaitingSeller attributes' do
-      expect {
+      expect do
         perform_operation(default_params)
-      }.to change{ User.count }.from(0).to(1)
+      end.to change(User, :count).from(0).to(1)
 
       user = User.last
       expect(user.email).to eq(waiting_seller.contact_email)
@@ -95,7 +95,7 @@ RSpec.describe Sellers::WaitingSeller::Accept do
       # Cause an error to be returned from Devise
       result = perform_operation({
         password: '',
-        password_confirmation: ''
+        password_confirmation: '',
       })
 
       expect(result).to be_failure
@@ -105,17 +105,17 @@ RSpec.describe Sellers::WaitingSeller::Accept do
 
   describe '#create_seller!' do
     it 'creates a seller from the WaitingSeller attributes' do
-      expect {
+      expect do
         perform_operation(default_params)
-      }.to change{ Seller.count }.from(0).to(1)
+      end.to change(Seller, :count).from(0).to(1)
     end
   end
 
   describe '#create_version!' do
     it 'creates a seller version for the newly-created seller' do
-      expect {
+      expect do
         perform_operation(default_params)
-      }.to change{ SellerVersion.count }.from(0).to(1)
+      end.to change(SellerVersion, :count).from(0).to(1)
 
       seller = Seller.last
       version = SellerVersion.last
@@ -165,9 +165,9 @@ RSpec.describe Sellers::WaitingSeller::Accept do
 
   describe '#update_invitation_state!' do
     it 'updates the invitation state of the WaitingSeller' do
-      expect {
+      expect do
         perform_operation(default_params)
-      }.to change {
+      end.to change {
         waiting_seller.reload.invitation_state
       }.from('invited').to('joined')
     end

@@ -1,10 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe Products::BasicsForm do
-  let(:product) { build_stubbed(:inactive_product) }
   subject { described_class.new(product) }
 
-  let(:atts) {
+  let(:product) { build_stubbed(:inactive_product) }
+
+  let(:atts) do
     {
       name: 'Product-o-tron 2000',
       summary: "We name you product so you don't have to",
@@ -22,7 +23,7 @@ RSpec.describe Products::BasicsForm do
         'It benefits you',
       ],
     }
-  }
+  end
 
   it 'validates with valid attributes' do
     expect(subject.validate(atts)).to eq(true)
@@ -31,14 +32,14 @@ RSpec.describe Products::BasicsForm do
   it 'is invalid when the name is blank' do
     subject.validate(atts.merge(name: nil))
 
-    expect(subject).to_not be_valid
+    expect(subject).not_to be_valid
     expect(subject.errors[:name]).to be_present
   end
 
   it 'is invalid when the contact email address is not valid' do
     subject.validate(atts.merge(contact_email: 'foo'))
 
-    expect(subject).to_not be_valid
+    expect(subject).not_to be_valid
     expect(subject.errors[:contact_email]).to be_present
   end
 
@@ -51,7 +52,7 @@ RSpec.describe Products::BasicsForm do
 
       subject.validate(atts.merge(features: features))
 
-      expect(subject).to_not be_valid
+      expect(subject).not_to be_valid
       expect(subject.errors[:features]).to be_present
     end
 

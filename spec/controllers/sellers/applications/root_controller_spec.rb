@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe Sellers::Applications::RootController, type: :controller, sign_in: :seller_user_with_seller do
-
+RSpec.describe Sellers::Applications::RootController,
+               type: :controller, sign_in: :seller_user_with_seller do
   describe 'GET show' do
     context 'for a seller version not owned by the user' do
       let!(:other_seller) { create(:seller) }
@@ -22,5 +22,4 @@ RSpec.describe Sellers::Applications::RootController, type: :controller, sign_in
       end
     end
   end
-
 end

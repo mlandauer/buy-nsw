@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Admin::TagProblemReport do
-
   let(:problem_report) { create(:open_problem_report) }
 
   describe '.call' do
@@ -30,5 +29,4 @@ RSpec.describe Admin::TagProblemReport do
       end
     end
   end
-
 end

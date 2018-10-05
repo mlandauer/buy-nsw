@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe 'Reviewing product orders', type: :feature, js: true do
-
   describe 'as an admin user', user: :admin_user do
     it 'can view the order list' do
       orders = create_list(:product_order, 3)
@@ -16,5 +15,4 @@ RSpec.describe 'Reviewing product orders', type: :feature, js: true do
       end
     end
   end
-
 end

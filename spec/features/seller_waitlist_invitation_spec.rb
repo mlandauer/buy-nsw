@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe 'Seller waitlist invitations', type: :feature, js: true, skip_login: true do
-
   it 'can accept an invitation' do
     seller = create(:invited_waiting_seller)
     password = 'a strong password'

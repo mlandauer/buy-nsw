@@ -12,9 +12,12 @@ class ApplicationController < ActionController::Base
 
   impersonates :user
 
-private
+  private
+
   def authenticate!
-    return unless ENV['BASIC_USERNAME'].present? && ENV['BASIC_PASSWORD'].present?
+    if ENV['BASIC_USERNAME'].blank? || ENV['BASIC_PASSWORD'].blank?
+      return
+    end
 
     authenticate_or_request_with_http_basic do |username, password|
       username == ENV['BASIC_USERNAME'] && password == ENV['BASIC_PASSWORD']
@@ -22,7 +25,7 @@ private
   end
 
   def authorize_buyer!
-    unless current_user.buyer.present? && current_user.buyer.active?
+    if !(current_user.buyer.present? && current_user.buyer.active?)
       raise NotAuthorized
     end
   end
@@ -41,10 +44,10 @@ private
   end
 
   def errors_controller
-    ErrorsController.new.tap {|controller|
+    ErrorsController.new.tap do |controller|
       controller.request = request
       controller.response = response
-    }
+    end
   end
 
   def csv_request?

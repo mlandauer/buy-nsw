@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe 'Submitting a problem report', type: :feature, js: true do
-
   let(:label) { I18n.t('feedback.problem_report.label') }
   let(:task_label) { I18n.t('feedback.problem_report.task') }
   let(:issue_label) { I18n.t('feedback.problem_report.issue') }
@@ -42,5 +41,4 @@ RSpec.describe 'Submitting a problem report', type: :feature, js: true do
       expect(report.user).to eq(@user)
     end
   end
-
 end

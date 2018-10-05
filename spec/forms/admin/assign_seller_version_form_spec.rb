@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Admin::AssignSellerVersionForm do
-
   let(:user) { create(:admin_user) }
   let(:application) { build_stubbed(:seller_version) }
 
@@ -19,10 +18,10 @@ RSpec.describe Admin::AssignSellerVersionForm do
     form = described_class.new(application)
 
     form.validate(
-       assigned_to_id: nil,
+      assigned_to_id: nil,
     )
 
-    expect(form).to_not be_valid
+    expect(form).not_to be_valid
     expect(form.errors[:assigned_to_id]).to be_present
   end
 
@@ -31,11 +30,10 @@ RSpec.describe Admin::AssignSellerVersionForm do
     other_user = create(:buyer_user)
 
     form.validate(
-       assigned_to_id: other_user.id,
+      assigned_to_id: other_user.id,
     )
 
-    expect(form).to_not be_valid
+    expect(form).not_to be_valid
     expect(form.errors[:assigned_to_id]).to be_present
   end
-
 end

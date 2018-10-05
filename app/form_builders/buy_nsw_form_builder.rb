@@ -14,11 +14,11 @@ class BuyNswFormBuilder < SimpleForm::FormBuilder
 
   def errors_with_messages
     errors = HashWithIndifferentAccess.new(object.errors.messages)
-    errors.keys.map {|field, _|
+    errors.keys.map do |field, _|
       error_message_for_field(field)
-    }.compact.map {|field|
+    end.compact.map do |field|
       [field, field_id(field)]
-    }
+    end
   end
 
   def object
@@ -36,7 +36,8 @@ class BuyNswFormBuilder < SimpleForm::FormBuilder
     [base, key]
   end
 
-private
+  private
+
   def custom_input_options(attribute_name, options)
     hint_text = options[:hint] || translate_hint(attribute_name)
     label_text = options[:label] || translate_label(attribute_name)
@@ -46,7 +47,7 @@ private
 
     input_html = {
       aria: {
-        describedby: [ hint_id, error_id ].compact.join(' '),
+        describedby: [hint_id, error_id].compact.join(' '),
       },
     }
 
@@ -62,7 +63,8 @@ private
   def translate_hint(attribute_name)
     scope = [i18n_scope, attribute_name]
 
-    if html = translate_if_exists(:hint_html, scope)
+    html = translate_if_exists(:hint_html, scope)
+    if html
       html.html_safe
     else
       translate_if_exists(:hint, scope)

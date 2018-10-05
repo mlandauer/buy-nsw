@@ -56,7 +56,7 @@ gem 'rest-client'
 if ENV['TEMPLATE_DEV']
   gem 'digital_nsw_template', path: '../digital_nsw_template'
 else
-  gem 'digital_nsw_template', :git => 'https://github.com/digitalnsw/digital_nsw_template.git', :tag => '0.0.4'
+  gem 'digital_nsw_template', :git => 'https://github.com/digitalnsw/digital_nsw_template.git', :tag => '0.0.4' # rubocop:disable Metrics/LineLength, Bundler/DuplicatedGem
 end
 
 group :development, :test do
@@ -77,7 +77,8 @@ group :development, :test do
   gem 'pry'
   gem 'pry-rails'
   gem 'pry-byebug'
-  gem "awesome_print"
+  gem 'awesome_print'
+  gem 'rubocop-airbnb'
 end
 
 group :development do

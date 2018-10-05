@@ -42,11 +42,15 @@ module SellerVersions
       required(:product_liability_certificate_file, Types::File).maybe(:file_uploaded?)
       required(:product_liability_certificate_expiry, Types::Date).maybe(:date?, :in_future?)
 
-      rule(product_liability_certificate_file: [:product_liability_certificate_file, :product_liability_certificate_expiry]) do |file, expiry|
+      rule(product_liability_certificate_file: [
+        :product_liability_certificate_file, :product_liability_certificate_expiry,
+      ]) do |file, expiry|
         expiry.filled?.then(file.filled?)
       end
 
-      rule(product_liability_certificate_expiry: [:product_liability_certificate_file, :product_liability_certificate_expiry]) do |file, expiry|
+      rule(product_liability_certificate_expiry: [
+        :product_liability_certificate_file, :product_liability_certificate_expiry,
+      ]) do |file, expiry|
         file.filled?.then(expiry.filled?)
       end
     end

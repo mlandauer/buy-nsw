@@ -2,7 +2,7 @@ class User < ApplicationRecord
   extend Enumerize
 
   include Discard::Model
-  default_scope -> { kept }
+  default_scope -> { kept } # rubocop:disable Airbnb/DefaultScope
 
   devise :database_authenticatable, :registerable,
          :confirmable, :recoverable, :rememberable,
@@ -52,11 +52,11 @@ class User < ApplicationRecord
 
   scope :with_role, ->(role) { where(":role = ANY(roles)", role: role) }
   scope :without_role, ->(role) { where(":role != ANY(roles)", role: role) }
-  scope :admin, ->{ with_role('admin') }
-  scope :seller, ->{ with_role('seller') }
-  scope :buyer, ->{ with_role('buyer') }
+  scope :admin, -> { with_role('admin') }
+  scope :seller, -> { with_role('seller') }
+  scope :buyer, -> { with_role('buyer') }
 
-  scope :order_by_id, ->{ order('id' ) }
+  scope :order_by_id, -> { order('id') }
 
-  scope :unconfirmed, ->{ where('confirmed_at IS NULL') }
+  scope :unconfirmed, -> { where('confirmed_at IS NULL') }
 end

@@ -19,13 +19,12 @@ module Admin::BuyerApplications::DetailHelper
         :employment_status,
       ],
       application: [
-        :application_body        
+        :application_body,
       ],
       manager: [
         :manager_name,
         :manager_email,
-      ]
+      ],
     }
   end
-
 end

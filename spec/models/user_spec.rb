@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe User do
-
   describe '#is_admin?' do
     it 'is true when a user has the role "admin"' do
       user = User.new(roles: ['admin'])
@@ -42,7 +41,7 @@ RSpec.describe User do
 
   describe '#discarded_at?' do
     it 'discarded_at flag is nil as default when creating a new user' do
-      user= User.new(roles: ['seller'])
+      user = User.new(roles: ['seller'])
       expect(user.discarded?).to be_falsey
     end
 
@@ -51,9 +50,7 @@ RSpec.describe User do
       user.discard
       expect(user.discarded?).to be_truthy
     end
-
   end
-
 
   describe '#is_active_buyer?' do
     it 'is true when the user has the "buyer" role and an approved buyer application' do
@@ -103,5 +100,4 @@ RSpec.describe User do
       expect(User.with_role('seller').size).to eq(1)
     end
   end
-
 end

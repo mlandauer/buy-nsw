@@ -1,20 +1,20 @@
 module Search::Admin
   class User < Search::Base
-
     def available_filters
       {
         email: :term_filter,
       }
     end
 
-  private
+    private
+
     def base_relation
       ::User.all
     end
 
     def apply_filters(scope)
       scope.yield_self(&method(:email_filter)).
-            yield_self(&method(:sort_filter))
+        yield_self(&method(:sort_filter))
     end
 
     def sort_filter(relation)
